@@ -19,9 +19,6 @@ export class VordermanageComponent implements OnInit {
   shu:string[];
   details:string[];
 
-  // AddDayCount:any;
-  // GetDateStr:any;
-
   startime: any;
   endtime: any;
   agNum: any;
@@ -48,40 +45,29 @@ export class VordermanageComponent implements OnInit {
   data:string;  //显示提示信息
   Nodata3:boolean;
   data3:string;
-  constructor(private QUERY: InterfaceService, private message: ElMessageService) { } // (3)
-  // var time =  new Date();
-  // var year = time.getFullYear();
-  // var month = time.getMonth()+1;
-  // var day = time.getDate();
-  // var hour = time.getHours();
-  // var minutes = time.getMinutes();  
-  // var second = time.getSeconds(); 
-  // console.log(time,year,month,day,hour,minutes,second,"5535")
-  // GetDateStr(AddDayCount) { 
-  //   var dd = new Date(); 
-  //   dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
-  //   var y = dd.getFullYear(); 
-  //   var m = dd.getMonth()+1;//获取当前月份的日期 
-  //   var d = dd.getDate(); 
-  //   var hour = time.getHours();
-  //   var minutes = time.getMinutes();  
-  //   var second = time.getSeconds(); 
-  //   return y+"-"+m+"-"+d; 
-  // } 
-  //   //time.setTime(time.getTime()-1*24*60*60*1000);
-  //   // console.log(GetDateStr(1),"11");
-  // if(hour>=12){
-  //   var s1 = this.GetDateStr(0)+" 12:00:00";
-  //   var end = this.GetDateStr(0)+" 23:59:59";
-  // }else{
-  //   var s1 = this.GetDateStr(-1)+" 12:00:00";
-  //   var end =this. GetDateStr(0)+" 23:59:59";
-  // }
+  constructor(private QUERY: InterfaceService, private message: ElMessageService) { 
+  var time =  new Date();
+  var year = time.getFullYear();
+  var month = time.getMonth()+1;
+  var day = time.getDate();
+  var hour = time.getHours();
+  var minutes = time.getMinutes();  
+  var second = time.getSeconds(); 
+  console.log(time,year,month,day,hour,minutes,second,"5535")
+    //time.setTime(time.getTime()-1*24*60*60*1000);
+    // console.log(GetDateStr(1),"11");
+  if(hour>=12){
+    var s1 = this.GetDateStr(0)+" 12:00:00";
+    var end = this.GetDateStr(0)+" 23:59:59";
+  }else{
+    var s1 = this.GetDateStr(-1)+" 12:00:00";
+    var end =this. GetDateStr(0)+" 23:59:59";
+  }
   // var star =$("#startime").val(s1);
   // var startime=star.val();
   // var end =$("#endtime").val(end);
   // var endtime =end.val();
-  
+} // (3)
   ngOnInit() {
     this.ding = "";
     this.yong = "";
@@ -162,6 +148,18 @@ export class VordermanageComponent implements OnInit {
     this.uid = $("#uid").val();
     this.all(this.startime,this.endtime,this.agNum,this.pageNum,this.pageSize,this.state,this.inplay,this.tkId,this.uid)
   }
+  GetDateStr(AddDayCount) { 
+      var dd = new Date(); 
+      dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+      var y = dd.getFullYear(); 
+      var m = dd.getMonth()+1;//获取当前月份的日期 
+      var d = dd.getDate(); 
+      // var hour = time.getHours();
+      // var minutes = time.getMinutes();  
+      // var second = time.getSeconds(); 
+      return y+"-"+m+"-"+d; 
+  } 
+
   //分页
   modelChange(currentPage){
     this.all(this.startime,this.endtime,this.agNum,currentPage,this.pageSize,this.state,this.inplay,this.tkId,this.uid)

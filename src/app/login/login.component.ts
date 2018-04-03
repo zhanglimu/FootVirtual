@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
           // localStorage.setItem("username", val.data.nickName);
           // localStorage.setItem("loginCount", val.data.loginCount);
           //路由重定向
-          this.router.navigate(['./vsummary'])
+          this.router.navigate(['./orders'])
         } else {
           this.message.error(val.result.resultMsg)
         }

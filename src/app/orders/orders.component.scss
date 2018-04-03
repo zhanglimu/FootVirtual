@@ -14,10 +14,11 @@ a{
 .header-btn{
     color: #CDDE7A;
 }
-.segment a{
+.segment-button{
     background: #fff;
     padding: 10px;
     border-radius: 4px;
+    color: #333;
 }
 ul{
     padding: 0;
@@ -32,4 +33,158 @@ ul li {
 .font4{
     font-size: 10px;
     color: #ccc;
+}
+.selected {
+    // background-color: #FFF;
+    color: #fe3c3c;
+  }
+//summary
+.main{
+    background: rgba(255,255,255,0.8);
+    margin-left:180px;
+    min-height: 100vh; 
+    // background-size: cover;
+    padding-left: 20px;
+}
+a{
+    text-decoration: none;
+}
+.left{float: left;}
+.formdate{margin: 0 5%;}
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+    }
+.formwidth{
+    width: 80%;
+}
+.word{
+    display: inline-block;
+}
+.word select{
+    margin: 0;
+    width: 140px;
+}
+.word input,.word select{
+border: 1px solid #666;
+display: inline-block;
+padding: 5px 6px;
+font-size: 14px;
+line-height: 20px;
+border-radius: 4px;
+}
+button{
+    background: #f0f0f0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 6px 6px;
+    color: #333;
+    margin: 0 10px;
+}
+.selss{
+    color: #333;
+    background: #f0f0f0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+sub{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+table{
+    width: 100%;
+    background: #fbfbfb;
+}
+table th{
+    padding: 6px 0;
+}
+table td{
+    text-align: center;
+    padding: 6px 0;
+}
+.odds{
+    background: #b7d382;
+    color:#fff;
+}
+#firstr{
+    color: #333;
+}
+#lists tr:nth-of-type(even){
+    background: #e6e6e6;
+}
+.vor{padding:5px 10px;background: #fff;border-radius: 2px;}
+td.gree{background: #e7fce6;}
+td.red{background: #FFF0F5;}
+td.blue{background: #F2F2F2;}
+//order
+.lists:nth-of-type(even){
+    background: #FFE8E8;
+}
+.thtible:last-of-type{color: #fe3c3c;}
+.firstr:first-of-type{background: #b7d382;}
+#firstred tr:nth-of-type(even){background: #F2F2F2;}
+#firstred tr:hover{background: #bddcee;}
+//遮罩
+#bg {
+	display:none;
+	position:absolute;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background-color:black;
+	z-index:1001;
+	-moz-opacity:0.7;
+	opacity:.70;
+	filter:alpha(opacity=70);
+}
+#show {
+	display:none;
+	position:absolute;
+	top:25%;
+	left:22%;
+	width:53%;
+	height:42%;
+	padding:8px;
+	border:8px solid #E8E9F7;
+	background-color:white;
+	z-index:1002;
+	// overflow:auto;
+}
+.fontse{
+    background: #666;
+    color: #fff;
+}
+#btnclose{
+    float: right; 
+    border-radius: 2px;
+}
+#btnshow,#btnclose{
+    border: 1px solid #8ae4fc;
+    background:#e6effb;
+    color: #666;
+    padding: 4px 6px;
+}
+.barrier tr:nth-of-type(even){
+    background: #FFE8E8;
+}
+//
+.lv{background: #b7d382 !important;}
+//single
+.smallfont{font-size: 10px; background-color:rgba(153, 204, 102, 1);}
+.smallfonttitle{font-size: 10px; background-color:rgba(255, 153, 0, 1);}
+.smallfontbody{font-size: 10px; background-color:rgba(255, 247, 230, 1);}
+//allup
+.tablelv{background: #b7d382;}
+#scro{
+    display: block;
+    height:800px;
+    overflow-y:scroll;
+    word-break: break-all;
+    -moz-overflow-y:scroll;
+    -webkit-overflow-y:scroll;
 }

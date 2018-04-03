@@ -120,5 +120,5 @@ export class VsummaryComponent implements OnInit {
         }
         window.open(AppConfig.baseUrl +'/account/bookieSummary/summaryExcel?year='+year+'&month='+month+'&day='+day);
       } 
-    }
+  }
 }
