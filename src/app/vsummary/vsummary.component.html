@@ -1,0 +1,137 @@
+<app-orders></app-orders>
+<div class="main">
+    <div class="clearfix">
+        <form class="formwidth" #orderForm="ngForm" (ngSubmit)="onCha(orderForm.value)">
+            <h4 class="left">
+                <span>虚拟足球财务数据汇总表</span>
+            </h4>  
+            <form class="formdate left"> 
+                <p class="word left">
+                    <span>交易开始时间：</span>
+                    <input type="text" id="startime" class="Wdate" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
+                    <b>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></b>
+                    <b>周：<span id="week" class="vor" name="weeking">{{weeking}}</span></b>
+                </p>
+            </form> 
+            <p class="word left">
+                <button class="selss" type="submit">查询</button>
+            </p>
+        </form>
+        <p class="word">
+            <button (click)="export()">导出</button>
+        </p>
+    </div>
+    <div class="row-fluid">
+        <table class="table">
+            <thead>
+                <tr class="thtible">
+                    <td></td>
+                    <td></td> 
+                    <td colspan="3">合计</td>
+                    <td colspan="3">单场固定奖FSGL</td>
+                    <td colspan="3">串关固定奖ALLUP</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr class="firstr odds">
+                    <th></th>
+                    <th>场次数量NO. Match</th>
+                    <th>投注金额 Investment 人民币 RMB</th> 
+                    <th>返奖金额 Payout 人民币 RMB</th> 
+                    <th>盈利率 Payout Ratio %</th>
+                    <th>投注金额 Investment 人民币 RMB</th>
+                    <th>返奖金额 Payout 人民币 RMB</th>
+                    <th>盈利率 Payout Ratio %</th>
+                    <th>投注金额 Investment 人民币 RMB</th>
+                    <th>返奖金额 Payout 人民币 RMB</th> 
+                    <th>盈利率 Payout Ratio %</th>
+                </tr>
+            </thead>
+            <tbody id="lists" *ngIf="summaryList">
+                <tr *ngIf="summaryToday">
+                    <td>{{summaryToday.date}}</td>
+                    <td>{{summaryToday.num}}</td>
+                    <td class="gree">{{summaryToday.totalInvestment}}￥</td> 
+                    <td class="gree">{{summaryToday.totalPrice}}￥</td> 
+                    <td class="gree">{{summaryToday.payoutRate}}%</td>
+                    <td class="red">{{summaryToday.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{summaryToday.totalPriceFsgl}}￥</td>
+                    <td class="red">{{summaryToday.payoutRateFsgl}}%</td>
+                    <td class="blue">{{summaryToday.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{summaryToday.totalPriceAllup}}￥</td>
+                    <td class="blue">{{summaryToday.payoutRateAllup}}%</td>
+                </tr>
+                <tr *ngIf="summaryWeek">
+                    <td>{{summaryWeek.date}}</td>
+                    <td>{{summaryWeek.num}}</td>
+                    <td class="gree">{{summaryWeek.totalInvestment}}￥</td> 
+                    <td class="gree">{{summaryWeek.totalPrice}}￥</td> 
+                    <td class="gree">{{summaryWeek.payoutRate}}%</td>
+                    <td class="red">{{summaryWeek.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{summaryWeek.totalPriceFsgl}}￥</td>
+                    <td class="red">{{summaryWeek.payoutRateFsgl}}%</td>
+                    <td class="blue">{{summaryWeek.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{summaryWeek.totalPriceAllup}}￥</td>
+                    <td class="blue">{{summaryWeek.payoutRateAllup}}%</td>
+                </tr>
+                <tr *ngIf="summaryMonth">
+                    <td>{{summaryMonth.date}}</td>
+                    <td>{{summaryMonth.num}}</td>
+                    <td class="gree">{{summaryMonth.totalInvestment}}￥</td> 
+                    <td class="gree">{{summaryMonth.totalPrice}}￥</td> 
+                    <td class="gree">{{summaryMonth.payoutRate}}%</td>
+                    <td class="red">{{summaryMonth.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{summaryMonth.totalPriceFsgl}}￥</td>
+                    <td class="red">{{summaryMonth.payoutRateFsgl}}%</td>
+                    <td class="blue">{{summaryMonth.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{summaryMonth.totalPriceAllup}}￥</td>
+                    <td class="blue">{{summaryMonth.payoutRateAllup}}%</td>
+                </tr>
+                <tr *ngIf="summaryYear">
+                    <td>{{summaryYear.date}}</td>
+                    <td>{{summaryYear.num}}</td>
+                    <td class="gree">{{summaryYear.totalInvestment}}￥</td> 
+                    <td class="gree">{{summaryYear.totalPrice}}￥</td> 
+                    <td class="gree">{{summaryYear.payoutRate}}%</td>
+                    <td class="red">{{summaryYear.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{summaryYear.totalPriceFsgl}}￥</td>
+                    <td class="red">{{summaryYear.payoutRateFsgl}}%</td>
+                    <td class="blue">{{summaryYear.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{summaryYear.totalPriceAllup}}￥</td>
+                    <td class="blue">{{summaryYear.payoutRateAllup}}%</td>
+                </tr>
+                <tr *ngFor="let b of summaryList">
+                    <td>{{b.date}}</td>
+                    <td>{{b.num}}</td>
+                    <td class="gree">{{b.totalInvestment}}￥</td> 
+                    <td class="gree">{{b.totalPrice}}￥</td> 
+                    <td class="gree">{{b.payoutRate}}%</td>
+                    <td class="red">{{b.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{b.totalPriceFsgl}}￥</td>
+                    <td class="red">{{b.payoutRateFsgl}}%</td>
+                    <td class="blue">{{b.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{b.totalPriceAllup}}￥</td>
+                    <td class="blue">{{b.payoutRateAllup}}%</td>
+                </tr>
+                <tr *ngIf="summarytotal">
+                    <td>{{summarytotal.date}}</td>
+                    <td>{{summarytotal.num}}</td>
+                    <td class="gree">{{summarytotal.totalInvestment}}￥</td> 
+                    <td class="gree">{{summarytotal.totalPrice}}￥</td> 
+                    <td class="gree">{{summarytotal.payoutRate}}%</td>
+                    <td class="red">{{summarytotal.totalInvestmentFsgl}}￥</td>
+                    <td class="red">{{summarytotal.totalPriceFsgl}}￥</td>
+                    <td class="red">{{summarytotal.payoutRateFsgl}}%</td>
+                    <td class="blue">{{summarytotal.totalInvestmentAllup}}￥</td> 
+                    <td class="blue">{{summarytotal.totalPriceAllup}}￥</td>
+                    <td class="blue">{{summarytotal.payoutRateAllup}}%</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="Nodata">
+                <tr>
+                    <td colspan="11">{{data}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

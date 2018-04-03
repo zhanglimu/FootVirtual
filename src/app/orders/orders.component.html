@@ -1,0 +1,42 @@
+<header class="header-bar">
+  <p>
+    <img src="./assets/logo.png" alt="logo">
+  </p>
+  <p>
+    <b>虚拟FMS系统</b>
+  </p>
+  <!-- <p>
+    <span>Hello!&nbsp;&nbsp;{{username}}</span>
+  </p>
+  <p>
+    <span>第&nbsp;&nbsp;{{loginNum}}&nbsp;&nbsp;次登录</span>
+  </p>
+  <p>
+    <a class="header-btn" (click)="Signout()">退出登录</a>
+  </p> -->
+  <div class="segment">
+    <ul>
+      <li class="segment-button" [class.selected]="switchIndex === '0'" (click)="switch('0')">
+          <a href="./vsummary">虚拟Summary</a>
+      </li>
+      <li class="segment-button" [class.selected]="switchIndex === '1'" (click)="switch('1')">
+          <a href="./vagent">虚拟渠道</a>
+      </li>
+      <li class="segment-button" [class.selected]="switchIndex === '2'" (click)="switch('2')">
+        <a href="./vordermanage">虚拟订单</a>
+      </li>
+      <li class="segment-button" [class.selected]="switchIndex === '3'" (click)="switch('3')">
+        <a href="./vsingle">虚拟Single</a>
+      </li>
+      <li class="segment-button" [class.selected]="switchIndex === '4'" (click)="switch('4')">
+        <a href="./vallup">虚拟Allup</a>
+      </li>
+    </ul>
+  </div>
+  <!-- <div class="font4">
+    <p>1.每次更新版本首次启动需等待10分钟点击报表(系统后台正在缓存，目前只有summary有缓存，其他页面敬请期待) </p>
+    <p>2.渠道管理页面显示 查询时间区间为 所选时间的00:00:00 至24:00:00 </p>
+    <p>3.用户管理页面显示 查询时间区间为 此时时间小于当日14:00:00 查询 系统默认查询前一日14:00:00至当天23:59:59; 此时时间大于当日14:00:00 查询 系统默认查询当日14:00:00至当天23:59:59</p>
+    <p>4.其他报表页面显示 查询时间区间是所选择时间的14:00:00至第二天的14:00:00</p>
+  </div> -->
+</header>
