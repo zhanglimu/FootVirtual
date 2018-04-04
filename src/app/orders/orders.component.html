@@ -356,7 +356,7 @@
                         <td>{{b.state_name}}</td> 
                         <td>{{b.winMoney}}</td>
                         <td>
-                            <button id="btnshow" (click)="showdiv(b.ticketInfo_id,b.ballType)">详情</button>
+                            <button id="btnshow" (click)="showdiv(b.ticketInfo_id,b.ballType,b.tkId,b.refund)">详情</button>
                             <div id="bg"></div>
                             <div id="show">
                                 <input id="btnclose" value="Close" (click)="hidediv()" type="button">
@@ -364,9 +364,9 @@
                                     <thead class="fontse">
                                         <tr>
                                             <th style="width:8%;">订单ID</th>
-                                            <th style="width:74%;" colspan="4"></th>
+                                            <th style="width:74%;" colspan="4">{{tkIding}}</th>
                                             <th style="width:8%;">退款</th>
-                                            <th style="width:8%;"></th>
+                                            <th style="width:8%;">{{refund}}</th>
                                         </tr>
                                         <tr class="lv">
                                             <th style="width:8%;">序号</th>
@@ -388,8 +388,8 @@
                                             <td style="width:50%;">{{de.investInfo}}</td>
                                             <td style="width:8%;">{{de.local_m}}</td>
                                             <td style="width:8%;">{{de.total_price}}</td>
-                                            <td style="width:8%;">{{de.payouttime}}</td>
                                             <td style="width:8%;">{{de.inv_allup}}</td>
+                                            <td style="width:8%;">{{de.refund}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="Nodata3">

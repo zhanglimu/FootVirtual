@@ -45,6 +45,8 @@ export class OrdersComponent implements OnInit {
     shuju:LiveOrdermanage;
     shu:string[];
     details:string[];
+    tkIding:any;
+    refund:any;
   
     startime: any;
     endtime: any;
@@ -397,10 +399,12 @@ export class OrdersComponent implements OnInit {
     this.all(this.startime,this.endtime,this.agNum,currentPage,this.pageSize,this.state,this.inplay,this.tkId,this.uid)
   }
   //点击详情
-  showdiv(ticketid,ballType) {
-    console.log(ticketid,ballType,"jjj")
+  showdiv(ticketid,ballType,tkId,refund) {
+    console.log(ticketid,ballType,tkId,refund,"jjj")
+    this.tkIding=tkId;
+    this.refund=refund;
     this.QUERY.bookieOrder(ticketid,ballType).subscribe(response => {
-      console.log(response,"jjj")
+      console.log(response,"hhh")
       if (response!=null) {
         this.Nodata3 = false;
         this.details = response.detailList;
