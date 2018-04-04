@@ -33,7 +33,7 @@ export class InterfaceService{
     }
     //虚拟订单接口
     queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid){
-        return this.http.get(AppConfig.baseUrl+'/account/bookieOrder/queryAll?startDate='+startime +'&endDate='+endtime+'&agent_id='+agNum+'&page='+pageNum+'&size='+pageSize+'&inplay='+inplay+'&tkId='+tkId+'&uid='+uid)
+        return this.http.get(AppConfig.baseUrl+'/account/bookieOrder/queryAll?startDate='+startime +'&endDate='+endtime+'&agentId='+agNum+'&page='+pageNum+'&size='+pageSize+'&state='+state+'&inplay='+inplay+'&tkId='+tkId+'&uid='+uid)
         .map(res=>res.json());
     }
     //点击详情接口

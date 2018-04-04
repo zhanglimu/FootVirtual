@@ -38,7 +38,7 @@ export class OrdersComponent implements OnInit {
     checkDate:any;
     //agent开始
     agentdata: string[];   //订单变量
-    agentdatas:string[];
+    agentdatas:LiveOrdermanage;
 
     //order开始
     resut: any[];   //返回所有渠道信息变量
@@ -258,6 +258,14 @@ export class OrdersComponent implements OnInit {
       } 
   }
 //agent开始
+// 降序方法
+compare(property){
+  return function(a,b){
+      var value1 = a[property];
+      var value2 = b[property];
+      return value2 - value1;
+  }
+}
   agentCha(reslt) {
     var	year = "";
     var	month = "";
@@ -277,13 +285,25 @@ export class OrdersComponent implements OnInit {
         }else{
           year=sort;
         }
-        // console.log(year,month,day,"41444")
         this.QUERY.bookieAgent(year,month,day).subscribe(Response => {
             // console.log(Response.agentInfoModels,"5555")
           if (Response.agentInfoModels!=null) {
             this.Nodata = false;
             this.agentdata = Response.total;
-            this.agentdatas = Response.agentInfoModels;
+          // console.log(Response.agentInfoModels.sort(this.compare('agentSell')))//降序数据
+            this.agentdatas = Response.agentInfoModels.sort(this.compare('agentSell'));
+            for (var k = 0; k < Response.agentInfoModels.sort(this.compare('agentSell')).length; k++) {
+              if(this.agentdatas[k].agentSell =="-1"){
+                this.agentdatas[k].agentSellMess = "停售";
+              }else if(this.agentdatas[k].agentId == this.agentdatas[k].agentSell){
+                this.agentdatas[k].agentSellMess = "开售";
+              }
+              if(this.agentdatas[k].recyclePriceFb ==null){
+                this.agentdatas[k].recyclePriceName= "-"; 
+              }else{
+                this.agentdatas[k].recyclePriceName = this.agentdatas[k].recyclePriceFb ;
+              }
+            }
           }else{
             this.agentdatas = Response.agentInfoModels;
             this.Nodata = true;
@@ -320,7 +340,6 @@ export class OrdersComponent implements OnInit {
 //order开始
   all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid) {
     this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid).subscribe(data => {
-      console.log("order",data)
       if (data.modelList!=null) {
         this.count=data.total.size;
         this.pageCount = Math.ceil(this.count/this.pageSize);
@@ -406,7 +425,7 @@ export class OrdersComponent implements OnInit {
     this.tkIding=tkId;
     this.refund=refund;
     this.QUERY.bookieOrder(ticketid,ballType).subscribe(response => {
-      console.log(response,"hhh")
+      // console.log(response,"hhh")
       if (response!=null) {
         this.Nodata3 = false;
         this.details = response.detailList;
@@ -428,15 +447,14 @@ export class OrdersComponent implements OnInit {
   }
 //导出
   orderexport(){
-    var startime = $("#startime").val();
-    var endtime =$("#endtime").val();
-    var agNum =$('#agentNum option:selected').val();
-    var state =$('#state option:selected').val();
-    var inplay =$('#inplay option:selected').val();
-    var tkId = $("#tk").val();
-    var uid = $("#uid").val();
-    console.log(startime,endtime,agNum,state,inplay,tkId,uid,"hhhh");
-      window.open(AppConfig.baseUrl + "account/bookieOrder/userManagementExcel?startDate="+startime +"&endDate="+endtime+"&agentId="+agNum+"&state="+state+"&inplay="+inplay+"&tkId="+tkId+"&uid="+uid);
+    this.startime = $("#stime").val();
+    this.endtime =$("#etime").val();
+    this.agNum =$('#agentNum option:selected').val();
+    this.state =$('#state option:selected').val();
+    this.inplay =$('#inplay option:selected').val();
+    this.tkId = $("#tk").val();
+    this.uid = $("#uid").val();
+      window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid);
   }
   //single开始
   singleCha(reslt) {

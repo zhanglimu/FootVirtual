@@ -188,15 +188,14 @@
                 <thead>
                     <tr class="thtible" *ngIf="agentdata">
                         <td>合计Total</td>
-                        <!-- <td>{{agentdata.agentName}}</td>  -->
-                        <td>{{agentdata.agentCode}}</td>
-                        <td>{{agentdata.agentRate}}</td>
-                        <td>{{agentdata.ballType_name}}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                         <td>{{agentdata.userAmountFb}}</td>
                         <td>{{agentdata.orderAmountFb}}</td> 
-                        <td>{{agentdata.profitFb}}￥</td>
+                        <td>{{agentdata.tradePriceFb}}￥</td>
                         <td>{{agentdata.winMoneyFb}}￥</td>
-                        <td>{{agentdata.tradePriceFb}}￥</td> 
+                        <td>{{agentdata.profitFb}}￥</td> 
                         <td>{{agentdata.profitabilityFb}}%</td>
                     </tr>
                 </thead>
@@ -219,37 +218,13 @@
                         <td>{{b.agentName}}</td>
                         <td>{{b.agentCode}}</td>
                         <td>{{b.agentRate}}</td> 
-                        <td>{{b.ballType_name}}</td> 
+                        <td>{{b.agentSellMess}}</td> 
                         <td>{{b.userAmountFb}}</td>
                         <td>{{b.orderAmountFb}}</td>
-                        <td>{{b.profitFb}}￥</td>
+                        <td>{{b.tradePriceFb}}￥</td>
                         <td>{{b.winMoneyFb}}￥</td>
-                        <td>{{b.tradePriceFb}}￥</td> 
+                        <td>{{b.profitFb}}￥</td> 
                         <td>{{b.profitabilityFb}}%</td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>102</td>
-                        <td>0.1</td> 
-                        <td>开售</td> 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> 
-                        <td>%</td>
-                    </tr>
-                    <tr>
-                        <td>乐米</td>
-                        <td>111</td>
-                        <td>0.01</td> 
-                        <td>开售</td> 
-                        <td>3</td>
-                        <td>42</td>
-                        <td>445.03</td>
-                        <td>0</td>
-                        <td>445.03</td> 
-                        <td>100%</td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="Nodata">
@@ -303,6 +278,8 @@
                             <button (click)="orderexport()">导出</button>
                         </p>
                 </form>
+                <p class="word">
+                </p>
         </div>
         <div class="row-fluid">
             <table class="table">
@@ -319,7 +296,7 @@
                         <td>-</td>
                         <td>-</td> 
                         <td>{{shu.totalInvestment}}</td>
-                        <td>{{shu.payoutrate}}</td> 
+                        <td>{{shu.payoutRate}}%</td> 
                         <td>{{shu.winMoney}}</td>
                         <td></td>
                     </tr>
@@ -347,7 +324,7 @@
                         <td>{{b.uid}}</td>
                         <td>{{b.agentName}}</td> 
                         <td>{{b.ballType_name}}</td> 
-                        <td>{{b.bettingproducts}}</td>
+                        <td>{{b.bettingProducts}}</td>
                         <td>{{b.inplay_name}}</td>
                         <td>{{b.totalPrice}}</td>
                         <td>{{b.addAwardAmount}}</td>
