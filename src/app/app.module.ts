@@ -13,23 +13,11 @@ import { LoginComponent }  from './login/login.component';
 import { LoginService} from './service/login.service';
 import { LoginoutService} from './service/loginout.service';
 
-import { VsummaryComponent } from './vsummary/vsummary.component';
-import { VordermanageComponent } from './vordermanage/vordermanage.component';
-import { VallupComponent } from './vallup/vallup.component';
-import { VagentComponent } from './vagent/vagent.component';
-import { VsingleComponent } from './vsingle/vsingle.component';
-
-
 //路由配置方法
 export const ROUTES : Routes =[
   {path: '', pathMatch:'full', redirectTo:'login'}, //默认访问页面
   {path :'login', component:LoginComponent},
   {path :'orders', component:OrdersComponent},
-  {path :'vsummary', component:VsummaryComponent},
-  {path :'vagent', component:VagentComponent},
-  {path :'vordermanage', component:VordermanageComponent},
-  {path :'vsingle', component:VsingleComponent},
-  {path :'vallup', component:VallupComponent},
   
 ]
 //引用文件
@@ -46,11 +34,6 @@ export const ROUTES : Routes =[
     AppComponent, 
     LoginComponent, 
     OrdersComponent,
-    VsummaryComponent,
-    VagentComponent,
-    VordermanageComponent,
-    VsingleComponent,
-    VallupComponent,
   ],
   providers: [InterfaceService,LoginService,LoginoutService],
   bootstrap: [AppComponent]
