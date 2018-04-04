@@ -56,7 +56,8 @@ export class OrdersComponent implements OnInit {
     tkId: any;
     uid: any;
   
-    count: number = 0; //总条数  
+    count: number = 0; //总条数
+    pageCount:number;   
     pageNum: number = 1;  //默认第一页
     pageSize: number = 16;  //每页条数
   
@@ -322,6 +323,7 @@ export class OrdersComponent implements OnInit {
       console.log("order",data)
       if (data.modelList!=null) {
         this.count=data.total.size;
+        this.pageCount = Math.ceil(this.count/this.pageSize);
         this.shu = data.total;
         this.Nodata = false;
         this.shuju = data.modelList;
@@ -364,7 +366,7 @@ export class OrdersComponent implements OnInit {
           }
         }
       }else{
-        this.shuju=data.data;
+        this.count = 0;
         this.Nodata = true;
         this.data = "暂无新数据";
       }

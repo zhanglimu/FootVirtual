@@ -172,7 +172,6 @@ td.blue{background: #F2F2F2;}
 .barrier tr:nth-of-type(even){
     background: #FFE8E8;
 }
-//
 .lv{background: #b7d382 !important;}
 //single
 .smallfont{font-size: 10px; background-color:rgba(153, 204, 102, 1);}
@@ -182,7 +181,7 @@ td.blue{background: #F2F2F2;}
 .tablelv{background: #b7d382;}
 #scro{
     display: block;
-    height:800px;
+    max-height:800px;
     overflow-y:scroll;
     word-break: break-all;
     -moz-overflow-y:scroll;

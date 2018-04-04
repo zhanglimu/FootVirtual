@@ -414,6 +414,7 @@
                             <el-pagination [total]="count" 
                             [page-size]="16" 
                             *ngIf="count>0" 
+                            [page-count]="pageCount"
                             (modelChange)="modelChange($event)" 
                             [layout]="['prev', 'pager', 'next', 'jumper', 'total']">
                             </el-pagination>
