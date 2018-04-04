@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { ElProgressModule } from '../progress/module';
+import { ElButtonsModule } from '../button/module';
+import { ElUploadRequest } from './upload.request';
+import { ElUpload } from './upload';
+import { ElUploadList } from './upload.list';
+import { ElUploadDragger } from './upload.dragger';
+export class ElUploadModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return { ngModule: ElUploadModule, providers: [ElUploadRequest] };
+    }
+}
+ElUploadModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [ElUpload, ElUploadList, ElUploadDragger],
+                exports: [ElUpload],
+                imports: [
+                    CommonModule,
+                    FormsModule,
+                    HttpModule,
+                    HttpClientModule,
+                    ElButtonsModule,
+                    ElProgressModule,
+                ],
+                entryComponents: [ElUpload],
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ElUploadModule.ctorParameters = () => [];
+function ElUploadModule_tsickle_Closure_declarations() {
+    /** @type {?} */
+    ElUploadModule.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    ElUploadModule.ctorParameters;
+}
+//# sourceMappingURL=module.js.map
