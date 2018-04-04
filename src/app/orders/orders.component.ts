@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit {
   
     count: number = 0; //总条数  
     pageNum: number = 1;  //默认第一页
-    pageSize: number = 18;  //每页条数
+    pageSize: number = 16;  //每页条数
   
     ding: string;
     yong: string;
@@ -317,6 +317,7 @@ export class OrdersComponent implements OnInit {
 //order开始
   all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid) {
     this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid).subscribe(data => {
+      console.log("order",data)
       if (data.modelList!=null) {
         this.count=data.total.size;
         this.shu = data.total;
@@ -371,8 +372,8 @@ export class OrdersComponent implements OnInit {
     });
   }
   orderCha(reslt) {
-    this.startime = $("#startime").val();
-    this.endtime = $("#endtime").val();
+    this.startime = $("#stime").val();
+    this.endtime = $("#etime").val();
     this.agNum =$('#agentNum option:selected').val();
     this.state =$('#state option:selected').val();
     this.inplay =$('#inplay option:selected').val();
