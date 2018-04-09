@@ -36,6 +36,8 @@ export class OrdersComponent implements OnInit {
     monthing:any;
     weeking:any;
     checkDate:any;
+    lottery:any;
+    lot: string;
     //agent开始
     agentdata: string[];   //订单变量
     agentdatas:LiveOrdermanage;
@@ -55,6 +57,9 @@ export class OrdersComponent implements OnInit {
     inplay: any;
     tkId: any;
     uid: any;
+    lottery_t:any;
+    timekai:any;
+    timejie:any;
   
     count: number = 0; //总条数
     pageCount:number;   
@@ -66,14 +71,16 @@ export class OrdersComponent implements OnInit {
     in: string;
     sta: string;
     agent: string;  //渠道默认值
-    rec: string;
-    tra: string;
-    ca: string;     //彩种默认值
     da: string;     //时间默认值
+    lott:string;
+    timek:string;
+    timej:string;
     //single开始
     total: string[];   //订单变量
     singlebox:string[];
     singlehis:string[];
+    lottery_ty:any;
+    lotte:string;
     //allup
     allupdata: string[];   //订单变量
     allupHAD:string[];
@@ -100,10 +107,10 @@ export class OrdersComponent implements OnInit {
     allFGS:string[];
     allupFCA:string[];
     allFCA:string[];
+    lottery_typ:any;
+    lotter:string;
 
     time0:string;
-    timekai:any;
-    timejie:string;
     Nodata:boolean; //是否显示提示信息
     data:string;  //显示提示信息
     Nodata3:boolean;
@@ -112,23 +119,26 @@ export class OrdersComponent implements OnInit {
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       this.username = localStorage.getItem("username");
       this.loginNum = localStorage.getItem("loginCount")
-      //开始时间和结束时间
+      //order开始时间和结束时间
       var time =  new Date();
       var year = time.getFullYear();
       var month = time.getMonth()+1;
       var day = time.getDate();
       var hour = time.getHours();
+      // var hour = 10;
       var minutes = time.getMinutes();  
-      var second = time.getSeconds(); 
+      var second = time.getSeconds();
       if(hour>=12){
-        var s1 = this.GetDateStr(0)+" 12:00:00";
+        var s1 = this.GetDateStr(0)+" 14:00:00";
         var end = this.GetDateStr(0)+" 23:59:59";
       }else{
-        var s1 = this.GetDateStr(-1)+" 12:00:00";
+        var s1 = this.GetDateStr(-1)+" 14:00:00";
         var end =this. GetDateStr(0)+" 23:59:59";
       }
       this.timekai=s1;
       this.timejie =end;
+      //默认显示虚拟订单数据
+      this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",1)
     }
 /**
    * 切换选项卡
@@ -149,6 +159,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     //summary开始
+    this.lot = "1";//彩种值
     var woDate = new Date();
     this.date = woDate.toLocaleDateString(); 
       
@@ -168,26 +179,30 @@ export class OrdersComponent implements OnInit {
     var month = timeing.getMonth()+1;
     var day = timeing.getDate();
     this.time0=year+"-"+month+"-"+day;
+    console.log(this.time0,"dddd")
     //order开始
     this.ding = "";
     this.yong = "";
     this.in = '';
     this.sta = '';
     this.agent = ""; //渠道值
-    this.rec = '1';
-    this.tra = '1';
+    this.lott = "1";//彩种值
     this.Nodata =false;
+
     //返回渠道信息
     this.QUERY.queryAllAgent().subscribe(data => {
       if (data)
         this.resut = data.agentList;
     });
     //order结束
+    this.lotte = "1";//彩种值
+    this.lotter = "1";//彩种值
   }
   summaryCha(reslt) {
     var	year = "";
 		var	month = "";
-		var	day = "";
+    var	day = "";
+    this.lottery = $("#lottery_type").val();
 		var time:any = $("#startime").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
@@ -203,9 +218,8 @@ export class OrdersComponent implements OnInit {
         }else{
           year=sort;
         }
-        console.log(year,month,day,"41444")
-        this.QUERY.bookieSummary(year,month,day).subscribe(data => {
-          console.log(data,"7474")
+        // console.log(year,month,day,this.lottery,"41444")
+        this.QUERY.bookieSummary(year,month,day,this.lottery).subscribe(data => {
           if (data!=null) {
             this.Nodata = false;
             this.summarytotal = data.total;
@@ -238,7 +252,8 @@ export class OrdersComponent implements OnInit {
   summaryexport() {
     var	year = "";
 		var	month = "";
-		var	day = "";
+    var	day = "";
+    this.lottery = $("#lottery_type").val();
 		var time:any = $("#startime").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -254,7 +269,7 @@ export class OrdersComponent implements OnInit {
         }else{
           year=sort;
         }
-        window.open(AppConfig.baseUrl +'/account/bookieSummary/summaryExcel?year='+year+'&month='+month+'&day='+day);
+        window.open(AppConfig.baseUrl +'/account/bookieSummary/summaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
       } 
   }
 //agent开始
@@ -286,7 +301,6 @@ compare(property){
           year=sort;
         }
         this.QUERY.bookieAgent(year,month,day).subscribe(Response => {
-            // console.log(Response.agentInfoModels,"5555")
           if (Response.agentInfoModels!=null) {
             this.Nodata = false;
             this.agentdata = Response.total;
@@ -338,8 +352,8 @@ compare(property){
       } 
   }
 //order开始
-  all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid) {
-    this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid).subscribe(data => {
+  all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t) {
+    this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t).subscribe(data => {
       if (data.modelList!=null) {
         this.count=data.total.size;
         this.pageCount = Math.ceil(this.count/this.pageSize);
@@ -402,7 +416,8 @@ compare(property){
     this.inplay =$('#inplay option:selected').val();
     this.tkId = $("#tk").val();
     this.uid = $("#uid").val();
-    this.all(this.startime,this.endtime,this.agNum,this.pageNum,this.pageSize,this.state,this.inplay,this.tkId,this.uid)
+    this.lottery_t = $("#lottery_type").val();
+    this.all(this.startime,this.endtime,this.agNum,this.pageNum,this.pageSize,this.state,this.inplay,this.tkId,this.uid,this.lottery_t)
   }
   GetDateStr(AddDayCount) { 
     var dd = new Date(); 
@@ -417,7 +432,7 @@ compare(property){
 }
   //分页
   modelChange(currentPage){
-    this.all(this.startime,this.endtime,this.agNum,currentPage,this.pageSize,this.state,this.inplay,this.tkId,this.uid)
+    this.all(this.startime,this.endtime,this.agNum,currentPage,this.pageSize,this.state,this.inplay,this.tkId,this.uid,this.lottery_t)
   }
   //点击详情
   showdiv(ticketid,ballType,tkId,refund) {
@@ -425,7 +440,6 @@ compare(property){
     this.tkIding=tkId;
     this.refund=refund;
     this.QUERY.bookieOrder(ticketid,ballType).subscribe(response => {
-      // console.log(response,"hhh")
       if (response!=null) {
         this.Nodata3 = false;
         this.details = response.detailList;
@@ -454,15 +468,16 @@ compare(property){
     this.inplay =$('#inplay option:selected').val();
     this.tkId = $("#tk").val();
     this.uid = $("#uid").val();
-      window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid);
+    this.lottery_t = $("#lottery_type").val();
+      window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid+'&lottery_type='+this.lottery_t);
   }
   //single开始
   singleCha(reslt) {
     var	year = "";
 		var	month = "";
-		var	day = "";
+    var	day = "";
+    this.lottery_ty = $("#lottery_type").val();
     var time:any = $("#d12").val();
-    console.log(time);
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
 		}else{
@@ -477,9 +492,7 @@ compare(property){
         }else{
           year=sort;
         }
-        // console.log(year,month,day,"41444")
-        this.QUERY.bookieSingle(year,month,day).subscribe(data => {
-            // console.log(data.data.resultMap.HAD,"5555")
+        this.QUERY.bookieSingle(year,month,day,this.lottery_ty).subscribe(data => {
           if (data!=null) {
             this.Nodata = false;
             this.total = data.total;
@@ -502,6 +515,7 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
+    this.lottery_ty = $("#lottery_type").val();
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -517,7 +531,7 @@ compare(property){
         }else{
           year=sort;
         }
-        window.open(AppConfig.baseUrl +'/account/bookieSingle/detailSGLExcel?year='+year+'&month='+month+'&day='+day);
+        window.open(AppConfig.baseUrl +'/account/bookieSingle/detailSGLExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_ty);
       } 
   }
   //allup开始
@@ -525,6 +539,7 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
+    this.lottery_typ = $("#lottery_type").val();
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
@@ -540,9 +555,7 @@ compare(property){
         }else{
           year=sort;
         }
-        // console.log(year,month,day,"41444")
-        this.QUERY.bookieAllup(year,month,day).subscribe(data => {
-            console.log(data.HAD,"5555")
+        this.QUERY.bookieAllup(year,month,day,this.lottery_typ).subscribe(data => {
           if (data!=null) {
             this.Nodata = false;
             this.allupdata = data.total;
@@ -614,6 +627,7 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
+    this.lottery_typ = $("#lottery_type").val();
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -629,7 +643,7 @@ compare(property){
         }else{
           year=sort;
         }
-        window.open(AppConfig.baseUrl +'/account/bookieAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day);
+        window.open(AppConfig.baseUrl +'/account/bookieAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_typ);
       } 
   }
 
