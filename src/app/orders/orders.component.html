@@ -467,8 +467,8 @@
                 </tbody>
             <!-- </table> -->
             <!-- <table class="table"> -->
-                <tbody>
-                    <tr class="smallfontbody" *ngIf="total">
+                <tbody *ngIf="total">
+                    <tr class="smallfontbody">
                           <td>投注额</td>
                           <td>{{total.resultMap.HAD.totalInvestment}}</td>
                           <td>{{total.resultMap.HHAD.totalInvestment}}</td>

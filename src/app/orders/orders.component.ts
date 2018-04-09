@@ -20,7 +20,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '0';
+    public switchIndex: string = '2';
     username:string;
     loginNum:string;
 
@@ -147,6 +147,51 @@ export class OrdersComponent implements OnInit {
   switch(index: string): void {
     this.switchIndex = index;
     localStorage.setItem('SWITCH_INDEX', this.switchIndex);
+    //summary
+    this.summarytotal =[];
+    this.summaryToday =[];
+    this.summaryList =[];
+    this.summaryWeek =[];
+    this.summaryYear =[];
+    this.summaryMonth =[];
+    //agent
+    this.agentdata = [];
+    this.agentdatas =null;
+    //order
+    this.count=null;
+    this.pageCount =null;
+    this.shu = [];
+    this.shuju = null;
+    //single
+    this.total = null;
+    this.singlebox = null;
+    this.singlehis = [];
+    //allup
+    this.allupdata = [];
+    this.allupHAD = [];
+    this.allHAD = [];
+    this.allupHHAD = [];
+    this.allHHAD = [];
+    this.allupHAFU = [];
+    this.allHAFU = [];
+    this.allupTTG = [];
+    this.allTTG = [];
+    this.allupCRS = [];
+    this.allCRS = [];
+    this.allupFHAD = [];
+    this.allFHAD = [];
+    this.allupAHC = [];
+    this.allAHC = [];
+    this.allupFAHC = [];
+    this.allFAHC = [];
+    this.allupHL = [];
+    this.allHL = [];
+    this.allupFHL = [];
+    this.allFHL = [];
+    this.allupFGS = [];
+    this.allFGS = [];
+    this.allupFCA = [];
+    this.allFCA = [];
   }
   //退出登录
   Signout(){
@@ -355,10 +400,10 @@ compare(property){
   all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t) {
     this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t).subscribe(data => {
       if (data.modelList!=null) {
+        this.Nodata = false;
         this.count=data.total.size;
         this.pageCount = Math.ceil(this.count/this.pageSize);
         this.shu = data.total;
-        this.Nodata = false;
         this.shuju = data.modelList;
         for (var i = 0; i < data.modelList.length; i++) {
           switch (this.shuju[i].ballType) {
