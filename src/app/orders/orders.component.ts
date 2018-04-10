@@ -8,6 +8,7 @@ import { AppConfig } from "../const/app-config";
 import { InterfaceService} from '../service/interface.service';
 import { LiveOrdermanage } from '../modules/ordermanage';
 import * as $ from "jquery";
+import { element } from 'protractor';
 interface Member {
     id: string;
     login: string;
@@ -31,6 +32,7 @@ export class OrdersComponent implements OnInit {
     summaryWeek:string[];
     summaryYear:string[];
     summaryMonth:string[];
+    summaryName:string;
 
     date:string;
     monthing:any;
@@ -41,6 +43,7 @@ export class OrdersComponent implements OnInit {
     //agent开始
     agentdata: string[];   //订单变量
     agentdatas:LiveOrdermanage;
+    agentName:string;
 
     //order开始
     resut: any[];   //返回所有渠道信息变量
@@ -78,9 +81,10 @@ export class OrdersComponent implements OnInit {
     //single开始
     total: string[];   //订单变量
     singlebox:string[];
-    singlehis:string[];
+    // singlehis:string[];
     lottery_ty:any;
     lotte:string;
+    singleName:string;
     //allup
     allupdata: string[];   //订单变量
     allupHAD:string[];
@@ -109,6 +113,7 @@ export class OrdersComponent implements OnInit {
     allFCA:string[];
     lottery_typ:any;
     lotter:string;
+    allupName:string;
 
     time0:string;
     Nodata:boolean; //是否显示提示信息
@@ -159,13 +164,13 @@ export class OrdersComponent implements OnInit {
     this.agentdatas =null;
     //order
     this.count=null;
-    this.pageCount =null;
+    // this.pageCount =null;
     this.shu = [];
     this.shuju = null;
     //single
     this.total = null;
     this.singlebox = null;
-    this.singlehis = [];
+    // this.singlehis = [];
     //allup
     this.allupdata = [];
     this.allupHAD = [];
@@ -205,6 +210,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     //summary开始
     this.lot = "1";//彩种值
+    this.summaryName = "summary";
     var woDate = new Date();
     this.date = woDate.toLocaleDateString(); 
       
@@ -242,6 +248,9 @@ export class OrdersComponent implements OnInit {
     //order结束
     this.lotte = "1";//彩种值
     this.lotter = "1";//彩种值
+    this.agentName = "agent";
+    this.singleName = "single";
+    this.allupName = "allup";
   }
   summaryCha(reslt) {
     var	year = "";
@@ -292,6 +301,43 @@ export class OrdersComponent implements OnInit {
     var d1:any = new Date(a, b-1, c), d2:any = new Date(a, 0, 1), 
     d = Math.round((d1 - d2) / 86400000); 
     return Math.ceil((d + ((d2.getDay() + 1) - 1)) / 7); 
+  }
+  summaryretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    this.lottery = $("#lottery_type").val();
+    var time:any = $("#startime").val();
+		if(time =="" || time ==null){
+      this.message.error("请先选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Summaryretry(year,month,day,this.lottery,this.summaryName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
   }
   //导出
   summaryexport() {
@@ -373,6 +419,42 @@ compare(property){
           this.data = "数据异常请联系开发人员";
         });
       } 
+  }
+  agentretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    var time:any = $("#d12").val();
+		if(time =="" || time ==null){
+			  this.message.error("请先选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Agentretry(year,month,day,this.agentName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
   }
   agentexport() {
     var	year = "";
@@ -514,7 +596,7 @@ compare(property){
     this.tkId = $("#tk").val();
     this.uid = $("#uid").val();
     this.lottery_t = $("#lottery_type").val();
-      window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid+'&lottery_type='+this.lottery_t);
+      window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid+'&ballType='+this.lottery_t);
   }
   //single开始
   singleCha(reslt) {
@@ -542,9 +624,8 @@ compare(property){
             this.Nodata = false;
             this.total = data.total;
             this.singlebox = data.curInfo;
-            this.singlehis = data.hisInfo;
+            // this.singlehis = data.hisInfo;
           }else{
-            // this.singledatas = data.singledatas;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
@@ -554,7 +635,43 @@ compare(property){
         });
       } 
   }
-
+  singleretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    this.lottery = $("#lottery_type").val();
+		var time:any = $("#d12").val();
+		if(time =="" || time ==null){
+      this.message.error("请选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Singleretry(year,month,day,this.lottery,this.singleName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
+  }
   //导出
   singleexport() {
     var	year = "";
@@ -667,6 +784,43 @@ compare(property){
       } 
   }
 
+  allupretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    this.lottery = $("#lottery_type").val();
+		var time:any = $("#d12").val();
+		if(time =="" || time ==null){
+      this.message.error("请选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Allupretry(year,month,day,this.lottery,this.allupName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
+  }
   //导出
   allupexport() {
     var	year = "";

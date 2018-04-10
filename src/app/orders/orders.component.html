@@ -48,6 +48,7 @@
               </form> 
               <p class="word left">
                   <button class="selss" type="submit">查询</button>
+                  <button (click)="summaryretry()">重算</button>
               </p>
           </form>
           <p class="word">
@@ -184,6 +185,7 @@
                 </form>
                 <p class="word left">
                     <button class="selss" type="submit">查询</button>
+                    <button (click)="agentretry()">重算</button>
                 </p>
             </form>
             <p class="word">
@@ -441,6 +443,7 @@
                 </p> -->
                 <p class="word left">
                     <button class="selss" type="submit">查询</button>
+                    <button (click)="singleretry()">重算</button>
                 </p>
             </form>
             <p class="word">
@@ -553,10 +556,10 @@
                               <span>{{match.away_team}}</span>
                           </td>
                           <td>
-                              <span>{{match.home_score_half}}:</span>
-                              <span>{{match.away_score_half}}</span>/
                               <span>{{match.home_score}}:</span>
                               <span>{{match.away_score}}</span>
+                              <span *ngIf="match.home_kills">/{{match.home_kills}}:</span>
+                              <span *ngIf="match.away_kills">{{match.away_kills}}</span>
                           </td>
                       </tr>
                       <tr class="smallfontbody">
@@ -646,112 +649,6 @@
                 </tbody>
             </table>
         </div>
-          <!--历史数据  -->
-        <div class="row-fluid">
-            <table class="table" *ngIf="singlehis">
-                <tbody *ngFor="let match of singlehis">
-                      <tr class="smallfont">
-                          <td>{{match.match_code}}</td>
-                          <td>{{match.match_date}}</td>
-                          <td>{{match.match_league}}</td>
-                          <td>
-                              <span>{{match.home_team}}</span>vs
-                              <span>{{match.away_team}}</span>
-                          </td>
-                          <td>
-                              <span>{{match.home_score_half}}:</span>
-                              <span>{{match.away_score_half}}</span>/
-                              <span>{{match.home_score}}:</span>
-                              <span>{{match.away_score}}</span>
-                          </td>
-                      </tr>
-                      <tr class="smallfontbody">
-                          <td>玩法</td>
-                          <td>HAD</td>
-                          <td>HHAD</td>
-                          <td>HAFU</td>
-                          <td>CRS</td>
-                          <td>TTG</td>
-                          <td>FHAD</td>
-                          <td>AHC</td>
-                          <td>FAHC</td>
-                          <td>HL</td>
-                          <td>FHL</td>
-                          <td>FGS</td>
-                      </tr>
-                    <tr class="smallfontbody">
-                          <td>投注额</td>
-                          <td>{{match.resultMap.HAD.totalInvestment}}</td>
-                          <td>{{match.resultMap.HHAD.totalInvestment}}</td>
-                          <td>{{match.resultMap.HAFU.totalInvestment}}</td>
-                          <td>{{match.resultMap.CRS.totalInvestment}}</td>
-                          <td>{{match.resultMap.TTG.totalInvestment}}</td>
-                          <td>{{match.resultMap.FHAD.totalInvestment}}</td>
-                          <td>{{match.resultMap.AHC.totalInvestment}}</td>
-                          <td>{{match.resultMap.FAHC.totalInvestment}}</td>
-                          <td>{{match.resultMap.HL.totalInvestment}}</td>
-                           <td>{{match.resultMap.FHL.totalInvestment}}</td>
-                          <td>{{match.resultMap.FGS.totalInvestment}}</td>
-                      </tr>
-                      <tr class="smallfontbody">
-                          <td>返奖金额</td>
-                          <td>{{match.resultMap.HAD.totalPrice}}</td>
-                          <td>{{match.resultMap.HHAD.totalPrice}}</td>
-                          <td>{{match.resultMap.HAFU.totalPrice}}</td>
-                          <td>{{match.resultMap.CRS.totalPrice}}</td>
-                          <td>{{match.resultMap.TTG.totalPrice}}</td>
-                          <td>{{match.resultMap.FHAD.totalPrice}}</td>
-                          <td>{{match.resultMap.AHC.totalPrice}}</td>
-                          <td>{{match.resultMap.FAHC.totalPrice}}</td>
-                          <td>{{match.resultMap.HL.totalPrice}}</td>
-                           <td>{{match.resultMap.FHL.totalPrice}}</td>
-                          <td>{{match.resultMap.FGS.totalPrice}}</td>
-                      </tr> 
-                       <tr class="smallfontbody">
-                          <td>中奖投注额</td>
-                          <td>{{match.resultMap.HAD.winprice}}</td>
-                          <td>{{match.resultMap.HHAD.winprice}}</td>
-                          <td>{{match.resultMap.HAFU.winprice}}</td>
-                          <td>{{match.resultMap.CRS.winprice}}</td>
-                          <td>{{match.resultMap.TTG.winprice}}</td>
-                          <td>{{match.resultMap.FHAD.winprice}}</td>
-                          <td>{{match.resultMap.AHC.winprice}}</td>
-                          <td>{{match.resultMap.FAHC.winprice}}</td>
-                          <td>{{match.resultMap.HL.winprice}}</td>
-                           <td>{{match.resultMap.FHL.winprice}}</td>
-                          <td>{{match.resultMap.FGS.winprice}}</td>
-                      </tr>
-                        <tr class="smallfontbody">
-                          <td>平均中奖固定金额</td>
-                          <td>{{match.resultMap.HAD.average}}</td>
-                          <td>{{match.resultMap.HHAD.average}}</td>
-                          <td>{{match.resultMap.HAFU.average}}</td>
-                          <td>{{match.resultMap.CRS.average}}</td>
-                          <td>{{match.resultMap.TTG.average}}</td>
-                          <td>{{match.resultMap.FHAD.average}}</td>
-                          <td>{{match.resultMap.AHC.average}}</td>
-                          <td>{{match.resultMap.FAHC.average}}</td>
-                          <td>{{match.resultMap.HL.average}}</td>
-                           <td>{{match.resultMap.FHL.average}}</td>
-                          <td>{{match.resultMap.FGS.average}}</td>
-                      </tr>
-                          <tr class="smallfontbody">
-                          <td>盈利率%</td>
-                          <td>{{match.resultMap.HAD.payoutRate}}%</td>
-                          <td>{{match.resultMap.HHAD.payoutRate}}%</td>
-                          <td>{{match.resultMap.HAFU.payoutRate}}%</td>
-                          <td>{{match.resultMap.CRS.payoutRate}}%</td>
-                          <td>{{match.resultMap.TTG.payoutRate}}%</td>
-                          <td>{{match.resultMap.FHAD.payoutRate}}%</td>
-                          <td>{{match.resultMap.AHC.payoutRate}}%</td>
-                          <td>{{match.resultMap.FAHC.payoutRate}}%</td>
-                          <td>{{match.resultMap.HL.payoutRate}}% </td>
-                           <td>{{match.resultMap.FHL.payoutRate}}% </td>
-                          <td>{{match.resultMap.FGS.payoutRate}}%  </td>
-                        </tr>
-                </tbody>
-            </table> 
-        </div>
     </div>
     <div class="main" *ngSwitchCase="4">
         <div class="clearfix">
@@ -777,6 +674,7 @@
                 </form>
                 <p class="word left">
                     <button class="selss" type="submit">查询</button>
+                    <button (click)="allupretry()">重算</button>
                 </p>
             </form>
             <p class="word">
