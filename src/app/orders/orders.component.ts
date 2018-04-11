@@ -9,6 +9,7 @@ import { InterfaceService} from '../service/interface.service';
 import { LiveOrdermanage } from '../modules/ordermanage';
 import * as $ from "jquery";
 import { element } from 'protractor';
+
 interface Member {
     id: string;
     login: string;
@@ -22,6 +23,7 @@ interface Member {
   })
 export class OrdersComponent implements OnInit {
     public switchIndex: string = '2';
+    public loading = false;
     username:string;
     loginNum:string;
 
@@ -253,6 +255,7 @@ export class OrdersComponent implements OnInit {
     this.allupName = "allup";
   }
   summaryCha(reslt) {
+    this.loading = true;
     var	year = "";
 		var	month = "";
     var	day = "";
@@ -275,6 +278,7 @@ export class OrdersComponent implements OnInit {
         // console.log(year,month,day,this.lottery,"41444")
         this.QUERY.bookieSummary(year,month,day,this.lottery).subscribe(data => {
           if (data!=null) {
+            this.loading = false;
             this.Nodata = false;
             this.summarytotal = data.total;
             this.summaryToday = data.modelToday;
@@ -283,11 +287,12 @@ export class OrdersComponent implements OnInit {
             this.summaryYear = data.modelYear;
             this.summaryMonth = data.modelMonth;
           }else{
-            // this.summaryToday = data.modelToday;
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });
@@ -373,6 +378,7 @@ compare(property){
   }
 }
   agentCha(reslt) {
+    this.loading = true;
     var	year = "";
     var	month = "";
     var	day = "";
@@ -393,6 +399,7 @@ compare(property){
         }
         this.QUERY.bookieAgent(year,month,day).subscribe(Response => {
           if (Response.agentInfoModels!=null) {
+            this.loading = false;
             this.Nodata = false;
             this.agentdata = Response.total;
           // console.log(Response.agentInfoModels.sort(this.compare('agentSell')))//降序数据
@@ -410,11 +417,13 @@ compare(property){
               }
             }
           }else{
+            this.loading = false;
             this.agentdatas = Response.agentInfoModels;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });
@@ -482,6 +491,7 @@ compare(property){
   all(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t) {
     this.QUERY.queryAll(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t).subscribe(data => {
       if (data.modelList!=null) {
+        this.loading = false;
         this.Nodata = false;
         this.count=data.total.size;
         this.pageCount = Math.ceil(this.count/this.pageSize);
@@ -526,16 +536,19 @@ compare(property){
           }
         }
       }else{
+        this.loading = false;
         this.count = 0;
         this.Nodata = true;
         this.data = "暂无新数据";
       }
     },error=>{
+      this.loading = false;
       this.Nodata = true;
       this.data = "数据异常请联系开发人员";
     });
   }
   orderCha(reslt) {
+    this.loading = true;
     this.startime = $("#stime").val();
     this.endtime = $("#etime").val();
     this.agNum =$('#agentNum option:selected').val();
@@ -600,6 +613,7 @@ compare(property){
   }
   //single开始
   singleCha(reslt) {
+    this.loading = true;
     var	year = "";
 		var	month = "";
     var	day = "";
@@ -621,15 +635,18 @@ compare(property){
         }
         this.QUERY.bookieSingle(year,month,day,this.lottery_ty).subscribe(data => {
           if (data!=null) {
+            this.loading = false;
             this.Nodata = false;
             this.total = data.total;
             this.singlebox = data.curInfo;
             // this.singlehis = data.hisInfo;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });
@@ -698,6 +715,7 @@ compare(property){
   }
   //allup开始
   allupCha(reslt) {
+    this.loading = true;
     var	year = "";
 		var	month = "";
 		var	day = "";
@@ -719,6 +737,7 @@ compare(property){
         }
         this.QUERY.bookieAllup(year,month,day,this.lottery_typ).subscribe(data => {
           if (data!=null) {
+            this.loading = false;
             this.Nodata = false;
             this.allupdata = data.total;
 
@@ -773,11 +792,12 @@ compare(property){
             var str = this.allupFCA.splice(7,1);
 
           }else{
-            // this.allupdatas = data.agentInfoModels;
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });

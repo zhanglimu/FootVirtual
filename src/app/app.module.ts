@@ -6,6 +6,7 @@ import { AppComponent }  from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ElModule } from 'element-angular';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 import { OrdersComponent } from './orders/orders.component';
 import { InterfaceService} from './service/interface.service';
@@ -29,6 +30,14 @@ export const ROUTES : Routes =[
     ElModule.forRoot(),
     HttpModule,
     RouterModule.forRoot(ROUTES),
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff', 
+      secondaryColour: '#ffffff', 
+      tertiaryColour: '#ffffff'
+  })
   ],
   declarations: [
     AppComponent, 
