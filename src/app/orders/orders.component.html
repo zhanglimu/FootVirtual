@@ -97,7 +97,7 @@
                       <td class="blue">{{summaryToday.payoutRateAllup}}%</td>
                   </tr>
                   <tr *ngIf="summaryWeek">
-                      <td>{{summaryWeek.date}}</td>
+                      <td>本周截止到今日</td><!-- {{summaryWeek.date}} -->
                       <td>{{summaryWeek.num}}</td>
                       <td class="gree">{{summaryWeek.totalInvestment}}￥</td> 
                       <td class="gree">{{summaryWeek.totalPrice}}￥</td> 
@@ -110,7 +110,7 @@
                       <td class="blue">{{summaryWeek.payoutRateAllup}}%</td>
                   </tr>
                   <tr *ngIf="summaryMonth">
-                      <td>{{summaryMonth.date}}</td>
+                      <td>本月截止到今日</td><!-- {{summaryMonth.date}} -->
                       <td>{{summaryMonth.num}}</td>
                       <td class="gree">{{summaryMonth.totalInvestment}}￥</td> 
                       <td class="gree">{{summaryMonth.totalPrice}}￥</td> 
@@ -123,7 +123,7 @@
                       <td class="blue">{{summaryMonth.payoutRateAllup}}%</td>
                   </tr>
                   <tr *ngIf="summaryYear">
-                      <td>{{summaryYear.date}}</td>
+                      <td>本年截止到今日</td><!-- {{summaryYear.date}} -->
                       <td>{{summaryYear.num}}</td>
                       <td class="gree">{{summaryYear.totalInvestment}}￥</td> 
                       <td class="gree">{{summaryYear.totalPrice}}￥</td> 
@@ -455,7 +455,8 @@
         </div>
         <div class="row-fluid">
                 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-            <table *ngIf="singlebox">
+            <table>    <!-- *ngIf="singlebox" -->
+                <tbody *ngIf="zuqiu">
                     <tr class="firstr odds">
                           <td>合计</td>
                           <td>HAD</td>
@@ -470,7 +471,6 @@
                           <td>FHL</td>
                           <td>FGS</td>
                       </tr>  
-                <!-- <tbody *ngIf="total"> -->
                     <tr *ngIf="total" class="smallfontbody">
                           <td>投注额</td>
                           <td>{{total.resultMap.HAD.totalInvestment}}</td>
@@ -541,9 +541,70 @@
                           <td>{{total.resultMap.FHL.payoutRate}}%</td>
                           <td>{{total.resultMap.FGS.payoutRate}}%</td>
                       </tr>
-                <!-- </tbody> -->
-            <!-- <table *ngIf="singlebox"> -->
-                <tbody *ngFor="let match of singlebox">
+                </tbody>
+                <tbody *ngIf="dianjing">
+                      <tr class="firstr odds">
+                        <td>合计</td>
+                        <td>FBL</td>
+                        <td>SHDC</td>
+                        <td>HL</td>
+                        <td>HDC</td>
+                        <td>SHL</td>
+                        <td>MNL</td>
+                        <td>HS</td>
+                    </tr>  
+                  <tr *ngIf="totaldian" class="smallfontbody">
+                        <td>投注额</td>
+                        <td>{{total.resultMap.FBL.totalInvestment}}</td>
+                        <td>{{total.resultMap.SHDC.totalInvestment}}</td>
+                        <td>{{total.resultMap.HL.totalInvestment}}</td>
+                        <td>{{total.resultMap.HDC.totalInvestment}}</td>
+                        <td>{{total.resultMap.SHL.totalInvestment}}</td>
+                        <td>{{total.resultMap.MNL.totalInvestment}}</td>
+                        <td>{{total.resultMap.HS.totalInvestment}}</td>
+                    </tr>
+                    <tr *ngIf="totaldian" class="smallfontbody">
+                        <td>返奖金额</td>
+                        <td>{{total.resultMap.FBL.totalPrice}}</td>
+                        <td>{{total.resultMap.SHDC.totalPrice}}</td>
+                        <td>{{total.resultMap.HL.totalPrice}}</td>
+                        <td>{{total.resultMap.HDC.totalPrice}}</td>
+                        <td>{{total.resultMap.SHL.totalPrice}}</td>
+                        <td>{{total.resultMap.MNL.totalPrice}}</td>
+                        <td>{{total.resultMap.HS.totalPrice}}</td>
+                    </tr> 
+                     <tr *ngIf="totaldian" class="smallfontbody">
+                        <td>中奖投注额</td>
+                        <td>{{total.resultMap.FBL.winprice}}</td>
+                        <td>{{total.resultMap.SHDC.winprice}}</td>
+                        <td>{{total.resultMap.HL.winprice}}</td>
+                        <td>{{total.resultMap.HDC.winprice}}</td>
+                        <td>{{total.resultMap.SHL.winprice}}</td>
+                        <td>{{total.resultMap.MNL.winprice}}</td>
+                        <td>{{total.resultMap.HS.winprice}}</td>
+                    </tr>
+                      <tr *ngIf="totaldian" class="smallfontbody">
+                        <td>平均中奖固定金额</td>
+                        <td>{{total.resultMap.FBL.average}}</td>
+                        <td>{{total.resultMap.SHDC.average}}</td>
+                        <td>{{total.resultMap.HL.average}}</td>
+                        <td>{{total.resultMap.HDC.average}}</td>
+                        <td>{{total.resultMap.SHL.average}}</td>
+                        <td>{{total.resultMap.MNL.average}}</td>
+                        <td>{{total.resultMap.HS.average}}</td>
+                    </tr>
+                      <tr *ngIf="totaldian" class="smallfontbody">
+                        <td>盈利率%</td>
+                        <td>{{total.resultMap.FBL.payoutRate}}</td>
+                        <td>{{total.resultMap.SHDC.payoutRate}}</td>
+                        <td>{{total.resultMap.HL.payoutRate}}</td>
+                        <td>{{total.resultMap.HDC.payoutRate}}</td>
+                        <td>{{total.resultMap.SHL.payoutRate}}</td>
+                        <td>{{total.resultMap.MNL.payoutRate}}</td>
+                        <td>{{total.resultMap.HS.payoutRate}}</td>
+                    </tr>
+                </tbody>
+                <!-- <tbody *ngFor="let match of singlebox">
                       <tr class="smallfont">
                           <td>{{match.match_code}}</td>
                           <td>{{match.match_date}}</td>
@@ -643,7 +704,7 @@
                            <td>{{match.resultMap.FHL.payoutRate}}%</td>
                           <td>{{match.resultMap.FGS.payoutRate}}%</td>
                       </tr>
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </div>
@@ -678,7 +739,7 @@
                 <button (click)="allupexport()">导出</button>
             </p>
         </div>
-        <div class="row-fluid">
+        <div class="row-fluid" *ngIf="allupzuqiu">
                 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
             <table class="table">
                 <thead>
@@ -922,6 +983,161 @@
                 </tbody>
             </table>
         </div>
+        <!-- 电竞 -->
+        <div class="row-fluid" *ngIf="allupdianjing">
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        <table class="table">
+            <thead>
+                <tr class="thtible">
+                    <th style="width:20%;">人民币RMB</th>
+                    <th style="width:20%;">投注额</th>
+                    <th style="width:20%;">返奖金额</th>
+                    <th style="width:20%;">返奖率</th>
+                    <th style="width:20%;">盈利</th>
+                </tr>
+                <tr class="firstr odds" *ngIf="allupdiandata">
+                    <th style="width:20%;">合计</th>
+                    <th style="width:20%;">{{allupdiandata.totalInvestment}}</th>
+                    <th style="width:20%;">{{allupdiandata.totalPrice}}</th>
+                    <th style="width:20%;">{{allupdiandata.payoutRate}}%</th>
+                    <th style="width:20%;">{{allupdiandata.payout}}</th>
+                </tr>
+            </thead>
+        </table>
+        <table id="scro">
+            <tbody id="lists" *ngIf="allupFBL">
+                <tr class="tablelv" *ngIf="allFBL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">FBL</td>
+                    <td style="width:20%;">{{allFBL.totalInvestment}}</td>
+                    <td style="width:20%;">{{allFBL.totalPrice}}</td>
+                    <td style="width:20%;">{{allFBL.payoutRate}}</td> 
+                    <td style="width:20%;">{{allFBL.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupFBL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupSHDC">
+                <tr class="tablelv" *ngIf="allSHDC">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">SHDC</td>
+                    <td style="width:20%;">{{allSHDC.totalInvestment}}</td>
+                    <td style="width:20%;">{{allSHDC.totalPrice}}</td>
+                    <td style="width:20%;">{{allSHDC.payoutRate}}</td> 
+                    <td style="width:20%;">{{allSHDC.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupSHDC">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupdianHL">
+                <tr class="tablelv" *ngIf="alldianHL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">HL</td>
+                    <td style="width:20%;">{{alldianHL.totalInvestment}}</td>
+                    <td style="width:20%;">{{alldianHL.totalPrice}}</td>
+                    <td style="width:20%;">{{alldianHL.payoutRate}}</td> 
+                    <td style="width:20%;">{{alldianHL.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupdianHL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupHDC">
+                <tr class="tablelv" *ngIf="allHDC">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">HDC</td>
+                    <td style="width:20%;">{{allHDC.totalInvestment}}</td>
+                    <td style="width:20%;">{{allHDC.totalPrice}}</td>
+                    <td style="width:20%;">{{allHDC.payoutRate}}</td> 
+                    <td style="width:20%;">{{allHDC.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupHDC">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupSHL">
+                <tr class="tablelv" *ngIf="allSHL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">SHL</td>
+                    <td style="width:20%;">{{allSHL.totalInvestment}}</td>
+                    <td style="width:20%;">{{allSHL.totalPrice}}</td>
+                    <td style="width:20%;">{{allSHL.payoutRate}}</td> 
+                    <td style="width:20%;">{{allSHL.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupSHL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupMNL">
+                <tr class="tablelv" *ngIf="allMNL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">MNL</td>
+                    <td style="width:20%;">{{allMNL.totalInvestment}}</td>
+                    <td style="width:20%;">{{allMNL.totalPrice}}</td>
+                    <td style="width:20%;">{{allMNL.payoutRate}}</td> 
+                    <td style="width:20%;">{{allMNL.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupMNL">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody id="lists" *ngIf="allupHS">
+                <tr class="tablelv" *ngIf="allHS">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">HS</td>
+                    <td style="width:20%;">{{allHS.totalInvestment}}</td>
+                    <td style="width:20%;">{{allHS.totalPrice}}</td>
+                    <td style="width:20%;">{{allHS.payoutRate}}</td> 
+                    <td style="width:20%;">{{allHS.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupHS">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
+            <tbody *ngIf="Nodata">
+                <tr>
+                    <td colspan="10">{{data}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
   </div>
   <!-- <div class="font4">

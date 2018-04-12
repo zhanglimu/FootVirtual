@@ -82,13 +82,14 @@ export class OrdersComponent implements OnInit {
     timej:string;
     //single开始
     total: string[];   //订单变量
-    singlebox:string[];
+    // singlebox:string[];
     // singlehis:string[];
+    totaldian:string[];
     lottery_ty:any;
     lotte:string;
     singleName:string;
     //allup
-    allupdata: string[];   //订单变量
+    allupdata: string[];   //订单合计变量
     allupHAD:string[];
     allHAD:string[];
     allupHHAD:string[];
@@ -113,6 +114,23 @@ export class OrdersComponent implements OnInit {
     allFGS:string[];
     allupFCA:string[];
     allFCA:string[];
+    //电竞
+    allupdiandata:string[];
+    allupFBL:string[];
+    allFBL:string[];
+    allupSHDC:string[];
+    allSHDC:string[];
+    allupdianHL:string[];
+    alldianHL:string[];
+    allupHDC:string[];
+    allHDC:string[];
+    allupSHL:string[];
+    allSHL:string[];
+    allupMNL:string[];
+    allMNL:string[];
+    allupHS:string[];
+    allHS:string[];
+
     lottery_typ:any;
     lotter:string;
     allupName:string;
@@ -122,7 +140,10 @@ export class OrdersComponent implements OnInit {
     data:string;  //显示提示信息
     Nodata3:boolean;
     data3:string;
-    
+    zuqiu:boolean;
+    dianjing:boolean;
+    allupzuqiu:boolean;
+    allupdianjing:boolean;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       this.username = localStorage.getItem("username");
       this.loginNum = localStorage.getItem("loginCount")
@@ -171,8 +192,9 @@ export class OrdersComponent implements OnInit {
     this.shuju = null;
     //single
     this.total = null;
-    this.singlebox = null;
+    // this.singlebox = null;
     // this.singlehis = [];
+    this.totaldian = null;
     //allup
     this.allupdata = [];
     this.allupHAD = [];
@@ -199,6 +221,22 @@ export class OrdersComponent implements OnInit {
     this.allFGS = [];
     this.allupFCA = [];
     this.allFCA = [];
+    //电竞
+    this.allupdiandata=[];
+    this.allupFBL=[];
+    this.allFBL=[];
+    this.allupSHDC=[];
+    this.allSHDC=[];
+    this.allupdianHL=[];
+    this.alldianHL=[];
+    this.allupHDC=[];
+    this.allHDC=[];
+    this.allupSHL=[];
+    this.allSHL=[];
+    this.allupMNL=[];
+    this.allMNL=[];
+    this.allupHS=[];
+    this.allHS=[];
   }
   //退出登录
   Signout(){
@@ -253,6 +291,10 @@ export class OrdersComponent implements OnInit {
     this.agentName = "agent";
     this.singleName = "single";
     this.allupName = "allup";
+    this.zuqiu =false;
+    this.dianjing =false;
+    this.allupzuqiu =false;
+    this.allupdianjing =false;
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -638,8 +680,16 @@ compare(property){
             this.loading = false;
             this.Nodata = false;
             this.total = data.total;
-            this.singlebox = data.curInfo;
+            this.totaldian = data.total;
+            // this.singlebox = data.curInfo;
             // this.singlehis = data.hisInfo;
+            if (this.lottery_ty==2) {
+              this.dianjing =true;
+              this.zuqiu =false;
+            }else{
+              this.zuqiu =true;
+              this.dianjing =false;
+            }
           }else{
             this.loading = false;
             this.Nodata = true;
@@ -739,58 +789,95 @@ compare(property){
           if (data!=null) {
             this.loading = false;
             this.Nodata = false;
-            this.allupdata = data.total;
+            
+            if (this.lottery_typ==2) {
+              this.allupdianjing =true;
+              this.allupzuqiu =false;
+              this.allupdiandata = data.alluptotal;
 
-            this.allupHAD = data.HAD;
-            this.allHAD = data.HAD[7];
-            // this.allHAD.local_m = "HAD";
-            // this.allupHAD = this.allupHAD;
-            var str = this.allupHAD.splice(7,1);
+              this.allupFBL = data.FBL;
+              this.allFBL = data.FBL[7];
+              var str = this.allupFBL.splice(7,1);
+              
+              this.allupSHDC = data.SHDC;
+              this.allSHDC = data.SHDC[7];
+              var str = this.allupSHDC.splice(7,1);
 
-            this.allupHHAD = data.HHAD;
-            this.allHHAD = data.HHAD[7];
-            var str = this.allupHHAD.splice(7,1);
+              this.allupdianHL = data.HL;
+              this.alldianHL = data.HL[7];
+              var str = this.allupdianHL.splice(7,1);
 
-            this.allupHAFU = data.HAFU;
-            this.allHAFU = data.HAFU[7];
-            var str = this.allupHAFU.splice(7,1);
+              this.allupHDC = data.HDC;
+              this.allHDC = data.HDC[7];
+              var str = this.allupHDC.splice(7,1);
 
-            this.allupTTG = data.TTG;
-            this.allTTG = data.TTG[7];
-            var str = this.allupTTG.splice(7,1);
+              this.allupSHL = data.SHL;
+              this.allSHL = data.SHL[7];
+              var str = this.allupSHL.splice(7,1);
 
-            this.allupCRS = data.CRS;
-            this.allCRS = data.CRS[7];
-            var str = this.allupCRS.splice(7,1);
+              this.allupMNL = data.MNL;
+              this.allMNL = data.MNL[7];
+              var str = this.allupMNL.splice(7,1);
 
-            this.allupFHAD = data.FHAD;
-            this.allFHAD = data.FHAD[7];
-            var str = this.allupFHAD.splice(7,1);
+              this.allupHS = data.HS;
+              this.allHS = data.HS[7];
+              var str = this.allupHS.splice(7,1);
+            }else{
+              this.allupzuqiu =true;
+              this.allupdianjing =false;
+              this.allupdata = data.alluptotal;
 
-            this.allupAHC = data.AHC;
-            this.allAHC = data.AHC[7];
-            var str = this.allupAHC.splice(7,1);
+              this.allupHAD = data.HAD;
+              this.allHAD = data.HAD[7];
+              // this.allHAD.local_m = "HAD";
+              // this.allupHAD = this.allupHAD;
+              var str = this.allupHAD.splice(7,1);
 
-            this.allupFAHC = data.FAHC;
-            this.allFAHC = data.FAHC[7];
-            var str = this.allupFAHC.splice(7,1);
+              this.allupHHAD = data.HHAD;
+              this.allHHAD = data.HHAD[7];
+              var str = this.allupHHAD.splice(7,1);
 
-            this.allupHL = data.HL;
-            this.allHL = data.HL[7];
-            var str = this.allupHL.splice(7,1);
+              this.allupHAFU = data.HAFU;
+              this.allHAFU = data.HAFU[7];
+              var str = this.allupHAFU.splice(7,1);
 
-            this.allupFHL = data.FHL;
-            this.allFHL = data.FHL[7];
-            var str = this.allupFHL.splice(7,1);
+              this.allupTTG = data.TTG;
+              this.allTTG = data.TTG[7];
+              var str = this.allupTTG.splice(7,1);
 
-            this.allupFGS = data.FGS;
-            this.allFGS = data.FGS[7];
-            var str = this.allupFGS.splice(7,1);
+              this.allupCRS = data.CRS;
+              this.allCRS = data.CRS[7];
+              var str = this.allupCRS.splice(7,1);
 
-            this.allupFCA = data.FCA;
-            this.allFCA = data.FCA[7];
-            var str = this.allupFCA.splice(7,1);
+              this.allupFHAD = data.FHAD;
+              this.allFHAD = data.FHAD[7];
+              var str = this.allupFHAD.splice(7,1);
 
+              this.allupAHC = data.AHC;
+              this.allAHC = data.AHC[7];
+              var str = this.allupAHC.splice(7,1);
+
+              this.allupFAHC = data.FAHC;
+              this.allFAHC = data.FAHC[7];
+              var str = this.allupFAHC.splice(7,1);
+
+              this.allupHL = data.HL;
+              this.allHL = data.HL[7];
+              var str = this.allupHL.splice(7,1);
+
+              this.allupFHL = data.FHL;
+              this.allFHL = data.FHL[7];
+              var str = this.allupFHL.splice(7,1);
+
+              this.allupFGS = data.FGS;
+              this.allFGS = data.FGS[7];
+              var str = this.allupFGS.splice(7,1);
+
+              this.allupFCA = data.FCA;
+              this.allFCA = data.FCA[7];
+              var str = this.allupFCA.splice(7,1);
+            }
+            
           }else{
             this.loading = false;
             this.Nodata = true;
