@@ -38,7 +38,7 @@
                       <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
                       <strong>周：<span id="week" class="vor" name="weeking">{{weeking}}</span></strong>
                   </p>
-                  <p class="word">
+                  <p class="word" *ngIf="caizhong">
                     <span>彩种：</span>
                     <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
                         <option value="1">足球</option>
@@ -183,6 +183,13 @@
                         <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
                         <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                     </p>
+                    <p class="word" *ngIf="caizhong">
+                        <span>彩种：</span>
+                        <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
+                            <option value="1">足球</option>
+                            <option value="2">电竞</option>
+                        </select>
+                      </p>
                 </form>
                 <p class="word left">
                     <button class="selss" type="submit">查询</button>
@@ -284,15 +291,17 @@
                             <select id="agentNum" name="agentNum" [(ngModel)]="agent">
                                 <option value="">ALL</option>
                                 <option *ngFor="let agentNums of resut;" [value]='agentNums.agentNum'>{{agentNums.agentName}}</option>
-                            </select><br />
+                            </select>
+                        </p>
+                        <p class="word" *ngIf="caizhong">
                             <span>彩种：</span>
                             <select id="lottery_type" name="lottery_type" [(ngModel)]="lott">
                                 <option value="1">足球</option>
                                 <option value="2">电竞</option>
                             </select>
+                        </p>
                             <button class="selss" type="submit">查询</button>
                             <button (click)="orderexport()">导出</button>
-                        </p>
                 </form>
                 <p class="word">
                 </p>
@@ -432,7 +441,7 @@
                         <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
                         <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                     </p>
-                    <p class="word">
+                    <p class="word" *ngIf="caizhong">
                         <span>彩种：</span>
                         <select id="lottery_type" name="lottery_type" [(ngModel)]="lotte">
                             <option value="1">足球</option>
@@ -722,7 +731,7 @@
                         <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
                         <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                     </p>
-                    <p class="word">
+                    <p class="word" *ngIf="caizhong">
                         <span>彩种：</span>
                         <select id="lottery_type" name="lottery_type" [(ngModel)]="lotter">
                             <option value="1">足球</option>

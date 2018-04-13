@@ -24,9 +24,10 @@ interface Member {
 export class OrdersComponent implements OnInit {
     public switchIndex: string = '2';
     public loading = false;
-    username:string;
-    loginNum:string;
-
+    // username:string;
+    // loginNum:string;
+    people:any;
+    lo: string;
     //summary开始
     summarytotal: string[];   
     summaryToday:string[];
@@ -46,6 +47,7 @@ export class OrdersComponent implements OnInit {
     agentdata: string[];   //订单变量
     agentdatas:LiveOrdermanage;
     agentName:string;
+    lottery_:any;
 
     //order开始
     resut: any[];   //返回所有渠道信息变量
@@ -144,9 +146,11 @@ export class OrdersComponent implements OnInit {
     dianjing:boolean;
     allupzuqiu:boolean;
     allupdianjing:boolean;
+    caizhong:boolean;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
-      this.username = localStorage.getItem("username");
-      this.loginNum = localStorage.getItem("loginCount")
+      // this.username = localStorage.getItem("username");
+      // this.loginNum = localStorage.getItem("loginCount")
+      
       //order开始时间和结束时间
       var time =  new Date();
       var year = time.getFullYear();
@@ -248,8 +252,9 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.lo = "2";//彩种值
     //summary开始
-    this.lot = "1";//彩种值
+    this.lot = "2";//彩种值
     this.summaryName = "summary";
     var woDate = new Date();
     this.date = woDate.toLocaleDateString(); 
@@ -270,14 +275,13 @@ export class OrdersComponent implements OnInit {
     var month = timeing.getMonth()+1;
     var day = timeing.getDate();
     this.time0=year+"-"+month+"-"+day;
-    console.log(this.time0,"dddd")
     //order开始
     this.ding = "";
     this.yong = "";
     this.in = '';
     this.sta = '';
     this.agent = ""; //渠道值
-    this.lott = "1";//彩种值
+    this.lott = "2";//彩种值
     this.Nodata =false;
 
     //返回渠道信息
@@ -286,8 +290,8 @@ export class OrdersComponent implements OnInit {
         this.resut = data.agentList;
     });
     //order结束
-    this.lotte = "1";//彩种值
-    this.lotter = "1";//彩种值
+    this.lotte = "2";//彩种值
+    this.lotter = "2";//彩种值
     this.agentName = "agent";
     this.singleName = "single";
     this.allupName = "allup";
@@ -295,13 +299,27 @@ export class OrdersComponent implements OnInit {
     this.dianjing =false;
     this.allupzuqiu =false;
     this.allupdianjing =false;
+    // this.caizhong=false;
+    
+    this.people = localStorage.getItem("people")
+    console.log(this.people)
+    if(this.people==0){
+      this.caizhong=false;
+    }else{
+      this.caizhong=true;
+    }
   }
   summaryCha(reslt) {
     this.loading = true;
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery = "2";
+    }else{
+      this.lottery = $("#lottery_type").val();
+    }
+    // this.lottery = $("#lottery_type").val();
 		var time:any = $("#startime").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
@@ -353,7 +371,11 @@ export class OrdersComponent implements OnInit {
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery = "2";
+    }else{
+      this.lottery = $("#lottery_type").val();
+    }
     var time:any = $("#startime").val();
 		if(time =="" || time ==null){
       this.message.error("请先选择要重算的日期");
@@ -391,7 +413,11 @@ export class OrdersComponent implements OnInit {
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery = "2";
+    }else{
+      this.lottery = $("#lottery_type").val();
+    }
 		var time:any = $("#startime").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -424,6 +450,12 @@ compare(property){
     var	year = "";
     var	month = "";
     var	day = "";
+    if(this.people==0){
+      this.lottery_ = "2";
+    }else{
+      this.lottery_ = $("#lottery_type").val();
+    }
+    // this.lottery_ = $("#lottery_type").val();
     var time:any = $("#d12").val();
     if(time =="" || time ==null){
         this.message.error("请先选择日期");
@@ -439,7 +471,7 @@ compare(property){
         }else{
           year=sort;
         }
-        this.QUERY.bookieAgent(year,month,day).subscribe(Response => {
+        this.QUERY.bookieAgent(year,month,day,this.lottery_).subscribe(Response => {
           if (Response.agentInfoModels!=null) {
             this.loading = false;
             this.Nodata = false;
@@ -475,6 +507,11 @@ compare(property){
     var	year = "";
 		var	month = "";
     var	day = "";
+    if(this.people==0){
+      this.lottery_ = "2";
+    }else{
+      this.lottery_ = $("#lottery_type").val();
+    }
     var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要重算的日期");
@@ -494,7 +531,7 @@ compare(property){
           this.message.error("请先精确到日");
           return false;
         }
-        this.QUERY.Agentretry(year,month,day,this.agentName).subscribe(data => {
+        this.QUERY.Agentretry(year,month,day,this.lottery_,this.agentName).subscribe(data => {
           if (data.ResultCode=1) {
             this.Nodata = false;
           }else{
@@ -511,6 +548,11 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
+    if(this.people==0){
+      this.lottery_ = "2";
+    }else{
+      this.lottery_ = $("#lottery_type").val();
+    }
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -526,7 +568,7 @@ compare(property){
         }else{
           year=sort;
         }
-        window.open(AppConfig.baseUrl +'/account/bookieAgent/channelStatisticsExcel?year='+year+'&month='+month+'&day='+day);
+        window.open(AppConfig.baseUrl +'/account/bookieAgent/channelStatisticsExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_);
       } 
   }
 //order开始
@@ -598,7 +640,12 @@ compare(property){
     this.inplay =$('#inplay option:selected').val();
     this.tkId = $("#tk").val();
     this.uid = $("#uid").val();
-    this.lottery_t = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_t = "2";
+    }else{
+      this.lottery_t = $("#lottery_type").val();
+    }
+    // this.lottery_t = $("#lottery_type").val();
     this.all(this.startime,this.endtime,this.agNum,this.pageNum,this.pageSize,this.state,this.inplay,this.tkId,this.uid,this.lottery_t)
   }
   GetDateStr(AddDayCount) { 
@@ -650,7 +697,11 @@ compare(property){
     this.inplay =$('#inplay option:selected').val();
     this.tkId = $("#tk").val();
     this.uid = $("#uid").val();
-    this.lottery_t = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_t = "2";
+    }else{
+      this.lottery_t = $("#lottery_type").val();
+    }
       window.open(AppConfig.baseUrl + "/account/bookieOrder/userManagementExcel?startDate="+this.startime +"&endDate="+this.endtime+"&agentId="+this.agNum+"&state="+this.state+"&inplay="+this.inplay+"&tkId="+this.tkId+"&uid="+this.uid+'&ballType='+this.lottery_t);
   }
   //single开始
@@ -659,7 +710,12 @@ compare(property){
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery_ty = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_ty = "2";
+    }else{
+      this.lottery_ty = $("#lottery_type").val();
+    }
+    // this.lottery_ty = $("#lottery_type").val();
     var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
@@ -706,7 +762,11 @@ compare(property){
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_ty = "2";
+    }else{
+      this.lottery_ty = $("#lottery_type").val();
+    }
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
       this.message.error("请选择要重算的日期");
@@ -726,7 +786,7 @@ compare(property){
           this.message.error("请先精确到日");
           return false;
         }
-        this.QUERY.Singleretry(year,month,day,this.lottery,this.singleName).subscribe(data => {
+        this.QUERY.Singleretry(year,month,day,this.lottery_ty,this.singleName).subscribe(data => {
           if (data.ResultCode=1) {
             this.Nodata = false;
           }else{
@@ -744,7 +804,11 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
-    this.lottery_ty = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_ty = "2";
+    }else{
+      this.lottery_ty = $("#lottery_type").val();
+    }
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");
@@ -769,7 +833,12 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
-    this.lottery_typ = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_typ = "2";
+    }else{
+      this.lottery_typ = $("#lottery_type").val();
+    }
+    // this.lottery_typ = $("#lottery_type").val();
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择日期");
@@ -895,7 +964,11 @@ compare(property){
     var	year = "";
 		var	month = "";
     var	day = "";
-    this.lottery = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_typ = "2";
+    }else{
+      this.lottery_typ = $("#lottery_type").val();
+    }
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
       this.message.error("请选择要重算的日期");
@@ -915,7 +988,7 @@ compare(property){
           this.message.error("请先精确到日");
           return false;
         }
-        this.QUERY.Allupretry(year,month,day,this.lottery,this.allupName).subscribe(data => {
+        this.QUERY.Allupretry(year,month,day,this.lottery_typ,this.allupName).subscribe(data => {
           if (data.ResultCode=1) {
             this.Nodata = false;
           }else{
@@ -933,7 +1006,11 @@ compare(property){
     var	year = "";
 		var	month = "";
 		var	day = "";
-    this.lottery_typ = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_typ = "2";
+    }else{
+      this.lottery_typ = $("#lottery_type").val();
+    }
 		var time:any = $("#d12").val();
 		if(time =="" || time ==null){
 			  this.message.error("请先选择要导出的日期");

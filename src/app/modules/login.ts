@@ -1,5 +1,6 @@
 export class Login {
     constructor(public name: string,
-                public selected: boolean) {
+                public selected: boolean,
+              ){
     }
   }

@@ -11,12 +11,12 @@ export class InterfaceService{
     // private cookie ={withCredentials: true};
     constructor(private http:Http){}
     //渠道报表接口
-    bookieAgent(year,month,day){
-        return this.http.get(AppConfig.baseUrl+'/account/bookieAgent/queryAll?year='+year+'&month='+month+'&day='+day)
+    bookieAgent(year,month,day,lottery_){
+        return this.http.get(AppConfig.baseUrl+'/account/bookieAgent/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_)
         .map(res=>res.json());
     }
-    Agentretry(year,month,day,agentName){
-        return this.http.get(AppConfig.baseUrl+'/account/recountData?year='+year+'&month='+month+'&day='+day+'&reportsName='+agentName)
+    Agentretry(year,month,day,lottery_,agentName){
+        return this.http.get(AppConfig.baseUrl+'/account/recountData?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_+'&reportsName='+agentName)
         .map(res=>res.json());
     }
     //summary接口
@@ -40,7 +40,6 @@ export class InterfaceService{
     }
     //点击详情接口
     bookieOrder(ticketid,ballType){
-        console.log(ticketid,ballType,"uuu")
         return this.http.get(AppConfig.baseUrl+'/account/bookieOrder/queryDetail?ticketInfo_id='+ticketid +'&ballType='+ballType)
         .map(res=>res.json());
     }

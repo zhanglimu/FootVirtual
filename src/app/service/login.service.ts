@@ -15,7 +15,7 @@ export class LoginService {
     let formData: FormData = new FormData(); 
     formData.append('email', res.username); 
     formData.append('pwd', res.password); 
-    return this.http.post(AppConfig.baseUrl +'/account/user/tologin',formData//,{withCredentials: true}
+    return this.http.post(AppConfig.baseUrl +'/account/bookieUser/tologin',formData//,{withCredentials: true}
     ).map(res =>res.json());
   }
 

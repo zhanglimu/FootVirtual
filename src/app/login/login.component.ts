@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   onSubmit(res) {
     this.LOGIN.upLogion(res).subscribe(val => {
       console.log(val);
-      // if (val.result.resultCode == 0) {
         if (val.result.resultCode== 1) {
           // localStorage.setItem("username", val.data.nickName);
           // localStorage.setItem("loginCount", val.data.loginCount);
+          localStorage.setItem("people", val.data);
           //路由重定向
           this.router.navigate(['./orders'])
         } else {
