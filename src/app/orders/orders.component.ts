@@ -132,6 +132,8 @@ export class OrdersComponent implements OnInit {
     allMNL:string[];
     allupHS:string[];
     allHS:string[];
+    allupdianFCA:string[];
+    alldianFCA:string[];
 
     lottery_typ:any;
     lotter:string;
@@ -241,6 +243,8 @@ export class OrdersComponent implements OnInit {
     this.allMNL=[];
     this.allupHS=[];
     this.allHS=[];
+    this.allupdianFCA=[];
+    this.alldianFCA=[];
   }
   //退出登录
   Signout(){
@@ -590,7 +594,7 @@ compare(property){
               this.shuju[i].ballType_name = "足球";
               break;
             case 2:
-              this.shuju[i].ballType_name = "篮球";
+              this.shuju[i].ballType_name = "电竞";
               break;
           }
           switch (this.shuju[i].inplay) {
@@ -891,6 +895,10 @@ compare(property){
               this.allupHS = data.HS;
               this.allHS = data.HS[7];
               var str = this.allupHS.splice(7,1);
+
+              this.allupdianFCA = data.FCA;
+              this.alldianFCA = data.FCA[7];
+              var str = this.allupdianFCA.splice(7,1);
             }else{
               this.allupzuqiu =true;
               this.allupdianjing =false;

@@ -1140,6 +1140,24 @@
                     <td style="width:20%;">{{b.payout}}</td> 
                 </tr>
             </tbody>
+            <tbody id="lists" *ngIf="allupdianFCA">
+                <tr class="tablelv" *ngIf="alldianFCA">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">FCA</td>
+                    <td style="width:20%;">{{allHS.totalInvestment}}</td>
+                    <td style="width:20%;">{{allHS.totalPrice}}</td>
+                    <td style="width:20%;">{{allHS.payoutRate}}</td> 
+                    <td style="width:20%;">{{allHS.payout}}</td> 
+                </tr>
+                <tr *ngFor="let b of allupdianFCA">
+                    <td style="visibility:hidden;">0</td>
+                    <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                    <td style="width:20%;">{{b.totalInvestment}}</td>
+                    <td style="width:20%;">{{b.totalPrice}}</td>
+                    <td style="width:20%;">{{b.payoutRate}}</td> 
+                    <td style="width:20%;">{{b.payout}}</td> 
+                </tr>
+            </tbody>
             <tbody *ngIf="Nodata">
                 <tr>
                     <td colspan="10">{{data}}</td>
