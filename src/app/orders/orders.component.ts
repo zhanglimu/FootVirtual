@@ -22,7 +22,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '2';
+    public switchIndex: string = '7';
     public loading = false;
     // username:string;
     // loginNum:string;
@@ -147,10 +147,45 @@ export class OrdersComponent implements OnInit {
     allupzuqiu:boolean;
     allupdianjing:boolean;
     caizhong:boolean;
+//cash out/////////////////
+//cashallup
+    cashallupdata: string[];   //订单合计变量
+    cashallupHAD:string[];
+    outallHAD:string[];
+    cashallupHHAD:string[];
+    outallHHAD:string[];
+    cashallupHAFU:string[];
+    outallHAFU:string[];
+    cashallupTTG:string[];
+    outallTTG:string[];
+    cashallupCRS:string[];
+    outallCRS:string[];
+    cashallupFCA:string[];
+    outallFCA:string[];
+    cashlot:any;
+    //cashsingle
+    cashsingletotal:string[];
+    cashsingledata:string[];
+    cashlott:any;
+    //cashsummary
+    summaryweeking:any;
+    modelToday:string[];
+    modelWeek:string[];
+    modelMonth:string[];
+    modelYear:string[];
+    modelList:string[];
+    modelTotal:string[];
+    cashlotte:any;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
-      
+      // 折叠导航
+      $(document).ready(function(){
+        $(".one_bar").click(function(){
+              $(this).next().slideToggle();
+              $(this).parent().siblings().children("ul").slideUp();
+        });
+      });
       //order开始时间和结束时间
       var time =  new Date();
       var year = time.getFullYear();
@@ -241,6 +276,24 @@ export class OrdersComponent implements OnInit {
     this.allMNL=[];
     this.allupHS=[];
     this.allHS=[];
+    //cash out/////////////////
+//cashallup
+    this.cashallupdata=[];   //订单合计变量
+    this.cashallupHAD=[];
+    this.outallHAD=[];
+    this.cashallupHHAD=[];
+    this.outallHHAD=[];
+    this.cashallupHAFU=[];
+    this.outallHAFU=[];
+    this.cashallupTTG=[];
+    this.outallTTG=[];
+    this.cashallupCRS=[];
+    this.outallCRS=[];
+    this.cashallupFCA=[];
+    this.outallFCA=[];
+    //cashsingle
+    this.cashsingletotal=[];
+    this.cashsingledata=[];
   }
   //退出登录
   Signout(){
@@ -269,6 +322,7 @@ export class OrdersComponent implements OnInit {
     checkDate.setDate(1);
     week=Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
     this.weeking =week;
+    this.summaryweeking =week;
     //初始默认时间
     var timeing =  new Date();
     var year = timeing.getFullYear();
@@ -308,6 +362,10 @@ export class OrdersComponent implements OnInit {
     }else{
       this.caizhong=true;
     }
+    //cashout ////
+    this.cashlot = "1";//彩种值
+    this.cashlott = "1";
+    this.cashlotte = "1";
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -590,7 +648,7 @@ compare(property){
               this.shuju[i].ballType_name = "足球";
               break;
             case 2:
-              this.shuju[i].ballType_name = "篮球";
+              this.shuju[i].ballType_name = "电竞";
               break;
           }
           switch (this.shuju[i].inplay) {
@@ -1029,5 +1087,235 @@ compare(property){
         window.open(AppConfig.baseUrl +'/account/bookieAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_typ);
       } 
   }
+//cashallup开始
+cashallupCha(reslt) {
+  this.loading = true;
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlot = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Allup(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.cashallupdata = data.total;
+
+          this.cashallupHAD = data.HAD;
+          this.outallHAD = data.HAD[7];
+          var str = this.cashallupHAD.splice(7,1);
+
+          this.cashallupHHAD = data.HHAD;
+          this.outallHHAD = data.HHAD[7];
+          var str = this.cashallupHHAD.splice(7,1);
+
+          this.cashallupHAFU = data.HAFU;
+          this.outallHAFU = data.HAFU[7];
+          var str = this.cashallupHAFU.splice(7,1);
+
+          this.cashallupTTG = data.TTG;
+          this.outallTTG = data.TTG[7];
+          var str = this.cashallupTTG.splice(7,1);
+
+          this.cashallupCRS = data.CRS;
+          this.outallCRS = data.CRS[7];
+          var str = this.cashallupCRS.splice(7,1);
+
+          this.cashallupFCA = data.FCA;
+          this.outallFCA = data.FCA[7];
+          var str = this.cashallupFCA.splice(7,1);
+          
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+    } 
+}
+cashallupexport(){
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // if(this.people==0){
+  //   this.cashlot = "2";
+  // }else{
+  //   this.cashlot = $("#lottery_type").val();
+  // }
+  this.cashlot = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/dailyAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashlot);
+    } 
+}
+cashsingleCha(reslt) {
+  this.loading = true;
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // if(this.people==0){
+  //   this.lottery_ty = "2";
+  // }else{
+  //   this.lottery_ty = $("#lottery_type").val();
+  // }
+  this.cashlott = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Single(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.cashsingletotal = data.total;
+          this.cashsingledata = data.modelList;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+    } 
+}
+cashsingleexport(){
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlott = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/detailSGL/detailSGLExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashlot);
+    } 
+}
+cashsummaryCha(reslt) {
+  this.loading = true;
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Summary(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.modelToday = data.modelToday;
+          this.modelWeek = data.modelWeek;
+          this.modelMonth = data.modelMonth;
+          this.modelYear = data.modelYear;
+          this.modelList = data.modelList;
+          this.modelTotal = data.total;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+      
+    } 
+    this.summaryweeking =this.getYearWeek(year, month, day);
+    document.getElementById("week").innerText = this.summaryweeking;	
+    document.getElementById("month").innerText = month;
+}
+cashsummaryexport() {
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+    } 
+}
+
 
 }

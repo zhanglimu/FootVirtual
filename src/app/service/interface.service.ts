@@ -54,7 +54,6 @@ export class InterfaceService{
     }
     //虚拟ALLup接口
     bookieAllup(year,month,day,lottery_typ){
-        // console.log(year,month,day,lottery_typ,"service")
         return this.http.get(AppConfig.baseUrl+'/account/bookieAllup/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_typ)
         .map(res=>res.json());
     }
@@ -62,5 +61,22 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/recountData?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_typ+'&reportsName='+allupName)
         .map(res=>res.json());
     }
-
+//////////////////////////////CASH OUT/////////////////////////
+    Allup(year,month,day){
+        console.log(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day,"service")
+        return this.http.get(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    Single(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/detailSGL/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    Summary(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/summary/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    MonthSummary(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/dailyCollectStatements/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
 }   
