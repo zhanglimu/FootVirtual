@@ -22,7 +22,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '7';
+    public switchIndex: string = '2';
     public loading = false;
     // username:string;
     // loginNum:string;
@@ -132,6 +132,8 @@ export class OrdersComponent implements OnInit {
     allMNL:string[];
     allupHS:string[];
     allHS:string[];
+    allupdianFCA:string[];
+    alldianFCA:string[];
 
     lottery_typ:any;
     lotter:string;
@@ -176,6 +178,13 @@ export class OrdersComponent implements OnInit {
     modelList:string[];
     modelTotal:string[];
     cashlotte:any;
+    //cashmonthsummary
+    monthTotal:string[];
+    monthList:string[];
+    WeekList:string[];
+    Weektotal:string[];
+    tmpnewchar:any;
+    time1:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -205,7 +214,7 @@ export class OrdersComponent implements OnInit {
       this.timekai=s1;
       this.timejie =end;
       //默认显示虚拟订单数据
-      this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",1)
+      this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",2)
     }
 /**
    * 切换选项卡
@@ -276,6 +285,8 @@ export class OrdersComponent implements OnInit {
     this.allMNL=[];
     this.allupHS=[];
     this.allHS=[];
+    this.allupdianFCA=[];
+    this.alldianFCA=[];
     //cash out/////////////////
 //cashallup
     this.cashallupdata=[];   //订单合计变量
@@ -294,6 +305,18 @@ export class OrdersComponent implements OnInit {
     //cashsingle
     this.cashsingletotal=[];
     this.cashsingledata=[];
+    //cashsummary
+    this.modelToday=[];
+    this.modelWeek=[];
+    this.modelMonth=[];
+    this.modelYear=[];
+    this.modelList=[];
+    this.modelTotal=[];
+    //cashmonthsummary
+    this.monthTotal=[];
+    this.monthList=[];
+    this.WeekList=[];
+    this.Weektotal=[];
   }
   //退出登录
   Signout(){
@@ -329,6 +352,7 @@ export class OrdersComponent implements OnInit {
     var month = timeing.getMonth()+1;
     var day = timeing.getDate();
     this.time0=year+"-"+month+"-"+day;
+    this.time1=year+"-"+month;
     //order开始
     this.ding = "";
     this.yong = "";
@@ -356,7 +380,6 @@ export class OrdersComponent implements OnInit {
     // this.caizhong=false;
     
     this.people = localStorage.getItem("people")
-    console.log(this.people)
     if(this.people==0){
       this.caizhong=false;
     }else{
@@ -949,6 +972,10 @@ compare(property){
               this.allupHS = data.HS;
               this.allHS = data.HS[7];
               var str = this.allupHS.splice(7,1);
+
+              this.allupdianFCA = data.FCA;
+              this.alldianFCA = data.FCA[7];
+              var str = this.allupdianFCA.splice(7,1);
             }else{
               this.allupzuqiu =true;
               this.allupdianjing =false;
@@ -1294,6 +1321,91 @@ cashsummaryCha(reslt) {
     document.getElementById("month").innerText = month;
 }
 cashsummaryexport() {
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+    } 
+}
+cashmonthsummaryCha(reslt) {
+  this.loading = true;
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.MonthSummary(year,month).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.monthList = data;
+          console.log(this.monthList,"ddd")
+          this.monthTotal = data.monthTotal;
+          var obj=Object.keys(data).length-1;
+          this.tmpnewchar ='';
+          for (var i = 1; i <=obj; i++) {	
+            switch (i) {
+                  case 0: this.tmpnewchar = "零"; break;
+                  case 1: this.tmpnewchar = "一"; break;
+                  case 2: this.tmpnewchar = "二"; break;
+                  case 3: this.tmpnewchar = "三"; break;
+                  case 4: this.tmpnewchar = "四"; break;
+                  case 5: this.tmpnewchar = "五"; break;
+                  case 6: this.tmpnewchar = "六"; break;
+                  case 7: this.tmpnewchar = "七"; break;
+                  case 8: this.tmpnewchar = "八"; break;
+                  case 9: this.tmpnewchar = "九"; break;
+                 }	
+            for (var j = 0; j <data[i].weekList.length; j++) {
+              this.WeekList = data[i].weekList;
+              this.Weektotal = data[i].Weektotal;
+              console.log(this.WeekList,"4444")
+              console.log(this.Weektotal,"252")
+            }
+          }
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+      
+    }
+}
+cashmonthsummaryexport() {
   var	year = "";
   var	month = "";
   var	day = "";

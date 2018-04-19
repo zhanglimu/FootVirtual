@@ -75,8 +75,8 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/summary/queryAll?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
-    MonthSummary(year,month,day){
-        return this.http.get(AppConfig.baseUrl+'/account/dailyCollectStatements/queryAll?year='+year+'&month='+month+'&day='+day)
+    MonthSummary(year,month){
+        return this.http.get(AppConfig.baseUrl+'/account/dailyCollectStatements/queryAll?year='+year+'&month='+month)
         .map(res=>res.json());
     }
 }   
