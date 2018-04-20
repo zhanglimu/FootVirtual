@@ -22,7 +22,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '2';
+    public switchIndex: string = '8';
     public loading = false;
     // username:string;
     // loginNum:string;
@@ -149,6 +149,11 @@ export class OrdersComponent implements OnInit {
     allupzuqiu:boolean;
     allupdianjing:boolean;
     caizhong:boolean;
+    //break
+    breakFB:string[];
+    FBtotal:string[];
+    breaktotal:string[];
+    breakweeking:any;
 //cash out/////////////////
 //cashallup
     cashallupdata: string[];   //订单合计变量
@@ -185,6 +190,16 @@ export class OrdersComponent implements OnInit {
     Weektotal:string[];
     tmpnewchar:any;
     time1:string;
+    //cashbreak
+    cashbreakFB:string[];
+    cashFBtotal:string[];
+    cashbreakBK:string[];
+    cashBKtotal:string[];
+    cashbreaktotal:string[];
+    //cashorder
+    dea:string;
+    thir:string;
+    cashlotter:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -287,6 +302,10 @@ export class OrdersComponent implements OnInit {
     this.allHS=[];
     this.allupdianFCA=[];
     this.alldianFCA=[];
+    //break
+    this.breakFB=[];
+    this.FBtotal=[];
+    this.breaktotal=[];
     //cash out/////////////////
 //cashallup
     this.cashallupdata=[];   //订单合计变量
@@ -317,6 +336,12 @@ export class OrdersComponent implements OnInit {
     this.monthList=[];
     this.WeekList=[];
     this.Weektotal=[];
+    //cashbreak
+    this.cashbreakFB=[];
+    this.cashFBtotal=[];
+    this.cashbreakBK=[];
+    this.cashBKtotal=[];
+    this.cashbreaktotal=[];
   }
   //退出登录
   Signout(){
@@ -346,6 +371,7 @@ export class OrdersComponent implements OnInit {
     week=Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
     this.weeking =week;
     this.summaryweeking =week;
+    this.breakweeking =week;
     //初始默认时间
     var timeing =  new Date();
     var year = timeing.getFullYear();
@@ -389,6 +415,10 @@ export class OrdersComponent implements OnInit {
     this.cashlot = "1";//彩种值
     this.cashlott = "1";
     this.cashlotte = "1";
+    //cashorder
+    this.dea = '';
+    this.thir = '';
+    this.cashlotter = "1";
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -1114,6 +1144,73 @@ compare(property){
         window.open(AppConfig.baseUrl +'/account/bookieAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_typ);
       } 
   }
+  breakCha(reslt) {
+    this.loading = true;
+    var	year = "";
+    var	month = "";
+    var	day = "";
+    // this.cashlotte = $("#lottery_type").val();
+    var time:any = $("#startime").val();
+    if(time =="" || time ==null){
+        this.message.error("请先选择日期");
+    }else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+        }else{
+          year=sort;
+        }
+        this.QUERY.bookieBreakdown(year,month,day).subscribe(data => {
+          if (data!=null) {
+            this.loading = false;
+            this.Nodata = false;
+            this.breakFB = data.modelList;
+            this.FBtotal = data.FBtotal;
+            this.breaktotal = data.total;
+          }else{
+            this.loading = false;
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });
+        
+      } 
+      this.summaryweeking =this.getYearWeek(year, month, day);
+      document.getElementById("week").innerText = this.summaryweeking;	
+      document.getElementById("month").innerText = month;
+  }
+  breakexport() {
+    var	year = "";
+    var	month = "";
+    var	day = "";
+    // this.cashlotte = $("#lottery_type").val();
+    var time:any = $("#startime").val();
+    if(time =="" || time ==null){
+        this.message.error("请先选择要导出的日期");
+    }else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+        }else{
+          year=sort;
+        }
+        window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+      } 
+  }
 //cashallup开始
 cashallupCha(reslt) {
   this.loading = true;
@@ -1384,12 +1481,20 @@ cashmonthsummaryCha(reslt) {
                   case 7: this.tmpnewchar = "七"; break;
                   case 8: this.tmpnewchar = "八"; break;
                   case 9: this.tmpnewchar = "九"; break;
-                 }	
+                 }
+                //  this.monthList.forEach(weekList => {
+                //   this.WeekList.map(item => {
+                    // item.selected = this.selectedAll
+                    // if (this.selectedAll) {
+                    //   this.leagues.push(item.name);
+                    // }
+                //   })
+                // });	
             for (var j = 0; j <data[i].weekList.length; j++) {
               this.WeekList = data[i].weekList;
               this.Weektotal = data[i].Weektotal;
-              console.log(this.WeekList,"4444")
-              console.log(this.Weektotal,"252")
+              // console.log(this.WeekList,"4444")
+              // console.log(this.Weektotal,"252")
             }
           }
         }else{
@@ -1406,6 +1511,75 @@ cashmonthsummaryCha(reslt) {
     }
 }
 cashmonthsummaryexport() {
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+    } 
+}
+cashbreakCha(reslt) {
+  this.loading = true;
+  var	year = "";
+  var	month = "";
+  var	day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Breakdown(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.cashbreakFB = data.modelList;
+          this.cashFBtotal = data.FBtotal;
+          this.cashbreakBK = data.basketBallModelList;
+          this.cashBKtotal = data.BKtotal;
+          this.cashbreaktotal = data.total;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+      
+    } 
+    this.breakweeking =this.getYearWeek(year, month, day);
+    document.getElementById("week").innerText = this.breakweeking;	
+    document.getElementById("month").innerText = month;
+}
+cashbreakexport() {
   var	year = "";
   var	month = "";
   var	day = "";

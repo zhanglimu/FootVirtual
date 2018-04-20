@@ -15,16 +15,18 @@
                 <li class="segment-button" [class.selected]="switchIndex === '2'" (click)="switch('2')">订单</li>
                 <li class="segment-button" [class.selected]="switchIndex === '3'" (click)="switch('3')">Single</li>
                 <li class="segment-button" [class.selected]="switchIndex === '4'" (click)="switch('4')">Allup</li>
+                <li class="segment-button" [class.selected]="switchIndex === '5'" (click)="switch('5')">Breakdown</li>
             </ul>
         </li>
         <li>
             <span class="one_bar">Cash out</span>
             <ul class="two_bar">
-                <li class="segment-button" [class.selected]="switchIndex === '5'" (click)="switch('5')">Daily Allup</li>
-                <li class="segment-button" [class.selected]="switchIndex === '6'" (click)="switch('6')">Daily Single</li>
-                <li class="segment-button" [class.selected]="switchIndex === '7'" (click)="switch('7')">Summary</li>
-                <li class="segment-button" [class.selected]="switchIndex === '8'" (click)="switch('8')">month Summary</li>
-                <li class="segment-button" [class.selected]="switchIndex === '9'" (click)="switch('9')">Daily Breakdown</li>
+                <li class="segment-button" [class.selected]="switchIndex === '6'" (click)="switch('6')">Daily Allup</li>
+                <li class="segment-button" [class.selected]="switchIndex === '7'" (click)="switch('7')">Daily Single</li>
+                <li class="segment-button" [class.selected]="switchIndex === '8'" (click)="switch('8')">Summary</li>
+                <li class="segment-button" [class.selected]="switchIndex === '9'" (click)="switch('9')">month Summary</li>
+                <li class="segment-button" [class.selected]="switchIndex === '10'" (click)="switch('10')">Daily Breakdown</li>
+                <li class="segment-button" [class.selected]="switchIndex === '11'" (click)="switch('11')">订单管理</li>
             </ul>
         </li>
     </ul>
@@ -1071,8 +1073,139 @@
         </table>
     </div>
     </div>
-<!-- Cash out -->
     <div class="main" *ngSwitchCase="5">
+            <div class="clearfix">
+                <form class="formwidth" #breakForm="ngForm" (ngSubmit)="breakCha(breakForm.value)">
+                    <h4 class="left">
+                        <span>虚拟财务数据日明细表</span><br />
+                        <span>Daily Betting Breakdown</span>
+                    </h4>
+                    <form class="formdate left">
+                        <p class="word">
+                            <input type="text" id="startime" class="Wdate" value="{{time0}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
+                            <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
+                            <strong>周：<span id="week" class="vor" name="weeking">{{breakweeking}}</span></strong>
+                        </p>
+                    </form>
+                    <p class="word left">
+                        <button class="selss" type="submit">查询</button>
+                        <!-- <button (click)="cashsingleretry()">重算</button> -->
+                    </p>
+                </form>
+                <p class="word">
+                    <button (click)="breakexport()">导出</button>
+                </p>
+            </div>
+            <div class="row-fluid">
+                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                <table class="table" id="scroer">
+                        <thead>
+                            <tr class="thtible">
+                                <td></td>
+                                <td></td> 
+                                <td colspan="5">合计</td>
+                                <td colspan="5">过关固定奖ALLUP</td>
+                                <td colspan="7">单场固定奖FSGL</td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr class="firstr odds">
+                                <th></th>
+                                <th>场次数量NO. Match</th>
+                                <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                                <th>交易额 Investment 人民币 RMB</th> 
+                                <th>caiex加奖额</th>
+                                <th>中奖金额 Payout 人民币 RMB</th>
+                                <th>盈利率 Payout Ratio %</th>
+                                <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                                <th>交易额 Investment 人民币 RMB</th> 
+                                <th>caiex加奖额</th>
+                                <th>中奖金额 Payout 人民币 RMB</th>
+                                <th>盈利率 Payout Ratio %</th>
+                                <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                                <th>交易额 Investment 人民币 RMB</th> 
+                                <th>caiex加奖额</th>
+                                <th>中奖金额 Payout 人民币 RMB</th>
+                                <th>盈利率 Payout Ratio %</th>
+                                <th>中奖交易额Amt.Winning Unit</th>
+                                <th>平均奖金Average Winning Odds</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lists">
+                            <tr>
+                                <td class="fb" rowspan="7">足球FB</td>
+                            </tr>
+                            <tr *ngFor="let dn of breakFB">
+                                <td class="product" >{{dn.product}}</td>
+                                <td class="gree">{{dn.totalInvestment}}￥</td>
+                                <td class="gree">{{dn.invest}}￥</td>
+                                <td class="gree">{{dn.bonusInvest}}￥</td>
+                                <td class="gree">{{dn.totalPrice}}￥</td>
+                                <td class="gree">{{dn.payoutRate}}%</td>
+                                <td class="red">{{dn.totalInvestmentAllup}}￥</td>
+                                <td class="red">{{dn.investAllup}}￥</td>
+                                <td class="red">{{dn.bonusInvestAllup}}￥</td>
+                                <td class="red">{{dn.totalPriceAllup}}￥</td>
+                                <td class="red">{{dn.payoutRateAllup}}%</td>
+                                <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
+                                <td class="blue">{{dn.investFsgl}}￥</td>
+                                <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
+                                <td class="blue">{{dn.totalPriceFsgl}}￥</td>
+                                <td class="blue">{{dn.payoutRateFsgl}}%</td>
+                                <td class="blue">{{dn.winpriceFsgl}}￥</td>
+                                <td class="blue">{{dn.averageFsgl}}</td>
+                            </tr>
+                            <tr *ngIf="FBtotal">
+                                <td colspan="2">足球合计 FB Total</td>
+                                <td>{{FBtotal.totalInvestment}}￥</td>
+                                <td>{{FBtotal.invest}}￥</td>
+                                <td>{{FBtotal.bonusInvest}}￥</td>
+                                <td>{{FBtotal.totalPrice}}￥</td>
+                                <td>{{FBtotal.payoutRate}}%</td>
+                                <td>{{FBtotal.totalInvestmentAllup}}￥</td>
+                                <td>{{FBtotal.investAllup}}￥</td>
+                                <td>{{FBtotal.bonusInvestAllup}}￥</td>
+                                <td>{{FBtotal.totalPriceAllup}}￥</td>
+                                <td>{{FBtotal.payoutRateAllup}}%</td>
+                                <td>{{FBtotal.totalInvestmentFsgl}}￥</td>
+                                <td>{{FBtotal.investFsgl}}￥</td>
+                                <td>{{FBtotal.bonusInvestFsgl}}￥</td>
+                                <td>{{FBtotal.totalPriceFsgl}}￥</td>
+                                <td>{{FBtotal.payoutRateFsgl}}%</td>
+                                <td>{{FBtotal.winpriceFsgl}}￥</td>
+                                <td>{{FBtotal.averageFsgl}}￥</td>
+                            </tr>
+                                <tr class="dategray" *ngIf="breaktotal">
+                                    <td colspan="2">当日合计 Total</td>
+                                    <td>{{breaktotal.totalInvestment}}￥</td>
+                                    <td>{{breaktotal.invest}}￥</td>
+                                    <td>{{breaktotal.bonusInvest}}￥</td>
+                                    <td>{{breaktotal.totalPrice}}￥</td>
+                                    <td>{{breaktotal.payoutRate}}%</td>
+                                    <td>{{breaktotal.totalInvestmentAllup}}￥</td>
+                                    <td>{{breaktotal.investAllup}}￥</td>
+                                    <td>{{breaktotal.bonusInvestAllup}}￥</td>
+                                    <td>{{breaktotal.totalPriceAllup}}￥</td>
+                                    <td>{{breaktotal.payoutRateAllup}}%</td>
+                                    <td>{{breaktotal.totalInvestmentFsgl}}￥</td>
+                                    <td>{{breaktotal.investFsgl}}￥</td>
+                                    <td>{{breaktotal.bonusInvestFsgl}}￥</td>
+                                    <td>{{breaktotal.totalPriceFsgl}}￥</td>
+                                    <td>{{breaktotal.payoutRateFsgl}}%</td>
+                                    <td>{{breaktotal.winpriceFsgl}}￥</td>
+                                    <td>{{breaktotal.averageFsgl}}￥</td>
+                                </tr> 
+                        </tbody>
+                    <tbody *ngIf="Nodata">
+                        <tr>
+                            <td colspan="22">{{data}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<!-- Cash out -->
+    <div class="main" *ngSwitchCase="6">
         <div class="clearfix">
             <form class="formwidth" #cashallupForm="ngForm" (ngSubmit)="cashallupCha(cashallupForm.value)">
                 <h4 class="left">
@@ -1268,7 +1401,7 @@
             </table>
         </div>
     </div>
-    <div class="main" *ngSwitchCase="6">
+    <div class="main" *ngSwitchCase="7">
         <div class="clearfix">
             <form class="formwidth" #cashsingleForm="ngForm" (ngSubmit)="cashsingleCha(cashsingleForm.value)">
                 <h4 class="left">
@@ -1455,7 +1588,7 @@
             </table>
         </div>
     </div>
-    <div class="main" *ngSwitchCase="7">
+    <div class="main" *ngSwitchCase="8">
         <div class="clearfix">
             <form class="formwidth" #cashsummaryForm="ngForm" (ngSubmit)="cashsummaryCha(cashsummaryForm.value)">
                 <h4 class="left">
@@ -1677,7 +1810,7 @@
             </table>
         </div>
     </div>
-    <div class="main" *ngSwitchCase="8">
+    <div class="main" *ngSwitchCase="9">
         <div class="clearfix">
             <form class="formwidth" #cashmonthsummaryForm="ngForm" (ngSubmit)="cashmonthsummaryCha(cashmonthsummaryForm.value)">
                 <h4 class="left">
@@ -1706,114 +1839,503 @@
         </div>
         <div class="row-fluid">
                 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-            <table class="table">
+            <table class="table" id="scroer">
                 <table>
                     <thead>
                         <tr class="fb" *ngIf="monthTotal">
-                            <th>{{monthTotal.week}}</th>
-                            <th>{{monthTotal.totalNum}}</th>
-                            <th>{{monthTotal.totalInvestment}}￥</th>
-                            <th>{{monthTotal.invest}}￥</th>
-                            <th>{{monthTotal.cxBonus}}￥</th>
-                            <th>{{monthTotal.totalPrice}}￥</th>
-                            <th>{{monthTotal.payoutRate}}%</th>
-                            <th>{{monthTotal.fbNum}}</th>
-                            <th>{{monthTotal.totalInvestmentFb}}￥</th>
-                            <th>{{monthTotal.investFb}}￥</th>
-                            <th>{{monthTotal.cxBonusFb}}￥</th>
-                            <th>{{monthTotal.totalPriceFb}}￥</th>
-                            <th>{{monthTotal.payoutRateFb}}%</th>
-                            <th>{{monthTotal.bkNum}}</th>
-                            <th>{{monthTotal.totalInvestmentBk}}￥</th>
-                            <th>{{monthTotal.investBk}}￥</th>
-                            <th>{{monthTotal.cxBonusBk}}￥</th>
-                            <th>{{monthTotal.totalPriceBk}}￥</th>
-                            <th>{{monthTotal.payoutRateBk}}%</th>
+                            <td>{{monthTotal.week}}</td>
+                            <td>{{monthTotal.totalNum}}</td>
+                            <td>{{monthTotal.totalInvestment}}￥</td>
+                            <td>{{monthTotal.invest}}￥</td>
+                            <td>{{monthTotal.cxBonus}}￥</td>
+                            <td>{{monthTotal.totalPrice}}￥</td>
+                            <td>{{monthTotal.payoutRate}}%</td>
+                            <td>{{monthTotal.fbNum}}</td>
+                            <td>{{monthTotal.totalInvestmentFb}}￥</td>
+                            <td>{{monthTotal.investFb}}￥</td>
+                            <td>{{monthTotal.cxBonusFb}}￥</td>
+                            <td>{{monthTotal.totalPriceFb}}￥</td>
+                            <td>{{monthTotal.payoutRateFb}}%</td>
+                            <td>{{monthTotal.bkNum}}</td>
+                            <td>{{monthTotal.totalInvestmentBk}}￥</td>
+                            <td>{{monthTotal.investBk}}￥</td>
+                            <td>{{monthTotal.cxBonusBk}}￥</td>
+                            <td>{{monthTotal.totalPriceBk}}￥</td>
+                            <td>{{monthTotal.payoutRateBk}}%</td>
                         </tr>
                         <tr class="thtible">
                             <td></td>
-                            <td colspan="6">合计</td>
-                            <td colspan="6">足球</td>
-                            <td colspan="6">篮球</td>
+                            <td class="gree1" colspan="6">合计</td>
+                            <td class="white1" colspan="6">足球</td>
+                            <td class="red1" colspan="6">篮球</td>
                         </tr>
-                        <tr class="gree1">
+                        <tr>
                             <td></td>
-                            <td colspan="6">Total Investment</td>
-                            <td colspan="6">FB Investment PMU Included</td>
-                            <td colspan="6">BK Investment PMU Included</td>
+                            <td class="gree1" colspan="6">Total Investment</td>
+                            <td class="white1" colspan="6">FB Investment PMU Included</td>
+                            <td class="red1" colspan="6">BK Investment PMU Included</td>
                         </tr>
                     </thead>
                 </table>
                 <table>
-                    <tbody id="lists" *ngFor="let monthSout of monthList">
+                    <tbody id="lists">
                         <tr class="firstr odds">
-                            <th>第{{tmpnewchar}}周</th>
-                            <th>场次数量NO. Match</th>
-                            <th>原始投注额 TotalInvestment</th> 
-                            <th>交易额 Investment</th> 
-                            <th>caiex加奖额</th>
-                            <th>中奖金额 Payout</th>
-                            <th>盈利率 Payout Ratio</th>
-                            <th>场次数量NO. Match</th>
-                            <th>原始投注额 TotalInvestment</th> 
-                            <th>交易额 Investment</th> 
-                            <th>caiex加奖额</th>
-                            <th>中奖金额 Payout</th>
-                            <th>盈利率 Payout Ratio</th>
-                            <th>场次数量NO. Match</th>
-                            <th>原始投注额 TotalInvestment</th> 
-                            <th>交易额 Investment</th> 
-                            <th>caiex加奖额</th>
-                            <th>中奖金额 Payout</th>
-                            <th>盈利率 Payout Ratio</th>
+                            <td>第{{tmpnewchar}}周</td>
+                            <td>场次数量NO. Match</td>
+                            <td>原始投注额 TotalInvestment</td> 
+                            <td>交易额 Investment</td> 
+                            <td>caiex加奖额</td>
+                            <td>中奖金额 Payout</td>
+                            <td>盈利率 Payout Ratio</td>
+                            <td>场次数量NO. Match</td>
+                            <td>原始投注额 TotalInvestment</td> 
+                            <td>交易额 Investment</td> 
+                            <td>caiex加奖额</td>
+                            <td>中奖金额 Payout</td>
+                            <td>盈利率 Payout Ratio</td>
+                            <td>场次数量NO. Match</td>
+                            <td>原始投注额 TotalInvestment</td> 
+                            <td>交易额 Investment</td> 
+                            <td>caiex加奖额</td>
+                            <td>中奖金额 Payout</td>
+                            <td>盈利率 Payout Ratio</td>
                         </tr>
                         <tr *ngFor="let monthS of WeekList">
                             <td>{{monthS.week}}</td>
                             <td>{{monthS.totalNum}}</td>
-                            <th>{{monthS.totalInvestment}}￥</th>
-                            <th>{{monthS.invest}}￥</th>
-                            <th>{{monthS.cxBonus}}￥</th>
-                            <th>{{monthS.totalPrice}}￥</th>
-                            <th>{{monthS.payoutRate}}%</th>
-                            <th>{{monthS.fbNum}}</th>
-                            <th>{{monthS.totalInvestmentFb}}￥</th>
-                            <th>{{monthS.investFb}}￥</th>
-                            <th>{{monthS.cxBonusFb}}￥</th>
-                            <th>{{monthS.totalPriceFb}}￥</th>
-                            <th>{{monthS.payoutRateFb}}%</th>
-                            <th>{{monthS.bkNum}}</th>
-                            <th>{{monthS.totalInvestmentBk}}￥</th>
-                            <th>{{monthS.investBk}}￥</th>
-                            <th>{{monthS.cxBonusBk}}￥</th>
-                            <th>{{monthS.totalPriceBk}}￥</th>
-                            <th>{{monthS.payoutRateBk}}%</th>
+                            <td>{{monthS.totalInvestment}}￥</td>
+                            <td>{{monthS.invest}}￥</td>
+                            <td>{{monthS.cxBonus}}￥</td>
+                            <td>{{monthS.totalPrice}}￥</td>
+                            <td>{{monthS.payoutRate}}%</td>
+                            <td>{{monthS.fbNum}}</td>
+                            <td>{{monthS.totalInvestmentFb}}￥</td>
+                            <td>{{monthS.investFb}}￥</td>
+                            <td>{{monthS.cxBonusFb}}￥</td>
+                            <td>{{monthS.totalPriceFb}}￥</td>
+                            <td>{{monthS.payoutRateFb}}%</td>
+                            <td>{{monthS.bkNum}}</td>
+                            <td>{{monthS.totalInvestmentBk}}￥</td>
+                            <td>{{monthS.investBk}}￥</td>
+                            <td>{{monthS.cxBonusBk}}￥</td>
+                            <td>{{monthS.totalPriceBk}}￥</td>
+                            <td>{{monthS.payoutRateBk}}%</td>
                         </tr>
                         <tr *ngIf="Weektotal">
                             <td>{{Weektotal.week}}</td>
                             <td>{{Weektotal.totalNum}}</td>
-                            <th>{{Weektotal.totalInvestment}}￥</th>
-                            <th>{{Weektotal.invest}}￥</th>
-                            <th>{{Weektotal.cxBonus}}￥</th>
-                            <th>{{Weektotal.totalPrice}}￥</th>
-                            <th>{{Weektotal.payoutRate}}%</th>
-                            <th>{{Weektotal.fbNum}}</th>
-                            <th>{{Weektotal.totalInvestmentFb}}￥</th>
-                            <th>{{Weektotal.investFb}}￥</th>
-                            <th>{{Weektotal.cxBonusFb}}￥</th>
-                            <th>{{Weektotal.totalPriceFb}}￥</th>
-                            <th>{{Weektotal.payoutRateFb}}%</th>
-                            <th>{{Weektotal.bkNum}}</th>
-                            <th>{{Weektotal.totalInvestmentBk}}￥</th>
-                            <th>{{Weektotal.investBk}}￥</th>
-                            <th>{{Weektotal.cxBonusBk}}￥</th>
-                            <th>{{Weektotal.totalPriceBk}}￥</th>
-                            <th>{{Weektotal.payoutRateBk}}%</th>
+                            <td>{{Weektotal.totalInvestment}}￥</td>
+                            <td>{{Weektotal.invest}}￥</td>
+                            <td>{{Weektotal.cxBonus}}￥</td>
+                            <td>{{Weektotal.totalPrice}}￥</td>
+                            <td>{{Weektotal.payoutRate}}%</td>
+                            <td>{{Weektotal.fbNum}}</td>
+                            <td>{{Weektotal.totalInvestmentFb}}￥</td>
+                            <td>{{Weektotal.investFb}}￥</td>
+                            <td>{{Weektotal.cxBonusFb}}￥</td>
+                            <td>{{Weektotal.totalPriceFb}}￥</td>
+                            <td>{{Weektotal.payoutRateFb}}%</td>
+                            <td>{{Weektotal.bkNum}}</td>
+                            <td>{{Weektotal.totalInvestmentBk}}￥</td>
+                            <td>{{Weektotal.investBk}}￥</td>
+                            <td>{{Weektotal.cxBonusBk}}￥</td>
+                            <td>{{Weektotal.totalPriceBk}}￥</td>
+                            <td>{{Weektotal.payoutRateBk}}%</td>
                         </tr>
                     </tbody>
                 </table>
                 <tbody *ngIf="Nodata">
                     <tr>
                         <td colspan="22">{{data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="main" *ngSwitchCase="10">
+        <div class="clearfix">
+            <form class="formwidth" #cashbreakForm="ngForm" (ngSubmit)="cashbreakCha(cashbreakForm.value)">
+                <h4 class="left">
+                    <span>财务数据日明细表</span><br />
+                    <span>Daily Betting Breakdown</span>
+                </h4>
+                <form class="formdate left">
+                    <p class="word">
+                        <input type="text" id="startime" class="Wdate" value="{{time0}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
+                        <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
+                        <strong>周：<span id="week" class="vor" name="weeking">{{breakweeking}}</span></strong>
+                    </p>
+                </form>
+                <p class="word left">
+                    <button class="selss" type="submit">查询</button>
+                </p>
+            </form>
+            <p class="word">
+                <button (click)="cashbreakexport()">导出</button>
+            </p>
+        </div>
+        <div class="row-fluid">
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <table class="table" id="scroer">
+                    <thead>
+                        <tr class="thtible">
+                            <td></td>
+                            <td></td> 
+                            <td colspan="5">合计</td>
+                            <td colspan="5">过关固定奖ALLUP</td>
+                            <td colspan="7">单场固定奖FSGL</td>
+                            <td colspan="5">Level0</td>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr class="firstr odds">
+                            <th></th>
+                            <th>场次数量NO. Match</th>
+                            <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                            <th>交易额 Investment 人民币 RMB</th> 
+                            <th>caiex加奖额</th>
+                            <th>中奖金额 Payout 人民币 RMB</th>
+                            <th>盈利率 Payout Ratio %</th>
+                            <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                            <th>交易额 Investment 人民币 RMB</th> 
+                            <th>caiex加奖额</th>
+                            <th>中奖金额 Payout 人民币 RMB</th>
+                            <th>盈利率 Payout Ratio %</th>
+                            <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                            <th>交易额 Investment 人民币 RMB</th> 
+                            <th>caiex加奖额</th>
+                            <th>中奖金额 Payout 人民币 RMB</th>
+                            <th>盈利率 Payout Ratio %</th>
+                            <th>中奖交易额Amt.Winning Unit</th>
+                            <th>平均奖金Average Winning Odds</th>
+                            <th>原始投注额 TotalInvestment 人民币 RMB</th> 
+                            <th>交易额 Investment 人民币 RMB</th> 
+                            <th>caiex加奖额</th>
+                            <th>中奖金额 Payout 人民币 RMB</th>
+                            <th>盈利率 Payout Ratio %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lists">
+                        <tr>
+                            <td class="fb" rowspan="7">足球FB</td>
+                        </tr>
+                        <tr *ngFor="let dn of cashbreakFB">
+                            <td class="product" >{{dn.product}}</td>
+                            <td class="gree">{{dn.totalInvestment}}￥</td>
+                            <td class="gree">{{dn.invest}}￥</td>
+                            <td class="gree">{{dn.bonusInvest}}￥</td>
+                            <td class="gree">{{dn.totalPrice}}￥</td>
+                            <td class="gree">{{dn.payoutRate}}%</td>
+                            <td class="red">{{dn.totalInvestmentAllup}}￥</td>
+                            <td class="red">{{dn.investAllup}}￥</td>
+                            <td class="red">{{dn.bonusInvestAllup}}￥</td>
+                            <td class="red">{{dn.totalPriceAllup}}￥</td>
+                            <td class="red">{{dn.payoutRateAllup}}%</td>
+                            <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
+                            <td class="blue">{{dn.investFsgl}}￥</td>
+                            <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
+                            <td class="blue">{{dn.totalPriceFsgl}}￥</td>
+                            <td class="blue">{{dn.payoutRateFsgl}}%</td>
+                            <td class="blue">{{dn.winpriceFsgl}}￥</td>
+                            <td class="blue">{{dn.averageFsgl}}</td>
+                            <td class="yel">{{dn.totalInvestmentLevel0}}￥</td>
+                            <td class="yel">{{dn.investLevel0}}￥</td>
+                            <td class="yel">{{dn.bonusInvestLevel0}}￥</td>
+                            <td class="yel">{{dn.totalPriceLevel0}}￥</td>
+                            <td class="yel">{{dn.payoutRateLevel0}}%</td>
+                        </tr>
+                        <tr *ngIf="cashFBtotal">
+                            <td colspan="2">足球合计 FB Total</td>
+                            <td>{{cashFBtotal.totalInvestment}}￥</td>
+                            <td>{{cashFBtotal.invest}}￥</td>
+                            <td>{{cashFBtotal.bonusInvest}}￥</td>
+                            <td>{{cashFBtotal.totalPrice}}￥</td>
+                            <td>{{cashFBtotal.payoutRate}}%</td>
+                            <td>{{cashFBtotal.totalInvestmentAllup}}￥</td>
+                            <td>{{cashFBtotal.investAllup}}￥</td>
+                            <td>{{cashFBtotal.bonusInvestAllup}}￥</td>
+                            <td>{{cashFBtotal.totalPriceAllup}}￥</td>
+                            <td>{{cashFBtotal.payoutRateAllup}}%</td>
+                            <td>{{cashFBtotal.totalInvestmentFsgl}}￥</td>
+                            <td>{{cashFBtotal.investFsgl}}￥</td>
+                            <td>{{cashFBtotal.bonusInvestFsgl}}￥</td>
+                            <td>{{cashFBtotal.totalPriceFsgl}}￥</td>
+                            <td>{{cashFBtotal.payoutRateFsgl}}%</td>
+                            <td>{{cashFBtotal.winpriceFsgl}}￥</td>
+                            <td>{{cashFBtotal.averageFsgl}}￥</td>
+                            <td>{{cashFBtotal.totalInvestmentLevel0}}￥</td>
+                            <td>{{cashFBtotal.investLevel0}}￥</td>
+                            <td>{{cashFBtotal.bonusInvestLevel0}}￥</td>
+                            <td>{{cashFBtotal.totalPriceLevel0}}￥</td>
+                            <td>{{cashFBtotal.payoutRateLevel0}}%</td>
+                        </tr>
+                        <tr>
+                            <td class="fb" rowspan="6">篮球BK</td>
+                        </tr>
+                        <tr *ngFor="let dn of cashbreakBK">
+                            <td class="product" >{{dn.product}}</td>
+                            <td class="gree">{{dn.totalInvestment}}￥</td>
+                            <td class="gree">{{dn.invest}}￥</td>
+                            <td class="gree">{{dn.bonusInvest}}￥</td>
+                            <td class="gree">{{dn.totalPrice}}￥</td>
+                            <td class="gree">{{dn.payoutRate}}%</td>
+                            <td class="red">{{dn.totalInvestmentAllup}}￥</td>
+                            <td class="red">{{dn.investAllup}}￥</td>
+                            <td class="red">{{dn.bonusInvestAllup}}￥</td>
+                            <td class="red">{{dn.totalPriceAllup}}￥</td>
+                            <td class="red">{{dn.payoutRateAllup}}%</td>
+                            <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
+                            <td class="blue">{{dn.investFsgl}}￥</td>
+                            <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
+                            <td class="blue">{{dn.totalPriceFsgl}}￥</td>
+                            <td class="blue">{{dn.payoutRateFsgl}}%</td>
+                            <td class="blue">{{dn.winpriceFsgl}}￥</td>
+                            <td class="blue">{{dn.averageFsgl}}</td>
+                            <td class="yel">{{dn.totalInvestmentLevel0}}￥</td>
+                            <td class="yel">{{dn.investLevel0}}￥</td>
+                            <td class="yel">{{dn.bonusInvestLevel0}}￥</td>
+                            <td class="yel">{{dn.totalPriceLevel0}}￥</td>
+                            <td class="yel">{{dn.payoutRateLevel0}}%</td>
+                        </tr>
+                        <tr *ngIf="cashBKtotal">
+                            <td colspan="2">足球合计 BK Total</td>
+                            <td>{{cashBKtotal.totalInvestment}}￥</td>
+                            <td>{{cashBKtotal.invest}}￥</td>
+                            <td>{{cashBKtotal.bonusInvest}}￥</td>
+                            <td>{{cashBKtotal.totalPrice}}￥</td>
+                            <td>{{cashBKtotal.payoutRate}}%</td>
+                            <td>{{cashBKtotal.totalInvestmentAllup}}￥</td>
+                            <td>{{cashBKtotal.investAllup}}￥</td>
+                            <td>{{cashBKtotal.bonusInvestAllup}}￥</td>
+                            <td>{{cashBKtotal.totalPriceAllup}}￥</td>
+                            <td>{{cashBKtotal.payoutRateAllup}}%</td>
+                            <td>{{cashBKtotal.totalInvestmentFsgl}}￥</td>
+                            <td>{{cashBKtotal.investFsgl}}￥</td>
+                            <td>{{cashBKtotal.bonusInvestFsgl}}￥</td>
+                            <td>{{cashBKtotal.totalPriceFsgl}}￥</td>
+                            <td>{{cashBKtotal.payoutRateFsgl}}%</td>
+                            <td>{{cashBKtotal.winpriceFsgl}}￥</td>
+                            <td>{{cashBKtotal.averageFsgl}}￥</td>
+                            <td>{{cashBKtotal.totalInvestmentLevel0}}￥</td>
+                            <td>{{cashBKtotal.investLevel0}}￥</td>
+                            <td>{{cashBKtotal.bonusInvestLevel0}}￥</td>
+                            <td>{{cashBKtotal.totalPriceLevel0}}￥</td>
+                            <td>{{cashBKtotal.payoutRateLevel0}}%</td>
+                        </tr>
+                            <tr class="dategray" *ngIf="cashbreaktotal">
+                                <td colspan="2">当日合计 Total</td>
+                                <td>{{cashbreaktotal.totalInvestment}}￥</td>
+                                <td>{{cashbreaktotal.invest}}￥</td>
+                                <td>{{cashbreaktotal.bonusInvest}}￥</td>
+                                <td>{{cashbreaktotal.totalPrice}}￥</td>
+                                <td>{{cashbreaktotal.payoutRate}}%</td>
+                                <td>{{cashbreaktotal.totalInvestmentAllup}}￥</td>
+                                <td>{{cashbreaktotal.investAllup}}￥</td>
+                                <td>{{cashbreaktotal.bonusInvestAllup}}￥</td>
+                                <td>{{cashbreaktotal.totalPriceAllup}}￥</td>
+                                <td>{{cashbreaktotal.payoutRateAllup}}%</td>
+                                <td>{{cashbreaktotal.totalInvestmentFsgl}}￥</td>
+                                <td>{{cashbreaktotal.investFsgl}}￥</td>
+                                <td>{{cashbreaktotal.bonusInvestFsgl}}￥</td>
+                                <td>{{cashbreaktotal.totalPriceFsgl}}￥</td>
+                                <td>{{cashbreaktotal.payoutRateFsgl}}%</td>
+                                <td>{{cashbreaktotal.winpriceFsgl}}￥</td>
+                                <td>{{cashbreaktotal.averageFsgl}}￥</td>
+                                <td>{{cashbreaktotal.totalInvestmentLevel0}}￥</td>
+                                <td>{{cashbreaktotal.investLevel0}}￥</td>
+                                <td>{{cashbreaktotal.bonusInvestLevel0}}￥</td>
+                                <td>{{cashbreaktotal.totalPriceLevel0}}￥</td>
+                                <td>{{cashbreaktotal.payoutRateLevel0}}%</td>
+                            </tr> 
+                    </tbody>
+                <tbody *ngIf="Nodata">
+                    <tr>
+                        <td colspan="22">{{data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="main" *ngSwitchCase="11">
+        <div class="clearfix">
+                <form class="formdate left" #cashorderForm="ngForm" (ngSubmit)="cashorderCha(cashorderForm.value)">
+                    <!-- <h4 class="left">
+                        <span> 虚拟订单管理</span><br />
+                        <span>Order Management</span>
+                    </h4>     -->
+                    <p class="word">
+                            <span>订单ID：</span><input id="tk" type="text" name="dingdan" [(ngModel)]="ding" value=""/><br />
+                            <span>用户ID：</span><input id="uid" type="text" name="yonghu" [(ngModel)]="yong" value=""/>
+                        </p>
+                        <p class="word">
+                            <span>交易开始时间：</span>
+                            <input type="text" id="stime" class="Wdate" value="{{timekai}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d 12:00:00',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                            <br />
+                            <span>交易截止时间：</span>
+                            <input type="text" id="etime" class="Wdate" value="{{timejie}}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                        </p>
+                        <p class="word">
+                            <span>订单类型：</span>
+                            <select id="inplay" name="inplay" [(ngModel)]="in">
+                                <option value="">ALL</option>
+                                <option value="0">死球</option>
+                                <option value="1">即场</option>
+                            </select><br />
+                            <span>订单状态：</span>
+                            <select id="state" name="state" [(ngModel)]="sta">
+                                <option value="">ALL</option>
+                                <option value="1">中奖</option>
+                                <option value="2">未中奖</option>
+                                <option value="3">Alive</option>
+                            </select>
+                        </p>
+                        <p class="word">
+                            <span>渠道的来源：</span>
+                            <select id="agentNum" name="agentNum" [(ngModel)]="agent">
+                                <option value="">ALL</option>
+                                <option *ngFor="let agentNums of resut;" [value]='agentNums.agentNum'>{{agentNums.agentName}}</option>
+                            </select><br />
+                            <span>第三方状态：</span>
+                            <select id="third" name="third" [(ngModel)]="thir">
+                                <option value="">ALL</option>
+                                <option value="1">未回收</option>
+                                <option value="2">已回收</option>
+                            </select>
+                        </p>
+                        <p class="word">
+                            <span>交易状态：</span>
+                            <select id="deal" name="deal" [(ngModel)]="dea">
+                                <option value="">ALL</option>
+                                <option value="0">交易成功</option>
+                                <option value="1">交易失败</option>
+                            </select>
+                        </p>
+                        <p class="word" *ngIf="caizhong">
+                            <span>彩种：</span>
+                            <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlotter">
+                                <option value="1">足球</option>
+                                <option value="2">电竞</option>
+                            </select>
+                        </p>
+                            <button class="selss" type="submit">查询</button>
+                            <button (click)="orderexport()">导出</button>
+                </form>
+        </div>
+        <div class="row-fluid">
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            <table class="table">
+                <thead>
+                    <tr class="thtible" *ngIf="shu">
+                        <td>合计Total</td>
+                        <!--<th>{{total.tkId}}</th>-->
+                        <td>{{shu.uid}}</td>
+                        <td>-</td> 
+                        <td>-</td> 
+                        <td>-</td>
+                        <td>-</td>
+                        <td>{{shu.totalPrice}}</td>
+                        <td>-</td>
+                        <td>-</td> 
+                        <td>{{shu.totalInvestment}}</td>
+                        <td>{{shu.payoutRate}}%</td> 
+                        <td>{{shu.winMoney}}</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr class="firstr odds">
+                        <th>订单ID</th>
+                        <th>用户ID</th>
+                        <th>渠道</th> 
+                        <th>彩种</th> 
+                        <th>玩法</th>
+                        <th>订单类型</th>
+                        <th>最大中奖额</th>
+                        <th>渠道促销</th>
+                        <th>下注时间</th> 
+                        <th>下注金额</th>
+                        <th>订单状态</th> 
+                        <th>中奖金额</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="firstred" *ngIf="shuju">
+                    <tr *ngFor="let b of shuju">
+                        <td>{{b.tkId}}</td>
+                        <td>{{b.uid}}</td>
+                        <td>{{b.agentName}}</td> 
+                        <td>{{b.ballType_name}}</td> 
+                        <td>{{b.bettingProducts}}</td>
+                        <td>{{b.inplay_name}}</td>
+                        <td>{{b.totalPrice}}</td>
+                        <td>{{b.addAwardAmount}}</td>
+                        <td>{{b.investTime}}</td> 
+                        <td>{{b.totalInvestment}}</td>
+                        <td>{{b.state_name}}</td> 
+                        <td>{{b.winMoney}}</td>
+                        <td>
+                            <button id="btnshow" (click)="showdiv(b.ticketInfo_id,b.ballType,b.tkId,b.refund)">详情</button>
+                            <div id="bg"></div>
+                            <div id="show">
+                                <input id="btnclose" value="Close" (click)="hidediv()" type="button">
+                                <table>
+                                    <thead class="fontse">
+                                        <tr>
+                                            <th style="width:8%;">订单ID</th>
+                                            <th style="width:74%;" colspan="4">{{tkIding}}</th>
+                                            <th style="width:8%;">退款</th>
+                                            <th style="width:8%;">{{refund}}</th>
+                                        </tr>
+                                        <tr class="lv">
+                                            <th style="width:8%;">序号</th>
+                                            <th style="width:8%;">玩法</th>
+                                            <th style="width:50%;">投注内容</th>
+                                            <th style="width:8%;">过关方式</th>
+                                            <th style="width:8%;">中奖金额</th>
+                                            <th style="width:8%;">投注金额</th>
+                                            <th style="width:8%;">退款金额</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <table id="sll">
+                                    <tbody class="barrier" *ngIf="details">
+                                        <tr *ngFor="let de of details index as i">
+                                            <td style="visibility:hidden;">0</td>
+                                            <td style="width:8%;">{{i+1}}{{de.payouttime}}</td>
+                                            <td style="width:8%;">{{de.product}}</td>
+                                            <td style="width:50%;">{{de.investInfo}}</td>
+                                            <td style="width:8%;">{{de.local_m}}</td>
+                                            <td style="width:8%;">{{de.total_price}}</td>
+                                            <td style="width:8%;">{{de.inv_allup}}</td>
+                                            <td style="width:8%;">{{de.refund}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="Nodata3">
+                                        <tr>
+                                            <td colspan="3">{{data3}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="Nodata">
+                    <tr>
+                        <td colspan="13">{{data}}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="13">
+                            <el-pagination [total]="count" 
+                            [page-size]="16" 
+                            *ngIf="count>0" 
+                            [page-count]="pageCount"
+                            (modelChange)="modelChange($event)" 
+                            [layout]="['prev', 'pager', 'next', 'jumper', 'total']">
+                            </el-pagination>
+                        </td>
                     </tr>
                 </tbody>
             </table>
