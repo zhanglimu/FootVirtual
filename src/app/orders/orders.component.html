@@ -1086,7 +1086,7 @@
                             <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
                             <strong>周：<span id="week" class="vor" name="weeking">{{breakweeking}}</span></strong>
                         </p>
-                        <p class="word">
+                        <p class="word" *ngIf="caizhong">
                             <span>彩种：</span>
                             <select id="lottery_type" name="lottery_type" [(ngModel)]="loery">
                                 <option value="1">足球</option>

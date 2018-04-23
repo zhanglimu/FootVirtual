@@ -96,4 +96,5 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryAll?startDate='+startime +'&endDate='+endtime+'&agentId='+agNum+'&page='+pageNum+'&size='+pageSize+'&state='+state+'&inplay='+inplay+'&tkId='+tkId+'&uid='+uid+'&ballType='+lottery_t)
         .map(res=>res.json());
     }
+    
 }   

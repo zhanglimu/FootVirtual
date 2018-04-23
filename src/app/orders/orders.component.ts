@@ -403,7 +403,7 @@ export class OrdersComponent implements OnInit {
     this.agentName = "agent";
     this.singleName = "single";
     this.allupName = "allup";
-    this.breakName = "break";
+    this.breakName = "breakdown";
     this.zuqiu =false;
     this.dianjing =false;
     this.allupzuqiu =false;
@@ -1241,7 +1241,11 @@ compare(property){
     var	year = "";
     var	month = "";
     var	day = "";
-    // this.cashlotte = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
     var time:any = $("#startime").val();
     if(time =="" || time ==null){
         this.message.error("请先选择要导出的日期");
@@ -1257,7 +1261,7 @@ compare(property){
         }else{
           year=sort;
         }
-        window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+        window.open(AppConfig.baseUrl +'/account/bookieBreakdown/breakdownExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_type);
       } 
   }
 //cashallup开始
