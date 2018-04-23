@@ -150,10 +150,12 @@ export class OrdersComponent implements OnInit {
     allupdianjing:boolean;
     caizhong:boolean;
     //break
-    breakFB:string[];
-    FBtotal:string[];
-    breaktotal:string[];
+    breakpro:string[];
+    totalpro:string[];
     breakweeking:any;
+    lottery_type:any;
+    loery:string;
+    breakName:string;
 //cash out/////////////////
 //cashallup
     cashallupdata: string[];   //订单合计变量
@@ -196,6 +198,7 @@ export class OrdersComponent implements OnInit {
     cashbreakBK:string[];
     cashBKtotal:string[];
     cashbreaktotal:string[];
+    cashbreakweeking:any;
     //cashorder
     dea:string;
     thir:string;
@@ -303,9 +306,8 @@ export class OrdersComponent implements OnInit {
     this.allupdianFCA=[];
     this.alldianFCA=[];
     //break
-    this.breakFB=[];
-    this.FBtotal=[];
-    this.breaktotal=[];
+    this.breakpro=[];
+    this.totalpro=[];
     //cash out/////////////////
 //cashallup
     this.cashallupdata=[];   //订单合计变量
@@ -372,6 +374,7 @@ export class OrdersComponent implements OnInit {
     this.weeking =week;
     this.summaryweeking =week;
     this.breakweeking =week;
+    this.cashbreakweeking =week;
     //初始默认时间
     var timeing =  new Date();
     var year = timeing.getFullYear();
@@ -396,9 +399,11 @@ export class OrdersComponent implements OnInit {
     //order结束
     this.lotte = "2";//彩种值
     this.lotter = "2";//彩种值
+    this.loery = "2"
     this.agentName = "agent";
     this.singleName = "single";
     this.allupName = "allup";
+    this.breakName = "break";
     this.zuqiu =false;
     this.dianjing =false;
     this.allupzuqiu =false;
@@ -1149,7 +1154,11 @@ compare(property){
     var	year = "";
     var	month = "";
     var	day = "";
-    // this.cashlotte = $("#lottery_type").val();
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
     var time:any = $("#startime").val();
     if(time =="" || time ==null){
         this.message.error("请先选择日期");
@@ -1165,13 +1174,12 @@ compare(property){
         }else{
           year=sort;
         }
-        this.QUERY.bookieBreakdown(year,month,day).subscribe(data => {
+        this.QUERY.bookieBreakdown(year,month,day,this.lottery_type).subscribe(data => {
           if (data!=null) {
             this.loading = false;
             this.Nodata = false;
-            this.breakFB = data.modelList;
-            this.FBtotal = data.FBtotal;
-            this.breaktotal = data.total;
+            this.breakpro = data.prolist;
+            this.totalpro = data.proTotal;
           }else{
             this.loading = false;
             this.Nodata = true;
@@ -1184,9 +1192,50 @@ compare(property){
         });
         
       } 
-      this.summaryweeking =this.getYearWeek(year, month, day);
-      document.getElementById("week").innerText = this.summaryweeking;	
+      this.breakweeking =this.getYearWeek(year, month, day);
+      document.getElementById("week").innerText = this.breakweeking;	
       document.getElementById("month").innerText = month;
+  }
+  breakretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
+    var time:any = $("#startime").val();
+		if(time =="" || time ==null){
+      this.message.error("请先选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Breakretry(year,month,day,this.lottery_type,this.breakName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
   }
   breakexport() {
     var	year = "";
@@ -1575,8 +1624,8 @@ cashbreakCha(reslt) {
       });
       
     } 
-    this.breakweeking =this.getYearWeek(year, month, day);
-    document.getElementById("week").innerText = this.breakweeking;	
+    this.cashbreakweeking =this.getYearWeek(year, month, day);
+    document.getElementById("week").innerText = this.cashbreakweeking;	
     document.getElementById("month").innerText = month;
 }
 cashbreakexport() {
