@@ -92,9 +92,34 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/dailyFinancialDetail/queryAll?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
-    Order(startime,endtime,agNum,pageNum,pageSize,state,inplay,tkId,uid,lottery_t){
-        return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryAll?startDate='+startime +'&endDate='+endtime+'&agentId='+agNum+'&page='+pageNum+'&size='+pageSize+'&state='+state+'&inplay='+inplay+'&tkId='+tkId+'&uid='+uid+'&ballType='+lottery_t)
+    // Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type){
+    //     return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryAll?startDate='+cashstartime +'&endDate='+cashendtime+'&agent_id='+cashagNum+'&page='+pageNum+'&size='+pageSize+'&trade_type='+cashdeal+'&state='+cashstate+'&recycleState='+cashthird+'&inplay='+cashinplay+'&tkId='+cashtkId+'&uid='+cashuid+'&ballType='+cashlottery_type)
+    //     .map(res=>res.json());
+    // }
+    Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type):Observable<any>{
+        let formData: FormData = new FormData(); 
+        formData.append('startDate', cashstartime); 
+        formData.append('endDate', cashendtime); 
+        formData.append('agent_id', cashagNum); 
+        formData.append('page', pageNum); 
+        formData.append('size', pageSize); 
+        formData.append('trade_type', cashdeal); 
+        formData.append('state', cashstate); 
+        formData.append('recycleState', cashthird); 
+        formData.append('inplay', cashinplay); 
+        formData.append('tkId', cashtkId); 
+        formData.append('uid', cashuid); 
+        formData.append('ballType', cashlottery_type); 
+        return this.http.post(AppConfig.baseUrl +'/account/orderManage/queryAll',formData)
+        .map(res =>res.json());
+      }
+    OrderAgent(){
+        return this.http.get(AppConfig.baseUrl + '/account/orderManage/queryAllAgent')//,this.cookie 
+        .map(res => res.json())
+    }
+    //详情接口
+    Orderdetail(ticketid,ballType,cashendtime){
+        return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryDetail?ticketInfo_id='+ticketid +'&ballType='+ballType +'&endDate='+cashendtime)
         .map(res=>res.json());
     }
-    
 }   

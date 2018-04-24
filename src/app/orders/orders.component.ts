@@ -78,14 +78,9 @@ export class OrdersComponent implements OnInit {
     in: string;
     sta: string;
     agent: string;  //渠道默认值
-    da: string;     //时间默认值
     lott:string;
-    timek:string;
-    timej:string;
     //single开始
     total: string[];   //订单变量
-    // singlebox:string[];
-    // singlehis:string[];
     totaldian:string[];
     lottery_ty:any;
     lotte:string;
@@ -138,6 +133,13 @@ export class OrdersComponent implements OnInit {
     lottery_typ:any;
     lotter:string;
     allupName:string;
+    //break
+    breakpro:string[];
+    totalpro:string[];
+    breakweeking:any;
+    lottery_type:any;
+    loery:string;
+    breakName:string;
 
     time0:string;
     Nodata:boolean; //是否显示提示信息
@@ -149,13 +151,6 @@ export class OrdersComponent implements OnInit {
     allupzuqiu:boolean;
     allupdianjing:boolean;
     caizhong:boolean;
-    //break
-    breakpro:string[];
-    totalpro:string[];
-    breakweeking:any;
-    lottery_type:any;
-    loery:string;
-    breakName:string;
 //cash out/////////////////
 //cashallup
     cashallupdata: string[];   //订单合计变量
@@ -200,9 +195,41 @@ export class OrdersComponent implements OnInit {
     cashbreaktotal:string[];
     cashbreakweeking:any;
     //cashorder
-    dea:string;
-    thir:string;
+    cashresut: any[];
+    cashshuju:LiveOrdermanage;
+    cashshu:string[];
+    cashdetails:LiveOrdermanage;
+    cashtkIding:any;
+    // l_code:string;
+    // betContent:string;
+    // canceled:string;
+    contents:string;
+    isA: boolean = false;
+    isB: boolean = false;
+
+    cashtkId: any;
+    cashuid: any;
+    cashstartime: any;
+    cashendtime: any;
+    cashagNum: any;
+    cashstate: any;
+    cashinplay: any;
+    cashdeal: any;
+    cashthird: any;
+    cashlottery_type: any;
+
+    cashding: string;
+    cashyong: string;
+    cashtimekai:any;
+    cashtimejie:any;
+    cashin: string;
+    cashsta: string;
+    cashagent: string;  //渠道默认值
+    cashdea:string;
+    cashthir:string;
     cashlotter:string;
+    cashcount: number = 0; //总条数
+    cashpageCount:number;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -231,6 +258,8 @@ export class OrdersComponent implements OnInit {
       }
       this.timekai=s1;
       this.timejie =end;
+      this.cashtimekai=s1;
+      this.cashtimejie =end;
       //默认显示虚拟订单数据
       this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",2)
     }
@@ -396,6 +425,12 @@ export class OrdersComponent implements OnInit {
       if (data)
         this.resut = data.agentList;
     });
+    //返回cashout渠道信息
+    this.QUERY.OrderAgent().subscribe(data => {
+      if (data)
+        this.cashresut = data.agentList;
+    });
+    
     //order结束
     this.lotte = "2";//彩种值
     this.lotter = "2";//彩种值
@@ -421,8 +456,13 @@ export class OrdersComponent implements OnInit {
     this.cashlott = "1";
     this.cashlotte = "1";
     //cashorder
-    this.dea = '';
-    this.thir = '';
+    this.cashding = "";
+    this.cashyong = "";
+    this.cashin = '';
+    this.cashsta = '';
+    this.cashagent = '';
+    this.cashdea = '';
+    this.cashthir = '';
     this.cashlotter = "1";
   }
   summaryCha(reslt) {
@@ -770,9 +810,6 @@ compare(property){
     var y = dd.getFullYear(); 
     var m = dd.getMonth()+1;//获取当前月份的日期 
     var d = dd.getDate(); 
-    // var hour = time.getHours();
-    // var minutes = time.getMinutes();  
-    // var second = time.getSeconds(); 
     return y+"-"+m+"-"+d; 
 }
   //分页
@@ -1654,6 +1691,235 @@ cashbreakexport() {
       }
       window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
     } 
+}
+//order开始
+cashall(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type) {
+  this.QUERY.Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type).subscribe(data => {
+    if (data.modelList!=null) {
+      this.loading = false;
+      this.Nodata = false;
+      this.cashcount=data.total.size;
+      this.cashpageCount = Math.ceil(this.cashcount/this.pageSize);
+      this.cashshu = data.total;
+      this.cashshuju = data.modelList;
+      for (var i = 0; i < data.modelList.length; i++) {
+        switch (this.cashshuju[i].trade_type) {
+          case null:
+            this.cashshuju[i].tradeName = "--";
+            break;
+          case 0:
+            this.cashshuju[i].tradeName = "未交易";
+            break;
+          case 1:
+            this.cashshuju[i].tradeName = "交易成功";
+            break;
+          case 2:
+            this.cashshuju[i].tradeName = "等待";
+            break;
+          case 3:
+            this.cashshuju[i].tradeName = "交易失败";
+            break;
+          case 4:
+            this.cashshuju[i].tradeName = "取消申请";
+            break;
+          case 5:
+            this.cashshuju[i].tradeName = "通过";
+            break;
+          case 6:
+            this.cashshuju[i].tradeName = "拒绝";
+            break;
+          case 7:
+            this.cashshuju[i].tradeName = "取消";
+            break;
+          case 44:
+            this.cashshuju[i].tradeName = "取消申请";
+            break;
+        }
+        if(this.cashshuju[i].trade_type=="4"){
+          this.cashshuju[i].iscancel=true;
+        }else{
+          this.cashshuju[i].iscancel=false;
+        }
+        switch (this.cashshuju[i].ballType) {
+          case null:
+            this.cashshuju[i].ballType_name = "--";
+            break;
+          case 1:
+            this.cashshuju[i].ballType_name = "足球";
+            break;
+          case 2:
+            this.cashshuju[i].ballType_name = "电竞";
+            break;
+        }
+        switch (this.cashshuju[i].inplay) {
+          case null:
+            this.cashshuju[i].inplay_name = "--";
+            break;
+          case 0:
+            this.cashshuju[i].inplay_name = "死球";
+            break;
+          case 1:
+            this.cashshuju[i].inplay_name = "即场";
+            break;
+        }
+        switch (this.cashshuju[i].state) {
+          case null:
+            this.cashshuju[i].state_name = "--";
+            break;
+          case 1:
+            this.cashshuju[i].state_name = "中奖";
+            break;
+          case 2:
+            this.cashshuju[i].state_name = "未中奖";
+            break;
+          case 3:
+            this.cashshuju[i].state_name = "Alive";
+            break;
+        }
+        if(this.cashshuju[i].addAwardAmount =="0"){
+          this.cashshuju[i].addAwardAmount ="-";
+        }else{
+          this.cashshuju[i].addAwardAmount = this.cashshuju[i].addAwardAmount;
+        }
+        
+        if(this.cashshuju[i].rakeRate =="0" || this.cashshuju[i].rakeRate ==null ){
+          this.cashshuju[i].rakeRate ="-";
+        }else{
+          this.cashshuju[i].rakeRate = this.cashshuju[i].rakeRate;
+        }
+        if(this.cashshuju[i].recyclePrice =="-1" || this.cashshuju[i].recyclePrice ==="" || this.cashshuju[i].recyclePrice==null){
+          this.cashshuju[i].recycleP ="未回收";
+          if(this.cashshuju[i].recyclePrice =="-1"){
+            this.cashshuju[i].isNorecycle=false;
+          }else{
+            this.cashshuju[i].isNorecycle=true;
+          }
+        }else{
+          this.cashshuju[i].recycleP = this.cashshuju[i].recyclePrice;
+        }
+      }
+    }else{
+      this.loading = false;
+      this.cashcount = 0;
+      this.Nodata = true;
+      this.data = "暂无新数据";
+    }
+  },error=>{
+    this.loading = false;
+    this.Nodata = true;
+    this.data = "数据异常请联系开发人员";
+  });
+}
+cashorderCha(reslt) {
+  this.loading = true;
+  this.cashstartime = $("#cashstime").val();
+  this.cashendtime = $("#cashetime").val();
+  this.cashagNum =$('#cashagentNum option:selected').val();
+  this.cashstate =$('#cashstate option:selected').val();
+  this.cashinplay =$('#cashinplay option:selected').val();
+  this.cashtkId = $("#cashtk").val();
+  this.cashuid = $("#cashuid").val();
+  this.cashthird =$('#cashthird option:selected').val();
+  this.cashdeal =$('#cashdeal option:selected').val();
+  if(this.people==0){
+    this.cashlottery_type = "2";
+  }else{
+    this.cashlottery_type = $("#cashlottery_type").val();
+  }
+  this.cashall(this.cashstartime,this.cashendtime,this.cashagNum,this.pageNum,this.pageSize,this.cashdeal,this.cashstate,this.cashthird,this.cashinplay,this.cashtkId,this.cashuid,this.cashlottery_type)
+}
+//分页
+cashmodelChange(currPage){
+  this.cashall(this.cashstartime,this.cashendtime,this.cashagNum,currPage,this.pageSize,this.cashdeal,this.cashstate,this.cashthird,this.cashinplay,this.cashtkId,this.cashuid,this.cashlottery_type)
+}
+//点击详情
+cashshowdiv(ticketInfo_id,ballType,tkId) {
+  this.cashendtime = $("#cashetime").val();
+  this.cashtkIding=tkId;
+  this.QUERY.Orderdetail(ticketInfo_id,ballType,this.cashendtime).subscribe(response => {
+    if (response!=null) {
+      this.cashdetails = response.detailList;
+console.log(this.cashdetails,"llll")
+      for (var i = 0; i < response.detailList.length; i++) {
+        var l_code= response.detailList[i].l_code;// level match code: 一场比赛的赛事编码 +,+ 降关情况
+        var l_codes=l_code.split(",");
+        var betContents= response.detailList[i].betContent.split("/");
+        var canceled = response.detailList[i].canceled;
+        var cancel = canceled.split(",");
+        
+        this.contents=""; 
+        for (var j = 0; j < l_codes.length; j++) {
+          if(this.contents==""){
+            if(l_codes[j]=="0"){
+                if(cancel[j] == "VOID" ){
+                  this.contents=betContents[j];
+                  this.cashdetails[i].isA=true;
+                  this.isB=false;
+                }else{
+                  this.contents=betContents[j]; 
+                  this.isA=false;
+                  this.cashdetails[i].isB=true;
+                }
+             }else{
+              this.contents=betContents[j]; 
+              this.isA=false;
+              this.isB=false;
+            }
+          }else{
+            if(l_codes[j]=="0"){
+               if(cancel[j] == "VOID" ){
+                this.contents=this.contents+"/"+betContents[j]; 
+                this.cashdetails[i].isA=true;
+                this.isB=false;
+              }else{ 
+                this.contents=this.contents+"/"+betContents[j];
+                this.isA=false;
+                this.cashdetails[i].isB=true;
+               } 
+            }else{
+                this.contents=this.contents+"/"+betContents[j];
+                this.isA=false;
+                this.isB=false;
+            }
+          } 
+        }
+      }
+
+
+      this.Nodata3 = false;
+    }else {
+    this.details = [];
+    this.Nodata3 = true;
+    this.data3 = "暂无新数据";
+    }
+  }, error => {
+    this.Nodata3 = true;
+    this.data3 = "数据异常请联系开发人员";
+  })
+  document.getElementById("bg").style.display = "block";
+  document.getElementById("show").style.display = "block";
+}
+cashhidediv() {
+  document.getElementById("bg").style.display = 'none';
+  document.getElementById("show").style.display = 'none';
+}
+//导出
+cshorderexport(){
+  this.cashstartime = $("#cashstime").val();
+  this.cashendtime = $("#cashetime").val();
+  this.cashagNum =$('#cashagentNum option:selected').val();
+  this.cashstate =$('#cashstate option:selected').val();
+  this.cashinplay =$('#cashinplay option:selected').val();
+  this.cashtkId = $("#cashtk").val();
+  this.cashuid = $("#cashuid").val();
+  this.cashthird =$('#cashthird option:selected').val();
+  this.cashdeal =$('#cashdeal option:selected').val();
+  if(this.people==0){
+    this.cashlottery_type = "2";
+  }else{
+    this.cashlottery_type = $("#cashlottery_type").val();
+  }
+    window.open(AppConfig.baseUrl + "/account/orderManage/userManagementExcel?startDate="+this.cashstartime +"&endDate="+this.cashendtime+"&agent_id="+this.cashagNum+"&trade_type="+this.cashdeal+"&state="+this.cashstate+"&recycleState="+this.cashthird+"&inplay="+this.cashinplay+"&tkId="+this.cashtkId+"&uid="+this.cashuid+"&ballType="+this.cashlottery_type);
 }
 
 

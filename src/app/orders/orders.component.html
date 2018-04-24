@@ -2127,27 +2127,27 @@
     </div>
     <div class="main" *ngSwitchCase="11">
         <div class="clearfix">
-                <form class="formdate left" #cashorderForm="ngForm" (ngSubmit)="cashorderCha(cashorderForm.value)">
+                <form class="left" #cashorderForm="ngForm" (ngSubmit)="cashorderCha(cashorderForm.value)">
                         <p class="word">
-                            <span>订单ID：</span><input id="tk" type="text" name="dingdan" [(ngModel)]="ding" value=""/><br />
-                            <span>用户ID：</span><input id="uid" type="text" name="yonghu" [(ngModel)]="yong" value=""/>
+                            <span>订单ID：</span><input id="cashtk" type="text" name="dingdan" [(ngModel)]="cashding" value=""/><br />
+                            <span>用户ID：</span><input id="cashuid" type="text" name="yonghu" [(ngModel)]="cashyong" value=""/>
                         </p>
                         <p class="word">
                             <span>交易开始时间：</span>
-                            <input type="text" id="stime" class="Wdate" value="{{timekai}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d 12:00:00',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                            <input type="text" id="cashstime" class="Wdate" value="{{cashtimekai}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d 12:00:00',dateFmt:'yyyy-M-d HH:mm:ss'})" />
                             <br />
                             <span>交易截止时间：</span>
-                            <input type="text" id="etime" class="Wdate" value="{{timejie}}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                            <input type="text" id="cashetime" class="Wdate" value="{{cashtimejie}}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-M-d HH:mm:ss'})" />
                         </p>
                         <p class="word">
                             <span>订单类型：</span>
-                            <select id="inplay" name="inplay" [(ngModel)]="in">
+                            <select id="cashinplay" name="inplay" [(ngModel)]="cashin">
                                 <option value="">ALL</option>
                                 <option value="0">死球</option>
                                 <option value="1">即场</option>
                             </select><br />
                             <span>订单状态：</span>
-                            <select id="state" name="state" [(ngModel)]="sta">
+                            <select id="cashstate" name="state" [(ngModel)]="cashsta">
                                 <option value="">ALL</option>
                                 <option value="1">中奖</option>
                                 <option value="2">未中奖</option>
@@ -2156,12 +2156,12 @@
                         </p>
                         <p class="word">
                             <span>渠道的来源：</span>
-                            <select id="agentNum" name="agentNum" [(ngModel)]="agent">
+                            <select id="cashagentNum" name="agentNum" [(ngModel)]="cashagent">
                                 <option value="">ALL</option>
-                                <option *ngFor="let agentNums of resut;" [value]='agentNums.agentNum'>{{agentNums.agentName}}</option>
+                                <option *ngFor="let agentNums of cashresut;" [value]='agentNums.agentNum'>{{agentNums.agentName}}</option>
                             </select><br />
                             <span>第三方状态：</span>
-                            <select id="third" name="third" [(ngModel)]="thir">
+                            <select id="cashthird" name="third" [(ngModel)]="cashthir">
                                 <option value="">ALL</option>
                                 <option value="1">未回收</option>
                                 <option value="2">已回收</option>
@@ -2169,7 +2169,7 @@
                         </p>
                         <p class="word">
                             <span>交易状态：</span>
-                            <select id="deal" name="deal" [(ngModel)]="dea">
+                            <select id="cashdeal" name="deal" [(ngModel)]="cashdea">
                                 <option value="">ALL</option>
                                 <option value="0">交易成功</option>
                                 <option value="1">交易失败</option>
@@ -2177,36 +2177,36 @@
                         </p>
                         <p class="word" *ngIf="caizhong">
                             <span>彩种：</span>
-                            <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlotter">
+                            <select id="cashlottery_type" name="lottery_type" [(ngModel)]="cashlotter">
                                 <option value="1">足球</option>
                                 <option value="2">电竞</option>
                             </select>
                         </p>
                             <button class="selss" type="submit">查询</button>
-                            <button (click)="orderexport()">导出</button>
+                            <button (click)="cashorderexport()">导出</button>
                 </form>
         </div>
         <div class="row-fluid">
                 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
             <table class="table">
                 <thead>
-                    <tr class="thtible" *ngIf="total">
+                    <tr class="thtible" *ngIf="cashshu">
                         <th>合计Total</th>
-                        <td>{{total.uid}}</td>
+                        <td>{{cashshu.uid}}</td>
                         <td>-</td> 
                         <td>-</td> 
-                        <td>{{total.bettingproducts}}</td>
-                        <td>{{total.inplay}}</td>
-                        <td>{{total.totalInvestment}}</td>
-                        <td>{{total.totalPrice}}</td>
+                        <td>{{cashshu.bettingproducts}}</td>
+                        <td>{{cashshu.inplay}}</td>
+                        <td>{{cashshu.totalInvestment}}</td>
+                        <td>{{cashshu.totalPrice}}</td>
                         <td>-</td> 
                         <td>-</td>
-                        <td>{{total.trade_price}}</td>
+                        <td>{{cashshu.trade_price}}</td>
                         <td>-</td>
-                        <td>{{total.payoutrate}}%</td>
-                        <td>{{total.winMoney}}</td>
-                        <td>{{total.rakeRate}}</td> 
-                        <td>{{total.recyclePrice}}</td>
+                        <td>{{cashshu.payoutrate}}%</td>
+                        <td>{{cashshu.winMoney}}</td>
+                        <td>{{cashshu.rakeRate}}</td> 
+                        <td>{{cashshu.recyclePrice}}</td>
                     </tr>
                 </thead>
                 <thead>
@@ -2230,59 +2230,59 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody id="firstred" *ngIf="shuju">
-                    <tr *ngFor="let b of shuju">
+                <tbody id="firstred" *ngIf="cashshuju">
+                    <tr *ngFor="let b of cashshuju">
                         <td>{{b.tkId}}</td>
                         <td>{{b.uid}}</td>
                         <td>{{b.agentName}}</td> 
-                        <td>{{b.ballTypeName}}</td> 
+                        <td>{{b.ballType_name}}</td> 
                         <td>{{b.bettingproducts}}</td>
-                        <td>{{b.inplayName}}</td>
+                        <td>{{b.inplay_name}}</td>
                         <td>{{b.totalInvestment}}</td>
                         <td>{{b.totalPrice}}</td>
                         <td>{{b.addAwardAmount}}</td>
                         <td>{{b.trade_time}}</td> 
                         <td>{{b.trade_price}}</td>
-                        <td>{{b.tradeName}}</td>  
-                        <td>{{b.stateName}}</td>
+                        <td [ngClass]="{cancel:b.iscancel}">{{b.tradeName}}</td>  
+                        <td>{{b.state_name}}</td>
                         <td>{{b.winMoney}}</td>
                         <td>{{b.rakeRate}}</td> 
-                        <td>{{b.recycleP}}</td>
+                        <td [ngClass]="{Norecycle:b.isNorecycle}">{{b.recycleP}}</td>
                         <td>
-                            <button id="btnshow" (click)="showdiv(b.ticketInfo_id,b.ballType,b.tkId,b.refund)">详情</button>
+                            <button id="btnshow" (click)="cashshowdiv(b.ticketInfo_id,b.ballType,b.tkId)">详情</button>
                             <div id="bg"></div>
                             <div id="show">
-                                <input id="btnclose" value="Close" (click)="hidediv()" type="button">
+                                <input id="btnclose" value="Close" (click)="cashhidediv()" type="button">
                                 <table>
                                     <thead class="fontse">
                                         <tr>
                                             <th style="width:8%;">订单ID</th>
-                                            <th style="width:74%;" colspan="4">{{tkIding}}</th>
-                                            <th style="width:8%;">退款</th>
-                                            <th style="width:8%;">{{refund}}</th>
+                                            <th style="width:90%;" colspan="7">{{cashtkIding}}</th>
                                         </tr>
                                         <tr class="lv">
                                             <th style="width:8%;">序号</th>
                                             <th style="width:8%;">玩法</th>
                                             <th style="width:50%;">投注内容</th>
-                                            <th style="width:8%;">过关方式</th>
+                                            <th style="width:6%;">过关方式</th>
+                                            <th style="width:4%;">倍数</th>
                                             <th style="width:8%;">中奖金额</th>
-                                            <th style="width:8%;">投注金额</th>
-                                            <th style="width:8%;">退款金额</th>
+                                            <th style="width:8%;">原交易金额</th>
+                                            <th style="width:8%;">caiex加奖额</th>
                                         </tr>
                                     </thead>
                                 </table>
                                 <table id="sll">
-                                    <tbody class="barrier" *ngIf="details">
-                                        <tr *ngFor="let de of details index as i">
+                                    <tbody class="barrier">
+                                        <tr *ngFor="let de of cashdetails index as i">
                                             <td style="visibility:hidden;">0</td>
-                                            <td style="width:8%;">{{i+1}}{{de.payouttime}}</td>
+                                            <td style="width:8%;">{{i+1}}{{de.stateMessage}}</td>
                                             <td style="width:8%;">{{de.product}}</td>
-                                            <td style="width:50%;">{{de.investInfo}}</td>
-                                            <td style="width:8%;">{{de.local_m}}</td>
+                                            <td style="width:50%;" [ngClass]="{a:de.isA, b:de.isB}">{{contents}}</td>
+                                            <td style="width:6%;">{{de.local_m}}</td>
+                                            <td style="width:4%;">{{de.num}}</td>
                                             <td style="width:8%;">{{de.total_price}}</td>
-                                            <td style="width:8%;">{{de.inv_allup}}</td>
-                                            <td style="width:8%;">{{de.refund}}</td>
+                                            <td style="width:8%;">{{de.price_allup}}</td>
+                                            <td style="width:8%;">{{de.cxBonus}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="Nodata3">
@@ -2303,11 +2303,11 @@
                 <tbody>
                     <tr>
                         <td colspan="13">
-                            <el-pagination [total]="count" 
+                            <el-pagination [total]="cashcount" 
                             [page-size]="16" 
-                            *ngIf="count>0" 
-                            [page-count]="pageCount"
-                            (modelChange)="modelChange($event)" 
+                            *ngIf="cashcount>0" 
+                            [page-count]="cashpageCount"
+                            (modelChange)="cashmodelChange($event)" 
                             [layout]="['prev', 'pager', 'next', 'jumper', 'total']">
                             </el-pagination>
                         </td>
