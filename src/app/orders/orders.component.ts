@@ -202,6 +202,7 @@ export class OrdersComponent implements OnInit {
     // betContent:string;
     // canceled:string;
     contents:string;
+    betents:string;
 
     cashtkId: any;
     cashuid: any;
@@ -226,6 +227,16 @@ export class OrdersComponent implements OnInit {
     cashlotter:string;
     cashcount: number = 0; //总条数
     cashpageCount:number;
+    //cashthird
+    thirdshuju:string[];
+    thirdstartime: any;
+    thirdendtime: any;
+    agentid: any;
+    per: any;
+    thirdtimekai:any;
+    thirdtimejie:any;
+    thirdagent:any;
+    thirdper: any;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -256,6 +267,11 @@ export class OrdersComponent implements OnInit {
       this.timejie =end;
       this.cashtimekai=s1;
       this.cashtimejie =end;
+      //third
+      var s2 = this.GetDateStr(-1);
+      var end2 =this. GetDateStr(0);
+      this.thirdtimekai=s2;
+      this.thirdtimejie =end2;
       //默认显示虚拟订单数据
       this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",2)
     }
@@ -458,22 +474,25 @@ export class OrdersComponent implements OnInit {
     this.cashdea = '';
     this.cashthir = '';
     this.cashlotter = "1";
+    //cashthird
+    this.thirdagent = "";
+    this.thirdper = "1";
   }
   summaryCha(reslt) {
     this.loading = true;
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery = "2";
     }else{
       this.lottery = $("#lottery_type").val();
     }
     // this.lottery = $("#lottery_type").val();
-		var time:any = $("#startime").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择日期");
-		}else{
+        var time:any = $("#startime").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -509,7 +528,7 @@ export class OrdersComponent implements OnInit {
         
       } 
       this.weeking =this.getYearWeek(year, month, day);
-      document.getElementById("week").innerText = this.weeking;	
+      document.getElementById("week").innerText = this.weeking; 
       document.getElementById("month").innerText = month;
   }
   getYearWeek (a, b, c) { 
@@ -518,18 +537,18 @@ export class OrdersComponent implements OnInit {
     return Math.ceil((d + ((d2.getDay() + 1) - 1)) / 7); 
   }
   summaryretry() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery = "2";
     }else{
       this.lottery = $("#lottery_type").val();
     }
     var time:any = $("#startime").val();
-		if(time =="" || time ==null){
+        if(time =="" || time ==null){
       this.message.error("请先选择要重算的日期");
-		}else{
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -560,18 +579,18 @@ export class OrdersComponent implements OnInit {
   }
   //导出
   summaryexport() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery = "2";
     }else{
       this.lottery = $("#lottery_type").val();
     }
-		var time:any = $("#startime").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择要导出的日期");
-		}else{
+        var time:any = $("#startime").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择要导出的日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -597,9 +616,9 @@ compare(property){
 }
   agentCha(reslt) {
     this.loading = true;
-    var	year = "";
-    var	month = "";
-    var	day = "";
+    var year = "";
+    var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_ = "2";
     }else{
@@ -654,18 +673,18 @@ compare(property){
       } 
   }
   agentretry() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_ = "2";
     }else{
       this.lottery_ = $("#lottery_type").val();
     }
     var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择要重算的日期");
-		}else{
+        if(time =="" || time ==null){
+              this.message.error("请先选择要重算的日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -695,18 +714,18 @@ compare(property){
     } 
   }
   agentexport() {
-    var	year = "";
-		var	month = "";
-		var	day = "";
+    var year = "";
+        var month = "";
+        var day = "";
     if(this.people==0){
       this.lottery_ = "2";
     }else{
       this.lottery_ = $("#lottery_type").val();
     }
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择要导出的日期");
-		}else{
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择要导出的日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -854,9 +873,9 @@ compare(property){
   //single开始
   singleCha(reslt) {
     this.loading = true;
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_ty = "2";
     }else{
@@ -864,9 +883,9 @@ compare(property){
     }
     // this.lottery_ty = $("#lottery_type").val();
     var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择日期");
-		}else{
+        if(time =="" || time ==null){
+              this.message.error("请先选择日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -906,18 +925,18 @@ compare(property){
       } 
   }
   singleretry() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_ty = "2";
     }else{
       this.lottery_ty = $("#lottery_type").val();
     }
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
       this.message.error("请选择要重算的日期");
-		}else{
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -948,18 +967,18 @@ compare(property){
   }
   //导出
   singleexport() {
-    var	year = "";
-		var	month = "";
-		var	day = "";
+    var year = "";
+        var month = "";
+        var day = "";
     if(this.people==0){
       this.lottery_ty = "2";
     }else{
       this.lottery_ty = $("#lottery_type").val();
     }
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择要导出的日期");
-		}else{
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择要导出的日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -977,19 +996,19 @@ compare(property){
   //allup开始
   allupCha(reslt) {
     this.loading = true;
-    var	year = "";
-		var	month = "";
-		var	day = "";
+    var year = "";
+        var month = "";
+        var day = "";
     if(this.people==0){
       this.lottery_typ = "2";
     }else{
       this.lottery_typ = $("#lottery_type").val();
     }
     // this.lottery_typ = $("#lottery_type").val();
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择日期");
-		}else{
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -1112,18 +1131,18 @@ compare(property){
   }
 
   allupretry() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_typ = "2";
     }else{
       this.lottery_typ = $("#lottery_type").val();
     }
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
       this.message.error("请选择要重算的日期");
-		}else{
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -1154,18 +1173,18 @@ compare(property){
   }
   //导出
   allupexport() {
-    var	year = "";
-		var	month = "";
-		var	day = "";
+    var year = "";
+        var month = "";
+        var day = "";
     if(this.people==0){
       this.lottery_typ = "2";
     }else{
       this.lottery_typ = $("#lottery_type").val();
     }
-		var time:any = $("#d12").val();
-		if(time =="" || time ==null){
-			  this.message.error("请先选择要导出的日期");
-		}else{
+        var time:any = $("#d12").val();
+        if(time =="" || time ==null){
+              this.message.error("请先选择要导出的日期");
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -1182,15 +1201,15 @@ compare(property){
   }
   breakCha(reslt) {
     this.loading = true;
-    var	year = "";
-    var	month = "";
-    var	day = "";
+    var year = "";
+    var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_type = "2";
     }else{
       this.lottery_type = $("#lottery_type").val();
     }
-    var time:any = $("#startime").val();
+    var time:any = $("#d12").val();
     if(time =="" || time ==null){
         this.message.error("请先选择日期");
     }else{
@@ -1223,23 +1242,20 @@ compare(property){
         });
         
       } 
-      this.breakweeking =this.getYearWeek(year, month, day);
-      document.getElementById("week").innerText = this.breakweeking;	
-      document.getElementById("month").innerText = month;
   }
   breakretry() {
-    var	year = "";
-		var	month = "";
-    var	day = "";
+    var year = "";
+        var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_type = "2";
     }else{
       this.lottery_type = $("#lottery_type").val();
     }
-    var time:any = $("#startime").val();
-		if(time =="" || time ==null){
+    var time:any = $("#d12").val();
+        if(time =="" || time ==null){
       this.message.error("请先选择要重算的日期");
-		}else{
+        }else{
         var sort = time.split("-");
         if(sort.length ==3){
           year=sort[0];
@@ -1269,15 +1285,15 @@ compare(property){
     } 
   }
   breakexport() {
-    var	year = "";
-    var	month = "";
-    var	day = "";
+    var year = "";
+    var month = "";
+    var day = "";
     if(this.people==0){
       this.lottery_type = "2";
     }else{
       this.lottery_type = $("#lottery_type").val();
     }
-    var time:any = $("#startime").val();
+    var time:any = $("#d12").val();
     if(time =="" || time ==null){
         this.message.error("请先选择要导出的日期");
     }else{
@@ -1298,9 +1314,9 @@ compare(property){
 //cashallup开始
 cashallupCha(reslt) {
   this.loading = true;
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlot = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
@@ -1360,9 +1376,9 @@ cashallupCha(reslt) {
     } 
 }
 cashallupexport(){
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // if(this.people==0){
   //   this.cashlot = "2";
   // }else{
@@ -1389,9 +1405,9 @@ cashallupexport(){
 }
 cashsingleCha(reslt) {
   this.loading = true;
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // if(this.people==0){
   //   this.lottery_ty = "2";
   // }else{
@@ -1432,9 +1448,9 @@ cashsingleCha(reslt) {
     } 
 }
 cashsingleexport(){
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlott = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
@@ -1456,9 +1472,9 @@ cashsingleexport(){
 }
 cashsummaryCha(reslt) {
   this.loading = true;
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
@@ -1498,13 +1514,13 @@ cashsummaryCha(reslt) {
       
     } 
     this.summaryweeking =this.getYearWeek(year, month, day);
-    document.getElementById("week").innerText = this.summaryweeking;	
+    document.getElementById("week").innerText = this.summaryweeking;    
     document.getElementById("month").innerText = month;
 }
 cashsummaryexport() {
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
@@ -1526,9 +1542,9 @@ cashsummaryexport() {
 }
 cashmonthsummaryCha(reslt) {
   this.loading = true;
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
@@ -1611,9 +1627,9 @@ week(i){
   return result;
 }
 cashmonthsummaryexport() {
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
@@ -1635,9 +1651,9 @@ cashmonthsummaryexport() {
 }
 cashbreakCha(reslt) {
   this.loading = true;
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
@@ -1676,13 +1692,13 @@ cashbreakCha(reslt) {
       
     } 
     this.cashbreakweeking =this.getYearWeek(year, month, day);
-    document.getElementById("week").innerText = this.cashbreakweeking;	
+    document.getElementById("week").innerText = this.cashbreakweeking;  
     document.getElementById("month").innerText = month;
 }
 cashbreakexport() {
-  var	year = "";
-  var	month = "";
-  var	day = "";
+  var   year = "";
+  var   month = "";
+  var   day = "";
   // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
@@ -1846,7 +1862,6 @@ cashmodelChange(currPage){
 cashshowdiv(ticketInfo_id,ballType,tkId) {
   this.cashendtime = $("#cashetime").val();
   this.cashtkIding=tkId;
-  // let styleString=''+'<style>.a{color:#8ae4fc}'+'.b{color: #fe3c3c}'+'</style>';
   this.QUERY.Orderdetail(ticketInfo_id,ballType,this.cashendtime).subscribe(response => {
     if (response!=null) {
       this.cashdetails = response.detailList;
@@ -1858,17 +1873,16 @@ console.log(this.cashdetails,"llll")
         var canceled = response.detailList[i].canceled;
         var cancel = canceled.split(",");
         this.contents=""; 
+        this.betents="";
         for (var j = 0; j < l_codes.length; j++) {
           if(this.contents==""){
             if(l_codes[j]=="0"){
                 if(cancel[j] == "VOID" ){
-                  this.contents='<font class="a">'+betContents[j]+'</font>';
-                  // let element=this.renderer.createElement('font');
-                  // element.innerHTML = contentString;
-                  // this.renderer.addClass(element,'new-content');
-                  // this.renderer.appendChlid(this.newsdetail.nativeElement,element);
+                  this.contents=betContents[j];
+                  this.cashdetails[i].isA=true;
                 }else{
-                  this.contents='<font class="b">'+betContents[j]+'</font>'; 
+                  this.contents=betContents[j]; 
+                  this.cashdetails[i].isB=true;
                 }
              }else{
               this.contents=betContents[j]; 
@@ -1876,9 +1890,13 @@ console.log(this.cashdetails,"llll")
           }else{
             if(l_codes[j]=="0"){
                if(cancel[j] == "VOID" ){
-                this.contents=this.contents+'/'+'<font [ngStyle]="{"color":"#8ae4fc"}">'+betContents[j]+'</font>'; 
+                this.contents=this.contents+'/';
+                this.betents=betContents[j]; 
+                this.cashdetails[i].isA=true;
               }else{ 
-                this.contents=this.contents+'/'+'<font [ngStyle]="{"color":"#fe3c3c"}">'+betContents[j]+'</font>';
+                this.contents=this.contents+'/';
+                this.betents=betContents[j]; 
+                this.cashdetails[i].isB=true;
                } 
             }else{
                 this.contents=this.contents+'/'+betContents[j];
@@ -1886,7 +1904,6 @@ console.log(this.cashdetails,"llll")
           } 
         }
       }
-
 
       this.Nodata3 = false;
     }else {
@@ -1922,6 +1939,52 @@ cshorderexport(){
     this.cashlottery_type = $("#cashlottery_type").val();
   }
     window.open(AppConfig.baseUrl + "/account/orderManage/userManagementExcel?startDate="+this.cashstartime +"&endDate="+this.cashendtime+"&agent_id="+this.cashagNum+"&trade_type="+this.cashdeal+"&state="+this.cashstate+"&recycleState="+this.cashthird+"&inplay="+this.cashinplay+"&tkId="+this.cashtkId+"&uid="+this.cashuid+"&ballType="+this.cashlottery_type);
+}
+cashthirdCha(reslt) {
+  this.loading = true;
+  this.thirdstartime = $("#thirdstartime").val();
+  this.thirdendtime = $("#thirdendtime").val();
+  this.agentid =$('#thirdagentNum option:selected').val();
+  this.per =$("#paper").val();
+  
+      this.QUERY.Third(this.agentid,this.thirdstartime,this.thirdendtime,this.per).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.thirdshuju = data.resultList;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+}
+cashthirdexport() {
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  // this.cashlotte = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+    } 
 }
 
 

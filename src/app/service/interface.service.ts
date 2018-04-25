@@ -122,4 +122,9 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryDetail?ticketInfo_id='+ticketid +'&ballType='+ballType +'&endDate='+cashendtime)
         .map(res=>res.json());
     }
+    //third接口
+    Third(agentid,thirdstartime,thirdendtime,per){
+        return this.http.get(AppConfig.baseUrl+'/account/orderTicket/queryAll?agentid='+agentid +'&startDate='+thirdstartime +'&endDate='+thirdendtime +'&page='+per)
+        .map(res=>res.json());
+    }
 }   
