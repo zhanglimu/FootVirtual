@@ -1964,27 +1964,12 @@ cashthirdCha(reslt) {
       });
 }
 cashthirdexport() {
-  var   year = "";
-  var   month = "";
-  var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
-  var time:any = $("#startime").val();
-  if(time =="" || time ==null){
-      this.message.error("请先选择要导出的日期");
-  }else{
-      var sort = time.split("-");
-      if(sort.length ==3){
-        year=sort[0];
-        month=sort[1];
-        day=sort[2];
-      }else if(sort.length ==2){
-        year=sort[0];
-        month=sort[1];
-      }else{
-        year=sort;
-      }
-      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
-    } 
+  this.thirdstartime = $("#thirdstartime").val();
+  this.thirdendtime = $("#thirdendtime").val();
+  this.agentid =$('#thirdagentNum option:selected').val();
+  this.per =$("#paper").val();
+      window.open(AppConfig.baseUrl +'/account/orderTicket//orderExcel?startDate='+this.thirdstartime+'&endtime='+this.thirdendtime+'&agentid='+this.agentid+'&page='+this.per);
+    
 }
 
 
