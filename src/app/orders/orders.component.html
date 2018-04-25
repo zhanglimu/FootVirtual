@@ -1847,9 +1847,9 @@
                     </thead>
                 </table>
                 <table>
-                    <tbody id="lists">
+                    <tbody id="lists" *ngFor="let sum of monthList">
                         <tr class="firstr odds">
-                            <td>第{{tmpnewchar}}周</td>
+                            <td>第{{sum.week}}周</td>
                             <td>场次数量NO. Match</td>
                             <td>原始投注额 TotalInvestment</td> 
                             <td>交易额 Investment</td> 
@@ -1869,7 +1869,7 @@
                             <td>中奖金额 Payout</td>
                             <td>盈利率 Payout Ratio</td>
                         </tr>
-                        <tr *ngFor="let monthS of WeekList">
+                        <tr *ngFor="let monthS of sum.weekList">
                             <td>{{monthS.week}}</td>
                             <td>{{monthS.totalNum}}</td>
                             <td>{{monthS.totalInvestment}}￥</td>
@@ -1890,26 +1890,26 @@
                             <td>{{monthS.totalPriceBk}}￥</td>
                             <td>{{monthS.payoutRateBk}}%</td>
                         </tr>
-                        <tr *ngIf="Weektotal">
-                            <td>{{Weektotal.week}}</td>
-                            <td>{{Weektotal.totalNum}}</td>
-                            <td>{{Weektotal.totalInvestment}}￥</td>
-                            <td>{{Weektotal.invest}}￥</td>
-                            <td>{{Weektotal.cxBonus}}￥</td>
-                            <td>{{Weektotal.totalPrice}}￥</td>
-                            <td>{{Weektotal.payoutRate}}%</td>
-                            <td>{{Weektotal.fbNum}}</td>
-                            <td>{{Weektotal.totalInvestmentFb}}￥</td>
-                            <td>{{Weektotal.investFb}}￥</td>
-                            <td>{{Weektotal.cxBonusFb}}￥</td>
-                            <td>{{Weektotal.totalPriceFb}}￥</td>
-                            <td>{{Weektotal.payoutRateFb}}%</td>
-                            <td>{{Weektotal.bkNum}}</td>
-                            <td>{{Weektotal.totalInvestmentBk}}￥</td>
-                            <td>{{Weektotal.investBk}}￥</td>
-                            <td>{{Weektotal.cxBonusBk}}￥</td>
-                            <td>{{Weektotal.totalPriceBk}}￥</td>
-                            <td>{{Weektotal.payoutRateBk}}%</td>
+                        <tr *ngIf="sum.Weektotal">
+                            <td>{{sum.Weektotal.week}}</td>
+                            <td>{{sum.Weektotal.totalNum}}</td>
+                            <td>{{sum.Weektotal.totalInvestment}}￥</td>
+                            <td>{{sum.Weektotal.invest}}￥</td>
+                            <td>{{sum.Weektotal.cxBonus}}￥</td>
+                            <td>{{sum.Weektotal.totalPrice}}￥</td>
+                            <td>{{sum.Weektotal.payoutRate}}%</td>
+                            <td>{{sum.Weektotal.fbNum}}</td>
+                            <td>{{sum.Weektotal.totalInvestmentFb}}￥</td>
+                            <td>{{sum.Weektotal.investFb}}￥</td>
+                            <td>{{sum.Weektotal.cxBonusFb}}￥</td>
+                            <td>{{sum.Weektotal.totalPriceFb}}￥</td>
+                            <td>{{sum.Weektotal.payoutRateFb}}%</td>
+                            <td>{{sum.Weektotal.bkNum}}</td>
+                            <td>{{sum.Weektotal.totalInvestmentBk}}￥</td>
+                            <td>{{sum.Weektotal.investBk}}￥</td>
+                            <td>{{sum.Weektotal.cxBonusBk}}￥</td>
+                            <td>{{sum.Weektotal.totalPriceBk}}￥</td>
+                            <td>{{sum.Weektotal.payoutRateBk}}%</td>
                         </tr>
                     </tbody>
                 </table>

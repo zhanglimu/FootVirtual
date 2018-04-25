@@ -183,8 +183,6 @@ export class OrdersComponent implements OnInit {
     //cashmonthsummary
     monthTotal:string[];
     monthList:string[];
-    WeekList:string[];
-    Weektotal:string[];
     tmpnewchar:any;
     time1:string;
     //cashbreak
@@ -204,8 +202,6 @@ export class OrdersComponent implements OnInit {
     // betContent:string;
     // canceled:string;
     contents:string;
-    isA: boolean = false;
-    isB: boolean = false;
 
     cashtkId: any;
     cashuid: any;
@@ -365,8 +361,6 @@ export class OrdersComponent implements OnInit {
     //cashmonthsummary
     this.monthTotal=[];
     this.monthList=[];
-    this.WeekList=[];
-    this.Weektotal=[];
     //cashbreak
     this.cashbreakFB=[];
     this.cashFBtotal=[];
@@ -1554,39 +1548,17 @@ cashmonthsummaryCha(reslt) {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
-          this.monthList = data;
-          console.log(this.monthList,"ddd")
+          console.log(data);
+          var objj = [];
+          for(let i in  data){
+             if(i !='monthTotal'){
+              data[i].week =this.week(i)
+              objj.push(data[i]);
+             }
+          }
+          this.monthList = objj;
           this.monthTotal = data.monthTotal;
           var obj=Object.keys(data).length-1;
-          this.tmpnewchar ='';
-          for (var i = 1; i <=obj; i++) {	
-            switch (i) {
-                  case 0: this.tmpnewchar = "零"; break;
-                  case 1: this.tmpnewchar = "一"; break;
-                  case 2: this.tmpnewchar = "二"; break;
-                  case 3: this.tmpnewchar = "三"; break;
-                  case 4: this.tmpnewchar = "四"; break;
-                  case 5: this.tmpnewchar = "五"; break;
-                  case 6: this.tmpnewchar = "六"; break;
-                  case 7: this.tmpnewchar = "七"; break;
-                  case 8: this.tmpnewchar = "八"; break;
-                  case 9: this.tmpnewchar = "九"; break;
-                 }
-                //  this.monthList.forEach(weekList => {
-                //   this.WeekList.map(item => {
-                    // item.selected = this.selectedAll
-                    // if (this.selectedAll) {
-                    //   this.leagues.push(item.name);
-                    // }
-                //   })
-                // });	
-            for (var j = 0; j <data[i].weekList.length; j++) {
-              this.WeekList = data[i].weekList;
-              this.Weektotal = data[i].Weektotal;
-              // console.log(this.WeekList,"4444")
-              // console.log(this.Weektotal,"252")
-            }
-          }
         }else{
           this.loading = false;
           this.Nodata = true;
@@ -1599,6 +1571,44 @@ cashmonthsummaryCha(reslt) {
       });
       
     }
+}
+//获取第多少周
+week(i){
+ var result = 0;
+  var i; 
+  switch (i) {
+    case '0': i = "零"; 
+    result = i;
+    break;
+    case '1': i = "一";  
+    result = i;
+    break;
+    case '2': i = "二"; 
+    result = i;
+    break;
+    case '3': i= "三"; 
+    result = i;
+    break;
+    case '4': i = "四";
+    result = i;
+    break;
+    case '5': i = "五";
+    result = i;
+    break;
+    case '6': i = "六"; 
+    result = i;
+    break;
+    case '7': i = "七"; 
+    result = i;
+    break;
+    case '8': i = "八"; 
+    result = i;
+    break;
+    case '9': i = "九"; 
+    result = i;
+    break;
+   }
+  return result;
 }
 cashmonthsummaryexport() {
   var	year = "";
@@ -1836,6 +1846,7 @@ cashmodelChange(currPage){
 cashshowdiv(ticketInfo_id,ballType,tkId) {
   this.cashendtime = $("#cashetime").val();
   this.cashtkIding=tkId;
+  // let styleString=''+'<style>.a{color:#8ae4fc}'+'.b{color: #fe3c3c}'+'</style>';
   this.QUERY.Orderdetail(ticketInfo_id,ballType,this.cashendtime).subscribe(response => {
     if (response!=null) {
       this.cashdetails = response.detailList;
@@ -1846,40 +1857,31 @@ console.log(this.cashdetails,"llll")
         var betContents= response.detailList[i].betContent.split("/");
         var canceled = response.detailList[i].canceled;
         var cancel = canceled.split(",");
-        
         this.contents=""; 
         for (var j = 0; j < l_codes.length; j++) {
           if(this.contents==""){
             if(l_codes[j]=="0"){
                 if(cancel[j] == "VOID" ){
-                  this.contents=betContents[j];
-                  this.cashdetails[i].isA=true;
-                  this.isB=false;
+                  this.contents='<font class="a">'+betContents[j]+'</font>';
+                  // let element=this.renderer.createElement('font');
+                  // element.innerHTML = contentString;
+                  // this.renderer.addClass(element,'new-content');
+                  // this.renderer.appendChlid(this.newsdetail.nativeElement,element);
                 }else{
-                  this.contents=betContents[j]; 
-                  this.isA=false;
-                  this.cashdetails[i].isB=true;
+                  this.contents='<font class="b">'+betContents[j]+'</font>'; 
                 }
              }else{
               this.contents=betContents[j]; 
-              this.isA=false;
-              this.isB=false;
             }
           }else{
             if(l_codes[j]=="0"){
                if(cancel[j] == "VOID" ){
-                this.contents=this.contents+"/"+betContents[j]; 
-                this.cashdetails[i].isA=true;
-                this.isB=false;
+                this.contents=this.contents+'/'+'<font [ngStyle]="{"color":"#8ae4fc"}">'+betContents[j]+'</font>'; 
               }else{ 
-                this.contents=this.contents+"/"+betContents[j];
-                this.isA=false;
-                this.cashdetails[i].isB=true;
+                this.contents=this.contents+'/'+'<font [ngStyle]="{"color":"#fe3c3c"}">'+betContents[j]+'</font>';
                } 
             }else{
-                this.contents=this.contents+"/"+betContents[j];
-                this.isA=false;
-                this.isB=false;
+                this.contents=this.contents+'/'+betContents[j];
             }
           } 
         }
