@@ -1800,42 +1800,42 @@
                   <table class="table" id="scroer">
                       <table>
                           <thead>
-                              <tr class="fb" *ngIf="monthTotal">
-                                  <td>{{monthTotal.week}}</td>
-                                  <td>{{monthTotal.totalNum}}</td>
-                                  <td>{{monthTotal.totalInvestment}}￥</td>
-                                  <td>{{monthTotal.invest}}￥</td>
-                                  <td>{{monthTotal.cxBonus}}￥</td>
-                                  <td>{{monthTotal.totalPrice}}￥</td>
-                                  <td>{{monthTotal.payoutRate}}%</td>
-                                  <td>{{monthTotal.fbNum}}</td>
-                                  <td>{{monthTotal.totalInvestmentFb}}￥</td>
-                                  <td>{{monthTotal.investFb}}￥</td>
-                                  <td>{{monthTotal.cxBonusFb}}￥</td>
-                                  <td>{{monthTotal.totalPriceFb}}￥</td>
-                                  <td>{{monthTotal.payoutRateFb}}%</td>
-                                  <td>{{monthTotal.bkNum}}</td>
-                                  <td>{{monthTotal.totalInvestmentBk}}￥</td>
-                                  <td>{{monthTotal.investBk}}￥</td>
-                                  <td>{{monthTotal.cxBonusBk}}￥</td>
-                                  <td>{{monthTotal.totalPriceBk}}￥</td>
-                                  <td>{{monthTotal.payoutRateBk}}%</td>
+                              <tr class="fb firstr" *ngIf="monthTotal">
+                                  <th>{{monthTotal.week}}</th>
+                                  <th>{{monthTotal.totalNum}}</th>
+                                  <th>{{monthTotal.totalInvestment}}￥</th>
+                                  <th>{{monthTotal.invest}}￥</th>
+                                  <th>{{monthTotal.cxBonus}}￥</th>
+                                  <th>{{monthTotal.totalPrice}}￥</th>
+                                  <th>{{monthTotal.payoutRate}}%</th>
+                                  <th>{{monthTotal.fbNum}}</th>
+                                  <th>{{monthTotal.totalInvestmentFb}}￥</th>
+                                  <th>{{monthTotal.investFb}}￥</th>
+                                  <th>{{monthTotal.cxBonusFb}}￥</th>
+                                  <th>{{monthTotal.totalPriceFb}}￥</th>
+                                  <th>{{monthTotal.payoutRateFb}}%</th>
+                                  <th>{{monthTotal.bkNum}}</th>
+                                  <th>{{monthTotal.totalInvestmentBk}}￥</th>
+                                  <th>{{monthTotal.investBk}}￥</th>
+                                  <th>{{monthTotal.cxBonusBk}}￥</th>
+                                  <th>{{monthTotal.totalPriceBk}}￥</th>
+                                  <th>{{monthTotal.payoutRateBk}}%</th>
                               </tr>
                               <tr class="thtible">
-                                  <td></td>
-                                  <td class="gree1" colspan="6">合计</td>
-                                  <td class="white1" colspan="6">足球</td>
-                                  <td class="red1" colspan="6">篮球</td>
+                                  <th></th>
+                                  <th class="gree1" colspan="6">合计</th>
+                                  <th class="white1" colspan="6">足球</th>
+                                  <th class="red1" colspan="6">篮球</th>
                               </tr>
                               <tr>
-                                  <td></td>
-                                  <td class="gree1" colspan="6">Total Investment</td>
-                                  <td class="white1" colspan="6">FB Investment PMU Included</td>
-                                  <td class="red1" colspan="6">BK Investment PMU Included</td>
+                                  <th></th>
+                                  <th class="gree1" colspan="6">Total Investment</th>
+                                  <th class="white1" colspan="6">FB Investment PMU Included</th>
+                                  <th class="red1" colspan="6">BK Investment PMU Included</th>
                               </tr>
                           </thead>
-                      </table>
-                      <table>
+                      <!-- </table>
+                      <table> -->
                           <tbody id="lists" *ngFor="let sum of monthList">
                               <tr class="firstr odds">
                                   <td>第{{sum.week}}周</td>
@@ -1904,7 +1904,7 @@
                       </table>
                       <tbody *ngIf="Nodata">
                           <tr>
-                              <td colspan="22">{{data}}</td>
+                              <td colspan="19">{{data}}</td>
                           </tr>
                       </tbody>
                   </table>
