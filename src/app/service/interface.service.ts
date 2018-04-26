@@ -127,4 +127,8 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/orderTicket/queryAll?agentid='+agentid +'&startDate='+thirdstartime +'&endDate='+thirdendtime +'&page='+per)
         .map(res=>res.json());
     }
+    Thirdid(tkId,agentid){
+        return this.http.get(AppConfig.baseUrl+'/account/orderTicket/query?tkId='+tkId +'&agentid='+agentid)
+        .map(res=>res.json());
+    }
 }   

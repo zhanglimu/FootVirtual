@@ -22,7 +22,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '8';
+    public switchIndex: string = '6';
     public loading = false;
     // username:string;
     // loginNum:string;
@@ -198,9 +198,6 @@ export class OrdersComponent implements OnInit {
     cashshu:string[];
     cashdetails:LiveOrdermanage;
     cashtkIding:any;
-    // l_code:string;
-    // betContent:string;
-    // canceled:string;
     contents:string;
     betents:string;
 
@@ -229,14 +226,18 @@ export class OrdersComponent implements OnInit {
     cashpageCount:number;
     //cashthird
     thirdshuju:string[];
+    thirdshu:string[];
     thirdstartime: any;
     thirdendtime: any;
     agentid: any;
     per: any;
+    thirdtkId:any;
     thirdtimekai:any;
     thirdtimejie:any;
     thirdagent:any;
     thirdper: any;
+    thirdtk:any;
+    thirdngif:boolean;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -383,6 +384,12 @@ export class OrdersComponent implements OnInit {
     this.cashbreakBK=[];
     this.cashBKtotal=[];
     this.cashbreaktotal=[];
+    //cashorder
+    this.cashshuju = null;
+    this.cashshu=[];
+    //cashthird
+    this.thirdshuju=[];
+    this.thirdshu=[];
   }
   //退出登录
   Signout(){
@@ -477,6 +484,7 @@ export class OrdersComponent implements OnInit {
     //cashthird
     this.thirdagent = "";
     this.thirdper = "1";
+    this.thirdtk = "";
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -1946,22 +1954,42 @@ cashthirdCha(reslt) {
   this.thirdendtime = $("#thirdendtime").val();
   this.agentid =$('#thirdagentNum option:selected').val();
   this.per =$("#paper").val();
-  
-      this.QUERY.Third(this.agentid,this.thirdstartime,this.thirdendtime,this.per).subscribe(data => {
-        if (data!=null) {
-          this.loading = false;
-          this.Nodata = false;
-          this.thirdshuju = data.resultList;
-        }else{
-          this.loading = false;
-          this.Nodata = true;
-          this.data = "暂无新数据";
-        }
-      },error=>{
+  this.thirdtkId =$("#thirdtk").val();
+  this.thirdngif=true;
+  if(this.thirdtkId !="" && this.thirdtkId !=null){
+    this.QUERY.Thirdid(this.thirdtkId,this.agentid).subscribe(data => {
+      if (data!=null) {
+        this.loading = false;
+        this.Nodata = false;
+        this.thirdshu = data.ticketResult;
+        this.thirdngif=false;
+      }else{
         this.loading = false;
         this.Nodata = true;
-        this.data = "数据异常请联系开发人员";
-      });
+        this.data = "暂无新数据";
+      }
+    },error=>{
+      this.loading = false;
+      this.Nodata = true;
+      this.data = "数据异常请联系开发人员";
+    });		
+  }else{
+    this.QUERY.Third(this.agentid,this.thirdstartime,this.thirdendtime,this.per).subscribe(data => {
+      if (data!=null) {
+        this.loading = false;
+        this.Nodata = false;
+        this.thirdshuju = data.resultList;
+      }else{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "暂无新数据";
+      }
+    },error=>{
+      this.loading = false;
+      this.Nodata = true;
+      this.data = "数据异常请联系开发人员";
+    });
+  }
 }
 cashthirdexport() {
   this.thirdstartime = $("#thirdstartime").val();
