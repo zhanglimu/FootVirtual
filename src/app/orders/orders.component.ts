@@ -1961,8 +1961,12 @@ cashthirdCha(reslt) {
       if (data!=null) {
         this.loading = false;
         this.Nodata = false;
-        this.thirdshu = data.ticketResult;
-        this.thirdngif=false;
+        if(this.agentid =="110"){   //110-彩票宝
+          this.message.error("该渠道为开发此接口");
+        }else{
+          this.thirdshu = data.ticketResult;
+          this.thirdngif=false;
+        }
       }else{
         this.loading = false;
         this.Nodata = true;
@@ -1978,7 +1982,16 @@ cashthirdCha(reslt) {
       if (data!=null) {
         this.loading = false;
         this.Nodata = false;
-        this.thirdshuju = data.resultList;
+            if(this.agentid =="110"||data.resultList.length<100){
+              if(this.agentid =="110"){
+                this.message.error("该渠道为开发此接口");
+              }else{
+                this.message.error("已是最后一页");
+                this.thirdshuju = data.resultList;
+              }
+            }else{
+              this.thirdshuju = data.resultList;
+            }
       }else{
         this.loading = false;
         this.Nodata = true;
