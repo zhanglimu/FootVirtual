@@ -1823,16 +1823,16 @@
                               </tr>
                               <tr class="thtible">
                                   <th></th>
-                                  <th class="gree1" colspan="6">合计</th>
-                                  <th class="white1" colspan="6">足球</th>
-                                  <th class="red1" colspan="6">篮球</th>
+                                  <th class="gree1" colspan="6">合计Total Investment</th>
+                                  <th class="white1" colspan="6">足球FB Investment PMU Included</th>
+                                  <th class="red1" colspan="6">篮球BK Investment PMU Included</th>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                   <th></th>
-                                  <th class="gree1" colspan="6">Total Investment</th>
-                                  <th class="white1" colspan="6">FB Investment PMU Included</th>
-                                  <th class="red1" colspan="6">BK Investment PMU Included</th>
-                              </tr>
+                                  <th class="gree1" colspan="6"></th>
+                                  <th class="white1" colspan="6"></th>
+                                  <th class="red1" colspan="6"></th>
+                              </tr> -->
                           </thead>
                       <!-- </table>
                       <table> -->
@@ -1860,45 +1860,45 @@
                               </tr>
                               <tr *ngFor="let monthS of sum.weekList">
                                   <td>{{monthS.week}}</td>
-                                  <td>{{monthS.totalNum}}</td>
-                                  <td>{{monthS.totalInvestment}}￥</td>
-                                  <td>{{monthS.invest}}￥</td>
-                                  <td>{{monthS.cxBonus}}￥</td>
-                                  <td>{{monthS.totalPrice}}￥</td>
-                                  <td>{{monthS.payoutRate}}%</td>
-                                  <td>{{monthS.fbNum}}</td>
-                                  <td>{{monthS.totalInvestmentFb}}￥</td>
-                                  <td>{{monthS.investFb}}￥</td>
-                                  <td>{{monthS.cxBonusFb}}￥</td>
-                                  <td>{{monthS.totalPriceFb}}￥</td>
-                                  <td>{{monthS.payoutRateFb}}%</td>
-                                  <td>{{monthS.bkNum}}</td>
-                                  <td>{{monthS.totalInvestmentBk}}￥</td>
-                                  <td>{{monthS.investBk}}￥</td>
-                                  <td>{{monthS.cxBonusBk}}￥</td>
-                                  <td>{{monthS.totalPriceBk}}￥</td>
-                                  <td>{{monthS.payoutRateBk}}%</td>
+                                  <td class="gree1">{{monthS.totalNum}}</td>
+                                  <td class="gree1">{{monthS.totalInvestment}}￥</td>
+                                  <td class="gree1">{{monthS.invest}}￥</td>
+                                  <td class="gree1">{{monthS.cxBonus}}￥</td>
+                                  <td class="gree1">{{monthS.totalPrice}}￥</td>
+                                  <td class="gree1">{{monthS.payoutRate}}%</td>
+                                  <td class="white1">{{monthS.fbNum}}</td>
+                                  <td class="white1">{{monthS.totalInvestmentFb}}￥</td>
+                                  <td class="white1">{{monthS.investFb}}￥</td>
+                                  <td class="white1">{{monthS.cxBonusFb}}￥</td>
+                                  <td class="white1">{{monthS.totalPriceFb}}￥</td>
+                                  <td class="white1">{{monthS.payoutRateFb}}%</td>
+                                  <td class="red1">{{monthS.bkNum}}</td>
+                                  <td class="red1">{{monthS.totalInvestmentBk}}￥</td>
+                                  <td class="red1">{{monthS.investBk}}￥</td>
+                                  <td class="red1">{{monthS.cxBonusBk}}￥</td>
+                                  <td class="red1">{{monthS.totalPriceBk}}￥</td>
+                                  <td class="red1">{{monthS.payoutRateBk}}%</td>
                               </tr>
                               <tr *ngIf="sum.Weektotal">
                                   <td>{{sum.Weektotal.week}}</td>
-                                  <td>{{sum.Weektotal.totalNum}}</td>
-                                  <td>{{sum.Weektotal.totalInvestment}}￥</td>
-                                  <td>{{sum.Weektotal.invest}}￥</td>
-                                  <td>{{sum.Weektotal.cxBonus}}￥</td>
-                                  <td>{{sum.Weektotal.totalPrice}}￥</td>
-                                  <td>{{sum.Weektotal.payoutRate}}%</td>
-                                  <td>{{sum.Weektotal.fbNum}}</td>
-                                  <td>{{sum.Weektotal.totalInvestmentFb}}￥</td>
-                                  <td>{{sum.Weektotal.investFb}}￥</td>
-                                  <td>{{sum.Weektotal.cxBonusFb}}￥</td>
-                                  <td>{{sum.Weektotal.totalPriceFb}}￥</td>
-                                  <td>{{sum.Weektotal.payoutRateFb}}%</td>
-                                  <td>{{sum.Weektotal.bkNum}}</td>
-                                  <td>{{sum.Weektotal.totalInvestmentBk}}￥</td>
-                                  <td>{{sum.Weektotal.investBk}}￥</td>
-                                  <td>{{sum.Weektotal.cxBonusBk}}￥</td>
-                                  <td>{{sum.Weektotal.totalPriceBk}}￥</td>
-                                  <td>{{sum.Weektotal.payoutRateBk}}%</td>
+                                  <td class="gree1">{{sum.Weektotal.totalNum}}</td>
+                                  <td class="gree1">{{sum.Weektotal.totalInvestment}}￥</td>
+                                  <td class="gree1">{{sum.Weektotal.invest}}￥</td>
+                                  <td class="gree1">{{sum.Weektotal.cxBonus}}￥</td>
+                                  <td class="gree1">{{sum.Weektotal.totalPrice}}￥</td>
+                                  <td class="gree1">{{sum.Weektotal.payoutRate}}%</td>
+                                  <td class="white1">{{sum.Weektotal.fbNum}}</td>
+                                  <td class="white1">{{sum.Weektotal.totalInvestmentFb}}￥</td>
+                                  <td class="white1">{{sum.Weektotal.investFb}}￥</td>
+                                  <td class="white1">{{sum.Weektotal.cxBonusFb}}￥</td>
+                                  <td class="white1">{{sum.Weektotal.totalPriceFb}}￥</td>
+                                  <td class="white1">{{sum.Weektotal.payoutRateFb}}%</td>
+                                  <td class="red1">{{sum.Weektotal.bkNum}}</td>
+                                  <td class="red1">{{sum.Weektotal.totalInvestmentBk}}￥</td>
+                                  <td class="red1">{{sum.Weektotal.investBk}}￥</td>
+                                  <td class="red1">{{sum.Weektotal.cxBonusBk}}￥</td>
+                                  <td class="red1">{{sum.Weektotal.totalPriceBk}}￥</td>
+                                  <td class="red1">{{sum.Weektotal.payoutRateBk}}%</td>
                               </tr>
                           </tbody>
                       </table>
