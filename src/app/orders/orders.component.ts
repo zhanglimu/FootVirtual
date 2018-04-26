@@ -1962,7 +1962,7 @@ cashthirdCha(reslt) {
         this.loading = false;
         this.Nodata = false;
         if(this.agentid =="110"){   //110-彩票宝
-          this.message.error("该渠道为开发此接口");
+          this.message.error("该渠道未开发此接口");
         }else{
           this.thirdshu = data.ticketResult;
           this.thirdngif=false;
@@ -1984,7 +1984,7 @@ cashthirdCha(reslt) {
         this.Nodata = false;
             if(this.agentid =="110"||data.resultList.length<100){
               if(this.agentid =="110"){
-                this.message.error("该渠道为开发此接口");
+                this.message.error("该渠道未开发此接口");
               }else{
                 this.message.error("已是最后一页");
                 this.thirdshuju = data.resultList;
@@ -2010,8 +2010,8 @@ cashthirdexport() {
   this.agentid =$('#thirdagentNum option:selected').val();
   this.per =$("#paper").val();
       window.open(AppConfig.baseUrl +'/account/orderTicket//orderExcel?startDate='+this.thirdstartime+'&endtime='+this.thirdendtime+'&agentid='+this.agentid+'&page='+this.per);
-    
 }
+
 
 
 }

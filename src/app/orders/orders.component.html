@@ -2343,32 +2343,36 @@
                     <table class="table">
                         <thead>
                             <tr class="firstr odds">
-                                <th>agentid</th>
-                                <th>tkId</th>
-                                <th>schemeState</th> 
-                                <th>tradeTime</th> 
-                                <th>tradePrice</th>
-                                <th>winMoney</th>
+                                <th style="width:16.5%;">agentid</th>
+                                <th style="width:16.5%;">tkId</th>
+                                <th style="width:16.5%;">schemeState</th> 
+                                <th style="width:16.5%;">tradeTime</th> 
+                                <th style="width:16.5%;">tradePrice</th>
+                                <th style="width:16.5%;">winMoney</th>
                             </tr>
                         </thead>
+                        </table>
+                        <table id="scro">
                         <tbody id="firstred" *ngIf="thirdngif">
                             <tr *ngFor="let b of thirdshuju">
-                                <td>{{b.agentid}}</td>
-                                <td>{{b.tkId}}</td>
-                                <td>{{b.stateMessage}}</td>
-                                <td>{{b.tradeTime}}</td> 
-                                <td>{{b.tradePrice}}</td> 
-                                <td>{{b.winMoney}}</td>
+                                <td style="visibility:hidden;">0</td>
+                                <td style="width:16.6%;">{{b.agentid}}</td>
+                                <td style="width:16.6%;">{{b.tkId}}</td>
+                                <td style="width:16.6%;">{{b.stateMessage}}</td>
+                                <td style="width:16.6%;">{{b.tradeTime}}</td> 
+                                <td style="width:16.6%;">{{b.tradePrice}}</td> 
+                                <td style="width:16.6%;">{{b.winMoney}}</td>
                             </tr>
                         </tbody>
-                        <tbody id="firstred">
+                        <tbody>
                             <tr *ngIf="thirdshu">
-                                <td>{{thirdshu.agentid}}</td>
-                                <td>{{thirdshu.tkId}}</td>
-                                <td>{{thirdshu.stateMessage}}</td>
-                                <td>{{thirdshu.tradeTime}}</td> 
-                                <td>{{thirdshu.tradePrice}}</td> 
-                                <td>{{thirdshu.winMoney}}</td>
+                                <td style="visibility:hidden;">0</td>
+                                <td style="width:16.6%;">{{thirdshu.agentid}}</td>
+                                <td style="width:16.6%;">{{thirdshu.tkId}}</td>
+                                <td style="width:16.6%;">{{thirdshu.stateMessage}}</td>
+                                <td style="width:16.6%;">{{thirdshu.tradeTime}}</td> 
+                                <td style="width:16.6%;">{{thirdshu.tradePrice}}</td> 
+                                <td style="width:16.6%;">{{thirdshu.winMoney}}</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="Nodata">

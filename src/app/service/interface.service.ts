@@ -92,10 +92,6 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/dailyFinancialDetail/queryAll?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
-    // Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type){
-    //     return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryAll?startDate='+cashstartime +'&endDate='+cashendtime+'&agent_id='+cashagNum+'&page='+pageNum+'&size='+pageSize+'&trade_type='+cashdeal+'&state='+cashstate+'&recycleState='+cashthird+'&inplay='+cashinplay+'&tkId='+cashtkId+'&uid='+cashuid+'&ballType='+cashlottery_type)
-    //     .map(res=>res.json());
-    // }
     Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type):Observable<any>{
         let formData: FormData = new FormData(); 
         formData.append('startDate', cashstartime); 
