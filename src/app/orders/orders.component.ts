@@ -238,6 +238,14 @@ export class OrdersComponent implements OnInit {
     thirdper: any;
     thirdtk:any;
     thirdngif:boolean;
+    //casherror
+    errorstartime: any;
+    errorendtime: any;
+    errortimekai:any;
+    errortimejie:any;
+    errorshuju:LiveOrdermanage;
+    errorcount: number = 0; //总条数
+    errorpageCount:number;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -273,6 +281,8 @@ export class OrdersComponent implements OnInit {
       var end2 =this. GetDateStr(0);
       this.thirdtimekai=s2;
       this.thirdtimejie =end2;
+      this.errortimekai=s2;
+      this.errortimejie =end2;
       //默认显示虚拟订单数据
       this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",2)
     }
@@ -295,13 +305,10 @@ export class OrdersComponent implements OnInit {
     this.agentdatas =null;
     //order
     this.count=null;
-    // this.pageCount =null;
     this.shu = [];
     this.shuju = null;
     //single
     this.total = null;
-    // this.singlebox = null;
-    // this.singlehis = [];
     this.totaldian = null;
     //allup
     this.allupdata = [];
@@ -2011,7 +2018,47 @@ cashthirdexport() {
   this.per =$("#paper").val();
       window.open(AppConfig.baseUrl +'/account/orderTicket//orderExcel?startDate='+this.thirdstartime+'&endtime='+this.thirdendtime+'&agentid='+this.agentid+'&page='+this.per);
 }
-
+//errorticket开始
+errorall(pageNum,pageSize,errorstartime,errorendtime) {
+  this.QUERY.Error(pageNum,pageSize,errorstartime,errorendtime).subscribe(data => {
+    if (data.ticketResult!=null) {
+      this.loading = false;
+      this.Nodata = false;
+      this.errorcount=data.total.size;
+      this.errorpageCount = Math.ceil(this.errorcount/this.pageSize);
+      this.errorshuju = data.ticketResult;
+      for (var i = 0; i < data.ticketResult.length; i++) {
+        switch (this.errorshuju[i].state) {
+          case 0:
+            this.errorshuju[i].state = "未处理";
+            break;
+          case 1:
+            this.errorshuju[i].state = "已处理";
+            break;
+        }
+      }
+    }else{
+      this.loading = false;
+      this.errorcount = 0;
+      this.Nodata = true;
+      this.data = "暂无新数据";
+    }
+  },error=>{
+    this.loading = false;
+    this.Nodata = true;
+    this.data = "数据异常请联系开发人员";
+  });
+}
+casherrorCha(reslt) {
+  this.loading = true;
+  this.errorstartime = $("#errorstartime").val();
+  this.errorendtime = $("#errorendtime").val();
+  this.errorall(this.pageNum,this.pageSize,this.errorstartime,this.errorendtime)
+}
+//分页
+errormodelChange(currPage){
+  this.errorall(currPage,this.pageSize,this.errorstartime,this.errorendtime)
+}
 
 
 }
