@@ -166,11 +166,30 @@ export class OrdersComponent implements OnInit {
     outallCRS:string[];
     cashallupFCA:string[];
     outallFCA:string[];
+    //lanqiu
+    cashalluplandata:string[];
+    cashalluplanHILO:string[];
+    outalllanHILO:string[];
+    cashalluplanFCA:string[];
+    outalllanFCA:string[];
+    cashalluplanHDC:string[];
+    outalllanHDC:string[];
+    cashalluplanWNM:string[];
+    outalllanWNM:string[];
+    cashalluplanMNL:string[];
+    outalllanMNL:string[];
+
     cashlot:any;
+    cashzhonglei:any;
+    cashallupName:string;
+    cashallupzuqiu:boolean;
+    alluplanqiu:boolean;
     //cashsingle
     cashsingletotal:string[];
     cashsingledata:string[];
     cashlott:any;
+    cashzhongle:any;
+    cashsingleName:string;
     //cashsummary
     summaryweeking:any;
     modelToday:string[];
@@ -180,11 +199,14 @@ export class OrdersComponent implements OnInit {
     modelList:string[];
     modelTotal:string[];
     cashlotte:any;
+    cashzhongl:any;
+    cashsummaryName:string;
     //cashmonthsummary
     monthTotal:string[];
     monthList:string[];
     tmpnewchar:any;
     time1:string;
+    cashmonthSummaryName:string;
     //cashbreak
     cashbreakFB:string[];
     cashFBtotal:string[];
@@ -192,6 +214,7 @@ export class OrdersComponent implements OnInit {
     cashBKtotal:string[];
     cashbreaktotal:string[];
     cashbreakweeking:any;
+    cashbreakdownName:string;
     //cashorder
     cashresut: any[];
     cashshuju:LiveOrdermanage;
@@ -249,6 +272,7 @@ export class OrdersComponent implements OnInit {
     //channel
     channeltotal:string[];
     channelshuju:string[];
+    cashagentName:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -479,6 +503,8 @@ export class OrdersComponent implements OnInit {
       this.caizhong=true;
     }
     //cashout ////
+    this.cashallupzuqiu =false;
+    this.alluplanqiu =false;
     this.cashlot = "1";//彩种值
     this.cashlott = "1";
     this.cashlotte = "1";
@@ -495,6 +521,13 @@ export class OrdersComponent implements OnInit {
     this.thirdagent = "";
     this.thirdper = "1";
     this.thirdtk = "";
+
+    this.cashallupName ="allup";
+    this.cashsingleName ="single";
+    this.cashsummaryName ="summary";
+    this.cashmonthSummaryName ="monthSummary";
+    this.cashbreakdownName ="breakdown";
+    this.cashagentName ="agent";
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -1335,7 +1368,7 @@ cashallupCha(reslt) {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlot = $("#lottery_type").val();
+  this.cashzhonglei = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
@@ -1351,36 +1384,65 @@ cashallupCha(reslt) {
       }else{
         year=sort;
       }
-      this.QUERY.Allup(year,month,day).subscribe(data => {
+      this.QUERY.Allup(year,month,day,this.cashzhonglei).subscribe(data => {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
-          this.cashallupdata = data.total;
+            if (this.cashzhonglei==2) {
+              this.alluplanqiu =true;
+              this.cashallupzuqiu =false;
+              
+              this.cashalluplandata = data.total;
 
-          this.cashallupHAD = data.HAD;
-          this.outallHAD = data.HAD[7];
-          var str = this.cashallupHAD.splice(7,1);
+              this.cashalluplanHILO = data.HILO;
+              this.outalllanHILO = data.HILO[7];
+              var str = this.cashalluplanHILO.splice(7,1);
 
-          this.cashallupHHAD = data.HHAD;
-          this.outallHHAD = data.HHAD[7];
-          var str = this.cashallupHHAD.splice(7,1);
+              this.cashalluplanFCA = data.FCA;
+              this.outalllanFCA = data.FCA[7];
+              var str = this.cashalluplanFCA.splice(7,1);
 
-          this.cashallupHAFU = data.HAFU;
-          this.outallHAFU = data.HAFU[7];
-          var str = this.cashallupHAFU.splice(7,1);
+              this.cashalluplanHDC = data.HDC;
+              this.outalllanHDC = data.HDC[7];
+              var str = this.cashalluplanHDC.splice(7,1);
 
-          this.cashallupTTG = data.TTG;
-          this.outallTTG = data.TTG[7];
-          var str = this.cashallupTTG.splice(7,1);
+              this.cashalluplanWNM = data.WNM;
+              this.outalllanWNM = data.WNM[7];
+              var str = this.cashalluplanWNM.splice(7,1);
 
-          this.cashallupCRS = data.CRS;
-          this.outallCRS = data.CRS[7];
-          var str = this.cashallupCRS.splice(7,1);
+              this.cashalluplanMNL = data.MNL;
+              this.outalllanMNL = data.MNL[7];
+              var str = this.cashalluplanMNL.splice(7,1);
+            }else{
+              this.cashallupzuqiu =true;
+              this.alluplanqiu =false;
+              
+              this.cashallupdata = data.total;
 
-          this.cashallupFCA = data.FCA;
-          this.outallFCA = data.FCA[7];
-          var str = this.cashallupFCA.splice(7,1);
-          
+              this.cashallupHAD = data.HAD;
+              this.outallHAD = data.HAD[7];
+              var str = this.cashallupHAD.splice(7,1);
+
+              this.cashallupHHAD = data.HHAD;
+              this.outallHHAD = data.HHAD[7];
+              var str = this.cashallupHHAD.splice(7,1);
+
+              this.cashallupHAFU = data.HAFU;
+              this.outallHAFU = data.HAFU[7];
+              var str = this.cashallupHAFU.splice(7,1);
+
+              this.cashallupTTG = data.TTG;
+              this.outallTTG = data.TTG[7];
+              var str = this.cashallupTTG.splice(7,1);
+
+              this.cashallupCRS = data.CRS;
+              this.outallCRS = data.CRS[7];
+              var str = this.cashallupCRS.splice(7,1);
+
+              this.cashallupFCA = data.FCA;
+              this.outallFCA = data.FCA[7];
+              var str = this.cashallupFCA.splice(7,1);
+            }
         }else{
           this.loading = false;
           this.Nodata = true;
@@ -1392,6 +1454,43 @@ cashallupCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+cashallupretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  this.cashzhonglei = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+    this.message.error("请选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.cashallupretry(year,month,day,this.cashzhonglei,this.cashallupName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 cashallupexport(){
   var   year = "";
@@ -1426,12 +1525,7 @@ cashsingleCha(reslt) {
   var   year = "";
   var   month = "";
   var   day = "";
-  // if(this.people==0){
-  //   this.lottery_ty = "2";
-  // }else{
-  //   this.lottery_ty = $("#lottery_type").val();
-  // }
-  this.cashlott = $("#lottery_type").val();
+  this.cashzhongle = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
@@ -1447,7 +1541,7 @@ cashsingleCha(reslt) {
       }else{
         year=sort;
       }
-      this.QUERY.Single(year,month,day).subscribe(data => {
+      this.QUERY.Single(year,month,day,this.cashzhongle).subscribe(data => {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
@@ -1464,6 +1558,43 @@ cashsingleCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+cashsingleretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  this.cashzhongle = $("#lottery_type").val();
+      var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.cashsingleretry(year,month,day,this.cashzhongle,this.cashsingleName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 cashsingleexport(){
   var   year = "";
@@ -1493,7 +1624,7 @@ cashsummaryCha(reslt) {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
+  this.cashzhongl = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
@@ -1509,7 +1640,7 @@ cashsummaryCha(reslt) {
       }else{
         year=sort;
       }
-      this.QUERY.Summary(year,month,day).subscribe(data => {
+      this.QUERY.Summary(year,month,day,this.cashzhongl).subscribe(data => {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
@@ -1534,6 +1665,43 @@ cashsummaryCha(reslt) {
     this.summaryweeking =this.getYearWeek(year, month, day);
     document.getElementById("week").innerText = this.summaryweeking;    
     document.getElementById("month").innerText = month;
+}
+cashsummaryretry() {
+  var year = "";
+      var month = "";
+  var day = "";
+  this.cashzhongl = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.cashsummaryretry(year,month,day,this.cashzhongl,this.cashsummaryName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 cashsummaryexport() {
   var   year = "";
@@ -1606,6 +1774,42 @@ cashmonthsummaryCha(reslt) {
       
     }
 }
+cashmonthsummaryretry() {
+  var year = "";
+      var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.cashmonthsummaryretry(year,month,day,this.cashmonthSummaryName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
+}
 //获取第多少周
 week(i){
  var result = 0;
@@ -1649,7 +1853,7 @@ cashmonthsummaryexport() {
   var   month = "";
   var   day = "";
   // this.cashlotte = $("#lottery_type").val();
-  var time:any = $("#startime").val();
+  var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
   }else{
@@ -2100,6 +2304,42 @@ channelCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+channelretry() {
+  var year = "";
+      var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.channelretry(year,month,day,this.cashagentName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 
 }

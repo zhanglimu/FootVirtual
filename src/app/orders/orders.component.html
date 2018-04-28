@@ -1179,7 +1179,7 @@
                               <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
                               <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                           </p>
-                          <p class="word" *ngIf="caizhong">
+                          <p class="word">
                               <span>彩种：</span>
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlot">
                                   <option value="1">足球</option>
@@ -1196,7 +1196,7 @@
                       <button (click)="cashallupexport()">导出</button>
                   </p>
               </div>
-              <div class="row-fluid">
+              <div class="row-fluid" *ngIf="cashallupzuqiu">
                       <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
                   <table class="table">
                       <thead>
@@ -1295,7 +1295,7 @@
                               <td style="width:14%;">{{outallTTG.totalPrice}}</td>
                               <td style="width:14%;">{{outallTTG.bonus}}</td>
                               <td style="width:14%;">{{outallTTG.totalPrice}}</td>
-                              <td style="width:14%;">{{outallTTG.payoutRate}}</td> 
+                              <td style="width:14%;">{{outallTTG.payoutRate}}%</td> 
                               <td style="width:14%;">{{outallTTG.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of cashallupTTG">
@@ -1317,7 +1317,7 @@
                               <td style="width:14%;">{{outallCRS.totalPrice}}</td>
                               <td style="width:14%;">{{outallCRS.bonus}}</td>
                               <td style="width:14%;">{{outallCRS.totalPrice}}</td>
-                              <td style="width:14%;">{{outallCRS.payoutRate}}</td> 
+                              <td style="width:14%;">{{outallCRS.payoutRate}}%</td> 
                               <td style="width:14%;">{{outallCRS.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of cashallupCRS">
@@ -1339,7 +1339,7 @@
                               <td style="width:14%;">{{outallFCA.totalPrice}}</td>
                               <td style="width:14%;">{{outallFCA.bonus}}</td>
                               <td style="width:14%;">{{outallFCA.totalPrice}}</td>
-                              <td style="width:14%;">{{outallFCA.payoutRate}}</td> 
+                              <td style="width:14%;">{{outallFCA.payoutRate}}%</td> 
                               <td style="width:14%;">{{outallFCA.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of cashallupFCA">
@@ -1360,6 +1360,149 @@
                       </tbody>
                   </table>
               </div>
+              <!-- 篮球 -->
+              <div class="row-fluid" *ngIf="alluplanqiu">
+                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                <table class="table">
+                    <thead>
+                        <tr class="thtible">
+                            <th style="width:14%;">人民币RMB</th>
+                            <th style="width:14%;">原始投注额</th>
+                            <th style="width:14%;">返奖金额</th>
+                            <th style="width:14%;">caiex加奖额Bonus</th>
+                            <th style="width:14%;">返奖金额</th>
+                            <th style="width:14%;">返奖率</th>
+                            <th style="width:14%;">盈余金额</th>
+                        </tr>
+                        <tr class="firstr odds" *ngIf="cashalluplandata">
+                            <th style="width:14%;">合计</th>
+                            <th style="width:14%;">{{cashalluplandata.totalInvestment}}</th>
+                            <th style="width:14%;">{{cashalluplandata.totalPrice}}</th>
+                            <th style="width:14%;">{{cashalluplandata.bonus}}</th>
+                            <th style="width:14%;">{{cashalluplandata.totalPrice}}</th>
+                            <th style="width:14%;">{{cashalluplandata.payoutRate}}%</th>
+                            <th style="width:14%;">{{cashalluplandata.payout}}</th>
+                        </tr>
+                    </thead>
+                </table>
+                <table id="scro">
+                    <tbody id="lists" *ngIf="cashalluplanHILO">
+                        <tr class="tablelv" *ngIf="outalllanHILO">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">HILO</td>
+                            <td style="width:15%;">{{outalllanHILO.totalInvestment}}</td>
+                            <td style="width:15%;">{{outalllanHILO.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanHILO.bonus}}</td>
+                            <td style="width:14%;">{{outalllanHILO.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanHILO.payoutRate}}%</td>
+                            <td style="width:14%;">{{outalllanHILO.payout}}</td>
+                        </tr>
+                        <tr *ngFor="let b of cashalluplanHILO">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                            <td style="width:14%;">{{b.totalInvestment}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.bonus}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.payoutRate}}%</td>
+                            <td style="width:14%;">{{b.payout}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody id="lists" *ngIf="cashalluplanFCA">
+                        <tr class="tablelv" *ngIf="outalllanFCA">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">FCA</td>
+                            <td style="width:14%;">{{outalllanFCA.totalInvestment}}</td>
+                            <td style="width:14%;">{{outalllanFCA.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanFCA.bonus}}</td>
+                            <td style="width:14%;">{{outalllanFCA.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanFCA.payoutRate}}%</td> 
+                            <td style="width:14%;">{{outalllanFCA.payout}}</td> 
+                        </tr>
+                        <tr *ngFor="let b of cashalluplanFCA">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                            <td style="width:14%;">{{b.totalInvestment}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.bonus}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.payoutRate}}%</td>
+                            <td style="width:14%;">{{b.payout}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody id="lists" *ngIf="cashalluplanHDC">
+                        <tr class="tablelv" *ngIf="outalllanHDC">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14;">HDC</td>
+                            <td style="width:14%;">{{outalllanHDC.totalInvestment}}</td>
+                            <td style="width:14%;">{{outalllanHDC.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanHDC.bonus}}</td>
+                            <td style="width:14%;">{{outalllanHDC.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanHDC.payoutRate}}%</td> 
+                            <td style="width:14%;">{{outalllanHDC.payout}}</td> 
+                        </tr>
+                        <tr *ngFor="let b of cashalluplanHDC">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                            <td style="width:14%;">{{b.totalInvestment}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.bonus}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.payoutRate}}%</td>
+                            <td style="width:14%;">{{b.payout}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody id="lists" *ngIf="cashalluplanWNM">
+                        <tr class="tablelv" *ngIf="outalllanWNM">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">WNM</td>
+                            <td style="width:14%;">{{outalllanWNM.totalInvestment}}</td>
+                            <td style="width:14%;">{{outalllanWNM.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanWNM.bonus}}</td>
+                            <td style="width:14%;">{{outalllanWNM.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanWNM.payoutRate}}%</td> 
+                            <td style="width:14%;">{{outalllanWNM.payout}}</td> 
+                        </tr>
+                        <tr *ngFor="let b of cashalluplanWNM">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                            <td style="width:14%;">{{b.totalInvestment}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.bonus}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.payoutRate}}%</td>
+                            <td style="width:14%;">{{b.payout}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody id="lists" *ngIf="cashalluplanMNL">
+                        <tr class="tablelv" *ngIf="outalllanMNL">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">MNL</td>
+                            <td style="width:14%;">{{outalllanMNL.totalInvestment}}</td>
+                            <td style="width:14%;">{{outalllanMNL.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanMNL.bonus}}</td>
+                            <td style="width:14%;">{{outalllanMNL.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanMNL.payoutRate}}%</td> 
+                            <td style="width:14%;">{{outalllanMNL.payout}}</td> 
+                        </tr>
+                        <tr *ngFor="let b of cashalluplanMNL">
+                            <td style="visibility:hidden;">0</td>
+                            <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
+                            <td style="width:14%;">{{b.totalInvestment}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.bonus}}</td>
+                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.payoutRate}}%</td>
+                            <td style="width:14%;">{{b.payout}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="Nodata">
+                        <tr>
+                            <td colspan="8">{{data}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
           </div>
           <div class="main" *ngSwitchCase="7">
               <div class="clearfix">
@@ -1375,7 +1518,7 @@
                               <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
                               <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                           </p>
-                          <p class="word" *ngIf="caizhong">
+                          <p class="word">
                               <span>彩种：</span>
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlott">
                                   <option value="1">足球</option>

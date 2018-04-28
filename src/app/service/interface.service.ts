@@ -71,21 +71,37 @@ export class InterfaceService{
         .map(res=>res.json());
     }
 //////////////////////////////CASH OUT/////////////////////////
-    Allup(year,month,day){
-        console.log(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day,"service")
-        return this.http.get(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day)
+    Allup(year,month,day,cashzhonglei){
+        console.log(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhonglei,"service")
+        return this.http.get(AppConfig.baseUrl+'/account/dailyAllup/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhonglei)
         .map(res=>res.json());
     }
-    Single(year,month,day){
-        return this.http.get(AppConfig.baseUrl+'/account/detailSGL/queryAll?year='+year+'&month='+month+'&day='+day)
+    cashallupretry(year,month,day,cashzhonglei,cashallupName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhonglei+'&reportsName='+cashallupName)
         .map(res=>res.json());
     }
-    Summary(year,month,day){
+    Single(year,month,day,cashzhongle){
+        return this.http.get(AppConfig.baseUrl+'/account/detailSGL/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhongle)
+        .map(res=>res.json());
+    }
+    cashsingleretry(year,month,day,cashzhongle,cashsingleName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhongle+'&reportsName='+cashsingleName)
+        .map(res=>res.json());
+    }
+    Summary(year,month,day,cashzhongl){
         return this.http.get(AppConfig.baseUrl+'/account/summary/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    cashsummaryretry(year,month,day,cashzhongl,cashsummaryName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhongl+'&reportsName='+cashsummaryName)
         .map(res=>res.json());
     }
     MonthSummary(year,month){
         return this.http.get(AppConfig.baseUrl+'/account/dailyCollectStatements/queryAll?year='+year+'&month='+month)
+        .map(res=>res.json());
+    }
+    cashmonthsummaryretry(year,month,day,cashmonthSummaryName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+cashmonthSummaryName)
         .map(res=>res.json());
     }
     Breakdown(year,month,day){
@@ -139,6 +155,10 @@ export class InterfaceService{
     }
     Channeldetail(agentId){
         return this.http.get(AppConfig.baseUrl+'/account/channelStatistics/queryPreStoreDetail?agentCode='+agentId)
+        .map(res=>res.json());
+    }
+    channelretry(year,month,day,cashagentName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+cashagentName)
         .map(res=>res.json());
     }
 }   
