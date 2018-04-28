@@ -132,4 +132,13 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/errorTicket/getErrorTickets?page='+page +'&size='+size +'&startDate='+errorstartime +'&endDate='+errorendtime)
         .map(res=>res.json());
     }
+    //channel接口
+    Channel(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/channelStatistics/queryAll?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    Channeldetail(agentId){
+        return this.http.get(AppConfig.baseUrl+'/account/channelStatistics/queryPreStoreDetail?agentCode='+agentId)
+        .map(res=>res.json());
+    }
 }   

@@ -246,6 +246,9 @@ export class OrdersComponent implements OnInit {
     errorshuju:LiveOrdermanage;
     errorcount: number = 0; //总条数
     errorpageCount:number;
+    //channel
+    channeltotal:string[];
+    channelshuju:string[];
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -941,7 +944,7 @@ compare(property){
   }
   singleretry() {
     var year = "";
-        var month = "";
+    var month = "";
     var day = "";
     if(this.people==0){
       this.lottery_ty = "2";
@@ -2059,6 +2062,44 @@ casherrorCha(reslt) {
 errormodelChange(currPage){
   this.errorall(currPage,this.pageSize,this.errorstartime,this.errorendtime)
 }
-
+//channel
+channelCha(reslt) {
+  this.loading = true;
+  var  year = "";
+  var  month = "";
+  var  day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Channel(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.channeltotal = data.total;
+          this.channelshuju = data.agentInfoModels;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+    } 
+}
 
 }
