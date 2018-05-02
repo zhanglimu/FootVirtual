@@ -186,10 +186,12 @@ export class OrdersComponent implements OnInit {
     alluplanqiu:boolean;
     //cashsingle
     cashsingletotal:string[];
-    cashsingledata:string[];
+    cashsinglelan:string[];
     cashlott:any;
     cashzhongle:any;
     cashsingleName:string;
+    cashzuqiu:boolean;
+    cashlanqiu:boolean;
     //cashsummary
     summaryweeking:any;
     modelToday:string[];
@@ -208,11 +210,10 @@ export class OrdersComponent implements OnInit {
     time1:string;
     cashmonthSummaryName:string;
     //cashbreak
-    cashbreakFB:string[];
-    cashFBtotal:string[];
-    cashbreakBK:string[];
-    cashBKtotal:string[];
-    cashbreaktotal:string[];
+    cashbreakpro:string[];
+    cashtotalpro:string[];
+    cashlottery:any;
+    cashzhong:any;
     cashbreakweeking:any;
     cashbreakdownName:string;
     //cashorder
@@ -401,7 +402,7 @@ export class OrdersComponent implements OnInit {
     this.outallFCA=[];
     //cashsingle
     this.cashsingletotal=[];
-    this.cashsingledata=[];
+    this.cashsinglelan=[];
     //cashsummary
     this.modelToday=[];
     this.modelWeek=[];
@@ -413,11 +414,8 @@ export class OrdersComponent implements OnInit {
     this.monthTotal=[];
     this.monthList=[];
     //cashbreak
-    this.cashbreakFB=[];
-    this.cashFBtotal=[];
-    this.cashbreakBK=[];
-    this.cashBKtotal=[];
-    this.cashbreaktotal=[];
+    this.cashbreakpro=[];
+    this.cashtotalpro=[];
     //cashorder
     this.cashshuju = null;
     this.cashshu=[];
@@ -508,6 +506,10 @@ export class OrdersComponent implements OnInit {
     this.cashlot = "1";//彩种值
     this.cashlott = "1";
     this.cashlotte = "1";
+    this.cashlottery = "1";
+    //cashsingle
+    this.cashzuqiu =false;
+    this.cashlanqiu =false;
     //cashorder
     this.cashding = "";
     this.cashyong = "";
@@ -1546,7 +1548,14 @@ cashsingleCha(reslt) {
           this.loading = false;
           this.Nodata = false;
           this.cashsingletotal = data.total;
-          this.cashsingledata = data.modelList;
+          this.cashsinglelan = data.total;
+          if (this.cashzhongle==2) {
+            this.cashlanqiu =true;
+            this.cashzuqiu =false;
+          }else{
+            this.cashzuqiu =true;
+            this.cashlanqiu =false;
+          }
         }else{
           this.loading = false;
           this.Nodata = true;
@@ -1876,7 +1885,7 @@ cashbreakCha(reslt) {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
+  this.cashzhong = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
@@ -1892,15 +1901,12 @@ cashbreakCha(reslt) {
       }else{
         year=sort;
       }
-      this.QUERY.Breakdown(year,month,day).subscribe(data => {
+      this.QUERY.Breakdown(year,month,day,this.cashzhong).subscribe(data => {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
-          this.cashbreakFB = data.modelList;
-          this.cashFBtotal = data.FBtotal;
-          this.cashbreakBK = data.basketBallModelList;
-          this.cashBKtotal = data.BKtotal;
-          this.cashbreaktotal = data.total;
+          this.cashbreakpro = data.prolist;
+          this.cashtotalpro = data.proTotal;
         }else{
           this.loading = false;
           this.Nodata = true;

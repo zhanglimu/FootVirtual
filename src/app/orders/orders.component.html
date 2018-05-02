@@ -1537,158 +1537,102 @@
               </div>
               <div class="row-fluid">
                       <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
-                  <table class="table" id="scroer">
-                      <tbody id="lists" *ngIf="cashsingledata">
-                          <tr class="fb" *ngIf="cashsingletotal">
-                              <td colspan="4"></td>
-                              <td>合计</td>
-                              <td>{{cashsingletotal.totalInvestmentHAD}}</td>
-                              <td>{{cashsingletotal.investHAD}}</td>
-                              <td>{{cashsingletotal.bonusHAD}}</td>
-                              <td>{{cashsingletotal.totalPriceHAD}}</td>
-                              <td>{{cashsingletotal.winpriceHAD}}</td>
-                              <td>{{cashsingletotal.averageHAD}}</td>
-                              <td>{{cashsingletotal.payoutRateHAD}}%</td>
-                              <td>{{cashsingletotal.totalInvestmentHHAD}}</td>
-                              <td>{{cashsingletotal.investHHAD}}</td>
-                              <td>{{cashsingletotal.bonusHHAD}}</td>
-                              <td>{{cashsingletotal.totalPriceHHAD}}</td>
-                              <td>{{cashsingletotal.winpriceHHAD}}</td>
-                              <td>{{cashsingletotal.averageHHAD}}</td>
-                              <td>{{cashsingletotal.payoutRateHHAD}}%</td>
-                              <td>{{cashsingletotal.totalInvestmentHAFU}}</td>
-                              <td>{{cashsingletotal.investHAFU}}</td>
-                              <td>{{cashsingletotal.bonusHAFU}}</td>
-                              <td>{{cashsingletotal.totalPriceHAFU}}</td>
-                              <td>{{cashsingletotal.winpriceHAFU}}</td>
-                              <td>{{cashsingletotal.averageHAFU}}</td>
-                              <td>{{cashsingletotal.payoutRateHAFU}}%</td>
-                              <td>{{cashsingletotal.totalInvestmentTTG}}</td>
-                              <td>{{cashsingletotal.investTTG}}</td>
-                              <td>{{cashsingletotal.bonusTTG}}</td>
-                              <td>{{cashsingletotal.totalPriceTTG}}</td>
-                              <td>{{cashsingletotal.winpriceTTG}}</td>
-                              <td>{{cashsingletotal.averageTTG}}</td>
-                              <td>{{cashsingletotal.payoutRateTTG}}%</td>
-                              <td>{{cashsingletotal.totalInvestmentCRS}}</td>
-                              <td>{{cashsingletotal.investCRS}}</td>
-                              <td>{{cashsingletotal.investCRS}}</td>
-                              <td>{{cashsingletotal.totalPriceCRS}}</td>
-                              <td>{{cashsingletotal.winpriceCRS}}</td>
-                              <td>{{cashsingletotal.averageCRS}}</td>
-                              <td>{{cashsingletotal.payoutRateCRS}}%</td>
-                          </tr>
-                          <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td class="gree1" colspan="7">胜平负HAD</td>
-                              <td class="red1" colspan="7">让球胜平负HHAD</td>
-                              <td class="blue1" colspan="7">HAFU</td>
-                              <td class="yel1" colspan="7">TTG</td>
-                              <td class="white1" colspan="7">CRS</td>
-                          </tr>
-                          <tr>
-                              <td>比赛编号Match No.</td>
-                              <td>比赛时间Match_date</td>
-                              <td>联赛League</td>
-                              <td>Team(HomeVSAway)</td>
-                              <td>赛果Result(半场/全场)</td>
-                              <td class="gree1">原始投注额TotalInvestment(人民币RMB)</td>
-                              <td class="gree1">投注额Investment(人民币RMB)</td>
-                              <td class="gree1">caiex加奖额(人民币RMB)</td>
-                              <td class="gree1">返奖金额Payout(人民币RMB)</td>
-                              <td class="gree1">中奖交易额Amt.Winning Unit</td>
-                              <td class="gree1">平均中奖固定奖金额AverageWinningOdds</td>
-                              <td class="gree1">盈利率%PayoutRatio</td>
-                              <td class="red1">原始投注额TotalInvestment(人民币RMB)</td>
-                              <td class="red1">投注额Investment(人民币RMB)</td>
-                              <td class="red1">caiex加奖额(人民币RMB)</td>
-                              <td class="red1">返奖金额Payout(人民币RMB)</td>
-                              <td class="red1">中奖交易额Amt.Winning Unit</td>
-                              <td class="red1">平均中奖固定奖金额AverageWinningOdds</td>
-                              <td class="red1">盈利率%PayoutRatio</td>
-                              <td class="blue1">原始投注额TotalInvestment(人民币RMB)</td>
-                              <td class="blue1">投注额Investment(人民币RMB)</td>
-                              <td class="blue1">caiex加奖额(人民币RMB)</td>
-                              <td class="blue1">返奖金额Payout(人民币RMB)</td>
-                              <td class="blue1">中奖交易额Amt.Winning Unit</td>
-                              <td class="blue1">平均中奖固定奖金额AverageWinningOdds</td>
-                              <td class="blue1">盈利率%PayoutRatio</td>
-                              <td class="yel1">原始投注额TotalInvestment(人民币RMB)</td>
-                              <td class="yel1">投注额Investment(人民币RMB)</td>
-                              <td class="yel1">caiex加奖额(人民币RMB)</td>
-                              <td class="yel1">返奖金额Payout(人民币RMB)</td>
-                              <td class="yel1">中奖交易额Amt.Winning Unit</td>
-                              <td class="yel1">平均中奖固定奖金额AverageWinningOdds</td>
-                              <td class="yel1">盈利率%PayoutRatio</td>
-                              <td class="white1">原始投注额TotalInvestment(人民币RMB)</td>
-                              <td class="white1">投注额Investment(人民币RMB)</td>
-                              <td class="white1">caiex加奖额(人民币RMB)</td>
-                              <td class="white1">返奖金额Payout(人民币RMB)</td>
-                              <td class="white1">中奖交易额Amt.Winning Unit</td>
-                              <td class="white1">平均中奖固定奖金额AverageWinningOdds</td>
-                              <td class="white1">盈利率%PayoutRatio</td>
-                          </tr>
-                          <tr class="smallfont" *ngFor="let do of cashsingledata">
-                              <td>{{do.match_code}}</td>
-                              <td>{{do.match_date}}</td>
-                              <td>{{do.match_league}}</td>
-                              <td>
-                                  <span>{{do.home_team}}</span>vs
-                                  <span>{{do.away_team}}</span>
-                              </td>
-                              <td>
-                                  <span>{{do.home_score_half}}:</span>
-                                  <span>{{do.away_score_half}}</span>/
-                                  <span>{{do.home_score}}:</span>
-                                  <span>{{do.away_score}}</span>
-                              </td>
-                              <td class="gree1">{{do.totalInvestmentHAD}}</td>
-                              <td class="gree1">{{do.investHAD}}</td>
-                              <td class="gree1">{{do.bonusHAD}}</td>
-                              <td class="gree1">{{do.totalPriceHAD}}</td>
-                              <td class="gree1">{{do.winpriceHAD}}</td>
-                              <td class="gree1">{{do.averageHAD}}</td>
-                              <td class="gree1">{{do.payoutRateHAD}}%</td>
-                              <td class="red1">{{do.totalInvestmentHHAD}}</td>
-                              <td class="red1">{{do.investHHAD}}</td>
-                              <td class="red1">{{do.bonusHHAD}}</td>
-                              <td class="red1">{{do.totalPriceHHAD}}</td>
-                              <td class="red1">{{do.winpriceHHAD}}</td>
-                              <td class="red1">{{do.averageHHAD}}</td>
-                              <td class="red1">{{do.payoutRateHHAD}}%</td>
-                              <td class="blue1">{{do.totalInvestmentHAFU}}</td>
-                              <td class="blue1">{{do.investHAFU}}</td>
-                              <td class="blue1">{{do.bonusHAFU}}</td>
-                              <td class="blue1">{{do.totalPriceHAFU}}</td>
-                              <td class="blue1">{{do.winpriceHAFU}}</td>
-                              <td class="blue1">{{do.averageHAFU}}</td>
-                              <td class="blue1">{{do.payoutRateHAFU}}%</td>
-                              <td class="yel1">{{do.totalInvestmentTTG}}</td>
-                              <td class="yel1">{{do.investTTG}}</td>
-                              <td class="yel1">{{do.bonusTTG}}</td>
-                              <td class="yel1">{{do.totalPriceTTG}}</td>
-                              <td class="yel1">{{do.winpriceTTG}}</td>
-                              <td class="yel1">{{do.averageTTG}}</td>
-                              <td class="yel1">{{do.payoutRateTTG}}%</td>
-                              <td class="white1">{{do.totalInvestmentCRS}}</td>
-                              <td class="white1">{{do.investCRS}}</td>
-                              <td class="white1">{{do.bonusCRS}}</td>
-                              <td class="white1">{{do.totalPriceCRS}}</td>
-                              <td class="white1">{{do.winpriceCRS}}</td>
-                              <td class="white1">{{do.averageCRS}}</td>
-                              <td class="white1">{{do.payoutRateCRS}}%</td>
-                          </tr>
-                      </tbody>
-                      <tbody *ngIf="Nodata">
-                          <tr>
-                              <td colspan="40">{{data}}</td>
-                          </tr>
-                      </tbody>
-                  </table>
+                    <table>
+                        <tbody *ngIf="cashzuqiu">
+                            <tr class="firstr odds">
+                                  <td>合计</td>
+                                  <td>HHAD</td>
+                                  <td>CRS</td>
+                                  <td>TTG</td>
+                                  <td>HAFU</td>
+                                  <td>HAD</td>
+                              </tr>  
+                            <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>投注额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.totalInvestment}}</td>
+                              </tr>
+                              <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>返奖金额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.totalPrice}}</td>
+                              </tr> 
+                               <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>中奖投注额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.winprice}}</td>
+                              </tr>
+                                <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>平均中奖固定金额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.average}}</td>
+                              </tr>
+                                <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>盈利率%</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.payoutRate}}%</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.payoutRate}}%</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.payoutRate}}%</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.payoutRate}}%</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.payoutRate}}</td>
+                              </tr>
+                        </tbody>
+                        <tbody *ngIf="cashlanqiu">
+                            <tr class="firstr odds">
+                                <td>合计</td>
+                                <td>HILO</td>
+                                <td>HDC</td>
+                                <td>WNM</td>
+                                <td>MNL</td>
+                            </tr>  
+                          <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>投注额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.totalInvestment}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.totalInvestment}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.totalInvestment}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.totalInvestment}}</td>
+                            </tr>
+                            <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>返奖金额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.totalPrice}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.totalPrice}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.totalPrice}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.totalPrice}}</td>
+                            </tr> 
+                             <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>中奖投注额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.winprice}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.winprice}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.winprice}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.winprice}}</td>
+                            </tr>
+                              <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>平均中奖固定金额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.average}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.average}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.average}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.average}}</td>
+                            </tr>
+                              <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>盈利率%</td>
+                                <td>{{cashsinglelan.resultMap.HILO.payoutRate}}%</td>
+                                <td>{{cashsinglelan.resultMap.HDC.payoutRate}}%</td>
+                                <td>{{cashsinglelan.resultMap.WNM.payoutRate}}%</td>
+                                <td>{{cashsinglelan.resultMap.MNL.payoutRate}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
               </div>
           </div>
           <div class="main" *ngSwitchCase="8">
@@ -1703,9 +1647,10 @@
                               <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
                               <strong>周：<span id="week" class="vor" name="weeking">{{summaryweeking}}</span></strong>
                           </p>
-                          <p class="word" *ngIf="caizhong">
+                          <p class="word">
                               <span>彩种：</span>
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlotte">
+                                  <option value="0">all</option>
                                   <option value="1">足球</option>
                                   <option value="2">篮球</option>
                               </select>
@@ -2068,6 +2013,13 @@
                               <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
                               <strong>周：<span id="week" class="vor" name="weeking">{{cashbreakweeking}}</span></strong>
                           </p>
+                          <p class="word">
+                            <span>彩种：</span>
+                            <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlottery">
+                                <option value="1">足球</option>
+                                <option value="2">篮球</option>
+                            </select>
+                        </p>
                       </form>
                       <p class="word left">
                           <button class="selss" type="submit">查询</button>
@@ -2120,138 +2072,59 @@
                               </tr>
                           </thead>
                           <tbody id="lists">
-                              <tr>
-                                  <td class="fb" rowspan="7">足球FB</td>
-                              </tr>
-                              <tr *ngFor="let dn of cashbreakFB">
-                                  <td class="product" >{{dn.product}}</td>
-                                  <td class="gree">{{dn.totalInvestment}}￥</td>
-                                  <td class="gree">{{dn.invest}}￥</td>
-                                  <td class="gree">{{dn.bonusInvest}}￥</td>
-                                  <td class="gree">{{dn.totalPrice}}￥</td>
-                                  <td class="gree">{{dn.payoutRate}}%</td>
-                                  <td class="red">{{dn.totalInvestmentAllup}}￥</td>
-                                  <td class="red">{{dn.investAllup}}￥</td>
-                                  <td class="red">{{dn.bonusInvestAllup}}￥</td>
-                                  <td class="red">{{dn.totalPriceAllup}}￥</td>
-                                  <td class="red">{{dn.payoutRateAllup}}%</td>
-                                  <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
-                                  <td class="blue">{{dn.investFsgl}}￥</td>
-                                  <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
-                                  <td class="blue">{{dn.totalPriceFsgl}}￥</td>
-                                  <td class="blue">{{dn.payoutRateFsgl}}%</td>
-                                  <td class="blue">{{dn.winpriceFsgl}}￥</td>
-                                  <td class="blue">{{dn.averageFsgl}}￥</td>
-                                  <td class="yel">{{dn.totalInvestmentLevel0}}￥</td>
-                                  <td class="yel">{{dn.investLevel0}}￥</td>
-                                  <td class="yel">{{dn.bonusInvestLevel0}}￥</td>
-                                  <td class="yel">{{dn.totalPriceLevel0}}￥</td>
-                                  <td class="yel">{{dn.payoutRateLevel0}}%</td>
-                              </tr>
-                              <tr *ngIf="cashFBtotal">
-                                  <td colspan="2">足球合计 FB Total</td>
-                                  <td>{{cashFBtotal.totalInvestment}}￥</td>
-                                  <td>{{cashFBtotal.invest}}￥</td>
-                                  <td>{{cashFBtotal.bonusInvest}}￥</td>
-                                  <td>{{cashFBtotal.totalPrice}}￥</td>
-                                  <td>{{cashFBtotal.payoutRate}}%</td>
-                                  <td>{{cashFBtotal.totalInvestmentAllup}}￥</td>
-                                  <td>{{cashFBtotal.investAllup}}￥</td>
-                                  <td>{{cashFBtotal.bonusInvestAllup}}￥</td>
-                                  <td>{{cashFBtotal.totalPriceAllup}}￥</td>
-                                  <td>{{cashFBtotal.payoutRateAllup}}%</td>
-                                  <td>{{cashFBtotal.totalInvestmentFsgl}}￥</td>
-                                  <td>{{cashFBtotal.investFsgl}}￥</td>
-                                  <td>{{cashFBtotal.bonusInvestFsgl}}￥</td>
-                                  <td>{{cashFBtotal.totalPriceFsgl}}￥</td>
-                                  <td>{{cashFBtotal.payoutRateFsgl}}%</td>
-                                  <td>{{cashFBtotal.winpriceFsgl}}￥</td>
-                                  <td>{{cashFBtotal.averageFsgl}}￥</td>
-                                  <td>{{cashFBtotal.totalInvestmentLevel0}}￥</td>
-                                  <td>{{cashFBtotal.investLevel0}}￥</td>
-                                  <td>{{cashFBtotal.bonusInvestLevel0}}￥</td>
-                                  <td>{{cashFBtotal.totalPriceLevel0}}￥</td>
-                                  <td>{{cashFBtotal.payoutRateLevel0}}%</td>
-                              </tr>
-                              <tr>
-                                  <td class="fb" rowspan="6">篮球BK</td>
-                              </tr>
-                              <tr *ngFor="let dn of cashbreakBK">
-                                  <td class="product" >{{dn.product}}</td>
-                                  <td class="gree">{{dn.totalInvestment}}￥</td>
-                                  <td class="gree">{{dn.invest}}￥</td>
-                                  <td class="gree">{{dn.bonusInvest}}￥</td>
-                                  <td class="gree">{{dn.totalPrice}}￥</td>
-                                  <td class="gree">{{dn.payoutRate}}%</td>
-                                  <td class="red">{{dn.totalInvestmentAllup}}￥</td>
-                                  <td class="red">{{dn.investAllup}}￥</td>
-                                  <td class="red">{{dn.bonusInvestAllup}}￥</td>
-                                  <td class="red">{{dn.totalPriceAllup}}￥</td>
-                                  <td class="red">{{dn.payoutRateAllup}}%</td>
-                                  <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
-                                  <td class="blue">{{dn.investFsgl}}￥</td>
-                                  <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
-                                  <td class="blue">{{dn.totalPriceFsgl}}￥</td>
-                                  <td class="blue">{{dn.payoutRateFsgl}}%</td>
-                                  <td class="blue">{{dn.winpriceFsgl}}￥</td>
-                                  <td class="blue">{{dn.averageFsgl}}￥</td>
-                                  <td class="yel">{{dn.totalInvestmentLevel0}}￥</td>
-                                  <td class="yel">{{dn.investLevel0}}￥</td>
-                                  <td class="yel">{{dn.bonusInvestLevel0}}￥</td>
-                                  <td class="yel">{{dn.totalPriceLevel0}}￥</td>
-                                  <td class="yel">{{dn.payoutRateLevel0}}%</td>
-                              </tr>
-                              <tr *ngIf="cashBKtotal">
-                                  <td colspan="2">足球合计 BK Total</td>
-                                  <td>{{cashBKtotal.totalInvestment}}￥</td>
-                                  <td>{{cashBKtotal.invest}}￥</td>
-                                  <td>{{cashBKtotal.bonusInvest}}￥</td>
-                                  <td>{{cashBKtotal.totalPrice}}￥</td>
-                                  <td>{{cashBKtotal.payoutRate}}%</td>
-                                  <td>{{cashBKtotal.totalInvestmentAllup}}￥</td>
-                                  <td>{{cashBKtotal.investAllup}}￥</td>
-                                  <td>{{cashBKtotal.bonusInvestAllup}}￥</td>
-                                  <td>{{cashBKtotal.totalPriceAllup}}￥</td>
-                                  <td>{{cashBKtotal.payoutRateAllup}}%</td>
-                                  <td>{{cashBKtotal.totalInvestmentFsgl}}￥</td>
-                                  <td>{{cashBKtotal.investFsgl}}￥</td>
-                                  <td>{{cashBKtotal.bonusInvestFsgl}}￥</td>
-                                  <td>{{cashBKtotal.totalPriceFsgl}}￥</td>
-                                  <td>{{cashBKtotal.payoutRateFsgl}}%</td>
-                                  <td>{{cashBKtotal.winpriceFsgl}}￥</td>
-                                  <td>{{cashBKtotal.averageFsgl}}￥</td>
-                                  <td>{{cashBKtotal.totalInvestmentLevel0}}￥</td>
-                                  <td>{{cashBKtotal.investLevel0}}￥</td>
-                                  <td>{{cashBKtotal.bonusInvestLevel0}}￥</td>
-                                  <td>{{cashBKtotal.totalPriceLevel0}}￥</td>
-                                  <td>{{cashBKtotal.payoutRateLevel0}}%</td>
-                              </tr>
-                                  <tr class="dategray" *ngIf="cashbreaktotal">
-                                      <td colspan="2">当日合计 Total</td>
-                                      <td>{{cashbreaktotal.totalInvestment}}￥</td>
-                                      <td>{{cashbreaktotal.invest}}￥</td>
-                                      <td>{{cashbreaktotal.bonusInvest}}￥</td>
-                                      <td>{{cashbreaktotal.totalPrice}}￥</td>
-                                      <td>{{cashbreaktotal.payoutRate}}%</td>
-                                      <td>{{cashbreaktotal.totalInvestmentAllup}}￥</td>
-                                      <td>{{cashbreaktotal.investAllup}}￥</td>
-                                      <td>{{cashbreaktotal.bonusInvestAllup}}￥</td>
-                                      <td>{{cashbreaktotal.totalPriceAllup}}￥</td>
-                                      <td>{{cashbreaktotal.payoutRateAllup}}%</td>
-                                      <td>{{cashbreaktotal.totalInvestmentFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.investFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.bonusInvestFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.totalPriceFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.payoutRateFsgl}}%</td>
-                                      <td>{{cashbreaktotal.winpriceFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.averageFsgl}}￥</td>
-                                      <td>{{cashbreaktotal.totalInvestmentLevel0}}￥</td>
-                                      <td>{{cashbreaktotal.investLevel0}}￥</td>
-                                      <td>{{cashbreaktotal.bonusInvestLevel0}}￥</td>
-                                      <td>{{cashbreaktotal.totalPriceLevel0}}￥</td>
-                                      <td>{{cashbreaktotal.payoutRateLevel0}}%</td>
-                                  </tr> 
-                          </tbody>
+                            <tr *ngFor="let dn of cashbreakpro">
+                                <td class="product" >{{dn.product}}</td>
+                                <td>{{dn.num}}</td>
+                                <td class="gree">{{dn.totalInvestment}}￥</td>
+                                <td class="gree">{{dn.invest}}￥</td>
+                                <td class="gree">{{dn.bonusInvest}}￥</td>
+                                <td class="gree">{{dn.totalPrice}}￥</td>
+                                <td class="gree">{{dn.payoutRate}}%</td>
+                                <td class="red">{{dn.totalInvestmentAllup}}￥</td>
+                                <td class="red">{{dn.investAllup}}￥</td>
+                                <td class="red">{{dn.bonusInvestAllup}}￥</td>
+                                <td class="red">{{dn.totalPriceAllup}}￥</td>
+                                <td class="red">{{dn.payoutRateAllup}}%</td>
+                                <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
+                                <td class="blue">{{dn.investFsgl}}￥</td>
+                                <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
+                                <td class="blue">{{dn.totalPriceFsgl}}￥</td>
+                                <td class="blue">{{dn.payoutRateFsgl}}%</td>
+                                <td class="blue">{{dn.winpriceFsgl}}￥</td>
+                                <td class="blue">{{dn.averageFsgl}}￥</td>
+                                <td class="yel">{{dn.totalInvestmentLevel0}}￥</td>
+                                <td class="yel">{{dn.investLevel0}}￥</td>
+                                <td class="yel">{{dn.bonusInvestLevel0}}￥</td>
+                                <td class="yel">{{dn.totalPriceLevel0}}￥</td>
+                                <td class="yel">{{dn.payoutRateLevel0}}%</td>
+                            </tr>
+                            <tr *ngIf="cashtotalpro">
+                                <td>合计Total</td>
+                                <td>{{cashtotalpro.num}}</td>
+                                <td>{{cashtotalpro.totalInvestment}}￥</td>
+                                <td>{{cashtotalpro.invest}}￥</td>
+                                <td>{{cashtotalpro.bonusInvest}}￥</td>
+                                <td>{{cashtotalpro.totalPrice}}￥</td>
+                                <td>{{cashtotalpro.payoutRate}}%</td>
+                                <td>{{cashtotalpro.totalInvestmentAllup}}￥</td>
+                                <td>{{cashtotalpro.investAllup}}￥</td>
+                                <td>{{cashtotalpro.bonusInvestAllup}}￥</td>
+                                <td>{{cashtotalpro.totalPriceAllup}}￥</td>
+                                <td>{{cashtotalpro.payoutRateAllup}}%</td>
+                                <td>{{cashtotalpro.totalInvestmentFsgl}}￥</td>
+                                <td>{{cashtotalpro.investFsgl}}￥</td>
+                                <td>{{cashtotalpro.bonusInvestFsgl}}￥</td>
+                                <td>{{cashtotalpro.totalPriceFsgl}}￥</td>
+                                <td>{{cashtotalpro.payoutRateFsgl}}%</td>
+                                <td>{{cashtotalpro.winpriceFsgl}}￥</td>
+                                <td>{{cashtotalpro.averageFsgl}}￥</td>
+                                <td>{{cashtotalpro.totalInvestmentLevel0}}￥</td>
+                                <td>{{cashtotalpro.investLevel0}}￥</td>
+                                <td>{{cashtotalpro.bonusInvestLevel0}}￥</td>
+                                <td>{{cashtotalpro.totalPriceLevel0}}￥</td>
+                                <td>{{cashtotalpro.payoutRateLevel0}}%</td>
+                            </tr>
+                        </tbody>
                       <tbody *ngIf="Nodata">
                           <tr>
                               <td colspan="22">{{data}}</td>
@@ -2683,21 +2556,21 @@
                                 <td>{{le.cxBonusRateFb}}</td>
                                 <td>{{le.agentSellMess}}</td>
 
-								<td>{{le.userAmountFb}}</td>
-                                <td>{{le.orderAmountFb}}</td>
-                                <td>{{le.tradePriceFb}}</td>
-                                <td>{{le.cxBonusFb}}</td>
-                                <td>{{le.winMoneyFb}}</td>
-                                <td>{{le.profitFb}}</td>
-                                <td>{{le.profitabilityFb}}%</td>
+								<td class="red1">{{le.userAmountFb}}</td>
+                                <td class="red1">{{le.orderAmountFb}}</td>
+                                <td class="red1">{{le.tradePriceFb}}</td>
+                                <td class="red1">{{le.cxBonusFb}}</td>
+                                <td class="red1">{{le.winMoneyFb}}</td>
+                                <td class="red1">{{le.profitFb}}</td>
+                                <td class="red1">{{le.profitabilityFb}}%</td>
                                 
-                                <td>{{le.userAmountBk}}</td>
-                                <td>{{le.orderAmountBk}}</td>
-                                <td>{{le.tradePriceBk}}</td>
-                                <td>{{le.cxBonusBk}}</td>
-                                <td>{{le.winMoneyBk}}</td>
-                                <td>{{le.profitBk}}</td>
-                                <td>{{le.profitabilityBk}}%</td>
+                                <td class="yel1">{{le.userAmountBk}}</td>
+                                <td class="yel1">{{le.orderAmountBk}}</td>
+                                <td class="yel1">{{le.tradePriceBk}}</td>
+                                <td class="yel1">{{le.cxBonusBk}}</td>
+                                <td class="yel1">{{le.winMoneyBk}}</td>
+                                <td class="yel1">{{le.profitBk}}</td>
+                                <td class="yel1">{{le.profitabilityBk}}%</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="Nodata">

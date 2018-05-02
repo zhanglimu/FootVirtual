@@ -89,7 +89,7 @@ export class InterfaceService{
         .map(res=>res.json());
     }
     Summary(year,month,day,cashzhongl){
-        return this.http.get(AppConfig.baseUrl+'/account/summary/queryAll?year='+year+'&month='+month+'&day='+day)
+        return this.http.get(AppConfig.baseUrl+'/account/summary/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhongl)
         .map(res=>res.json());
     }
     cashsummaryretry(year,month,day,cashzhongl,cashsummaryName){
@@ -104,8 +104,8 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+cashmonthSummaryName)
         .map(res=>res.json());
     }
-    Breakdown(year,month,day){
-        return this.http.get(AppConfig.baseUrl+'/account/dailyFinancialDetail/queryAll?year='+year+'&month='+month+'&day='+day)
+    Breakdown(year,month,day,cashzhong){
+        return this.http.get(AppConfig.baseUrl+'/account/dailyFinancialDetail/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhong)
         .map(res=>res.json());
     }
     Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type):Observable<any>{
