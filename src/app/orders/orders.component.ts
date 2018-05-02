@@ -272,7 +272,7 @@ export class OrdersComponent implements OnInit {
     errorpageCount:number;
     //channel
     channeltotal:string[];
-    channelshuju:string[];
+    channelshuju:LiveOrdermanage;
     cashagentName:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
@@ -1785,7 +1785,7 @@ cashmonthsummaryCha(reslt) {
 }
 cashmonthsummaryretry() {
   var year = "";
-      var month = "";
+  var month = "";
   var day = "";
   var time:any = $("#d12").val();
       if(time =="" || time ==null){
@@ -1799,11 +1799,9 @@ cashmonthsummaryretry() {
       }else if(sort.length ==2){
         year=sort[0];
         month=sort[1];
-        this.message.error("请先精确到日");
         return false;
       }else{
         year=sort;
-        this.message.error("请先精确到日");
         return false;
       }
       this.QUERY.cashmonthsummaryretry(year,month,day,this.cashmonthSummaryName).subscribe(data => {
@@ -1861,7 +1859,6 @@ cashmonthsummaryexport() {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
@@ -1922,6 +1919,43 @@ cashbreakCha(reslt) {
     this.cashbreakweeking =this.getYearWeek(year, month, day);
     document.getElementById("week").innerText = this.cashbreakweeking;  
     document.getElementById("month").innerText = month;
+}
+cashbreakretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  this.cashzhong = $("#lottery_type").val();
+  var time:any = $("#startime").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.cashbreakretry(year,month,day,this.cashzhong,this.cashbreakdownName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 cashbreakexport() {
   var   year = "";
@@ -2299,6 +2333,19 @@ channelCha(reslt) {
           this.Nodata = false;
           this.channeltotal = data.total;
           this.channelshuju = data.agentInfoModels;
+          for(var i=0; i<data.agentInfoModels.length; i++){
+            if(this.channelshuju[i].recyclePrice =="0"){
+              this.channelshuju[i].recyclePriceName ="-";
+            }else{
+              this.channelshuju[i].recyclePriceName = this.channelshuju[i].recyclePrice;
+            }
+            if(this.channelshuju[i].agentSell =="-1"){
+              this.channelshuju[i].agentSellMess = "停售";
+              
+            }else if(this.channelshuju[i].agentId == this.channelshuju[i].agentSell){
+              this.channelshuju[i].agentSellMess = "开售";
+            }
+          }
         }else{
           this.loading = false;
           this.Nodata = true;

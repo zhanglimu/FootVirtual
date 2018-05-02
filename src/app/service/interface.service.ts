@@ -108,6 +108,10 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/dailyFinancialDetail/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhong)
         .map(res=>res.json());
     }
+    cashbreakretry(year,month,day,cashzhong,cashbreakdownName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhong+'&reportsName='+cashbreakdownName)
+        .map(res=>res.json());
+    }
     Order(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type):Observable<any>{
         let formData: FormData = new FormData(); 
         formData.append('startDate', cashstartime); 
