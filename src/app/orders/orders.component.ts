@@ -9,6 +9,7 @@ import { InterfaceService} from '../service/interface.service';
 import { LiveOrdermanage } from '../modules/ordermanage';
 import * as $ from "jquery";
 import { element } from 'protractor';
+import * as swal from 'sweetalert';
 
 interface Member {
     id: string;
@@ -214,7 +215,6 @@ export class OrdersComponent implements OnInit {
     cashtotalpro:string[];
     cashlottery:any;
     cashzhong:any;
-    cashbreakweeking:any;
     cashbreakdownName:string;
     //cashorder
     cashresut: any[];
@@ -422,6 +422,9 @@ export class OrdersComponent implements OnInit {
     //cashthird
     this.thirdshuju=[];
     this.thirdshu=[];
+    //channel
+    this.channeltotal=[];
+    this.channelshuju = null;
   }
   //退出登录
   Signout(){
@@ -452,7 +455,6 @@ export class OrdersComponent implements OnInit {
     this.weeking =week;
     this.summaryweeking =week;
     this.breakweeking =week;
-    this.cashbreakweeking =week;
     //初始默认时间
     var timeing =  new Date();
     var year = timeing.getFullYear();
@@ -1883,7 +1885,7 @@ cashbreakCha(reslt) {
   var   month = "";
   var   day = "";
   this.cashzhong = $("#lottery_type").val();
-  var time:any = $("#startime").val();
+  var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择日期");
   }else{
@@ -1916,16 +1918,13 @@ cashbreakCha(reslt) {
       });
       
     } 
-    this.cashbreakweeking =this.getYearWeek(year, month, day);
-    document.getElementById("week").innerText = this.cashbreakweeking;  
-    document.getElementById("month").innerText = month;
 }
 cashbreakretry() {
   var year = "";
   var month = "";
   var day = "";
   this.cashzhong = $("#lottery_type").val();
-  var time:any = $("#startime").val();
+  var time:any = $("#d12").val();
       if(time =="" || time ==null){
     this.message.error("请先选择要重算的日期");
       }else{
@@ -1962,7 +1961,7 @@ cashbreakexport() {
   var   month = "";
   var   day = "";
   // this.cashlotte = $("#lottery_type").val();
-  var time:any = $("#startime").val();
+  var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
   }else{
@@ -2360,7 +2359,7 @@ channelCha(reslt) {
 }
 channelretry() {
   var year = "";
-      var month = "";
+  var month = "";
   var day = "";
   var time:any = $("#d12").val();
       if(time =="" || time ==null){

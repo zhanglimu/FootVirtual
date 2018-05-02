@@ -1098,7 +1098,7 @@
                           </form>
                           <p class="word left">
                               <button class="selss" type="submit">查询</button>
-                              <button (click)="cashbreakretry()">重算</button>
+                              <button (click)="breakretry()">重算</button>
                           </p>
                       </form>
                       <p class="word">
@@ -2008,10 +2008,16 @@
                           <span>Daily Betting Breakdown</span>
                       </h4>
                       <form class="formdate left">
-                          <p class="word">
+                          <!-- <p class="word">
                               <input type="text" id="startime" class="Wdate" value="{{time0}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
                               <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
                               <strong>周：<span id="week" class="vor" name="weeking">{{cashbreakweeking}}</span></strong>
+                          </p> -->
+                          <p class="word">
+                                <input id="d12" class="Wdate" type="text" value="{{time0}}"/>
+                                <input type="radio" name="radio" value="1" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy'})"/>年
+                                <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
+                                <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
                           </p>
                           <p class="word">
                             <span>彩种：</span>
