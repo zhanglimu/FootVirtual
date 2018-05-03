@@ -18,7 +18,7 @@
                       <li class="segment-button" [class.selected]="switchIndex === '5'" (click)="switch('5')">Breakdown</li>
                   </ul>
               </li>
-              <li>
+              <li *ngIf="caizhong">
                   <span class="one_bar">Cash out</span>
                   <ul class="two_bar">
                       <li class="segment-button" [class.selected]="switchIndex === '6'" (click)="switch('6')">Daily Allup</li>
@@ -1203,7 +1203,7 @@
                           <tr class="thtible">
                               <th style="width:14%;">人民币RMB</th>
                               <th style="width:14%;">原始投注额</th>
-                              <th style="width:14%;">返奖金额</th>
+                              <th style="width:14%;">投注额Investment</th>
                               <th style="width:14%;">caiex加奖额Bonus</th>
                               <th style="width:14%;">返奖金额</th>
                               <th style="width:14%;">返奖率</th>
@@ -1212,7 +1212,7 @@
                           <tr class="firstr odds" *ngIf="cashallupdata">
                               <th style="width:14%;">合计</th>
                               <th style="width:14%;">{{cashallupdata.totalInvestment}}</th>
-                              <th style="width:14%;">{{cashallupdata.totalPrice}}</th>
+                              <th style="width:14%;">{{cashallupdata.invest}}</th>
                               <th style="width:14%;">{{cashallupdata.bonus}}</th>
                               <th style="width:14%;">{{cashallupdata.totalPrice}}</th>
                               <th style="width:14%;">{{cashallupdata.payoutRate}}%</th>
@@ -1226,7 +1226,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">HAD</td>
                               <td style="width:15%;">{{outallHAD.totalInvestment}}</td>
-                              <td style="width:15%;">{{outallHAD.totalPrice}}</td>
+                              <td style="width:15%;">{{outallHAD.invest}}</td>
                               <td style="width:14%;">{{outallHAD.bonus}}</td>
                               <td style="width:14%;">{{outallHAD.totalPrice}}</td>
                               <td style="width:14%;">{{outallHAD.payoutRate}}%</td>
@@ -1236,7 +1236,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1248,7 +1248,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">HHAD</td>
                               <td style="width:14%;">{{outallHHAD.totalInvestment}}</td>
-                              <td style="width:14%;">{{outallHHAD.totalPrice}}</td>
+                              <td style="width:14%;">{{outallHHAD.invest}}</td>
                               <td style="width:14%;">{{outallHHAD.bonus}}</td>
                               <td style="width:14%;">{{outallHHAD.totalPrice}}</td>
                               <td style="width:14%;">{{outallHHAD.payoutRate}}%</td> 
@@ -1258,7 +1258,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1270,7 +1270,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">HAFU</td>
                               <td style="width:14%;">{{outallHAFU.totalInvestment}}</td>
-                              <td style="width:14%;">{{outallHAFU.totalPrice}}</td>
+                              <td style="width:14%;">{{outallHAFU.invest}}</td>
                               <td style="width:14%;">{{outallHAFU.bonus}}</td>
                               <td style="width:14%;">{{outallHAFU.totalPrice}}</td>
                               <td style="width:14%;">{{outallHAFU.payoutRate}}%</td> 
@@ -1280,7 +1280,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1292,7 +1292,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">TTG</td>
                               <td style="width:14%;">{{outallTTG.totalInvestment}}</td>
-                              <td style="width:14%;">{{outallTTG.totalPrice}}</td>
+                              <td style="width:14%;">{{outallTTG.invest}}</td>
                               <td style="width:14%;">{{outallTTG.bonus}}</td>
                               <td style="width:14%;">{{outallTTG.totalPrice}}</td>
                               <td style="width:14%;">{{outallTTG.payoutRate}}%</td> 
@@ -1302,7 +1302,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1314,7 +1314,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14;">CRS</td>
                               <td style="width:14%;">{{outallCRS.totalInvestment}}</td>
-                              <td style="width:14%;">{{outallCRS.totalPrice}}</td>
+                              <td style="width:14%;">{{outallCRS.invest}}</td>
                               <td style="width:14%;">{{outallCRS.bonus}}</td>
                               <td style="width:14%;">{{outallCRS.totalPrice}}</td>
                               <td style="width:14%;">{{outallCRS.payoutRate}}%</td> 
@@ -1324,7 +1324,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1336,7 +1336,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">FCA</td>
                               <td style="width:14%;">{{outallFCA.totalInvestment}}</td>
-                              <td style="width:14%;">{{outallFCA.totalPrice}}</td>
+                              <td style="width:14%;">{{outallFCA.invest}}</td>
                               <td style="width:14%;">{{outallFCA.bonus}}</td>
                               <td style="width:14%;">{{outallFCA.totalPrice}}</td>
                               <td style="width:14%;">{{outallFCA.payoutRate}}%</td> 
@@ -1346,7 +1346,7 @@
                               <td style="visibility:hidden;">0</td>
                               <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                               <td style="width:14%;">{{b.totalInvestment}}</td>
-                              <td style="width:14%;">{{b.totalPrice}}</td>
+                              <td style="width:14%;">{{b.invest}}</td>
                               <td style="width:14%;">{{b.bonus}}</td>
                               <td style="width:14%;">{{b.totalPrice}}</td>
                               <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1368,7 +1368,7 @@
                         <tr class="thtible">
                             <th style="width:14%;">人民币RMB</th>
                             <th style="width:14%;">原始投注额</th>
-                            <th style="width:14%;">返奖金额</th>
+                            <th style="width:14%;">投注额Investment</th>
                             <th style="width:14%;">caiex加奖额Bonus</th>
                             <th style="width:14%;">返奖金额</th>
                             <th style="width:14%;">返奖率</th>
@@ -1377,7 +1377,7 @@
                         <tr class="firstr odds" *ngIf="cashalluplandata">
                             <th style="width:14%;">合计</th>
                             <th style="width:14%;">{{cashalluplandata.totalInvestment}}</th>
-                            <th style="width:14%;">{{cashalluplandata.totalPrice}}</th>
+                            <th style="width:14%;">{{cashalluplandata.invest}}</th>
                             <th style="width:14%;">{{cashalluplandata.bonus}}</th>
                             <th style="width:14%;">{{cashalluplandata.totalPrice}}</th>
                             <th style="width:14%;">{{cashalluplandata.payoutRate}}%</th>
@@ -1391,7 +1391,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">HILO</td>
                             <td style="width:15%;">{{outalllanHILO.totalInvestment}}</td>
-                            <td style="width:15%;">{{outalllanHILO.totalPrice}}</td>
+                            <td style="width:15%;">{{outalllanHILO.invest}}</td>
                             <td style="width:14%;">{{outalllanHILO.bonus}}</td>
                             <td style="width:14%;">{{outalllanHILO.totalPrice}}</td>
                             <td style="width:14%;">{{outalllanHILO.payoutRate}}%</td>
@@ -1401,7 +1401,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                             <td style="width:14%;">{{b.totalInvestment}}</td>
-                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.invest}}</td>
                             <td style="width:14%;">{{b.bonus}}</td>
                             <td style="width:14%;">{{b.totalPrice}}</td>
                             <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1413,7 +1413,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">FCA</td>
                             <td style="width:14%;">{{outalllanFCA.totalInvestment}}</td>
-                            <td style="width:14%;">{{outalllanFCA.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanFCA.invest}}</td>
                             <td style="width:14%;">{{outalllanFCA.bonus}}</td>
                             <td style="width:14%;">{{outalllanFCA.totalPrice}}</td>
                             <td style="width:14%;">{{outalllanFCA.payoutRate}}%</td> 
@@ -1423,7 +1423,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                             <td style="width:14%;">{{b.totalInvestment}}</td>
-                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.invest}}</td>
                             <td style="width:14%;">{{b.bonus}}</td>
                             <td style="width:14%;">{{b.totalPrice}}</td>
                             <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1435,7 +1435,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14;">HDC</td>
                             <td style="width:14%;">{{outalllanHDC.totalInvestment}}</td>
-                            <td style="width:14%;">{{outalllanHDC.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanHDC.invest}}</td>
                             <td style="width:14%;">{{outalllanHDC.bonus}}</td>
                             <td style="width:14%;">{{outalllanHDC.totalPrice}}</td>
                             <td style="width:14%;">{{outalllanHDC.payoutRate}}%</td> 
@@ -1445,7 +1445,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                             <td style="width:14%;">{{b.totalInvestment}}</td>
-                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.invest}}</td>
                             <td style="width:14%;">{{b.bonus}}</td>
                             <td style="width:14%;">{{b.totalPrice}}</td>
                             <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1457,7 +1457,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">WNM</td>
                             <td style="width:14%;">{{outalllanWNM.totalInvestment}}</td>
-                            <td style="width:14%;">{{outalllanWNM.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanWNM.invest}}</td>
                             <td style="width:14%;">{{outalllanWNM.bonus}}</td>
                             <td style="width:14%;">{{outalllanWNM.totalPrice}}</td>
                             <td style="width:14%;">{{outalllanWNM.payoutRate}}%</td> 
@@ -1467,7 +1467,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                             <td style="width:14%;">{{b.totalInvestment}}</td>
-                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.invest}}</td>
                             <td style="width:14%;">{{b.bonus}}</td>
                             <td style="width:14%;">{{b.totalPrice}}</td>
                             <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1479,7 +1479,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">MNL</td>
                             <td style="width:14%;">{{outalllanMNL.totalInvestment}}</td>
-                            <td style="width:14%;">{{outalllanMNL.totalPrice}}</td>
+                            <td style="width:14%;">{{outalllanMNL.invest}}</td>
                             <td style="width:14%;">{{outalllanMNL.bonus}}</td>
                             <td style="width:14%;">{{outalllanMNL.totalPrice}}</td>
                             <td style="width:14%;">{{outalllanMNL.payoutRate}}%</td> 
@@ -1489,7 +1489,7 @@
                             <td style="visibility:hidden;">0</td>
                             <td style="width:14%;">{{b.local_m}}关    Level {{b.local_m}}</td>
                             <td style="width:14%;">{{b.totalInvestment}}</td>
-                            <td style="width:14%;">{{b.totalPrice}}</td>
+                            <td style="width:14%;">{{b.invest}}</td>
                             <td style="width:14%;">{{b.bonus}}</td>
                             <td style="width:14%;">{{b.totalPrice}}</td>
                             <td style="width:14%;">{{b.payoutRate}}%</td>
@@ -1868,13 +1868,6 @@
                           <p class="word">
                               <input id="d12" type="text" class="Wdate" value="{{time1}}" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>
                           </p>
-                          <!-- <p class="word" *ngIf="caizhong">
-                              <span>彩种：</span>
-                              <select id="lottery_type" name="lottery_type" [(ngModel)]="cashlotte">
-                                  <option value="1">足球</option>
-                                  <option value="2">篮球</option>
-                              </select>
-                          </p> -->
                       </form>
                       <p class="word left">
                           <button class="selss" type="submit">查询</button>
@@ -1949,7 +1942,7 @@
                                   <td>盈利率 Payout Ratio</td>
                               </tr>
                               <tr *ngFor="let monthS of sum.weekList">
-                                  <td>{{monthS.week}}</td>
+                                  <td>{{monthS.date}}</td>
                                   <td class="gree1">{{monthS.totalNum}}</td>
                                   <td class="gree1">{{monthS.totalInvestment}}￥</td>
                                   <td class="gree1">{{monthS.invest}}￥</td>
@@ -1970,7 +1963,7 @@
                                   <td class="red1">{{monthS.payoutRateBk}}%</td>
                               </tr>
                               <tr *ngIf="sum.Weektotal">
-                                  <td>{{sum.Weektotal.week}}</td>
+                                  <td>{{sum.Weektotal.date}}</td>
                                   <td class="gree1">{{sum.Weektotal.totalNum}}</td>
                                   <td class="gree1">{{sum.Weektotal.totalInvestment}}￥</td>
                                   <td class="gree1">{{sum.Weektotal.invest}}￥</td>
@@ -2008,11 +2001,6 @@
                           <span>Daily Betting Breakdown</span>
                       </h4>
                       <form class="formdate left">
-                          <!-- <p class="word">
-                              <input type="text" id="startime" class="Wdate" value="{{time0}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
-                              <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
-                              <strong>周：<span id="week" class="vor" name="weeking">{{cashbreakweeking}}</span></strong>
-                          </p> -->
                           <p class="word">
                                 <input id="d12" class="Wdate" type="text" value="{{time0}}"/>
                                 <input type="radio" name="radio" value="1" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy'})"/>年
@@ -2030,6 +2018,7 @@
                       <p class="word left">
                           <button class="selss" type="submit">查询</button>
                           <button (click)="cashbreakretry()">重算</button>
+                          <button (click)="swal()"></button>
                       </p>
                   </form>
                   <p class="word">
@@ -2189,7 +2178,7 @@
                                       <option value="1">交易失败</option>
                                   </select>
                               </p>
-                              <p class="word" *ngIf="caizhong">
+                              <p class="word">
                                   <span>彩种：</span>
                                   <select id="cashlottery_type" name="lottery_type" [(ngModel)]="cashlotter">
                                       <option value="1">足球</option>
@@ -2486,6 +2475,7 @@
                             <button class="selss" type="submit">查询</button>
                             <button (click)="channelretry()">重算</button>
                             <button (click)="channelexport()">导出</button>
+                            <button (click)="swal()">11111</button>
                         </form>
                 </div>
                 <div class="row-fluid">

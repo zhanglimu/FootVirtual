@@ -9,7 +9,7 @@ import { InterfaceService} from '../service/interface.service';
 import { LiveOrdermanage } from '../modules/ordermanage';
 import * as $ from "jquery";
 import { element } from 'protractor';
-import * as swal from 'sweetalert';
+// import * as swal from 'sweetalert';
 
 interface Member {
     id: string;
@@ -23,7 +23,7 @@ interface Member {
     styleUrls: ['./orders.component.scss']
   })
 export class OrdersComponent implements OnInit {
-    public switchIndex: string = '6';
+    public switchIndex: string = '2';
     public loading = false;
     // username:string;
     // loginNum:string;
