@@ -1,3 +1,6 @@
+.container{
+    font-size:12px;
+}
 .header-bar{
     color:#fff;
     position: absolute;
@@ -61,7 +64,7 @@ a{
     text-decoration: none;
 }
 .left{float: left;}
-.formdate{margin: 0 5%;}
+// .formdate{margin: 0 5%;}
 .clearfix:after {
     content:".";
     display:block;
