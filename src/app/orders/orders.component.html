@@ -24,7 +24,7 @@
                       <li class="segment-button" [class.selected]="switchIndex === '6'" (click)="switch('6')">Daily Allup</li>
                       <li class="segment-button" [class.selected]="switchIndex === '7'" (click)="switch('7')">Daily Single</li>
                       <li class="segment-button" [class.selected]="switchIndex === '8'" (click)="switch('8')">Summary</li>
-                      <li class="segment-button" [class.selected]="switchIndex === '9'" (click)="switch('9')">month Summary</li>
+                      <li class="segment-button" [class.selected]="switchIndex === '9'" (click)="switch('9')">Daily Summary</li>
                       <li class="segment-button" [class.selected]="switchIndex === '10'" (click)="switch('10')">Daily Breakdown</li>
                       <li class="segment-button" [class.selected]="switchIndex === '11'" (click)="switch('11')">订单管理</li>
                       <li class="segment-button" [class.selected]="switchIndex === '12'" (click)="switch('12')">渠道统计报表</li>
@@ -1547,13 +1547,29 @@
                                   <td>HAFU</td>
                                   <td>HAD</td>
                               </tr>  
-                            <tr *ngIf="cashsingletotal" class="smallfontbody">
-                                  <td>投注额</td>
+                              <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>原始投注额</td>
                                   <td>{{cashsingletotal.resultMap.HHAD.totalInvestment}}</td>
                                   <td>{{cashsingletotal.resultMap.CRS.totalInvestment}}</td>
                                   <td>{{cashsingletotal.resultMap.TTG.totalInvestment}}</td>
                                   <td>{{cashsingletotal.resultMap.HAFU.totalInvestment}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.totalInvestment}}</td>
+                              </tr>
+                              <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>投注额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.invest}}</td>
+                              </tr>
+                              <tr *ngIf="cashsingletotal" class="smallfontbody">
+                                  <td>加奖额</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.bonus}}</td>
                               </tr>
                               <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>返奖金额</td>
@@ -1597,11 +1613,25 @@
                                 <td>MNL</td>
                             </tr>  
                           <tr *ngIf="cashsinglelan" class="smallfontbody">
-                                <td>投注额</td>
+                                <td>原始投注额</td>
                                 <td>{{cashsinglelan.resultMap.HILO.totalInvestment}}</td>
                                 <td>{{cashsinglelan.resultMap.HDC.totalInvestment}}</td>
                                 <td>{{cashsinglelan.resultMap.WNM.totalInvestment}}</td>
                                 <td>{{cashsinglelan.resultMap.MNL.totalInvestment}}</td>
+                            </tr>
+                          <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>投注额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.invest}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.invest}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.invest}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.invest}}</td>
+                            </tr>
+                            <tr *ngIf="cashsinglelan" class="smallfontbody">
+                                <td>加奖额</td>
+                                <td>{{cashsinglelan.resultMap.HILO.bonus}}</td>
+                                <td>{{cashsinglelan.resultMap.HDC.bonus}}</td>
+                                <td>{{cashsinglelan.resultMap.WNM.bonus}}</td>
+                                <td>{{cashsinglelan.resultMap.MNL.bonus}}</td>
                             </tr>
                             <tr *ngIf="cashsinglelan" class="smallfontbody">
                                 <td>返奖金额</td>
@@ -1868,6 +1898,13 @@
                           <p class="word">
                               <input id="d12" type="text" class="Wdate" value="{{time1}}" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>
                           </p>
+                          <p class="word">
+                                <span>彩种：</span>
+                                <select id="lottery_type" name="lottery_type" [(ngModel)]="cashl">
+                                    <option value=""></option>
+                                    <!-- <option value="2">篮球</option> -->
+                                </select>
+                            </p>
                       </form>
                       <p class="word left">
                           <button class="selss" type="submit">查询</button>
@@ -1942,7 +1979,7 @@
                                   <td>盈利率 Payout Ratio</td>
                               </tr>
                               <tr *ngFor="let monthS of sum.weekList">
-                                  <td>{{monthS.date}}</td>
+                                  <td>{{monthS.week}}</td>
                                   <td class="gree1">{{monthS.totalNum}}</td>
                                   <td class="gree1">{{monthS.totalInvestment}}￥</td>
                                   <td class="gree1">{{monthS.invest}}￥</td>
@@ -1963,7 +2000,7 @@
                                   <td class="red1">{{monthS.payoutRateBk}}%</td>
                               </tr>
                               <tr *ngIf="sum.Weektotal">
-                                  <td>{{sum.Weektotal.date}}</td>
+                                  <td>{{sum.Weektotal.week}}</td>
                                   <td class="gree1">{{sum.Weektotal.totalNum}}</td>
                                   <td class="gree1">{{sum.Weektotal.totalInvestment}}￥</td>
                                   <td class="gree1">{{sum.Weektotal.invest}}￥</td>
@@ -2039,7 +2076,7 @@
                           </thead>
                           <thead>
                               <tr class="firstr odds">
-                                  <th></th>
+                                  <th>玩法</th>
                                   <th>场次数量NO. Match</th>
                                   <th>原始投注额 TotalInvestment 人民币 RMB</th> 
                                   <th>交易额 Investment 人民币 RMB</th> 
@@ -2399,11 +2436,34 @@
                       </thead>
                       <tbody id="firstred">
                           <tr *ngFor="let le of channelshuju">
-                              <td>{{le.agentName}}</td>
+                            <td id="btn" (click)="qushowdiv()">{{le.agentName}}</td>
+                              <div id="bg"></div>
+                              <div id="show">
+                                  <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
+                                  <div >
+                                    <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label>
+                                    <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label>
+                                    <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label>
+                                    <label class="youqi">渠道url：<input value="{{le.url}}" readonly></label>
+                                    <label class="youqi">渠道密码：<input value="{{le.password}}" readonly></label>	
+                                    <label class="youqi">预存额：<input value="{{le.prestore}}" readonly></label>
+                                    <label class="youqi">存额报警线：<input value="{{le.prestoreAlarm}}" readonly></label>
+                                  </div>
+                              </div>
+
                               <td>{{le.agentCode}}</td>
                               <td>{{le.prestore}}</td> 
-                              <td>预存额明细</td>
-                              <td>回收明细</td> 
+                            <td id="btn" (click)="yushowdiv(le.agentCode)">预存额明细</td>
+                              <div id="yubg"></div>
+                              <div id="yushow">
+                                  <input id="btnclose" value="Close" (click)="yuhidediv()" type="button">
+                                  <p *ngFor="let de of yushuju index as i">
+                                      <span class="line">{{de.operateTime}}</span>
+                                      <span>{{de.preStoreDetail}}</span>
+                                  </p>
+                              </div>
+
+                              <td><button id="btnshow" (click)="recycle(le.agentId)">回收明细</button></td> 
                               <td>{{le.prestoreAlarm}}</td> 
                               <td>{{le.recyclePriceName}}</td>
                               <td>{{le.cxBonusRate}}</td>

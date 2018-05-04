@@ -100,8 +100,8 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/dailyCollectStatements/queryAll?year='+year+'&month='+month)
         .map(res=>res.json());
     }
-    cashmonthsummaryretry(year,month,day,cashmonthSummaryName){
-        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+cashmonthSummaryName)
+    cashmonthsummaryretry(year,month,day,cashzhon,cashmonthSummaryName){
+        return this.http.get(AppConfig.baseUrl+'/account/cashOutRecount?year='+year+'&month='+month+'&day='+day+'&lottery_type='+cashzhon+'&reportsName='+cashmonthSummaryName)
         .map(res=>res.json());
     }
     Breakdown(year,month,day,cashzhong){

@@ -209,6 +209,8 @@ export class OrdersComponent implements OnInit {
     monthList:string[];
     tmpnewchar:any;
     time1:string;
+    cashl:any;
+    cashzhon:any;
     cashmonthSummaryName:string;
     //cashbreak
     cashbreakpro:string[];
@@ -274,6 +276,7 @@ export class OrdersComponent implements OnInit {
     channeltotal:string[];
     channelshuju:LiveOrdermanage;
     cashagentName:string;
+    yushuju:string[];
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -505,6 +508,7 @@ export class OrdersComponent implements OnInit {
     //cashout ////
     this.cashallupzuqiu =false;
     this.alluplanqiu =false;
+    this.cashl = "";
     this.cashlot = "1";//彩种值
     this.cashlott = "1";
     this.cashlotte = "1";
@@ -536,7 +540,7 @@ export class OrdersComponent implements OnInit {
   summaryCha(reslt) {
     this.loading = true;
     var year = "";
-        var month = "";
+    var month = "";
     var day = "";
     if(this.people==0){
       this.lottery = "2";
@@ -1500,12 +1504,7 @@ cashallupexport(){
   var   year = "";
   var   month = "";
   var   day = "";
-  // if(this.people==0){
-  //   this.cashlot = "2";
-  // }else{
-  //   this.cashlot = $("#lottery_type").val();
-  // }
-  this.cashlot = $("#lottery_type").val();
+  this.cashzhonglei = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
@@ -1521,7 +1520,7 @@ cashallupexport(){
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/dailyAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashlot);
+      window.open(AppConfig.baseUrl +'/account/dailyAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhonglei);
     } 
 }
 cashsingleCha(reslt) {
@@ -1611,7 +1610,7 @@ cashsingleexport(){
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlott = $("#lottery_type").val();
+  this.cashzhongle = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
@@ -1627,7 +1626,7 @@ cashsingleexport(){
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/detailSGL/detailSGLExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashlot);
+      window.open(AppConfig.baseUrl +'/account/detailSGL/detailSGLExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongle);
     } 
 }
 cashsummaryCha(reslt) {
@@ -1679,10 +1678,14 @@ cashsummaryCha(reslt) {
 }
 cashsummaryretry() {
   var year = "";
-      var month = "";
+  var month = "";
   var day = "";
   this.cashzhongl = $("#lottery_type").val();
   var time:any = $("#startime").val();
+  if(this.cashzhongl =="0"){
+    this.message.error("请去选择足球或篮球再重算");
+    return false;
+  }else{
       if(time =="" || time ==null){
     this.message.error("请先选择要重算的日期");
       }else{
@@ -1714,11 +1717,12 @@ cashsummaryretry() {
       });      
   } 
 }
+}
 cashsummaryexport() {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
+  this.cashzhongl = $("#lottery_type").val();
   var time:any = $("#startime").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
@@ -1734,7 +1738,7 @@ cashsummaryexport() {
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongl);
     } 
 }
 cashmonthsummaryCha(reslt) {
@@ -1786,13 +1790,13 @@ cashmonthsummaryCha(reslt) {
     }
 }
 cashmonthsummaryretry() {
+  this.loading = true;
+  this.message.error("该页面重算时间稍久，请耐心等待!");
   var year = "";
   var month = "";
   var day = "";
   var time:any = $("#d12").val();
-      if(time =="" || time ==null){
-    this.message.error("请先选择要重算的日期");
-      }else{
+  this.cashzhon = $("#lottery_type").val();
       var sort = time.split("-");
       if(sort.length ==3){
         year=sort[0];
@@ -1801,12 +1805,10 @@ cashmonthsummaryretry() {
       }else if(sort.length ==2){
         year=sort[0];
         month=sort[1];
-        return false;
       }else{
         year=sort;
-        return false;
       }
-      this.QUERY.cashmonthsummaryretry(year,month,day,this.cashmonthSummaryName).subscribe(data => {
+      this.QUERY.cashmonthsummaryretry(year,month,day,this.cashzhon,this.cashmonthSummaryName).subscribe(data => {
         if (data.ResultCode=1) {
           this.Nodata = false;
         }else{
@@ -1816,8 +1818,7 @@ cashmonthsummaryretry() {
       },error=>{
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
-      });      
-  } 
+      });   
 }
 //获取第多少周
 week(i){
@@ -1960,7 +1961,7 @@ cashbreakexport() {
   var   year = "";
   var   month = "";
   var   day = "";
-  // this.cashlotte = $("#lottery_type").val();
+  this.cashzhong = $("#lottery_type").val();
   var time:any = $("#d12").val();
   if(time =="" || time ==null){
       this.message.error("请先选择要导出的日期");
@@ -1976,7 +1977,7 @@ cashbreakexport() {
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery);
+      window.open(AppConfig.baseUrl +'/account/dailyFinancialDetail/dailyFinancialDetailExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhong);
     } 
 }
 //order开始
@@ -2108,11 +2109,7 @@ cashorderCha(reslt) {
   this.cashuid = $("#cashuid").val();
   this.cashthird =$('#cashthird option:selected').val();
   this.cashdeal =$('#cashdeal option:selected').val();
-  if(this.people==0){
-    this.cashlottery_type = "2";
-  }else{
-    this.cashlottery_type = $("#cashlottery_type").val();
-  }
+  this.cashlottery_type = $("#cashlottery_type").val();
   this.cashall(this.cashstartime,this.cashendtime,this.cashagNum,this.pageNum,this.pageSize,this.cashdeal,this.cashstate,this.cashthird,this.cashinplay,this.cashtkId,this.cashuid,this.cashlottery_type)
 }
 //分页
@@ -2194,11 +2191,7 @@ cshorderexport(){
   this.cashuid = $("#cashuid").val();
   this.cashthird =$('#cashthird option:selected').val();
   this.cashdeal =$('#cashdeal option:selected').val();
-  if(this.people==0){
-    this.cashlottery_type = "2";
-  }else{
-    this.cashlottery_type = $("#cashlottery_type").val();
-  }
+  this.cashlottery_type = $("#cashlottery_type").val();
     window.open(AppConfig.baseUrl + "/account/orderManage/userManagementExcel?startDate="+this.cashstartime +"&endDate="+this.cashendtime+"&agent_id="+this.cashagNum+"&trade_type="+this.cashdeal+"&state="+this.cashstate+"&recycleState="+this.cashthird+"&inplay="+this.cashinplay+"&tkId="+this.cashtkId+"&uid="+this.cashuid+"&ballType="+this.cashlottery_type);
 }
 cashthirdCha(reslt) {
@@ -2214,7 +2207,7 @@ cashthirdCha(reslt) {
       if (data!=null) {
         this.loading = false;
         this.Nodata = false;
-        if(this.agentid =="110"){   //110-彩票宝
+        if(this.agentid =="100"||this.agentid =="101"||this.agentid =="103"||this.agentid =="110"||this.agentid =="112"||this.agentid =="113"||this.agentid =="114"||this.agentid =="115"||this.agentid =="116"||this.agentid =="117"||this.agentid =="118"||this.agentid =="122"||this.agentid =="123"){   //110-彩票宝
           this.message.error("该渠道未开发此接口");
         }else{
           this.thirdshu = data.ticketResult;
@@ -2235,8 +2228,8 @@ cashthirdCha(reslt) {
       if (data!=null) {
         this.loading = false;
         this.Nodata = false;
-            if(this.agentid =="110"||data.resultList.length<100){
-              if(this.agentid =="110"){
+            if(data.resultList.length<100){
+              if(this.agentid =="100"||this.agentid =="101"||this.agentid =="103"||this.agentid =="110"||this.agentid =="112"||this.agentid =="113"||this.agentid =="114"||this.agentid =="115"||this.agentid =="116"||this.agentid =="117"||this.agentid =="118"||this.agentid =="122"||this.agentid =="123"){
                 this.message.error("该渠道未开发此接口");
               }else{
                 this.message.error("已是最后一页");
@@ -2357,6 +2350,68 @@ channelCha(reslt) {
       });
     } 
 }
+//点击详情
+qushowdiv() {
+  var  year = "";
+  var  month = "";
+  var  day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+    this.QUERY.Channel(year,month,day).subscribe(data => {
+      if (data!=null) {
+        this.Nodata3 = false;
+        this.channelshuju = data.agentInfoModels;
+      }else {
+      this.details = [];
+      this.Nodata3 = true;
+      this.data3 = "暂无新数据";
+      }
+    }, error => {
+      this.Nodata3 = true;
+      this.data3 = "数据异常请联系开发人员";
+    })
+    document.getElementById("bg").style.display = "block";
+    document.getElementById("show").style.display = "block";
+  }
+}
+quhidediv() {
+  document.getElementById("bg").style.display = 'none';
+  document.getElementById("show").style.display = 'none';
+}
+yushowdiv(agentId) {
+    this.QUERY.Channeldetail(agentId).subscribe(data => {
+      if (data!=null) {
+        this.Nodata3 = false;
+        this.yushuju = data.agentInfoDetails;
+      }else {
+      this.details = [];
+      this.Nodata3 = true;
+      this.data3 = "暂无新数据";
+      }
+    }, error => {
+      this.Nodata3 = true;
+      this.data3 = "数据异常请联系开发人员";
+    })
+    document.getElementById("yubg").style.display = "block";
+    document.getElementById("yushow").style.display = "block";
+  }
+yuhidediv() {
+  document.getElementById("yubg").style.display = 'none';
+  document.getElementById("yushow").style.display = 'none';
+}
 channelretry() {
   var year = "";
   var month = "";
@@ -2393,5 +2448,50 @@ channelretry() {
       });      
   } 
 }
+channelexport(){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/channelStatisticsExcel?year='+year+'&month='+month+'&day='+day);
+    } 
+}
+recycle(agentId){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId);
+    } 
+}
+
 
 }

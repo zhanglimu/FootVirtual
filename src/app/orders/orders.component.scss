@@ -143,7 +143,7 @@ td.blue{background: #F2F2F2;}
 #firstred tr:nth-of-type(even){background: #F2F2F2;}
 #firstred tr:hover{background: #bddcee;}
 //遮罩
-#bg {
+#bg,#yubg {
 	display:none;
 	position:absolute;
 	top:0%;
@@ -156,7 +156,7 @@ td.blue{background: #F2F2F2;}
 	opacity:.70;
 	filter:alpha(opacity=70);
 }
-#show {
+#show,#yushow {
 	display:none;
 	position:absolute;
 	top:25%;
@@ -221,3 +221,8 @@ td.blue{background: #F2F2F2;}
 .cancel{color: #fe3c3c}
 .a{color:#8ae4fc}
 .b{color: #fe3c3c}
+
+#btn{
+    color: #fe3c3c;
+}
+.line{color: #55b5ad}
