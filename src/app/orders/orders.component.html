@@ -2413,7 +2413,7 @@
                               <th>渠道编码</th>
                               <th>预存额</th>
                               <th>-</th>
-                              <th>-</th> 
+                              <th>回收明细</th> 
                               <th>预存报警</th>
                               <th>回收额</th>
                               <th>加奖比例</th>
@@ -2463,7 +2463,10 @@
                                   </p>
                               </div>
 
-                              <td><button id="btnshow" (click)="recycle(le.agentId)">回收明细</button></td> 
+                              <td>
+                                  <button id="btnshow" (click)="FBrecycle(le.agentId)">FB</button>
+                                  <button id="btnshow" (click)="BKrecycle(le.agentId)">BK</button>
+                                </td> 
                               <td>{{le.prestoreAlarm}}</td> 
                               <td>{{le.recyclePriceName}}</td>
                               <td>{{le.cxBonusRate}}</td>

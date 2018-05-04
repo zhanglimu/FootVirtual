@@ -2470,7 +2470,7 @@ channelexport(){
       window.open(AppConfig.baseUrl +'/account/channelStatistics/channelStatisticsExcel?year='+year+'&month='+month+'&day='+day);
     } 
 }
-recycle(agentId){
+FBrecycle(agentId){
   var   year = "";
   var   month = "";
   var   day = "";
@@ -2489,9 +2489,30 @@ recycle(agentId){
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId);
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=1');
     } 
 }
-
+BKrecycle(agentId){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=2');
+    } 
+}
 
 }
