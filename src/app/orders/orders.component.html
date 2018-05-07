@@ -1898,13 +1898,6 @@
                           <p class="word">
                               <input id="d12" type="text" class="Wdate" value="{{time1}}" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>
                           </p>
-                          <p class="word">
-                                <span>彩种：</span>
-                                <select id="lottery_type" name="lottery_type" [(ngModel)]="cashl">
-                                    <option value=""></option>
-                                    <!-- <option value="2">篮球</option> -->
-                                </select>
-                            </p>
                       </form>
                       <p class="word left">
                           <button class="selss" type="submit">查询</button>
@@ -2317,8 +2310,8 @@
                                                   <td style="width:8%;">{{i+1}}{{de.stateMessage}}</td>
                                                   <td style="width:8%;">{{de.product}}</td>
                                                   <td style="width:50%;">
-                                                     <span [ngClass]="{a:de.isA}">{{contents}}</span>
-                                                     <span [ngClass]="{b:de.isB}">{{betents}}</span>
+                                                     {{de.betcontems}}
+                                                     <!-- <span [ngClass]="{b:de.isB}">{{betents}}</span> -->
                                                   </td>
                                                   <td style="width:6%;">{{de.local_m}}</td>
                                                   <td style="width:4%;">{{de.num}}</td>

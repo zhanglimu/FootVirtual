@@ -209,8 +209,8 @@ export class OrdersComponent implements OnInit {
     monthList:string[];
     tmpnewchar:any;
     time1:string;
-    cashl:any;
-    cashzhon:any;
+    // cashl:any;
+    // cashzhon:any;
     cashmonthSummaryName:string;
     //cashbreak
     cashbreakpro:string[];
@@ -508,7 +508,7 @@ export class OrdersComponent implements OnInit {
     //cashout ////
     this.cashallupzuqiu =false;
     this.alluplanqiu =false;
-    this.cashl = "";
+    // this.cashl = "";
     this.cashlot = "1";//彩种值
     this.cashlott = "1";
     this.cashlotte = "1";
@@ -1796,7 +1796,7 @@ cashmonthsummaryretry() {
   var month = "";
   var day = "";
   var time:any = $("#d12").val();
-  this.cashzhon = $("#lottery_type").val();
+  // this.cashzhon = $("#lottery_type").val();
       var sort = time.split("-");
       if(sort.length ==3){
         year=sort[0];
@@ -1808,7 +1808,7 @@ cashmonthsummaryretry() {
       }else{
         year=sort;
       }
-      this.QUERY.cashmonthsummaryretry(year,month,day,this.cashzhon,this.cashmonthSummaryName).subscribe(data => {
+      this.QUERY.cashmonthsummaryretry(year,month,day,this.cashmonthSummaryName).subscribe(data => {
         if (data.ResultCode=1) {
           this.Nodata = false;
         }else{
@@ -2124,48 +2124,51 @@ cashshowdiv(ticketInfo_id,ballType,tkId) {
     if (response!=null) {
       this.cashdetails = response.detailList;
 console.log(this.cashdetails,"llll")
-      for (var i = 0; i < response.detailList.length; i++) {
-        var l_code= response.detailList[i].l_code;// level match code: 一场比赛的赛事编码 +,+ 降关情况
-        var l_codes=l_code.split(",");
-        var betContents= response.detailList[i].betContent.split("/");
-        var canceled = response.detailList[i].canceled;
-        var cancel = canceled.split(",");
-        this.contents=""; 
-        this.betents="";
-        for (var j = 0; j < l_codes.length; j++) {
-          if(this.contents==""){
-            if(l_codes[j]=="0"){
-                if(cancel[j] == "VOID" ){
-                  this.contents=betContents[j];
-                  this.cashdetails[i].isA=true;
-                }else{
-                  this.contents=betContents[j]; 
-                  this.cashdetails[i].isB=true;
-                }
-             }else{
-              this.contents=betContents[j]; 
-            }
-          }else{
-            if(l_codes[j]=="0"){
-               if(cancel[j] == "VOID" ){
-                this.contents=this.contents+'/';
-                this.betents=betContents[j]; 
-                this.cashdetails[i].isA=true;
-              }else{ 
-                this.contents=this.contents+'/';
-                this.betents=betContents[j]; 
-                this.cashdetails[i].isB=true;
-               } 
-            }else{
-                this.contents=this.contents+'/'+betContents[j];
-            }
-          } 
-        }
-      }
+      // for (var i = 0; i < response.detailList.length; i++) {
+      //   var l_code= response.detailList[i].l_code;
+      //   var l_codes=l_code.split(",");
+      //   var betContents= response.detailList[i].betContent.split("/");
+      //   var canceled = response.detailList[i].canceled;
+      //   var cancel = canceled.split(",");
+      //   this.contents=""; 
+      //   this.betents="";
+      //   for (var j = 0; j < l_codes.length; j++) {
+      //     if(this.contents==""){
+      //       if(l_codes[j]=="0"){
+      //           if(cancel[j] == "VOID" ){
+      //             this.contents=betContents[j];
+      //             this.cashdetails[i].isA=true;
+      //             console.log("qqq")
+      //           }else{
+      //             this.contents=betContents[j]; 
+      //             this.cashdetails[i].isB=true;
+      //             console.log("eee")
+      //           }
+      //        }else{
+      //         this.contents=betContents[j]; 
+      //        }
+      //     }else{
+      //       if(l_codes[j]=="0"){
+      //          if(cancel[j] == "VOID" ){
+      //           this.contents=this.contents+'/';
+      //           this.betents=betContents[j]; 
+      //           this.cashdetails[i].isA=true;
+      //           console.log("www")
+      //         }else{ 
+      //           this.contents=this.contents+'/';
+      //           this.betents=betContents[j]; 
+      //           this.cashdetails[i].isB=true;
+      //           console.log("hhh")
+      //          } 
+      //       }else{
+      //           this.contents=this.contents+'/'+betContents[j];
+      //       }
+      //     } 
+      //   }
+      // }
 
       this.Nodata3 = false;
     }else {
-    this.details = [];
     this.Nodata3 = true;
     this.data3 = "暂无新数据";
     }
@@ -2181,7 +2184,7 @@ cashhidediv() {
   document.getElementById("show").style.display = 'none';
 }
 //导出
-cshorderexport(){
+cashorderexport(){
   this.cashstartime = $("#cashstime").val();
   this.cashendtime = $("#cashetime").val();
   this.cashagNum =$('#cashagentNum option:selected').val();
