@@ -2303,15 +2303,14 @@
                                               </tr>
                                           </thead>
                                       </table>
-                                      <table id="sll">
+                                      <table id="scr">
                                           <tbody class="barrier">
                                               <tr *ngFor="let de of cashdetails index as i">
                                                   <td style="visibility:hidden;">0</td>
                                                   <td style="width:8%;">{{i+1}}{{de.stateMessage}}</td>
                                                   <td style="width:8%;">{{de.product}}</td>
-                                                  <td style="width:50%;" [innerHTML]="contents">
-                                                     <!-- <span [ngClass]="{a:de.isA}">{{contents}}</span>
-                                                     <span [ngClass]="{b:de.isB}">{{betents}}</span> -->
+                                                  <td style="width:50%;">
+                                                    <span *ngFor="let gg of de.betList"[ngStyle]="{'color':gg.color}">{{gg.detail}} / </span>
                                                   </td>
                                                   <td style="width:6%;">{{de.local_m}}</td>
                                                   <td style="width:4%;">{{de.num}}</td>
@@ -2429,57 +2428,57 @@
                       </thead>
                       <tbody id="firstred">
                           <tr *ngFor="let le of channelshuju">
-                            <td id="btn" (click)="qushowdiv()">{{le.agentName}}</td>
-                              <div id="bg"></div>
-                              <div id="show">
-                                  <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
-                                  <div >
-                                    <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label>
-                                    <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label>
-                                    <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label>
-                                    <label class="youqi">渠道url：<input value="{{le.url}}" readonly></label>
-                                    <label class="youqi">渠道密码：<input value="{{le.password}}" readonly></label>	
-                                    <label class="youqi">预存额：<input value="{{le.prestore}}" readonly></label>
-                                    <label class="youqi">存额报警线：<input value="{{le.prestoreAlarm}}" readonly></label>
-                                  </div>
-                              </div>
+                            <td id="btn" (click)="qushowdiv($index)">{{le.agentName}}</td>
+                                <div id="bg"></div>
+                                <div id="show">
+                                    <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
+                                    <div >
+                                        <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label><br>
+                                        <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label><br>
+                                        <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label><br>
+                                        <label class="youqi">渠道url：<input value="{{le.url}}" readonly></label><br>
+                                        <label class="youqi">渠道密码：<input value="{{le.password}}" readonly></label><br>	
+                                        <label class="youqi">预存额：<input value="{{le.prestore}}" readonly></label><br>
+                                        <label class="youqi">存额报警线：<input value="{{le.prestoreAlarm}}" readonly></label>
+                                    </div>
+                                </div>
 
-                              <td>{{le.agentCode}}</td>
-                              <td>{{le.prestore}}</td> 
+                            <td>{{le.agentCode}}</td>
+                            <td>{{le.prestore}}</td> 
                             <td id="btn" (click)="yushowdiv(le.agentCode)">预存额明细</td>
-                              <div id="yubg"></div>
-                              <div id="yushow">
-                                  <input id="btnclose" value="Close" (click)="yuhidediv()" type="button">
-                                  <p *ngFor="let de of yushuju index as i">
-                                      <span class="line">{{de.operateTime}}</span>
-                                      <span>{{de.preStoreDetail}}</span>
-                                  </p>
-                              </div>
+                                <div id="yubg"></div>
+                                <div id="yushow">
+                                    <input id="btnclose" value="Close" (click)="yuhidediv()" type="button">
+                                    <p *ngFor="let de of yushuju index as i">
+                                        <span class="line">{{de.operateTime}}</span>
+                                        <span>{{de.preStoreDetail}}</span>
+                                    </p>
+                                </div>
 
-                              <td>
-                                  <button id="btnshow" (click)="FBrecycle(le.agentId)">FB</button>
-                                  <button id="btnshow" (click)="BKrecycle(le.agentId)">BK</button>
-                                </td> 
-                              <td>{{le.prestoreAlarm}}</td> 
-                              <td>{{le.recyclePriceName}}</td>
-                              <td>{{le.cxBonusRate}}</td>
-                              <td>{{le.agentSellMess}}</td>
+                            <td>
+                                <button id="btnshow" (click)="FBrecycle(le.agentId)">FB</button>
+                                <button id="btnshow" (click)="BKrecycle(le.agentId)">BK</button>
+                            </td> 
+                            <td>{{le.prestoreAlarm}}</td> 
+                            <td>{{le.recyclePriceName}}</td>
+                            <td>{{le.cxBonusRate}}</td>
+                            <td>{{le.agentSellMess}}</td>
 
-                              <td class="red1">{{le.userAmountFb}}</td>
-                              <td class="red1">{{le.orderAmountFb}}</td>
-                              <td class="red1">{{le.tradePriceFb}}</td>
-                              <td class="red1">{{le.cxBonusFb}}</td>
-                              <td class="red1">{{le.winMoneyFb}}</td>
-                              <td class="red1">{{le.profitFb}}</td>
-                              <td class="red1">{{le.profitabilityFb}}%</td>
+                            <td class="red1">{{le.userAmountFb}}</td>
+                            <td class="red1">{{le.orderAmountFb}}</td>
+                            <td class="red1">{{le.tradePriceFb}}</td>
+                            <td class="red1">{{le.cxBonusFb}}</td>
+                            <td class="red1">{{le.winMoneyFb}}</td>
+                            <td class="red1">{{le.profitFb}}</td>
+                            <td class="red1">{{le.profitabilityFb}}%</td>
                               
-                              <td class="yel1">{{le.userAmountBk}}</td>
-                              <td class="yel1">{{le.orderAmountBk}}</td>
-                              <td class="yel1">{{le.tradePriceBk}}</td>
-                              <td class="yel1">{{le.cxBonusBk}}</td>
-                              <td class="yel1">{{le.winMoneyBk}}</td>
-                              <td class="yel1">{{le.profitBk}}</td>
-                              <td class="yel1">{{le.profitabilityBk}}%</td>
+                            <td class="yel1">{{le.userAmountBk}}</td>
+                            <td class="yel1">{{le.orderAmountBk}}</td>
+                            <td class="yel1">{{le.tradePriceBk}}</td>
+                            <td class="yel1">{{le.cxBonusBk}}</td>
+                            <td class="yel1">{{le.winMoneyBk}}</td>
+                            <td class="yel1">{{le.profitBk}}</td>
+                            <td class="yel1">{{le.profitabilityBk}}%</td>
                           </tr>
                       </tbody>
                       <tbody *ngIf="Nodata">

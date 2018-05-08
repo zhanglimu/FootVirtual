@@ -223,6 +223,7 @@ export class OrdersComponent implements OnInit {
     cashshuju:LiveOrdermanage;
     cashshu:string[];
     cashdetails:LiveOrdermanage;
+    colordetail:string[];
     cashtkIding:any;
     contents:string;
     betents:string;
@@ -2124,39 +2125,10 @@ cashshowdiv(ticketInfo_id,ballType,tkId) {
     if (response!=null) {
       this.cashdetails = response.detailList;
 console.log(this.cashdetails,"llll")
-      for (var i = 0; i < response.detailList.length; i++) {
-        var l_code= response.detailList[i].l_code;
-        var l_codes=l_code.split(",");
-        var betContents= response.detailList[i].betContent.split("/");
-        var canceled = response.detailList[i].canceled;
-        var cancel = canceled.split(",");
-        this.contents=""; 
-        this.betents="";
-        for (var j = 0; j < l_codes.length; j++) {
-          if(this.contents==""){
-            if(l_codes[j]=="0"){
-                if(cancel[j] == "VOID" ){
-                  // this.contents="<font style=\"color:#8ae4fc\">"+betContents[j]+"</font>";
-                  this.contents="&lt;font style=&quot;color:#8ae4fc&quot;&gt;"+betContents[j]+"&lt;/font&gt;";
-                }else{
-                  this.contents="<font style='color:#fe3c3c'>"+betContents[j]+"</font>"; 
-                }
-             }else{
-              this.contents=betContents[j]; 
-            }
-          }else{
-            if(l_codes[j]=="0"){
-               if(cancel[j] == "VOID" ){
-                this.contents=this.contents+"/"+"<font style='color:#8ae4fc'>"+betContents[j]+"</font>"; 
-              }else{ 
-                this.contents=this.contents+"/"+"<font style='color:#fe3c3c'>"+betContents[j]+"</font>";
-               } 
-            }else{
-              this.contents=this.contents+"/"+betContents[j];
-            }
-          } 
-        }
-      }
+      // for (var i = 0; i < response.detailList.length; i++) {
+      //   this.colordetail = response.detailList[i].betList;
+      //   console.log(this.colordetail,"sss")
+      // }
 
       this.Nodata3 = false;
     }else {
@@ -2345,41 +2317,10 @@ channelCha(reslt) {
     } 
 }
 //点击详情
-qushowdiv() {
-  var  year = "";
-  var  month = "";
-  var  day = "";
-  var time:any = $("#d12").val();
-  if(time =="" || time ==null){
-      this.message.error("请先选择日期");
-  }else{
-      var sort = time.split("-");
-      if(sort.length ==3){
-        year=sort[0];
-        month=sort[1];
-        day=sort[2];
-      }else if(sort.length ==2){
-        year=sort[0];
-        month=sort[1];
-      }else{
-        year=sort;
-      }
-    this.QUERY.Channel(year,month,day).subscribe(data => {
-      if (data!=null) {
-        this.Nodata3 = false;
-        this.channelshuju = data.agentInfoModels;
-      }else {
-      this.details = [];
-      this.Nodata3 = true;
-      this.data3 = "暂无新数据";
-      }
-    }, error => {
-      this.Nodata3 = true;
-      this.data3 = "数据异常请联系开发人员";
-    })
+qushowdiv(index) {
+  alert(index)
     document.getElementById("bg").style.display = "block";
     document.getElementById("show").style.display = "block";
-  }
 }
 quhidediv() {
   document.getElementById("bg").style.display = 'none';

@@ -222,7 +222,19 @@ td.blue{background: #F2F2F2;}
 .a{color:#8ae4fc}
 .b{color: #fe3c3c}
 
+#scr{
+    display: block;
+    max-height:300px;
+    overflow-y:scroll;
+    word-break: break-all;
+    -moz-overflow-y:scroll;
+    -webkit-overflow-y:scroll;
+}
 #btn{
     color: #fe3c3c;
 }
 .line{color: #55b5ad}
+
+label{display: inline-block;margin: 10px 0;width: 400px;}
+.youqi{text-align: right!important;}
+.youqi input{border: none;border-bottom: 1px solid #ccc;color: #000 !important;}
