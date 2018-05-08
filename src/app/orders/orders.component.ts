@@ -2036,7 +2036,7 @@ cashall(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,c
             this.cashshuju[i].ballType_name = "足球";
             break;
           case 2:
-            this.cashshuju[i].ballType_name = "电竞";
+            this.cashshuju[i].ballType_name = "篮球";
             break;
         }
         switch (this.cashshuju[i].inplay) {
@@ -2124,48 +2124,39 @@ cashshowdiv(ticketInfo_id,ballType,tkId) {
     if (response!=null) {
       this.cashdetails = response.detailList;
 console.log(this.cashdetails,"llll")
-      // for (var i = 0; i < response.detailList.length; i++) {
-      //   var l_code= response.detailList[i].l_code;
-      //   var l_codes=l_code.split(",");
-      //   var betContents= response.detailList[i].betContent.split("/");
-      //   var canceled = response.detailList[i].canceled;
-      //   var cancel = canceled.split(",");
-      //   this.contents=""; 
-      //   this.betents="";
-      //   for (var j = 0; j < l_codes.length; j++) {
-      //     if(this.contents==""){
-      //       if(l_codes[j]=="0"){
-      //           if(cancel[j] == "VOID" ){
-      //             this.contents=betContents[j];
-      //             this.cashdetails[i].isA=true;
-      //             console.log("qqq")
-      //           }else{
-      //             this.contents=betContents[j]; 
-      //             this.cashdetails[i].isB=true;
-      //             console.log("eee")
-      //           }
-      //        }else{
-      //         this.contents=betContents[j]; 
-      //        }
-      //     }else{
-      //       if(l_codes[j]=="0"){
-      //          if(cancel[j] == "VOID" ){
-      //           this.contents=this.contents+'/';
-      //           this.betents=betContents[j]; 
-      //           this.cashdetails[i].isA=true;
-      //           console.log("www")
-      //         }else{ 
-      //           this.contents=this.contents+'/';
-      //           this.betents=betContents[j]; 
-      //           this.cashdetails[i].isB=true;
-      //           console.log("hhh")
-      //          } 
-      //       }else{
-      //           this.contents=this.contents+'/'+betContents[j];
-      //       }
-      //     } 
-      //   }
-      // }
+      for (var i = 0; i < response.detailList.length; i++) {
+        var l_code= response.detailList[i].l_code;
+        var l_codes=l_code.split(",");
+        var betContents= response.detailList[i].betContent.split("/");
+        var canceled = response.detailList[i].canceled;
+        var cancel = canceled.split(",");
+        this.contents=""; 
+        this.betents="";
+        for (var j = 0; j < l_codes.length; j++) {
+          if(this.contents==""){
+            if(l_codes[j]=="0"){
+                if(cancel[j] == "VOID" ){
+                  // this.contents="<font style=\"color:#8ae4fc\">"+betContents[j]+"</font>";
+                  this.contents="&lt;font style=&quot;color:#8ae4fc&quot;&gt;"+betContents[j]+"&lt;/font&gt;";
+                }else{
+                  this.contents="<font style='color:#fe3c3c'>"+betContents[j]+"</font>"; 
+                }
+             }else{
+              this.contents=betContents[j]; 
+            }
+          }else{
+            if(l_codes[j]=="0"){
+               if(cancel[j] == "VOID" ){
+                this.contents=this.contents+"/"+"<font style='color:#8ae4fc'>"+betContents[j]+"</font>"; 
+              }else{ 
+                this.contents=this.contents+"/"+"<font style='color:#fe3c3c'>"+betContents[j]+"</font>";
+               } 
+            }else{
+              this.contents=this.contents+"/"+betContents[j];
+            }
+          } 
+        }
+      }
 
       this.Nodata3 = false;
     }else {

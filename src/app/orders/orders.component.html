@@ -2309,9 +2309,9 @@
                                                   <td style="visibility:hidden;">0</td>
                                                   <td style="width:8%;">{{i+1}}{{de.stateMessage}}</td>
                                                   <td style="width:8%;">{{de.product}}</td>
-                                                  <td style="width:50%;">
-                                                     {{de.betcontems}}
-                                                     <!-- <span [ngClass]="{b:de.isB}">{{betents}}</span> -->
+                                                  <td style="width:50%;" [innerHTML]="contents">
+                                                     <!-- <span [ngClass]="{a:de.isA}">{{contents}}</span>
+                                                     <span [ngClass]="{b:de.isB}">{{betents}}</span> -->
                                                   </td>
                                                   <td style="width:6%;">{{de.local_m}}</td>
                                                   <td style="width:4%;">{{de.num}}</td>
