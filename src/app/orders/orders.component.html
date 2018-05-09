@@ -36,9 +36,9 @@
                     <span class="one_bar">事件型</span>
                     <ul class="two_bar">
                         <li class="segment-button" [class.selected]="switchIndex === '15'" (click)="switch('15')">Single</li>
-                        <!-- <li class="segment-button" [class.selected]="switchIndex === '16'" (click)="switch('16')">Summary</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '16'" (click)="switch('16')">Summary</li>
                         <li class="segment-button" [class.selected]="switchIndex === '17'" (click)="switch('17')">Breakdown</li>
-                        <li class="segment-button" [class.selected]="switchIndex === '18'" (click)="switch('18')">订单管理</li>
+                        <!-- <li class="segment-button" [class.selected]="switchIndex === '18'" (click)="switch('18')">订单管理</li>
                         <li class="segment-button" [class.selected]="switchIndex === '19'" (click)="switch('19')">Daily Summary</li>
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li> -->
                       </ul>
@@ -584,53 +584,53 @@
                           </tr>  
                         <tr *ngIf="totaldian" class="smallfontbody">
                               <td>投注额</td>
-                              <td>{{total.resultMap.FBL.totalInvestment}}</td>
-                              <td>{{total.resultMap.SHDC.totalInvestment}}</td>
-                              <td>{{total.resultMap.HL.totalInvestment}}</td>
-                              <td>{{total.resultMap.HDC.totalInvestment}}</td>
-                              <td>{{total.resultMap.SHL.totalInvestment}}</td>
-                              <td>{{total.resultMap.MNL.totalInvestment}}</td>
-                              <td>{{total.resultMap.HS.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.FBL.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.SHDC.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.HL.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.HDC.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.SHL.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.MNL.totalInvestment}}</td>
+                              <td>{{totaldian.resultMap.HS.totalInvestment}}</td>
                           </tr>
                           <tr *ngIf="totaldian" class="smallfontbody">
                               <td>返奖金额</td>
-                              <td>{{total.resultMap.FBL.totalPrice}}</td>
-                              <td>{{total.resultMap.SHDC.totalPrice}}</td>
-                              <td>{{total.resultMap.HL.totalPrice}}</td>
-                              <td>{{total.resultMap.HDC.totalPrice}}</td>
-                              <td>{{total.resultMap.SHL.totalPrice}}</td>
-                              <td>{{total.resultMap.MNL.totalPrice}}</td>
-                              <td>{{total.resultMap.HS.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.FBL.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.SHDC.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.HL.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.HDC.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.SHL.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.MNL.totalPrice}}</td>
+                              <td>{{totaldian.resultMap.HS.totalPrice}}</td>
                           </tr> 
                            <tr *ngIf="totaldian" class="smallfontbody">
                               <td>中奖投注额</td>
-                              <td>{{total.resultMap.FBL.winprice}}</td>
-                              <td>{{total.resultMap.SHDC.winprice}}</td>
-                              <td>{{total.resultMap.HL.winprice}}</td>
-                              <td>{{total.resultMap.HDC.winprice}}</td>
-                              <td>{{total.resultMap.SHL.winprice}}</td>
-                              <td>{{total.resultMap.MNL.winprice}}</td>
-                              <td>{{total.resultMap.HS.winprice}}</td>
+                              <td>{{totaldian.resultMap.FBL.winprice}}</td>
+                              <td>{{totaldian.resultMap.SHDC.winprice}}</td>
+                              <td>{{totaldian.resultMap.HL.winprice}}</td>
+                              <td>{{totaldian.resultMap.HDC.winprice}}</td>
+                              <td>{{totaldian.resultMap.SHL.winprice}}</td>
+                              <td>{{totaldian.resultMap.MNL.winprice}}</td>
+                              <td>{{totaldian.resultMap.HS.winprice}}</td>
                           </tr>
                             <tr *ngIf="totaldian" class="smallfontbody">
                               <td>平均中奖固定金额</td>
-                              <td>{{total.resultMap.FBL.average}}</td>
-                              <td>{{total.resultMap.SHDC.average}}</td>
-                              <td>{{total.resultMap.HL.average}}</td>
-                              <td>{{total.resultMap.HDC.average}}</td>
-                              <td>{{total.resultMap.SHL.average}}</td>
-                              <td>{{total.resultMap.MNL.average}}</td>
-                              <td>{{total.resultMap.HS.average}}</td>
+                              <td>{{totaldian.resultMap.FBL.average}}</td>
+                              <td>{{totaldian.resultMap.SHDC.average}}</td>
+                              <td>{{totaldian.resultMap.HL.average}}</td>
+                              <td>{{totaldian.resultMap.HDC.average}}</td>
+                              <td>{{totaldian.resultMap.SHL.average}}</td>
+                              <td>{{totaldian.resultMap.MNL.average}}</td>
+                              <td>{{totaldian.resultMap.HS.average}}</td>
                           </tr>
                             <tr *ngIf="totaldian" class="smallfontbody">
                               <td>盈利率%</td>
-                              <td>{{total.resultMap.FBL.payoutRate}}%</td>
-                              <td>{{total.resultMap.SHDC.payoutRate}}%</td>
-                              <td>{{total.resultMap.HL.payoutRate}}%</td>
-                              <td>{{total.resultMap.HDC.payoutRate}}%</td>
-                              <td>{{total.resultMap.SHL.payoutRate}}%</td>
-                              <td>{{total.resultMap.MNL.payoutRate}}%</td>
-                              <td>{{total.resultMap.HS.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.FBL.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.SHDC.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.HL.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.HDC.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.SHL.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.MNL.payoutRate}}%</td>
+                              <td>{{totaldian.resultMap.HS.payoutRate}}%</td>
                           </tr>
                       </tbody>
                   </table>
@@ -2669,7 +2669,7 @@
                             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
                     <table>
                         <tbody>
-                                <tr class="firstr odds">
+                                <tr class="eventblue">
                                       <td>合计</td>
                                       <td>CHP</td>
                                       <td>FNL</td>
@@ -2703,6 +2703,161 @@
                     </table>
                 </div>
             </div>
+            <div class="main" *ngSwitchCase="16">
+                <div class="clearfix">
+                    <form class="formwidth" #eventsummaryForm="ngForm" (ngSubmit)="eventsummaryCha(eventsummaryForm.value)">
+                        <h4 class="left">
+                            <span>虚拟足球财务数据汇总表</span>
+                        </h4>  
+                        <form class="formdate left"> 
+                            <p class="word left">
+                                <span>交易开始时间：</span>
+                                <input type="text" id="startime" class="Wdate" value="{{time0}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d',dateFmt:'yyyy-M-d'})" />
+                                <strong>月：<span id="month" class="vor" name="monthing">{{monthing}}</span></strong>
+                                <strong>周：<span id="week" class="vor" name="weeking">{{weeking}}</span></strong>
+                            </p>
+                        </form> 
+                        <p class="word left">
+                            <button class="selss" type="submit">查询</button>
+                            <button (click)="eventsummaryretry()">重算</button>
+                        </p>
+                    </form>
+                    <p class="word">
+                        <button (click)="eventsummaryexport()">导出</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                    <table class="table">
+                        <thead>
+                            <tr class="thtible">
+                                <td></td>
+                                <td></td> 
+                                <td colspan="3">合计</td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr class="eventblue">
+                                <th></th>
+                                <th>场次数量NO. Match</th>
+                                <th>投注金额 Investment 人民币 RMB</th> 
+                                <th>返奖金额 Payout 人民币 RMB</th> 
+                                <th>盈利率 Payout Ratio %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventlists" *ngIf="summaryList">
+                            <tr *ngIf="summaryToday">
+                                <td>{{summaryToday.date}}</td>
+                                <td>{{summaryToday.num}}</td>
+                                <td>{{summaryToday.totalInvestment}}￥</td> 
+                                <td>{{summaryToday.totalPrice}}￥</td> 
+                                <td>{{summaryToday.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngIf="summaryWeek">
+                                <td>本周截止到今日</td>
+                                <td>{{summaryWeek.num}}</td>
+                                <td>{{summaryWeek.totalInvestment}}￥</td> 
+                                <td>{{summaryWeek.totalPrice}}￥</td> 
+                                <td>{{summaryWeek.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngIf="summaryMonth">
+                                <td>本月截止到今日</td>
+                                <td>{{summaryMonth.num}}</td>
+                                <td>{{summaryMonth.totalInvestment}}￥</td> 
+                                <td>{{summaryMonth.totalPrice}}￥</td> 
+                                <td>{{summaryMonth.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngIf="summaryYear">
+                                <td>本年截止到今日</td>
+                                <td>{{summaryYear.num}}</td>
+                                <td>{{summaryYear.totalInvestment}}￥</td> 
+                                <td>{{summaryYear.totalPrice}}￥</td> 
+                                <td>{{summaryYear.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngFor="let b of summaryList">
+                                <td>{{b.date}}</td>
+                                <td>{{b.num}}</td>
+                                <td>{{b.totalInvestment}}￥</td> 
+                                <td>{{b.totalPrice}}￥</td> 
+                                <td>{{b.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngIf="summarytotal">
+                                <td>{{summarytotal.date}}</td>
+                                <td>{{summarytotal.num}}</td>
+                                <td>{{summarytotal.totalInvestment}}￥</td> 
+                                <td>{{summarytotal.totalPrice}}￥</td> 
+                                <td>{{summarytotal.payoutRate}}%</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="Nodata">
+                            <tr>
+                                <td colspan="5">{{data}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="main" *ngSwitchCase="17">
+                  <div class="clearfix">
+                      <form class="formwidth" #eventbreakForm="ngForm" (ngSubmit)="eventbreakCha(eventbreakForm.value)">
+                          <h4 class="left">
+                              <span>虚拟财务数据日明细表</span><br />
+                              <span>Daily Betting Breakdown</span>
+                          </h4>
+                          <form class="formdate left">
+                              <p class="word">
+                                    <input id="d12" class="Wdate" type="text" value="{{time0}}"/>
+                                    <input type="radio" name="radio" value="1" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy'})"/>年
+                                    <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
+                                    <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
+                              </p>
+                          </form>
+                          <p class="word left">
+                              <button class="selss" type="submit">查询</button>
+                              <button (click)="eventbreakretry()">重算</button>
+                          </p>
+                      </form>
+                      <p class="word">
+                          <button (click)="eventbreakexport()">导出</button>
+                      </p>
+                  </div>
+                  <div class="row-fluid">
+                          <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                      <table class="table">
+                              <thead>
+                                  <tr class="thtible">
+                                      <td></td> 
+                                      <td colspan="3">合计</td>
+                                  </tr>
+                                  <tr class="eventblue">
+                                      <th>玩法</th>
+                                      <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>中奖金额 Payout 人民币 RMB</th>
+                                      <th>盈利率 Payout Ratio %</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="eventlists">
+                                  <tr *ngFor="let dn of breakpro">
+                                      <td class="product" >{{dn.product}}</td>
+                                      <td>{{dn.totalInvestment}}￥</td>
+                                      <td>{{dn.totalPrice}}￥</td>
+                                      <td>{{dn.payoutRate}}%</td>
+                                  </tr>
+                                  <tr *ngIf="totalpro">
+                                      <td>合计Total</td>
+                                      <td>{{totalpro.totalInvestment}}￥</td>
+                                      <td>{{totalpro.totalPrice}}￥</td>
+                                      <td>{{totalpro.payoutRate}}%</td>
+                                  </tr>
+                              </tbody>
+                          <tbody *ngIf="Nodata">
+                              <tr>
+                                  <td colspan="4">{{data}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
 
       
         </div>

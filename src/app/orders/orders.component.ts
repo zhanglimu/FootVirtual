@@ -1736,7 +1736,7 @@ cashsummaryexport() {
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongl);
+      window.open(AppConfig.baseUrl +'/account/summary/summaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongl);
     } 
 }
 cashmonthsummaryCha(reslt) {
@@ -2472,15 +2472,7 @@ eventsingleCha(reslt) {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
-          this.total = data.total;
-          this.totaldian = data.total;
-          if (this.lottery_ty==2) {
-            this.dianjing =true;
-            this.zuqiu =false;
-          }else{
-            this.zuqiu =true;
-            this.dianjing =false;
-          }
+          // this.eventtotal = data.total;
         }else{
           this.loading = false;
           this.Nodata = true;
