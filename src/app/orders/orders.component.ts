@@ -941,7 +941,6 @@ compare(property){
     }else{
       this.lottery_ty = $("#lottery_type").val();
     }
-    // this.lottery_ty = $("#lottery_type").val();
     var time:any = $("#d12").val();
         if(time =="" || time ==null){
               this.message.error("请先选择日期");
@@ -963,8 +962,6 @@ compare(property){
             this.Nodata = false;
             this.total = data.total;
             this.totaldian = data.total;
-            // this.singlebox = data.curInfo;
-            // this.singlehis = data.hisInfo;
             if (this.lottery_ty==2) {
               this.dianjing =true;
               this.zuqiu =false;
@@ -2447,6 +2444,53 @@ BKrecycle(agentId){
         year=sort;
       }
       window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=2');
+    } 
+}
+//event
+eventsingleCha(reslt) {
+  this.loading = true;
+  var year = "";
+  var month = "";
+  var day = "";
+  // this.lottery_ty = $("#lottery_type").val();
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+            this.message.error("请先选择日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.eventSingle(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.total = data.total;
+          this.totaldian = data.total;
+          if (this.lottery_ty==2) {
+            this.dianjing =true;
+            this.zuqiu =false;
+          }else{
+            this.zuqiu =true;
+            this.dianjing =false;
+          }
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
     } 
 }
 

@@ -32,6 +32,17 @@
                       <li class="segment-button" [class.selected]="switchIndex === '14'" (click)="switch('14')">Errorticket</li>
                     </ul>
               </li>
+              <li *ngIf="caizhong">
+                    <span class="one_bar">事件型</span>
+                    <ul class="two_bar">
+                        <li class="segment-button" [class.selected]="switchIndex === '15'" (click)="switch('15')">Single</li>
+                        <!-- <li class="segment-button" [class.selected]="switchIndex === '16'" (click)="switch('16')">Summary</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '17'" (click)="switch('17')">Breakdown</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '18'" (click)="switch('18')">订单管理</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '19'" (click)="switch('19')">Daily Summary</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li> -->
+                      </ul>
+                </li>
           </ul>
       </div>
 </header>
@@ -2432,7 +2443,7 @@
                                 <div id="bg"></div>
                                 <div id="show">
                                     <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
-                                    <div >
+                                    <div>
                                         <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label><br>
                                         <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label><br>
                                         <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label><br>
@@ -2630,6 +2641,69 @@
                     </table>
                 </div>
             </div>
+            <div class="main" *ngSwitchCase="15">
+                <div class="clearfix">
+                        <form class="formwidth" #eventsingleForm="ngForm" (ngSubmit)="eventsingleCha(eventsingleForm.value)">
+                            <h4 class="left">
+                                <span>事件型足球单场投注数据明细表</span><br />
+                                <span>Single Betting Details</span>
+                            </h4>
+                            <form class="formdate left">
+                                <p class="word">
+                                    <input id="d12" class="Wdate" type="text" value="{{time0}}"/>
+                                    <input type="radio" name="radio" value="1" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy'})"/>年
+                                    <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
+                                    <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
+                                </p>
+                            </form>
+                            <p class="word left">
+                                <button class="selss" type="submit">查询</button>
+                                <button (click)="eventsingleretry()">重算</button>
+                            </p>
+                        </form>
+                        <p class="word">
+                            <button (click)="eventsingleexport()">导出</button>
+                        </p>
+                </div>
+                <div class="row-fluid">
+                            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                    <table>
+                        <tbody>
+                                <tr class="firstr odds">
+                                      <td>合计</td>
+                                      <td>CHP</td>
+                                      <td>FNL</td>
+                                  </tr>  
+                                <tr *ngIf="total" class="smallfontbody">
+                                      <td>投注额</td>
+                                      <td>{{total.resultMap.CHP.totalInvestment}}</td>
+                                      <td>{{total.resultMap.FNL.totalInvestment}}</td>
+                                  </tr>
+                                  <tr *ngIf="total" class="smallfontbody">
+                                      <td>返奖金额</td>
+                                      <td>{{total.resultMap.CHP.totalPrice}}</td>
+                                      <td>{{total.resultMap.FNL.totalPrice}}</td>
+                                  </tr> 
+                                   <tr *ngIf="total" class="smallfontbody">
+                                      <td>中奖投注额</td>
+                                      <td>{{total.resultMap.CHP.winprice}}</td>
+                                      <td>{{total.resultMap.FNL.winprice}}</td>
+                                  </tr>
+                                    <tr *ngIf="total" class="smallfontbody">
+                                      <td>平均中奖固定金额</td>
+                                      <td>{{total.resultMap.CHP.average}}</td>
+                                      <td>{{total.resultMap.FNL.average}}</td>
+                                  </tr>
+                                    <tr *ngIf="total" class="smallfontbody">
+                                      <td>盈利率%</td>
+                                      <td>{{total.resultMap.CHP.payoutRate}}%</td>
+                                      <td>{{total.resultMap.FNL.payoutRate}}%</td>
+                                  </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
       
         </div>
         <!-- <div class="font4">
