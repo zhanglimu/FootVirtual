@@ -1541,67 +1541,67 @@
                         <tbody *ngIf="cashzuqiu">
                             <tr class="firstr odds">
                                   <td>合计</td>
-                                  <td>HHAD</td>
-                                  <td>CRS</td>
-                                  <td>TTG</td>
-                                  <td>HAFU</td>
                                   <td>HAD</td>
+                                  <td>HHAD</td>
+                                  <td>HAFU</td>
+                                  <td>TTG</td>
+                                  <td>CRS</td>
                               </tr>  
                               <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>原始投注额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.totalInvestment}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.totalInvestment}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.totalInvestment}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.totalInvestment}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.totalInvestment}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.totalInvestment}}</td>
                               </tr>
                               <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>投注额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.invest}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.invest}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.invest}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.invest}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.invest}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.invest}}</td>
                               </tr>
                               <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>加奖额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.bonus}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.bonus}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.bonus}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.bonus}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.bonus}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.bonus}}</td>
                               </tr>
                               <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>返奖金额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.totalPrice}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.totalPrice}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.totalPrice}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.totalPrice}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.totalPrice}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.totalPrice}}</td>
                               </tr> 
                                <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>中奖投注额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.winprice}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.winprice}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.winprice}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.winprice}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.winprice}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.winprice}}</td>
                               </tr>
                                 <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>平均中奖固定金额</td>
-                                  <td>{{cashsingletotal.resultMap.HHAD.average}}</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.average}}</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.average}}</td>
-                                  <td>{{cashsingletotal.resultMap.HAFU.average}}</td>
                                   <td>{{cashsingletotal.resultMap.HAD.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.HHAD.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.HAFU.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.average}}</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.average}}</td>
                               </tr>
                                 <tr *ngIf="cashsingletotal" class="smallfontbody">
                                   <td>盈利率%</td>
+                                  <td>{{cashsingletotal.resultMap.HAD.payoutRate}}%</td>
                                   <td>{{cashsingletotal.resultMap.HHAD.payoutRate}}%</td>
-                                  <td>{{cashsingletotal.resultMap.CRS.payoutRate}}%</td>
-                                  <td>{{cashsingletotal.resultMap.TTG.payoutRate}}%</td>
                                   <td>{{cashsingletotal.resultMap.HAFU.payoutRate}}%</td>
-                                  <td>{{cashsingletotal.resultMap.HAD.payoutRate}}</td>
+                                  <td>{{cashsingletotal.resultMap.TTG.payoutRate}}%</td>
+                                  <td>{{cashsingletotal.resultMap.CRS.payoutRate}}%</td>
                               </tr>
                         </tbody>
                         <tbody *ngIf="cashlanqiu">

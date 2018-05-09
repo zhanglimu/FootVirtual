@@ -2291,8 +2291,8 @@ channelCha(reslt) {
           this.loading = false;
           this.Nodata = false;
           this.channeltotal = data.total;
-          this.channelshuju = data.agentInfoModels;
-          for(var i=0; i<data.agentInfoModels.length; i++){
+          this.channelshuju = data.agentInfoModels.sort(this.compare('agentSell'));
+          for(var i=0; i<data.agentInfoModels.sort(this.compare('agentSell')).length; i++){
             if(this.channelshuju[i].recyclePrice =="0"){
               this.channelshuju[i].recyclePriceName ="-";
             }else{
@@ -2319,7 +2319,6 @@ channelCha(reslt) {
 }
 //点击详情
 qushowdiv(index) {
-  alert(index)
   this.xiang=this.channelshuju[index];
     document.getElementById("bg").style.display = "block";
     document.getElementById("show").style.display = "block";
