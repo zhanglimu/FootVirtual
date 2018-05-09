@@ -225,8 +225,6 @@ export class OrdersComponent implements OnInit {
     cashdetails:LiveOrdermanage;
     colordetail:string[];
     cashtkIding:any;
-    contents:string;
-    betents:string;
 
     cashtkId: any;
     cashuid: any;
