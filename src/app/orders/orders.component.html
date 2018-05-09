@@ -38,9 +38,9 @@
                         <li class="segment-button" [class.selected]="switchIndex === '15'" (click)="switch('15')">Single</li>
                         <li class="segment-button" [class.selected]="switchIndex === '16'" (click)="switch('16')">Summary</li>
                         <li class="segment-button" [class.selected]="switchIndex === '17'" (click)="switch('17')">Breakdown</li>
-                        <!-- <li class="segment-button" [class.selected]="switchIndex === '18'" (click)="switch('18')">订单管理</li>
+                        <li class="segment-button" [class.selected]="switchIndex === '18'" (click)="switch('18')">订单管理</li>
                         <li class="segment-button" [class.selected]="switchIndex === '19'" (click)="switch('19')">Daily Summary</li>
-                        <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li> -->
+                        <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
           </ul>
@@ -2674,30 +2674,30 @@
                                       <td>CHP</td>
                                       <td>FNL</td>
                                   </tr>  
-                                <tr *ngIf="total" class="smallfontbody">
+                                <tr *ngIf="eventtotal" class="smallfontbody">
                                       <td>投注额</td>
-                                      <td>{{total.resultMap.CHP.totalInvestment}}</td>
-                                      <td>{{total.resultMap.FNL.totalInvestment}}</td>
+                                      <td>{{eventtotal.resultMap.CHP.totalInvestment}}</td>
+                                      <td>{{eventtotal.resultMap.FNL.totalInvestment}}</td>
                                   </tr>
-                                  <tr *ngIf="total" class="smallfontbody">
+                                  <tr *ngIf="eventtotal" class="smallfontbody">
                                       <td>返奖金额</td>
-                                      <td>{{total.resultMap.CHP.totalPrice}}</td>
-                                      <td>{{total.resultMap.FNL.totalPrice}}</td>
+                                      <td>{{eventtotal.resultMap.CHP.totalPrice}}</td>
+                                      <td>{{eventtotal.resultMap.FNL.totalPrice}}</td>
                                   </tr> 
-                                   <tr *ngIf="total" class="smallfontbody">
+                                   <tr *ngIf="eventtotal" class="smallfontbody">
                                       <td>中奖投注额</td>
-                                      <td>{{total.resultMap.CHP.winprice}}</td>
-                                      <td>{{total.resultMap.FNL.winprice}}</td>
+                                      <td>{{eventtotal.resultMap.CHP.winprice}}</td>
+                                      <td>{{eventtotal.resultMap.FNL.winprice}}</td>
                                   </tr>
-                                    <tr *ngIf="total" class="smallfontbody">
+                                    <tr *ngIf="eventtotal" class="smallfontbody">
                                       <td>平均中奖固定金额</td>
-                                      <td>{{total.resultMap.CHP.average}}</td>
-                                      <td>{{total.resultMap.FNL.average}}</td>
+                                      <td>{{eventtotal.resultMap.CHP.average}}</td>
+                                      <td>{{eventtotal.resultMap.FNL.average}}</td>
                                   </tr>
-                                    <tr *ngIf="total" class="smallfontbody">
+                                    <tr *ngIf="eventtotal" class="smallfontbody">
                                       <td>盈利率%</td>
-                                      <td>{{total.resultMap.CHP.payoutRate}}%</td>
-                                      <td>{{total.resultMap.FNL.payoutRate}}%</td>
+                                      <td>{{eventtotal.resultMap.CHP.payoutRate}}%</td>
+                                      <td>{{eventtotal.resultMap.FNL.payoutRate}}%</td>
                                   </tr>
                         </tbody>
                     </table>
@@ -2837,17 +2837,17 @@
                                   </tr>
                               </thead>
                               <tbody id="eventlists">
-                                  <tr *ngFor="let dn of breakpro">
+                                  <tr *ngFor="let dn of eventbreakpro">
                                       <td class="product" >{{dn.product}}</td>
                                       <td>{{dn.totalInvestment}}￥</td>
                                       <td>{{dn.totalPrice}}￥</td>
                                       <td>{{dn.payoutRate}}%</td>
                                   </tr>
-                                  <tr *ngIf="totalpro">
+                                  <tr *ngIf="eventtotalpro">
                                       <td>合计Total</td>
-                                      <td>{{totalpro.totalInvestment}}￥</td>
-                                      <td>{{totalpro.totalPrice}}￥</td>
-                                      <td>{{totalpro.payoutRate}}%</td>
+                                      <td>{{eventtotalpro.totalInvestment}}￥</td>
+                                      <td>{{eventtotalpro.totalPrice}}￥</td>
+                                      <td>{{eventtotalpro.payoutRate}}%</td>
                                   </tr>
                               </tbody>
                           <tbody *ngIf="Nodata">
@@ -2858,6 +2858,192 @@
                       </table>
                   </div>
               </div>
+            <div class="main" *ngSwitchCase="18">
+              <div class="clearfix">
+                      <form class="left" #eventorderForm="ngForm" (ngSubmit)="eventorderCha(eventorderForm.value)">
+                              <p class="word">
+                                  <span>订单ID：</span><input id="eventtk" type="text" name="dingdan" [(ngModel)]="eventding" value=""/><br />
+                                  <span>用户ID：</span><input id="eventuid" type="text" name="yonghu" [(ngModel)]="eventyong" value=""/>
+                              </p>
+                              <p class="word">
+                                  <span>交易开始时间：</span>
+                                  <input type="text" id="eventstime" class="Wdate" value="{{eventtimekai}}" onfocus="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d 12:00:00',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                                  <br />
+                                  <span>交易截止时间：</span>
+                                  <input type="text" id="eventetime" class="Wdate" value="{{eventtimejie}}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-M-d HH:mm:ss'})" />
+                              </p>
+                              <p class="word">
+                                  <span>订单类型：</span>
+                                  <select id="eventinplay" name="inplay" [(ngModel)]="eventin">
+                                      <option value="">ALL</option>
+                                      <option value="0">死球</option>
+                                      <option value="1">即场</option>
+                                  </select><br />
+                                  <span>订单状态：</span>
+                                  <select id="eventstate" name="state" [(ngModel)]="eventsta">
+                                      <option value="">ALL</option>
+                                      <option value="1">中奖</option>
+                                      <option value="2">未中奖</option>
+                                      <option value="3">Alive</option>
+                                  </select>
+                              </p>
+                              <p class="word">
+                                  <span>渠道的来源：</span>
+                                  <select id="eventagentNum" name="agentNum" [(ngModel)]="eventagent">
+                                      <option value="">ALL</option>
+                                      <option *ngFor="let agentNums of cashresut;" [value]='agentNums.agentNum'>{{agentNums.agentName}}</option>
+                                  </select><br />
+                                  <span>第三方状态：</span>
+                                  <select id="eventthird" name="third" [(ngModel)]="eventthir">
+                                      <option value="">ALL</option>
+                                      <option value="1">未回收</option>
+                                      <option value="2">已回收</option>
+                                  </select>
+                              </p>
+                              <p class="word">
+                                  <span>交易状态：</span>
+                                  <select id="eventdeal" name="deal" [(ngModel)]="eventdea">
+                                      <option value="">ALL</option>
+                                      <option value="0">交易成功</option>
+                                      <option value="1">交易失败</option>
+                                  </select>
+                              </p>
+                                  <button class="selss" type="submit">查询</button>
+                                  <button (click)="eventorderexport()">导出</button>
+                      </form>
+              </div>
+              <div class="row-fluid">
+                      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                  <table class="table">
+                      <thead>
+                          <tr class="thtible" *ngIf="eventshu">
+                              <th>合计Total</th>
+                              <td>{{eventshu.uid}}</td>
+                              <td>-</td> 
+                              <td>-</td> 
+                              <td>{{eventshu.bettingproducts}}</td>
+                              <td>{{eventshu.inplay}}</td>
+                              <td>{{eventshu.totalInvestment}}</td>
+                              <td>{{eventshu.totalPrice}}</td>
+                              <td>-</td> 
+                              <td>-</td>
+                              <td>{{eventshu.trade_price}}</td>
+                              <td>-</td>
+                              <td>{{eventshu.payoutrate}}%</td>
+                              <td>{{eventshu.winMoney}}</td>
+                              <td>{{eventshu.rakeRate}}</td> 
+                              <td>{{eventshu.recyclePrice}}</td>
+                          </tr>
+                      </thead>
+                      <thead>
+                          <tr class="eventblue">
+                              <th>订单ID</th>
+                              <th>用户ID</th>
+                              <th>渠道</th> 
+                              <th>彩种</th> 
+                              <th>玩法</th>
+                              <th>订单类型</th>
+                              <th>金额</th>
+                              <th>最大中奖额</th>
+                              <th>渠道促销</th>
+                              <th>交易时间</th> 
+                              <th>交易金额</th>
+                              <th>交易状态</th>
+                              <th>订单状态</th> 
+                              <th>中奖金额</th>
+                              <th>抽成比例</th>
+                              <th>第三方状态</th>
+                              <th>操作</th>
+                          </tr>
+                      </thead>
+                      <tbody id="firstred">
+                          <tr *ngFor="let b of eventshuju">
+                              <td>{{b.tkId}}</td>
+                              <td>{{b.uid}}</td>
+                              <td>{{b.agentName}}</td> 
+                              <td>{{b.ballType_name}}</td> 
+                              <td>{{b.bettingproducts}}</td>
+                              <td>{{b.inplay_name}}</td>
+                              <td>{{b.totalInvestment}}</td>
+                              <td>{{b.totalPrice}}</td>
+                              <td>{{b.addAwardAmount}}</td>
+                              <td>{{b.trade_time}}</td> 
+                              <td>{{b.trade_price}}</td>
+                              <td [ngClass]="{cancel:b.iscancel}">{{b.tradeName}}</td>  
+                              <td>{{b.state_name}}</td>
+                              <td>{{b.winMoney}}</td>
+                              <td>{{b.rakeRate}}</td> 
+                              <td [ngClass]="{Norecycle:b.isNorecycle}">{{b.recycleP}}</td>
+                              <td>
+                                  <button id="btnshow" (click)="eventshowdiv(b.ticketInfo_id,b.ballType,b.tkId)">详情</button>
+                                  <div id="bg"></div>
+                                  <div id="show">
+                                      <input id="btnclose" value="Close" (click)="eventhidediv()" type="button">
+                                      <table>
+                                          <thead class="fontse">
+                                              <tr>
+                                                  <th style="width:8%;">订单ID</th>
+                                                  <th style="width:90%;" colspan="7">{{eventtkIding}}</th>
+                                              </tr>
+                                              <tr class="lv">
+                                                  <th style="width:8%;">序号</th>
+                                                  <th style="width:8%;">玩法</th>
+                                                  <th style="width:50%;">投注内容</th>
+                                                  <th style="width:6%;">过关方式</th>
+                                                  <th style="width:4%;">倍数</th>
+                                                  <th style="width:8%;">中奖金额</th>
+                                                  <th style="width:8%;">原交易金额</th>
+                                                  <th style="width:8%;">caiex加奖额</th>
+                                              </tr>
+                                          </thead>
+                                      </table>
+                                      <table id="scr">
+                                          <tbody class="barrier">
+                                              <tr *ngFor="let de of eventdetails index as i">
+                                                  <td style="visibility:hidden;">0</td>
+                                                  <td style="width:8%;">{{i+1}}{{de.stateMessage}}</td>
+                                                  <td style="width:8%;">{{de.product}}</td>
+                                                  <td style="width:50%;">
+                                                    <span *ngFor="let gg of de.betList"[ngStyle]="{'color':gg.color}">{{gg.detail}} / </span>
+                                                  </td>
+                                                  <td style="width:6%;">{{de.local_m}}</td>
+                                                  <td style="width:4%;">{{de.num}}</td>
+                                                  <td style="width:8%;">{{de.total_price}}</td>
+                                                  <td style="width:8%;">{{de.price_allup}}</td>
+                                                  <td style="width:8%;">{{de.cxBonus}}</td>
+                                              </tr>
+                                          </tbody>
+                                          <tbody *ngIf="Nodata3">
+                                              <tr>
+                                                  <td colspan="3">{{data3}}</td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                      <tbody *ngIf="Nodata">
+                          <tr>
+                              <td colspan="13">{{data}}</td>
+                          </tr>
+                      </tbody>
+                      <tbody>
+                          <tr>
+                              <td colspan="13">
+                                  <el-pagination [total]="eventcount" 
+                                  [page-size]="16" 
+                                  *ngIf="eventcount>0" 
+                                  [page-count]="eventpageCount"
+                                  (modelChange)="eventmodelChange($event)" 
+                                  [layout]="['prev', 'pager', 'next', 'jumper', 'total']">
+                                  </el-pagination>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
 
       
         </div>

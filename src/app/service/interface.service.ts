@@ -179,31 +179,24 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventBreakDown?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
-    // eventOrder(cashstartime,cashendtime,cashagNum,pageNum,pageSize,cashdeal,cashstate,cashthird,cashinplay,cashtkId,cashuid,cashlottery_type):Observable<any>{
-    //     let formData: FormData = new FormData(); 
-    //     formData.append('startDate', cashstartime); 
-    //     formData.append('endDate', cashendtime); 
-    //     formData.append('agent_id', cashagNum); 
-    //     formData.append('page', pageNum); 
-    //     formData.append('size', pageSize); 
-    //     formData.append('trade_type', cashdeal); 
-    //     formData.append('state', cashstate); 
-    //     formData.append('recycleState', cashthird); 
-    //     formData.append('inplay', cashinplay); 
-    //     formData.append('tkId', cashtkId); 
-    //     formData.append('uid', cashuid); 
-    //     formData.append('ballType', cashlottery_type); 
-    //     return this.http.post(AppConfig.baseUrl +'/account/orderManage/queryAll',formData)
-    //     .map(res =>res.json());
-    //   }
-    // eventOrderAgent(){
-    //     return this.http.get(AppConfig.baseUrl + '/account/orderManage/queryAllAgent')//,this.cookie 
-    //     .map(res => res.json())
-    // }
-    // eventOrderdetail(ticketid,ballType,cashendtime){
-    //     return this.http.get(AppConfig.baseUrl+'/account/orderManage/queryDetail?ticketInfo_id='+ticketid +'&ballType='+ballType +'&endDate='+cashendtime)
-    //     .map(res=>res.json());
-    // }
+    eventOrder(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid):Observable<any>{
+        let formData: FormData = new FormData(); 
+        formData.append('startDate', eventstartime); 
+        formData.append('endDate', eventendtime); 
+        formData.append('agent_id', eventagNum); 
+        formData.append('page', pageNum); 
+        formData.append('size', pageSize); 
+        formData.append('trade_type', eventdeal); 
+        formData.append('state', eventstate); 
+        formData.append('recycleState', eventthird); 
+        formData.append('inplay', eventinplay); 
+        formData.append('tkId', eventtkId); 
+        formData.append('uid', eventuid); 
+        formData.append('ballType', "3"); 
+        console.log(AppConfig.baseUrl +'/account/orderManage/queryAll',formData)
+        return this.http.post(AppConfig.baseUrl +'/account/orderManage/queryAll',formData)
+        .map(res =>res.json());
+      }
     // eventagent(year,month,day){
     //     return this.http.get(AppConfig.baseUrl+'/account/event/queryEventAgent?year='+year+'&month='+month+'&day='+day)
     //     .map(res=>res.json());

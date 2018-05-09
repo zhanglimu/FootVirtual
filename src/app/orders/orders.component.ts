@@ -278,6 +278,43 @@ export class OrdersComponent implements OnInit {
     channelshuju:LiveOrdermanage;
     cashagentName:string;
     yushuju:string[];
+//cash out/////////////////
+    //eventsingle
+    eventtotal:string[];
+    //eventbrake
+    eventbreakpro:string[];
+    eventtotalpro:string[];
+    //eventorder
+    eventresut: any[];
+    eventshuju:LiveOrdermanage;
+    eventshu:string[];
+    eventdetails:LiveOrdermanage;
+    // colordetail:string[];
+    eventtkIding:any;
+    // contents:string;
+    // betents:string;
+
+    eventtkId: any;
+    eventuid: any;
+    eventstartime: any;
+    eventendtime: any;
+    eventagNum: any;
+    eventstate: any;
+    eventinplay: any;
+    eventdeal: any;
+    eventthird: any;
+
+    eventding: string;
+    eventyong: string;
+    eventtimekai:any;
+    eventtimejie:any;
+    eventin: string;
+    eventsta: string;
+    eventagent: string;  //渠道默认值
+    eventdea:string;
+    eventthir:string;
+    eventcount: number = 0; //总条数
+    eventpageCount:number;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -308,6 +345,8 @@ export class OrdersComponent implements OnInit {
       this.timejie =end;
       this.cashtimekai=s1;
       this.cashtimejie =end;
+      this.eventtimekai=s1;
+      this.eventtimejie =end;
       //third
       var s2 = this.GetDateStr(-1);
       var end2 =this. GetDateStr(0);
@@ -537,6 +576,14 @@ export class OrdersComponent implements OnInit {
     this.cashmonthSummaryName ="monthSummary";
     this.cashbreakdownName ="breakdown";
     this.cashagentName ="agent";
+    //eventorder
+    this.eventding = "";
+    this.eventyong = "";
+    this.eventin = '';
+    this.eventsta = '';
+    this.eventagent = '';
+    this.eventdea = '';
+    this.eventthir = '';
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -2452,7 +2499,6 @@ eventsingleCha(reslt) {
   var year = "";
   var month = "";
   var day = "";
-  // this.lottery_ty = $("#lottery_type").val();
   var time:any = $("#d12").val();
       if(time =="" || time ==null){
             this.message.error("请先选择日期");
@@ -2472,7 +2518,7 @@ eventsingleCha(reslt) {
         if (data!=null) {
           this.loading = false;
           this.Nodata = false;
-          // this.eventtotal = data.total;
+          this.eventtotal = data.total;
         }else{
           this.loading = false;
           this.Nodata = true;
@@ -2484,6 +2530,259 @@ eventsingleCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+eventsingleexport(){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/event/exportEventSingle?year='+year+'&month='+month+'&day='+day);
+    } 
+}
+eventbreakCha(reslt) {
+  this.loading = true;
+  var year = "";
+  var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+            this.message.error("请先选择日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.eventbreak(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.eventbreakpro = data.prolist;
+          this.eventtotalpro = data.proTotal;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+    } 
+}
+eventbreakexport(){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/event/exportEventBreakDown?year='+year+'&month='+month+'&day='+day);
+    } 
+}
+eventall(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid) {
+  console.log(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid)
+  this.QUERY.eventOrder(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid).subscribe(data => {
+    if (data.modelList!=null) {
+      this.loading = false;
+      this.Nodata = false;
+      this.eventcount=data.total.size;
+      this.eventpageCount = Math.ceil(this.eventcount/this.pageSize);
+      this.eventshu = data.total;
+      this.eventshuju = data.modelList;
+      for (var i = 0; i < data.modelList.length; i++) {
+        switch (this.eventshuju[i].trade_type) {
+          case null:
+            this.eventshuju[i].tradeName = "--";
+            break;
+          case 0:
+            this.eventshuju[i].tradeName = "未交易";
+            break;
+          case 1:
+            this.eventshuju[i].tradeName = "交易成功";
+            break;
+          case 2:
+            this.eventshuju[i].tradeName = "等待";
+            break;
+          case 3:
+            this.eventshuju[i].tradeName = "交易失败";
+            break;
+          case 4:
+            this.eventshuju[i].tradeName = "取消申请";
+            break;
+          case 5:
+            this.eventshuju[i].tradeName = "通过";
+            break;
+          case 6:
+            this.eventshuju[i].tradeName = "拒绝";
+            break;
+          case 7:
+            this.eventshuju[i].tradeName = "取消";
+            break;
+          case 44:
+            this.eventshuju[i].tradeName = "取消申请";
+            break;
+        }
+        if(this.eventshuju[i].trade_type=="4"){
+          this.eventshuju[i].iscancel=true;
+        }else{
+          this.eventshuju[i].iscancel=false;
+        }
+        switch (this.eventshuju[i].ballType) {
+          case null:
+            this.eventshuju[i].ballType_name = "--";
+            break;
+          case 1:
+            this.eventshuju[i].ballType_name = "足球";
+            break;
+          case 2:
+            this.eventshuju[i].ballType_name = "篮球";
+            break;
+        }
+        switch (this.eventshuju[i].inplay) {
+          case null:
+            this.eventshuju[i].inplay_name = "--";
+            break;
+          case 0:
+            this.eventshuju[i].inplay_name = "死球";
+            break;
+          case 1:
+            this.eventshuju[i].inplay_name = "即场";
+            break;
+        }
+        switch (this.eventshuju[i].state) {
+          case null:
+            this.eventshuju[i].state_name = "--";
+            break;
+          case 1:
+            this.eventshuju[i].state_name = "中奖";
+            break;
+          case 2:
+            this.eventshuju[i].state_name = "未中奖";
+            break;
+          case 3:
+            this.eventshuju[i].state_name = "Alive";
+            break;
+        }
+        if(this.eventshuju[i].addAwardAmount =="0"){
+          this.eventshuju[i].addAwardAmount ="-";
+        }else{
+          this.eventshuju[i].addAwardAmount = this.eventshuju[i].addAwardAmount;
+        }
+        
+        if(this.eventshuju[i].rakeRate =="0" || this.eventshuju[i].rakeRate ==null ){
+          this.eventshuju[i].rakeRate ="-";
+        }else{
+          this.eventshuju[i].rakeRate = this.eventshuju[i].rakeRate;
+        }
+        if(this.eventshuju[i].recyclePrice =="-1" || this.eventshuju[i].recyclePrice ==="" || this.eventshuju[i].recyclePrice==null){
+          this.eventshuju[i].recycleP ="未回收";
+          if(this.eventshuju[i].recyclePrice =="-1"){
+            this.eventshuju[i].isNorecycle=false;
+          }else{
+            this.eventshuju[i].isNorecycle=true;
+          }
+        }else{
+          this.eventshuju[i].recycleP = this.eventshuju[i].recyclePrice;
+        }
+      }
+    }else{
+      this.loading = false;
+      this.eventcount = 0;
+      this.Nodata = true;
+      this.data = "暂无新数据";
+    }
+  },error=>{
+    this.loading = false;
+    this.Nodata = true;
+    this.data = "数据异常请联系开发人员";
+  });
+}
+eventorderCha(reslt) {
+  this.loading = true;
+  this.eventstartime = $("#eventstime").val();
+  this.eventendtime = $("#eventetime").val();
+  this.eventagNum =$('#eventagentNum option:selected').val();
+  this.eventstate =$('#eventstate option:selected').val();
+  this.eventinplay =$('#eventinplay option:selected').val();
+  this.eventtkId = $("#eventtk").val();
+  this.eventuid = $("#eventuid").val();
+  this.eventthird =$('#eventthird option:selected').val();
+  this.eventdeal =$('#eventdeal option:selected').val();
+  this.eventall(this.eventstartime,this.eventendtime,this.eventagNum,this.pageNum,this.pageSize,this.eventdeal,this.eventstate,this.eventthird,this.eventinplay,this.eventtkId,this.eventuid)
+}
+//分页
+eventmodelChange(currPage){
+  this.eventall(this.eventstartime,this.eventendtime,this.eventagNum,currPage,this.pageSize,this.eventdeal,this.eventstate,this.eventthird,this.eventinplay,this.eventtkId,this.eventuid)
+}
+//点击详情
+eventshowdiv(ticketInfo_id,ballType,tkId) {
+  this.eventendtime = $("#eventetime").val();
+  this.eventtkIding=tkId;
+  this.QUERY.Orderdetail(ticketInfo_id,ballType,this.eventendtime).subscribe(response => {
+    if (response!=null) {
+      this.eventdetails = response.detailList;
+      this.Nodata3 = false;
+    }else {
+    this.Nodata3 = true;
+    this.data3 = "暂无新数据";
+    }
+  }, error => {
+    this.Nodata3 = true;
+    this.data3 = "数据异常请联系开发人员";
+  })
+  document.getElementById("bg").style.display = "block";
+  document.getElementById("show").style.display = "block";
+}
+eventhidediv() {
+  document.getElementById("bg").style.display = 'none';
+  document.getElementById("show").style.display = 'none';
+}
+//导出
+eventorderexport(){
+  this.eventstartime = $("#eventstime").val();
+  this.eventendtime = $("#eventetime").val();
+  this.eventagNum =$('#eventagentNum option:selected').val();
+  this.eventstate =$('#eventstate option:selected').val();
+  this.eventinplay =$('#eventinplay option:selected').val();
+  this.eventtkId = $("#eventtk").val();
+  this.eventuid = $("#eventuid").val();
+  this.eventthird =$('#eventthird option:selected').val();
+  this.eventdeal =$('#eventdeal option:selected').val();
+    window.open(AppConfig.baseUrl + "/account/orderManage/userManagementExcel?startDate="+this.eventstartime +"&endDate="+this.eventendtime+"&agent_id="+this.eventagNum+"&trade_type="+this.eventdeal+"&state="+this.eventstate+"&recycleState="+this.eventthird+"&inplay="+this.eventinplay+"&tkId="+this.eventtkId+"&uid="+this.eventuid+"&ballType=3");
 }
 
 }
