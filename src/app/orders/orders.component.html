@@ -2427,19 +2427,19 @@
                           </tr>
                       </thead>
                       <tbody id="firstred">
-                          <tr *ngFor="let le of channelshuju">
-                            <td id="btn" (click)="qushowdiv($index)">{{le.agentName}}</td>
+                          <tr *ngFor="let le of channelshuju let i=index">
+                            <td id="btn" (click)="qushowdiv(i)">{{le.agentName}}</td>
                                 <div id="bg"></div>
                                 <div id="show">
                                     <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
-                                    <div >
-                                        <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label><br>
-                                        <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label><br>
-                                        <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label><br>
-                                        <label class="youqi">渠道url：<input value="{{le.url}}" readonly></label><br>
-                                        <label class="youqi">渠道密码：<input value="{{le.password}}" readonly></label><br>	
-                                        <label class="youqi">预存额：<input value="{{le.prestore}}" readonly></label><br>
-                                        <label class="youqi">存额报警线：<input value="{{le.prestoreAlarm}}" readonly></label>
+                                    <div *ngIf="xiang">
+                                        <label class="youqi">渠道名称：<input value="{{xiang.agentName}}" readonly></label><br>
+                                        <label class="youqi">渠道编码：<input value="{{xiang.agentCode}}" readonly></label><br>
+                                        <label class="youqi">渠道编号：<input value="{{xiang.agentId}}" readonly></label><br>
+                                        <label class="youqi">渠道url：<input value="{{xiang.url}}" readonly></label><br>
+                                        <label class="youqi">渠道密码：<input value="{{xiang.password}}" readonly></label><br>	
+                                        <label class="youqi">预存额：<input value="{{xiang.prestore}}" readonly></label><br>
+                                        <label class="youqi">存额报警线：<input value="{{xiang.prestoreAlarm}}" readonly></label>
                                     </div>
                                 </div>
 

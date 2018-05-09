@@ -278,6 +278,7 @@ export class OrdersComponent implements OnInit {
     channelshuju:LiveOrdermanage;
     cashagentName:string;
     yushuju:string[];
+    xiang:string[];
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -2319,6 +2320,7 @@ channelCha(reslt) {
 //点击详情
 qushowdiv(index) {
   alert(index)
+  this.xiang=this.channelshuju[index];
     document.getElementById("bg").style.display = "block";
     document.getElementById("show").style.display = "block";
 }
