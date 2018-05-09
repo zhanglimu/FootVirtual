@@ -1740,7 +1740,7 @@ cashsummaryexport() {
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/dailyCollectStatements/dailySummaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongl);
+      window.open(AppConfig.baseUrl +'/account/summary/summaryExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.cashzhongl);
     } 
 }
 cashmonthsummaryCha(reslt) {
