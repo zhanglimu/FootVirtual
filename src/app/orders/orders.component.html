@@ -2071,7 +2071,6 @@
                           <thead>
                               <tr class="thtible">
                                   <td></td>
-                                  <td></td> 
                                   <td colspan="5">合计</td>
                                   <td colspan="5">过关固定奖ALLUP</td>
                                   <td colspan="7">单场固定奖FSGL</td>
@@ -2081,7 +2080,6 @@
                           <thead>
                               <tr class="firstr odds">
                                   <th>玩法</th>
-                                  <th>场次数量NO. Match</th>
                                   <th>原始投注额 TotalInvestment 人民币 RMB</th> 
                                   <th>交易额 Investment 人民币 RMB</th> 
                                   <th>caiex加奖额</th>
@@ -2109,7 +2107,6 @@
                           <tbody id="lists">
                             <tr *ngFor="let dn of cashbreakpro">
                                 <td class="product" >{{dn.product}}</td>
-                                <td>{{dn.num}}</td>
                                 <td class="gree">{{dn.totalInvestment}}￥</td>
                                 <td class="gree">{{dn.invest}}￥</td>
                                 <td class="gree">{{dn.bonusInvest}}￥</td>
@@ -2135,7 +2132,6 @@
                             </tr>
                             <tr *ngIf="cashtotalpro">
                                 <td>合计Total</td>
-                                <td>{{cashtotalpro.num}}</td>
                                 <td>{{cashtotalpro.totalInvestment}}￥</td>
                                 <td>{{cashtotalpro.invest}}￥</td>
                                 <td>{{cashtotalpro.bonusInvest}}￥</td>
@@ -2438,19 +2434,19 @@
                           </tr>
                       </thead>
                       <tbody id="firstred">
-                          <tr *ngFor="let le of channelshuju">
-                            <td id="btn" (click)="qushowdiv($index)">{{le.agentName}}</td>
+                          <tr *ngFor="let le of channelshuju let i=index">
+                            <td id="btn" (click)="qushowdiv(i)">{{le.agentName}}</td>
                                 <div id="bg"></div>
                                 <div id="show">
                                     <input id="btnclose" value="Close" (click)="quhidediv()" type="button">
-                                    <div>
-                                        <label class="youqi">渠道名称：<input value="{{le.agentName}}" readonly></label><br>
-                                        <label class="youqi">渠道编码：<input value="{{le.agentCode}}" readonly></label><br>
-                                        <label class="youqi">渠道编号：<input value="{{le.agentId}}" readonly></label><br>
-                                        <label class="youqi">渠道url：<input value="{{le.url}}" readonly></label><br>
-                                        <label class="youqi">渠道密码：<input value="{{le.password}}" readonly></label><br>	
-                                        <label class="youqi">预存额：<input value="{{le.prestore}}" readonly></label><br>
-                                        <label class="youqi">存额报警线：<input value="{{le.prestoreAlarm}}" readonly></label>
+                                    <div *ngIf="xiang">
+                                        <label class="youqi">渠道名称：<input value="{{xiang.agentName}}" readonly></label><br>
+                                        <label class="youqi">渠道编码：<input value="{{xiang.agentCode}}" readonly></label><br>
+                                        <label class="youqi">渠道编号：<input value="{{xiang.agentId}}" readonly></label><br>
+                                        <label class="youqi">渠道url：<input value="{{xiang.url}}" readonly></label><br>
+                                        <label class="youqi">渠道密码：<input value="{{xiang.password}}" readonly></label><br>	
+                                        <label class="youqi">预存额：<input value="{{xiang.prestore}}" readonly></label><br>
+                                        <label class="youqi">存额报警线：<input value="{{xiang.prestoreAlarm}}" readonly></label>
                                     </div>
                                 </div>
 
@@ -2706,9 +2702,6 @@
             <div class="main" *ngSwitchCase="16">
                 <div class="clearfix">
                     <form class="formwidth" #eventsummaryForm="ngForm" (ngSubmit)="eventsummaryCha(eventsummaryForm.value)">
-                        <h4 class="left">
-                            <span>虚拟足球财务数据汇总表</span>
-                        </h4>  
                         <form class="formdate left"> 
                             <p class="word left">
                                 <span>交易开始时间：</span>
@@ -2745,48 +2738,48 @@
                                 <th>盈利率 Payout Ratio %</th>
                             </tr>
                         </thead>
-                        <tbody id="eventlists" *ngIf="summaryList">
-                            <tr *ngIf="summaryToday">
-                                <td>{{summaryToday.date}}</td>
-                                <td>{{summaryToday.num}}</td>
-                                <td>{{summaryToday.totalInvestment}}￥</td> 
-                                <td>{{summaryToday.totalPrice}}￥</td> 
-                                <td>{{summaryToday.payoutRate}}%</td>
+                        <tbody id="eventlists" *ngIf="esummaryList">
+                            <tr *ngIf="esummaryToday">
+                                <td>{{esummaryToday.date}}</td>
+                                <td>{{esummaryToday.num}}</td>
+                                <td>{{esummaryToday.totalInvestment}}￥</td> 
+                                <td>{{esummaryToday.totalPrice}}￥</td> 
+                                <td>{{esummaryToday.payoutRate}}%</td>
                             </tr>
-                            <tr *ngIf="summaryWeek">
+                            <tr *ngIf="esummaryWeek">
                                 <td>本周截止到今日</td>
-                                <td>{{summaryWeek.num}}</td>
-                                <td>{{summaryWeek.totalInvestment}}￥</td> 
-                                <td>{{summaryWeek.totalPrice}}￥</td> 
-                                <td>{{summaryWeek.payoutRate}}%</td>
+                                <td>{{esummaryWeek.num}}</td>
+                                <td>{{esummaryWeek.totalInvestment}}￥</td> 
+                                <td>{{esummaryWeek.totalPrice}}￥</td> 
+                                <td>{{esummaryWeek.payoutRate}}%</td>
                             </tr>
-                            <tr *ngIf="summaryMonth">
+                            <tr *ngIf="esummaryMonth">
                                 <td>本月截止到今日</td>
-                                <td>{{summaryMonth.num}}</td>
-                                <td>{{summaryMonth.totalInvestment}}￥</td> 
-                                <td>{{summaryMonth.totalPrice}}￥</td> 
-                                <td>{{summaryMonth.payoutRate}}%</td>
+                                <td>{{esummaryMonth.num}}</td>
+                                <td>{{esummaryMonth.totalInvestment}}￥</td> 
+                                <td>{{esummaryMonth.totalPrice}}￥</td> 
+                                <td>{{esummaryMonth.payoutRate}}%</td>
                             </tr>
-                            <tr *ngIf="summaryYear">
+                            <tr *ngIf="esummaryYear">
                                 <td>本年截止到今日</td>
-                                <td>{{summaryYear.num}}</td>
-                                <td>{{summaryYear.totalInvestment}}￥</td> 
-                                <td>{{summaryYear.totalPrice}}￥</td> 
-                                <td>{{summaryYear.payoutRate}}%</td>
+                                <td>{{esummaryYear.num}}</td>
+                                <td>{{esummaryYear.totalInvestment}}￥</td> 
+                                <td>{{esummaryYear.totalPrice}}￥</td> 
+                                <td>{{esummaryYear.payoutRate}}%</td>
                             </tr>
-                            <tr *ngFor="let b of summaryList">
+                            <tr *ngFor="let b of esummaryList">
                                 <td>{{b.date}}</td>
                                 <td>{{b.num}}</td>
                                 <td>{{b.totalInvestment}}￥</td> 
                                 <td>{{b.totalPrice}}￥</td> 
                                 <td>{{b.payoutRate}}%</td>
                             </tr>
-                            <tr *ngIf="summarytotal">
-                                <td>{{summarytotal.date}}</td>
-                                <td>{{summarytotal.num}}</td>
-                                <td>{{summarytotal.totalInvestment}}￥</td> 
-                                <td>{{summarytotal.totalPrice}}￥</td> 
-                                <td>{{summarytotal.payoutRate}}%</td>
+                            <tr *ngIf="esummarytotal">
+                                <td>{{esummarytotal.date}}</td>
+                                <td>{{esummarytotal.num}}</td>
+                                <td>{{esummarytotal.totalInvestment}}￥</td> 
+                                <td>{{esummarytotal.totalPrice}}￥</td> 
+                                <td>{{esummarytotal.payoutRate}}%</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="Nodata">
@@ -2801,7 +2794,7 @@
                   <div class="clearfix">
                       <form class="formwidth" #eventbreakForm="ngForm" (ngSubmit)="eventbreakCha(eventbreakForm.value)">
                           <h4 class="left">
-                              <span>虚拟财务数据日明细表</span><br />
+                              <span>事件型财务数据日明细表</span><br />
                               <span>Daily Betting Breakdown</span>
                           </h4>
                           <form class="formdate left">
@@ -3039,6 +3032,197 @@
                                   [layout]="['prev', 'pager', 'next', 'jumper', 'total']">
                                   </el-pagination>
                               </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="main" *ngSwitchCase="19">
+            <div class="clearfix">
+                <form class="formwidth" #eventmonthsummaryForm="ngForm" (ngSubmit)="eventmonthsummaryCha(eventmonthsummaryForm.value)">
+                    <h4 class="left">
+                        <span>事件型财务数据汇总表</span>
+                    </h4>
+                    <form class="formdate left">
+                        <p class="word">
+                            <input id="d12" type="text" class="Wdate" value="{{time1}}" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>
+                        </p>
+                    </form>
+                    <p class="word left">
+                        <button class="selss" type="submit">查询</button>
+                        <button (click)="eventmonthsummaryretry()">重算</button>
+                    </p>
+                </form>
+                <p class="word">
+                    <button (click)="eventmonthsummaryexport()">导出</button>
+                </p>
+            </div>
+            <div class="row-fluid">
+                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                <table class="table" id="scroer">
+                    <table>
+                        <thead>
+                            <tr class="eventblue" *ngIf="emonthTotal">
+                                <th>{{emonthTotal.week}}</th>
+                                <th>{{emonthTotal.totalNum}}</th>
+                                <th>{{emonthTotal.totalInvestment}}￥</th>
+                                <th>{{emonthTotal.invest}}￥</th>
+                                <th>{{emonthTotal.cxBonus}}￥</th>
+                                <th>{{emonthTotal.totalPrice}}￥</th>
+                                <th>{{emonthTotal.payoutRate}}%</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th colspan="6">合计Total Investment</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventlists" *ngFor="let sum of emonthList">
+                            <tr class="eventblue">
+                                <td>第{{sum.week}}周</td>
+                                <td>场次数量NO. Match</td>
+                                <td>原始投注额 TotalInvestment</td> 
+                                <td>交易额 Investment</td> 
+                                <td>caiex加奖额</td>
+                                <td>中奖金额 Payout</td>
+                                <td>盈利率 Payout Ratio</td>
+                            </tr>
+                            <tr *ngFor="let monthS of sum.weekList">
+                                <td>{{monthS.week}}</td>
+                                <td>{{monthS.totalNum}}</td>
+                                <td>{{monthS.totalInvestment}}￥</td>
+                                <td>{{monthS.invest}}￥</td>
+                                <td>{{monthS.cxBonus}}￥</td>
+                                <td>{{monthS.totalPrice}}￥</td>
+                                <td>{{monthS.payoutRate}}%</td>
+                            </tr>
+                            <tr *ngIf="sum.Weektotal">
+                                <td>{{sum.Weektotal.week}}</td>
+                                <td>{{sum.Weektotal.totalNum}}</td>
+                                <td>{{sum.Weektotal.totalInvestment}}￥</td>
+                                <td>{{sum.Weektotal.invest}}￥</td>
+                                <td>{{sum.Weektotal.cxBonus}}￥</td>
+                                <td>{{sum.Weektotal.totalPrice}}￥</td>
+                                <td>{{sum.Weektotal.payoutRate}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tbody *ngIf="Nodata">
+                        <tr>
+                            <td colspan="7">{{data}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="main" *ngSwitchCase="20">
+              <div class="clearfix">
+                      <form class="formdate left" #eventchannelForm="ngForm" (ngSubmit)="eventchannelCha(eventchannelForm.value)">
+                          <p class="word">
+                              <input id="d12" class="Wdate" type="text" value="{{time0}}"/>
+                              <input type="radio" name="radio" value="1" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy'})"/>年
+                              <input type="radio" name="radio" value="2" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M'})"/>月
+                              <input type="radio" name="radio" value="3" checked="checked" onclick="WdatePicker({el:'d12',skin:'whyGreen',dateFmt:'yyyy-M-d'})"/>日
+                          </p>
+                          <button class="selss" type="submit">查询</button>
+                          <button (click)="eventchannelretry()">重算</button>
+                          <button (click)="eventchannelexport()">导出</button>
+                      </form>
+              </div>
+              <div class="row-fluid">
+                      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                  <table class="table">
+                      <thead> 
+                          <tr *ngIf="eventchanneltotal">
+                                  <td>合计</td>
+                                  <td>-</td>
+                                  <td>{{eventchanneltotal.prestore}}</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>{{eventchanneltotal.prestoreAlarm}}</td>
+                                  <td>{{eventchanneltotal.recyclePriceFb}}</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  
+                                  <td class="gree1">{{eventchanneltotal.userAmountFb}}</td>
+                                  <td class="gree1">{{eventchanneltotal.orderAmountFb}}</td>
+                                  <td class="gree1">{{eventchanneltotal.tradePriceFb}}￥</td>
+                                  <td class="gree1">{{eventchanneltotal.cxBonusFb}}￥</td>
+                                  <td class="gree1">{{eventchanneltotal.winMoneyFb}}￥</td>
+                                  <td class="gree1">{{eventchanneltotal.profitFb}}￥</td>
+                                  <td class="gree1">{{eventchanneltotal.profitabilityFb}}%</td>
+                          </tr>
+                          <tr class="eventblue">
+                              <th colspan="9"></th>
+                              <th colspan="7">事件型</th>
+                          </tr>
+                          <tr class="eventblue">
+                              <th>渠道名称</th>
+                              <th>渠道编码</th>
+                              <th>预存额</th>
+                              <th>-</th>
+                              <th>回收明细</th> 
+                              <th>预存报警</th>
+                              <th>回收额</th>
+                              <th>加奖比例</th>
+                              <th>渠道开停售</th>
+                              <th>注册用户数</th>
+                              <th>订单数</th>
+                              <th>交易额</th> 
+                              <th>caiex加奖额</th>
+                              <th>中奖额</th>
+                              <th>盈亏</th>
+                              <th>盈利率</th>
+                          </tr>
+                      </thead>
+                      <tbody id="eventlists">
+                          <tr *ngFor="let le of eventchannelshuju let i=index">
+                            <td id="btn" (click)="agshowdiv(i)">{{le.agentName}}</td>
+                                <div id="bg"></div>
+                                <div id="show">
+                                    <input id="btnclose" value="Close" (click)="aghidediv()" type="button">
+                                    <div *ngIf="evxiang">
+                                        <label class="youqi">渠道名称：<input value="{{evxiang.agentName}}" readonly></label><br>
+                                        <label class="youqi">渠道编码：<input value="{{evxiang.agentCode}}" readonly></label><br>
+                                        <label class="youqi">渠道编号：<input value="{{evxiang.agentId}}" readonly></label><br>
+                                        <label class="youqi">渠道url：<input value="{{evxiang.url}}" readonly></label><br>
+                                        <label class="youqi">渠道密码：<input value="{{evxiang.password}}" readonly></label><br>	
+                                        <label class="youqi">预存额：<input value="{{evxiang.prestore}}" readonly></label><br>
+                                        <label class="youqi">存额报警线：<input value="{{evxiang.prestoreAlarm}}" readonly></label>
+                                    </div>
+                                </div>
+
+                            <td>{{le.agentCode}}</td>
+                            <td>{{le.prestore}}</td> 
+                            <td id="btn" (click)="evshowdiv(le.agentCode)">预存额明细</td>
+                                <div id="evbg"></div>
+                                <div id="evshow">
+                                    <input id="btnclose" value="Close" (click)="evhidediv()" type="button">
+                                    <p *ngFor="let de of evshuju index as i">
+                                        <span class="line">{{de.operateTime}}</span>
+                                        <span>{{de.preStoreDetail}}</span>
+                                    </p>
+                                </div>
+
+                            <td>
+                                <button id="btnshow" (click)="EVENTrecycle(le.agentId)">EVENT</button>
+                            </td> 
+                            <td>{{le.prestoreAlarm}}</td> 
+                            <td>{{le.recyclePriceName}}</td>
+                            <td>{{le.cxBonusRate}}</td>
+                            <td>{{le.agentSellMess}}</td>
+
+                            <td class="gree1">{{le.userAmountFb}}</td>
+                            <td class="gree1">{{le.orderAmountFb}}</td>
+                            <td class="gree1">{{le.tradePriceFb}}</td>
+                            <td class="gree1">{{le.cxBonusFb}}</td>
+                            <td class="gree1">{{le.winMoneyFb}}</td>
+                            <td class="gree1">{{le.profitFb}}</td>
+                            <td class="gree1">{{le.profitabilityFb}}%</td>
+                          </tr>
+                      </tbody>
+                      <tbody *ngIf="Nodata">
+                          <tr>
+                              <td colspan="16">{{data}}</td>
                           </tr>
                       </tbody>
                   </table>

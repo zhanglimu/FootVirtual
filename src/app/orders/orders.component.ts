@@ -276,9 +276,17 @@ export class OrdersComponent implements OnInit {
     channelshuju:LiveOrdermanage;
     cashagentName:string;
     yushuju:string[];
+    xiang:string[];
 //cash out/////////////////
     //eventsingle
     eventtotal:string[];
+    //eventsummary
+    esummarytotal: string[];   
+    esummaryToday:string[];
+    esummaryList:string[];
+    esummaryWeek:string[];
+    esummaryYear:string[];
+    esummaryMonth:string[];
     //eventbrake
     eventbreakpro:string[];
     eventtotalpro:string[];
@@ -311,6 +319,14 @@ export class OrdersComponent implements OnInit {
     eventthir:string;
     eventcount: number = 0; //总条数
     eventpageCount:number;
+    //eventmonthsummary
+    emonthTotal:string[];
+    emonthList:string[];
+    //eventchannel
+    eventchanneltotal:string[];
+    eventchannelshuju:LiveOrdermanage;
+    evshuju:string[];
+    evxiang:string[];
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -464,6 +480,29 @@ export class OrdersComponent implements OnInit {
     //channel
     this.channeltotal=[];
     this.channelshuju = null;
+    //eventsingle
+    this.eventtotal=[];
+    //eventsummary
+    this.esummarytotal=[];  
+    this.esummaryToday=[];
+    this.esummaryList=[];
+    this.esummaryWeek=[];
+    this.esummaryYear=[];
+    this.esummaryMonth=[];
+    //eventbrake
+    this.eventbreakpro=[];
+    this.eventtotalpro=[];
+    //eventorder
+    this.eventresut=[];
+    this.eventshuju=null;
+    this.eventshu=[];
+    this.eventdetails=null;
+    //eventmonthsummary
+    this.emonthTotal=[];
+    this.emonthList=[];
+    //eventchannel
+    this.eventchanneltotal=[];
+    this.eventchannelshuju=null;
   }
   //退出登录
   Signout(){
@@ -2358,7 +2397,7 @@ channelCha(reslt) {
 }
 //点击详情
 qushowdiv(index) {
-  alert(index)
+  this.xiang=this.channelshuju[index];
     document.getElementById("bg").style.display = "block";
     document.getElementById("show").style.display = "block";
 }
@@ -2547,6 +2586,74 @@ eventsingleexport(){
         year=sort;
       }
       window.open(AppConfig.baseUrl +'/account/event/exportEventSingle?year='+year+'&month='+month+'&day='+day);
+    } 
+}
+eventsummaryCha(reslt) {
+  this.loading = true;
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#startime").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.eventsummary(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.esummaryToday = data.modelToday;
+          this.esummaryWeek = data.modelWeek;
+          this.esummaryMonth = data.modelMonth;
+          this.esummaryYear = data.modelYear;
+          this.esummaryList = data.modelList;
+          this.esummarytotal = data.total;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+      
+    } 
+    this.summaryweeking =this.getYearWeek(year, month, day);
+    document.getElementById("week").innerText = this.summaryweeking;    
+    document.getElementById("month").innerText = month;
+}
+eventsummaryexport() {
+  var year = "";
+  var month = "";
+  var day = "";
+      var time:any = $("#startime").val();
+      if(time =="" || time ==null){
+            this.message.error("请先选择要导出的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/event/exportEventSummary?year='+year+'&month='+month+'&day='+day);
     } 
 }
 eventbreakCha(reslt) {
@@ -2779,6 +2886,201 @@ eventorderexport(){
   this.eventthird =$('#eventthird option:selected').val();
   this.eventdeal =$('#eventdeal option:selected').val();
     window.open(AppConfig.baseUrl + "/account/orderManage/userManagementExcel?startDate="+this.eventstartime +"&endDate="+this.eventendtime+"&agent_id="+this.eventagNum+"&trade_type="+this.eventdeal+"&state="+this.eventstate+"&recycleState="+this.eventthird+"&inplay="+this.eventinplay+"&tkId="+this.eventtkId+"&uid="+this.eventuid+"&ballType=3");
+}
+eventmonthsummaryCha(reslt) {
+  this.loading = true;
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.eventmonthsummary(year,month).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          var objj = [];
+          for(let i in  data){
+             if(i !='monthTotal'){
+              data[i].week =this.week(i)
+              objj.push(data[i]);
+             }
+          }
+          this.emonthList = objj;
+          this.emonthTotal = data.monthTotal;
+          var obj=Object.keys(data).length-1;
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+      
+    }
+}
+eventmonthsummaryexport() {
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/event/exportEventMonthSummary?year='+year+'&month='+month);
+    } 
+}
+eventchannelCha(reslt) {
+  this.loading = true;
+  var  year = "";
+  var  month = "";
+  var  day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.eventagent(year,month,day).subscribe(data => {
+        if (data!=null) {
+          this.loading = false;
+          this.Nodata = false;
+          this.eventchanneltotal = data.total;
+          this.eventchannelshuju = data.agentInfoModels;
+          for(var i=0; i<data.agentInfoModels.length; i++){
+            if(this.eventchannelshuju[i].recyclePrice =="0"){
+              this.eventchannelshuju[i].recyclePriceName ="-";
+            }else{
+              this.eventchannelshuju[i].recyclePriceName = this.eventchannelshuju[i].recyclePrice;
+            }
+            if(this.eventchannelshuju[i].agentSell =="-1"){
+              this.eventchannelshuju[i].agentSellMess = "停售";
+              
+            }else if(this.eventchannelshuju[i].agentId == this.eventchannelshuju[i].agentSell){
+              this.eventchannelshuju[i].agentSellMess = "开售";
+            }
+          }
+        }else{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.loading = false;
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });
+    } 
+}
+//点击详情
+agshowdiv(index) {
+  this.evxiang=this.eventchannelshuju[index];
+    document.getElementById("bg").style.display = "block";
+    document.getElementById("show").style.display = "block";
+}
+aghidediv() {
+  document.getElementById("bg").style.display = 'none';
+  document.getElementById("show").style.display = 'none';
+}
+evshowdiv(agentId) {
+    this.QUERY.Channeldetail(agentId).subscribe(data => {
+      if (data!=null) {
+        this.Nodata3 = false;
+        this.evshuju = data.agentInfoDetails;
+      }else {
+      this.details = [];
+      this.Nodata3 = true;
+      this.data3 = "暂无新数据";
+      }
+    }, error => {
+      this.Nodata3 = true;
+      this.data3 = "数据异常请联系开发人员";
+    })
+    document.getElementById("evbg").style.display = "block";
+    document.getElementById("evshow").style.display = "block";
+  }
+evhidediv() {
+  document.getElementById("evbg").style.display = 'none';
+  document.getElementById("evshow").style.display = 'none';
+}
+eventchannelexport(){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/event/exportEventAgent?year='+year+'&month='+month+'&day='+day);
+    } 
+}
+EVENTrecycle(agentId){
+  var   year = "";
+  var   month = "";
+  var   day = "";
+  var time:any = $("#d12").val();
+  if(time =="" || time ==null){
+      this.message.error("请先选择要导出的日期");
+  }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=1');
+    } 
 }
 
 }

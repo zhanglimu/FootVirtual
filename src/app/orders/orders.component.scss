@@ -143,7 +143,7 @@ td.blue{background: #F2F2F2;}
 #firstred tr:nth-of-type(even){background: #F2F2F2;}
 #firstred tr:hover{background: #bddcee;}
 //遮罩
-#bg,#yubg {
+#bg,#yubg,#agbg,#evbg {
 	display:none;
 	position:absolute;
 	top:0%;
@@ -156,7 +156,7 @@ td.blue{background: #F2F2F2;}
 	opacity:.70;
 	filter:alpha(opacity=70);
 }
-#show,#yushow {
+#show,#yushow,#agshow,#evshow {
 	display:none;
 	position:absolute;
 	top:25%;

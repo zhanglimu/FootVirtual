@@ -171,10 +171,10 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventSingle?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
-    // eventsummary(year,month,day){
-    //     return this.http.get(AppConfig.baseUrl+'/account/event/queryEventSingle?year='+year+'&month='+month+'&day='+day)
-    //     .map(res=>res.json());
-    // }
+    eventsummary(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/event/queryEventSummary?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
     eventbreak(year,month,day){
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventBreakDown?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
@@ -197,8 +197,12 @@ export class InterfaceService{
         return this.http.post(AppConfig.baseUrl +'/account/orderManage/queryAll',formData)
         .map(res =>res.json());
       }
-    // eventagent(year,month,day){
-    //     return this.http.get(AppConfig.baseUrl+'/account/event/queryEventAgent?year='+year+'&month='+month+'&day='+day)
-    //     .map(res=>res.json());
-    // }
+      eventmonthsummary(year,month){
+        return this.http.get(AppConfig.baseUrl+'/account/event/queryEventMonthSummary?year='+year+'&month='+month)
+        .map(res=>res.json());
+    }
+    eventagent(year,month,day){
+        return this.http.get(AppConfig.baseUrl+'/account/event/queryEventAgent?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
 }   
