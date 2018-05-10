@@ -171,12 +171,24 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventSingle?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
+    Esingleretry(year,month,day,EsingleName){
+        return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EsingleName)
+        .map(res=>res.json());
+    }
     eventsummary(year,month,day){
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventSummary?year='+year+'&month='+month+'&day='+day)
         .map(res=>res.json());
     }
+    Esummaryretry(year,month,day,EsummaryName){
+        return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EsummaryName)
+        .map(res=>res.json());
+    }
     eventbreak(year,month,day){
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventBreakDown?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    Ebreakretry(year,month,day,EbreakName){
+        return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EbreakName)
         .map(res=>res.json());
     }
     eventOrder(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid):Observable<any>{
@@ -201,8 +213,16 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventMonthSummary?year='+year+'&month='+month)
         .map(res=>res.json());
     }
+    Emonthsummaryretry(year,month,day,EmonthsummaryName){
+        return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EmonthsummaryName)
+        .map(res=>res.json());
+    }
     eventagent(year,month,day){
         return this.http.get(AppConfig.baseUrl+'/account/event/queryEventAgent?year='+year+'&month='+month+'&day='+day)
+        .map(res=>res.json());
+    }
+    Eagentretry(year,month,day,EagentName){
+        return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EagentName)
         .map(res=>res.json());
     }
 }   

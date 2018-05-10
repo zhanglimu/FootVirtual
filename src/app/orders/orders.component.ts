@@ -279,7 +279,8 @@ export class OrdersComponent implements OnInit {
     xiang:string[];
 //cash out/////////////////
     //eventsingle
-    eventtotal:string[];
+    eventotal:string[];
+    evenotal:string[];
     //eventsummary
     esummarytotal: string[];   
     esummaryToday:string[];
@@ -327,6 +328,11 @@ export class OrdersComponent implements OnInit {
     eventchannelshuju:LiveOrdermanage;
     evshuju:string[];
     evxiang:string[];
+    EsingleName:string;
+    EsummaryName:string;
+    EmonthSummaryName:string;
+    EbreakdownName:string;
+    EagentName:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -481,7 +487,7 @@ export class OrdersComponent implements OnInit {
     this.channeltotal=[];
     this.channelshuju = null;
     //eventsingle
-    this.eventtotal=[];
+    this.eventotal=[];
     //eventsummary
     this.esummarytotal=[];  
     this.esummaryToday=[];
@@ -619,6 +625,12 @@ export class OrdersComponent implements OnInit {
     this.eventagent = '';
     this.eventdea = '';
     this.eventthir = '';
+
+    this.EsingleName ="single";
+    this.EsummaryName ="summary";
+    this.EmonthSummaryName ="monthSummary";
+    this.EbreakdownName ="breakdown";
+    this.EagentName ="agent";
   }
   summaryCha(reslt) {
     this.loading = true;
@@ -2535,6 +2547,7 @@ eventsingleCha(reslt) {
   var month = "";
   var day = "";
   var time:any = $("#d12").val();
+  console.log(time,"11")
       if(time =="" || time ==null){
             this.message.error("请先选择日期");
       }else{
@@ -2551,9 +2564,11 @@ eventsingleCha(reslt) {
       }
       this.QUERY.eventSingle(year,month,day).subscribe(data => {
         if (data!=null) {
+          console.log(data,"55")
           this.loading = false;
           this.Nodata = false;
-          this.eventtotal = data.total;
+          this.eventotal = data.total.resultMap.CHP;
+          this.evenotal = data.total.resultMap.FNL;
         }else{
           this.loading = false;
           this.Nodata = true;
@@ -2565,6 +2580,42 @@ eventsingleCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+eventsingleretry(){
+  var year = "";
+  var month = "";
+  var day = "";
+      var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.Esingleretry(year,month,day,this.EsingleName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 eventsingleexport(){
   var   year = "";
@@ -2634,6 +2685,42 @@ eventsummaryCha(reslt) {
     document.getElementById("week").innerText = this.summaryweeking;    
     document.getElementById("month").innerText = month;
 }
+eventsummaryretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  var time:any = $("#startime").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.Esummaryretry(year,month,day,this.EsummaryName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
+}
 eventsummaryexport() {
   var year = "";
   var month = "";
@@ -2693,6 +2780,42 @@ eventbreakCha(reslt) {
         this.data = "数据异常请联系开发人员";
       });
     } 
+}
+eventbreakretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.Ebreakretry(year,month,day,this.EbreakdownName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
 }
 eventbreakexport(){
   var   year = "";
@@ -2934,6 +3057,36 @@ eventmonthsummaryCha(reslt) {
       
     }
 }
+eventmonthsummaryretry() {
+  this.loading = true;
+  this.message.error("该页面重算时间稍久，请耐心等待!");
+  var year = "";
+  var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+      }else{
+        year=sort;
+      }
+      this.QUERY.Emonthsummaryretry(year,month,day,this.EmonthSummaryName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });   
+}
 eventmonthsummaryexport() {
   var   year = "";
   var   month = "";
@@ -3038,6 +3191,42 @@ evhidediv() {
   document.getElementById("evbg").style.display = 'none';
   document.getElementById("evshow").style.display = 'none';
 }
+eventchannelretry() {
+  var year = "";
+  var month = "";
+  var day = "";
+  var time:any = $("#d12").val();
+      if(time =="" || time ==null){
+    this.message.error("请先选择要重算的日期");
+      }else{
+      var sort = time.split("-");
+      if(sort.length ==3){
+        year=sort[0];
+        month=sort[1];
+        day=sort[2];
+      }else if(sort.length ==2){
+        year=sort[0];
+        month=sort[1];
+        this.message.error("请先精确到日");
+        return false;
+      }else{
+        year=sort;
+        this.message.error("请先精确到日");
+        return false;
+      }
+      this.QUERY.Eagentretry(year,month,day,this.EagentName).subscribe(data => {
+        if (data.ResultCode=1) {
+          this.Nodata = false;
+        }else{
+          this.Nodata = true;
+          this.data = "暂无新数据";
+        }
+      },error=>{
+        this.Nodata = true;
+        this.data = "数据异常请联系开发人员";
+      });      
+  } 
+}
 eventchannelexport(){
   var   year = "";
   var   month = "";
@@ -3079,7 +3268,7 @@ EVENTrecycle(agentId){
       }else{
         year=sort;
       }
-      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=1');
+      window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=3');
     } 
 }
 
