@@ -225,4 +225,9 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/eventRecount?year='+year+'&month='+month+'&day='+day+'&reportsName='+EagentName)
         .map(res=>res.json());
     }
+
+    echarts(){
+        return this.http.get(AppConfig.baseUrl+'/account/getGrashByTime')
+        .map(res=>res.json());
+    }
 }   

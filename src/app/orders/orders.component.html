@@ -43,6 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
+              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">曲线</span></li> -->
           </ul>
       </div>
 </header>
@@ -2670,27 +2671,32 @@
                                       <td>CHP</td>
                                       <td>FNL</td>
                                   </tr>
-                                <tr class="smallfontbody">
-                                    <td>投注额</td>
+                                <tr>
+                                    <td>原始投注额</td>
                                     <td *ngIf="eventotal">{{eventotal.totalInvestment}}</td>
                                     <td *ngIf="evenotal">{{evenotal.totalInvestment}}</td>
                                 </tr>
-                                <tr class="smallfontbody">
+                                <tr>
+                                    <td>投注额</td>
+                                    <td *ngIf="eventotal">{{eventotal.invest}}</td>
+                                    <td *ngIf="evenotal">{{evenotal.invest}}</td>
+                                </tr>
+                                <tr>
                                     <td>返奖金额</td>
                                     <td *ngIf="eventotal">{{eventotal.totalPrice}}</td>
                                     <td *ngIf="evenotal">{{evenotal.totalPrice}}</td>
                                 </tr> 
-                                <tr class="smallfontbody">
+                                <tr>
                                     <td>中奖投注额</td>
                                     <td *ngIf="eventotal">{{eventotal.winprice}}</td>
                                     <td *ngIf="evenotal">{{evenotal.winprice}}</td>
                                 </tr>
-                                <tr class="smallfontbody">
+                                <tr>
                                     <td>平均中奖固定金额</td>
                                     <td *ngIf="eventotal">{{eventotal.average}}</td>
                                     <td *ngIf="evenotal">{{evenotal.average}}</td>
                                 </tr>
-                                <tr class="smallfontbody">
+                                <tr>
                                     <td>盈利率%</td>
                                     <td *ngIf="eventotal">{{eventotal.payoutRate}}%</td>
                                     <td *ngIf="evenotal">{{evenotal.payoutRate}}%</td>
@@ -2727,12 +2733,20 @@
                                 <td></td>
                                 <td></td> 
                                 <td colspan="3">合计</td>
+                                <td colspan="3">单场固定奖FSGL</td>
+                                <td colspan="3">LEVEL0</td>
                             </tr>
                         </thead>
                         <thead>
                             <tr class="eventblue">
                                 <th></th>
                                 <th>场次数量NO. Match</th>
+                                <th>投注金额 Investment 人民币 RMB</th> 
+                                <th>返奖金额 Payout 人民币 RMB</th> 
+                                <th>盈利率 Payout Ratio %</th>
+                                <th>投注金额 Investment 人民币 RMB</th> 
+                                <th>返奖金额 Payout 人民币 RMB</th> 
+                                <th>盈利率 Payout Ratio %</th>
                                 <th>投注金额 Investment 人民币 RMB</th> 
                                 <th>返奖金额 Payout 人民币 RMB</th> 
                                 <th>盈利率 Payout Ratio %</th>
@@ -2745,6 +2759,12 @@
                                 <td>{{esummaryToday.totalInvestment}}￥</td> 
                                 <td>{{esummaryToday.totalPrice}}￥</td> 
                                 <td>{{esummaryToday.payoutRate}}%</td>
+                                <td>{{esummaryToday.totalInvestmentFsgl}}￥</td> 
+                                <td>{{esummaryToday.totalPriceFsgl}}￥</td> 
+                                <td>{{esummaryToday.payoutRateFsgl}}%</td>
+                                <td>{{esummaryToday.totalInvestmentLevel0}}￥</td> 
+                                <td>{{esummaryToday.totalPriceLevel0}}￥</td> 
+                                <td>{{esummaryToday.payoutRateLevel0}}%</td>
                             </tr>
                             <tr *ngIf="esummaryWeek">
                                 <td>本周截止到今日</td>
@@ -2752,6 +2772,12 @@
                                 <td>{{esummaryWeek.totalInvestment}}￥</td> 
                                 <td>{{esummaryWeek.totalPrice}}￥</td> 
                                 <td>{{esummaryWeek.payoutRate}}%</td>
+                                <td>{{esummaryWeek.totalInvestmentFsgl}}￥</td> 
+                                <td>{{esummaryWeek.totalPriceFsgl}}￥</td> 
+                                <td>{{esummaryWeek.payoutRateFsgl}}%</td>
+                                <td>{{esummaryWeek.totalInvestmentLevel0}}￥</td> 
+                                <td>{{esummaryWeek.totalPriceLevel0}}￥</td> 
+                                <td>{{esummaryWeek.payoutRateLevel0}}%</td>
                             </tr>
                             <tr *ngIf="esummaryMonth">
                                 <td>本月截止到今日</td>
@@ -2759,6 +2785,12 @@
                                 <td>{{esummaryMonth.totalInvestment}}￥</td> 
                                 <td>{{esummaryMonth.totalPrice}}￥</td> 
                                 <td>{{esummaryMonth.payoutRate}}%</td>
+                                <td>{{esummaryMonth.totalInvestmentFsgl}}￥</td> 
+                                <td>{{esummaryMonth.totalPriceFsgl}}￥</td> 
+                                <td>{{esummaryMonth.payoutRateFsgl}}%</td>
+                                <td>{{esummaryMonth.totalInvestmentLevel0}}￥</td> 
+                                <td>{{esummaryMonth.totalPriceLevel0}}￥</td> 
+                                <td>{{esummaryMonth.payoutRateLevel0}}%</td>
                             </tr>
                             <tr *ngIf="esummaryYear">
                                 <td>本年截止到今日</td>
@@ -2766,6 +2798,12 @@
                                 <td>{{esummaryYear.totalInvestment}}￥</td> 
                                 <td>{{esummaryYear.totalPrice}}￥</td> 
                                 <td>{{esummaryYear.payoutRate}}%</td>
+                                <td>{{esummaryYear.totalInvestmentFsgl}}￥</td> 
+                                <td>{{esummaryYear.totalPriceFsgl}}￥</td> 
+                                <td>{{esummaryYear.payoutRateFsgl}}%</td>
+                                <td>{{esummaryYear.totalInvestmentLevel0}}￥</td> 
+                                <td>{{esummaryYear.totalPriceLevel0}}￥</td> 
+                                <td>{{esummaryYear.payoutRateLevel0}}%</td>
                             </tr>
                             <tr *ngFor="let b of esummaryList">
                                 <td>{{b.date}}</td>
@@ -2773,6 +2811,12 @@
                                 <td>{{b.totalInvestment}}￥</td> 
                                 <td>{{b.totalPrice}}￥</td> 
                                 <td>{{b.payoutRate}}%</td>
+                                <td>{{b.totalInvestmentFsgl}}￥</td> 
+                                <td>{{b.totalPriceFsgl}}￥</td> 
+                                <td>{{b.payoutRateFsgl}}%</td>
+                                <td>{{b.totalInvestmentLevel0}}￥</td> 
+                                <td>{{b.totalPriceLevel0}}￥</td> 
+                                <td>{{b.payoutRateLevel0}}%</td>
                             </tr>
                             <tr *ngIf="esummarytotal">
                                 <td>{{esummarytotal.date}}</td>
@@ -2780,11 +2824,17 @@
                                 <td>{{esummarytotal.totalInvestment}}￥</td> 
                                 <td>{{esummarytotal.totalPrice}}￥</td> 
                                 <td>{{esummarytotal.payoutRate}}%</td>
+                                <td>{{esummarytotal.totalInvestmentFsgl}}￥</td> 
+                                <td>{{esummarytotal.totalPriceFsgl}}￥</td> 
+                                <td>{{esummarytotal.payoutRateFsgl}}%</td>
+                                <td>{{esummarytotal.totalInvestmentLevel0}}￥</td> 
+                                <td>{{esummarytotal.totalPriceLevel0}}￥</td> 
+                                <td>{{esummarytotal.payoutRateLevel0}}%</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="Nodata">
                             <tr>
-                                <td colspan="5">{{data}}</td>
+                                <td colspan="11">{{data}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -2821,9 +2871,17 @@
                                   <tr class="thtible">
                                       <td></td> 
                                       <td colspan="3">合计</td>
+                                      <td colspan="3">单场固定奖FSGL</td>
+                                      <td colspan="3">LEVEL0</td>
                                   </tr>
                                   <tr class="eventblue">
                                       <th>玩法</th>
+                                      <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>中奖金额 Payout 人民币 RMB</th>
+                                      <th>盈利率 Payout Ratio %</th>
+                                      <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>中奖金额 Payout 人民币 RMB</th>
+                                      <th>盈利率 Payout Ratio %</th>
                                       <th>投注额 Investment 人民币 RMB</th> 
                                       <th>中奖金额 Payout 人民币 RMB</th>
                                       <th>盈利率 Payout Ratio %</th>
@@ -2835,17 +2893,29 @@
                                       <td>{{dn.totalInvestment}}￥</td>
                                       <td>{{dn.totalPrice}}￥</td>
                                       <td>{{dn.payoutRate}}%</td>
+                                      <td>{{dn.totalInvestmentFsgl}}￥</td> 
+                                      <td>{{dn.totalPriceFsgl}}￥</td> 
+                                      <td>{{dn.payoutRateFsgl}}%</td>
+                                      <td>{{dn.totalInvestmentLevel0}}￥</td> 
+                                      <td>{{dn.totalPriceLevel0}}￥</td> 
+                                      <td>{{dn.payoutRateLevel0}}%</td>
                                   </tr>
                                   <tr *ngIf="eventtotalpro">
                                       <td>合计Total</td>
                                       <td>{{eventtotalpro.totalInvestment}}￥</td>
                                       <td>{{eventtotalpro.totalPrice}}￥</td>
                                       <td>{{eventtotalpro.payoutRate}}%</td>
+                                      <td>{{eventtotalpro.totalInvestmentFsgl}}￥</td> 
+                                      <td>{{eventtotalpro.totalPriceFsgl}}￥</td> 
+                                      <td>{{eventtotalpro.payoutRateFsgl}}%</td>
+                                      <td>{{eventtotalpro.totalInvestmentLevel0}}￥</td> 
+                                      <td>{{eventtotalpro.totalPriceLevel0}}￥</td> 
+                                      <td>{{eventtotalpro.payoutRateLevel0}}%</td>
                                   </tr>
                               </tbody>
                           <tbody *ngIf="Nodata">
                               <tr>
-                                  <td colspan="4">{{data}}</td>
+                                  <td colspan="10">{{data}}</td>
                               </tr>
                           </tbody>
                       </table>
@@ -3228,6 +3298,9 @@
                   </table>
               </div>
           </div>
+          <!-- <div class="main" *ngSwitchCase="21">
+                <div echarts [options]="chartOption" class="demo-chart"></div>
+          </div> -->
 
       
         </div>

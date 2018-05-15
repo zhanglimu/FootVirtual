@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Http } from '@angular/http'; // (1)
 import 'rxjs/add/operator/map'; // (2)
 import{ Router} from '@angular/router';
@@ -20,7 +20,7 @@ interface Member {
 @Component({
     selector: 'app-orders',
     templateUrl: './orders.component.html',
-    styleUrls: ['./orders.component.scss']
+    styleUrls: ['./orders.component.scss'],
   })
 export class OrdersComponent implements OnInit {
     public switchIndex: string = '2';
@@ -2547,7 +2547,6 @@ eventsingleCha(reslt) {
   var month = "";
   var day = "";
   var time:any = $("#d12").val();
-  console.log(time,"11")
       if(time =="" || time ==null){
             this.message.error("请先选择日期");
       }else{
@@ -2564,7 +2563,6 @@ eventsingleCha(reslt) {
       }
       this.QUERY.eventSingle(year,month,day).subscribe(data => {
         if (data!=null) {
-          console.log(data,"55")
           this.loading = false;
           this.Nodata = false;
           this.eventotal = data.total.resultMap.CHP;
@@ -3271,5 +3269,6 @@ EVENTrecycle(agentId){
       window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=3');
     } 
 }
+
 
 }
