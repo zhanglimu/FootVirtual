@@ -2838,7 +2838,7 @@ eventbreakexport(){
     } 
 }
 eventall(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid) {
-  console.log(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid)
+  // console.log(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid)
   this.QUERY.eventOrder(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,eventstate,eventthird,eventinplay,eventtkId,eventuid).subscribe(data => {
     if (data.modelList!=null) {
       this.loading = false;
@@ -2895,6 +2895,9 @@ eventall(eventstartime,eventendtime,eventagNum,pageNum,pageSize,eventdeal,events
           case 2:
             this.eventshuju[i].ballType_name = "篮球";
             break;
+          case 3:
+          this.eventshuju[i].ballType_name = "事件型";
+          break;
         }
         switch (this.eventshuju[i].inplay) {
           case null:
@@ -3132,8 +3135,8 @@ eventchannelCha(reslt) {
           this.loading = false;
           this.Nodata = false;
           this.eventchanneltotal = data.total;
-          this.eventchannelshuju = data.agentInfoModels;
-          for(var i=0; i<data.agentInfoModels.length; i++){
+          this.eventchannelshuju = data.agentInfoModels.sort(this.compare('agentSell'));
+          for(var i=0; i<data.agentInfoModels.sort(this.compare('agentSell')).length; i++){
             if(this.eventchannelshuju[i].recyclePrice =="0"){
               this.eventchannelshuju[i].recyclePriceName ="-";
             }else{
