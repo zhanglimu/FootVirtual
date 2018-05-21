@@ -226,8 +226,4 @@ export class InterfaceService{
         .map(res=>res.json());
     }
 
-    echarts(){
-        return this.http.get(AppConfig.baseUrl+'/account/getGrashByTime')
-        .map(res=>res.json());
-    }
 }   

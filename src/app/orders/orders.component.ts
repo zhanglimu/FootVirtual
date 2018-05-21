@@ -333,9 +333,12 @@ export class OrdersComponent implements OnInit {
     EmonthSummaryName:string;
     EbreakdownName:string;
     EagentName:string;
+    //进度条
+    // pg:any;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
+      
       // 折叠导航
       $(document).ready(function(){
         $(".one_bar").click(function(){
@@ -520,6 +523,22 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+
+//进度条
+// var progressbar={
+//   init:function(){
+//       var fill=document.getElementById('fill');
+//       var counting=0;
+//   //通过间隔定时器实现百分比文字效果,通过计算CSS动画持续时间进行间隔设置
+//       var timer=setInterval(function(e){
+//           counting++;
+//           fill.innerHTML=counting+'%';
+//           if(counting===85000000) clearInterval(timer);
+//       },1200);
+//   }
+// };
+// progressbar.init();
+
     this.lo = "2";//彩种值
     //summary开始
     this.lot = "2";//彩种值

@@ -43,7 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
-              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">曲线</span></li> -->
+              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li> -->
           </ul>
       </div>
 </header>
@@ -85,9 +85,9 @@
                         <tr class="thtible">
                             <td></td>
                             <td></td> 
-                            <td colspan="3">合计</td>
-                            <td colspan="3">单场固定奖FSGL</td>
-                            <td colspan="3">串关固定奖ALLUP</td>
+                            <td colspan="4">合计</td>
+                            <td colspan="4">单场固定奖FSGL</td>
+                            <td colspan="4">串关固定奖ALLUP</td>
                         </tr>
                     </thead>
                     <thead>
@@ -96,12 +96,15 @@
                             <th>场次数量NO. Match</th>
                             <th>投注金额 Investment 人民币 RMB</th> 
                             <th>返奖金额 Payout 人民币 RMB</th> 
+                            <th>合计加奖</th> 
                             <th>盈利率 Payout Ratio %</th>
                             <th>投注金额 Investment 人民币 RMB</th>
                             <th>返奖金额 Payout 人民币 RMB</th>
+                            <th>单关加奖</th> 
                             <th>盈利率 Payout Ratio %</th>
                             <th>投注金额 Investment 人民币 RMB</th>
                             <th>返奖金额 Payout 人民币 RMB</th> 
+                            <th>串关加奖</th> 
                             <th>盈利率 Payout Ratio %</th>
                         </tr>
                     </thead>
@@ -111,12 +114,15 @@
                             <td>{{summaryToday.num}}</td>
                             <td class="gree">{{summaryToday.totalInvestment}}￥</td> 
                             <td class="gree">{{summaryToday.totalPrice}}￥</td> 
+                            <td class="gree">{{summaryToday.bonusInvest}}￥</td> 
                             <td class="gree">{{summaryToday.payoutRate}}%</td>
                             <td class="red">{{summaryToday.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{summaryToday.totalPriceFsgl}}￥</td>
+                            <td class="red">{{summaryToday.bonusInvestFsgl}}￥</td>
                             <td class="red">{{summaryToday.payoutRateFsgl}}%</td>
                             <td class="blue">{{summaryToday.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{summaryToday.totalPriceAllup}}￥</td>
+                            <td class="blue">{{summaryToday.bonusInvestAllup}}￥</td>
                             <td class="blue">{{summaryToday.payoutRateAllup}}%</td>
                         </tr>
                         <tr *ngIf="summaryWeek">
@@ -124,12 +130,15 @@
                             <td>{{summaryWeek.num}}</td>
                             <td class="gree">{{summaryWeek.totalInvestment}}￥</td> 
                             <td class="gree">{{summaryWeek.totalPrice}}￥</td> 
+                            <td class="gree">{{summaryWeek.bonusInvest}}￥</td> 
                             <td class="gree">{{summaryWeek.payoutRate}}%</td>
                             <td class="red">{{summaryWeek.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{summaryWeek.totalPriceFsgl}}￥</td>
+                            <td class="red">{{summaryWeek.bonusInvestFsgl}}￥</td>
                             <td class="red">{{summaryWeek.payoutRateFsgl}}%</td>
                             <td class="blue">{{summaryWeek.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{summaryWeek.totalPriceAllup}}￥</td>
+                            <td class="blue">{{summaryWeek.bonusInvestAllup}}￥</td>
                             <td class="blue">{{summaryWeek.payoutRateAllup}}%</td>
                         </tr>
                         <tr *ngIf="summaryMonth">
@@ -137,12 +146,15 @@
                             <td>{{summaryMonth.num}}</td>
                             <td class="gree">{{summaryMonth.totalInvestment}}￥</td> 
                             <td class="gree">{{summaryMonth.totalPrice}}￥</td> 
+                            <td class="gree">{{summaryMonth.bonusInvest}}￥</td> 
                             <td class="gree">{{summaryMonth.payoutRate}}%</td>
                             <td class="red">{{summaryMonth.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{summaryMonth.totalPriceFsgl}}￥</td>
+                            <td class="red">{{summaryMonth.bonusInvestFsgl}}￥</td>
                             <td class="red">{{summaryMonth.payoutRateFsgl}}%</td>
                             <td class="blue">{{summaryMonth.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{summaryMonth.totalPriceAllup}}￥</td>
+                            <td class="blue">{{summaryMonth.bonusInvestAllup}}￥</td>
                             <td class="blue">{{summaryMonth.payoutRateAllup}}%</td>
                         </tr>
                         <tr *ngIf="summaryYear">
@@ -150,12 +162,15 @@
                             <td>{{summaryYear.num}}</td>
                             <td class="gree">{{summaryYear.totalInvestment}}￥</td> 
                             <td class="gree">{{summaryYear.totalPrice}}￥</td> 
+                            <td class="gree">{{summaryYear.bonusInvest}}￥</td>
                             <td class="gree">{{summaryYear.payoutRate}}%</td>
                             <td class="red">{{summaryYear.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{summaryYear.totalPriceFsgl}}￥</td>
+                            <td class="red">{{summaryYear.bonusInvestFsgl}}￥</td>
                             <td class="red">{{summaryYear.payoutRateFsgl}}%</td>
                             <td class="blue">{{summaryYear.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{summaryYear.totalPriceAllup}}￥</td>
+                            <td class="blue">{{summaryYear.bonusInvestAllup}}￥</td>
                             <td class="blue">{{summaryYear.payoutRateAllup}}%</td>
                         </tr>
                         <tr *ngFor="let b of summaryList">
@@ -163,12 +178,15 @@
                             <td>{{b.num}}</td>
                             <td class="gree">{{b.totalInvestment}}￥</td> 
                             <td class="gree">{{b.totalPrice}}￥</td> 
+                            <td class="gree">{{b.bonusInvest}}￥</td>
                             <td class="gree">{{b.payoutRate}}%</td>
                             <td class="red">{{b.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{b.totalPriceFsgl}}￥</td>
+                            <td class="red">{{b.bonusInvestFsgl}}￥</td>
                             <td class="red">{{b.payoutRateFsgl}}%</td>
                             <td class="blue">{{b.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{b.totalPriceAllup}}￥</td>
+                            <td class="blue">{{b.bonusInvestAllup}}￥</td>
                             <td class="blue">{{b.payoutRateAllup}}%</td>
                         </tr>
                         <tr *ngIf="summarytotal">
@@ -176,18 +194,21 @@
                             <td>{{summarytotal.num}}</td>
                             <td class="gree">{{summarytotal.totalInvestment}}￥</td> 
                             <td class="gree">{{summarytotal.totalPrice}}￥</td> 
+                            <td class="gree">{{summarytotal.bonusInvest}}￥</td>
                             <td class="gree">{{summarytotal.payoutRate}}%</td>
                             <td class="red">{{summarytotal.totalInvestmentFsgl}}￥</td>
                             <td class="red">{{summarytotal.totalPriceFsgl}}￥</td>
+                            <td class="red">{{summarytotal.bonusInvestFsgl}}￥</td>
                             <td class="red">{{summarytotal.payoutRateFsgl}}%</td>
                             <td class="blue">{{summarytotal.totalInvestmentAllup}}￥</td> 
                             <td class="blue">{{summarytotal.totalPriceAllup}}￥</td>
+                            <td class="blue">{{summarytotal.bonusInvestAllup}}￥</td>
                             <td class="blue">{{summarytotal.payoutRateAllup}}%</td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="Nodata">
                         <tr>
-                            <td colspan="11">{{data}}</td>
+                            <td colspan="14">{{data}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -232,10 +253,12 @@
                               <td>-</td>
                               <td>-</td>
                               <td>-</td>
+                              <td>-</td>
                               <td>{{agentdata.userAmountFb}}</td>
                               <td>{{agentdata.orderAmountFb}}</td> 
                               <td>{{agentdata.tradePriceFb}}￥</td>
                               <td>{{agentdata.winMoneyFb}}￥</td>
+                              <td>{{agentdata.cxBonusFb}}￥</td>
                               <td>{{agentdata.profitFb}}￥</td> 
                               <td>{{agentdata.profitabilityFb}}%</td>
                           </tr>
@@ -245,11 +268,13 @@
                               <th>渠道名称</th>
                               <th>渠道编码</th>
                               <th>兑奖率</th> 
+                              <th>加奖兑奖率</th>
                               <th>渠道开停售</th> 
                               <th>注册用户数</th>
                               <th>订单数</th>
                               <th>投注金额</th>
                               <th>返奖金额</th>
+                              <th>加奖额</th>
                               <th>盈亏</th> 
                               <th>盈利率</th>
                           </tr>
@@ -259,18 +284,20 @@
                               <td>{{b.agentName}}</td>
                               <td>{{b.agentCode}}</td>
                               <td>{{b.agentRate}}</td> 
+                              <td>{{b.agentBonusRate}}</td>
                               <td>{{b.agentSellMess}}</td> 
                               <td>{{b.userAmountFb}}</td>
                               <td>{{b.orderAmountFb}}</td>
                               <td>{{b.tradePriceFb}}￥</td>
                               <td>{{b.winMoneyFb}}￥</td>
+                              <td>{{b.cxBonusFb}}￥</td>
                               <td>{{b.profitFb}}￥</td> 
                               <td>{{b.profitabilityFb}}%</td>
                           </tr>
                       </tbody>
                       <tbody *ngIf="Nodata">
                           <tr>
-                              <td colspan="10">{{data}}</td>
+                              <td colspan="12">{{data}}</td>
                           </tr>
                       </tbody>
                   </table>
@@ -279,10 +306,6 @@
           <div class="main" *ngSwitchCase="2">
               <div class="clearfix">
                       <form class="formdate left" #orderForm="ngForm" (ngSubmit)="orderCha(orderForm.value)">
-                          <!-- <h4 class="left">
-                              <span> 虚拟订单管理</span><br />
-                              <span>Order Management</span>
-                          </h4>     -->
                           <p class="word">
                                   <span>订单ID：</span><input id="tk" type="text" name="dingdan" [(ngModel)]="ding" value=""/><br />
                                   <span>用户ID：</span><input id="uid" type="text" name="yonghu" [(ngModel)]="yong" value=""/>
@@ -340,6 +363,7 @@
                               <td>-</td>
                               <td>-</td>
                               <td>{{shu.totalPrice}}</td>
+                              <td>{{shu.cxBonus}}</td>
                               <td>-</td>
                               <td>-</td> 
                               <td>{{shu.totalInvestment}}</td>
@@ -357,6 +381,7 @@
                               <th>玩法</th>
                               <th>订单类型</th>
                               <th>最大中奖额</th>
+                              <th>加奖额</th>
                               <th>渠道促销</th>
                               <th>下注时间</th> 
                               <th>下注金额</th>
@@ -374,6 +399,7 @@
                               <td>{{b.bettingProducts}}</td>
                               <td>{{b.inplay_name}}</td>
                               <td>{{b.totalPrice}}</td>
+                              <td>{{b.cxBonus}}</td>
                               <td>{{b.addAwardAmount}}</td>
                               <td>{{b.investTime}}</td> 
                               <td>{{b.totalInvestment}}</td>
@@ -388,7 +414,7 @@
                                           <thead class="fontse">
                                               <tr>
                                                   <th style="width:8%;">订单ID</th>
-                                                  <th style="width:74%;" colspan="4">{{tkIding}}</th>
+                                                  <th style="width:74%;" colspan="5">{{tkIding}}</th>
                                                   <th style="width:8%;">退款</th>
                                                   <th style="width:8%;">{{refund}}</th>
                                               </tr>
@@ -397,9 +423,10 @@
                                                   <th style="width:8%;">玩法</th>
                                                   <th style="width:50%;">投注内容</th>
                                                   <th style="width:8%;">过关方式</th>
-                                                  <th style="width:8%;">中奖金额</th>
-                                                  <th style="width:8%;">投注金额</th>
-                                                  <th style="width:8%;">退款金额</th>
+                                                  <th style="width:6%;">中奖金额</th>
+                                                  <th style="width:6%;">投注金额</th>
+                                                  <th style="width:6%;">加奖额</th>
+                                                  <th style="width:6%;">退款金额</th>
                                               </tr>
                                           </thead>
                                       </table>
@@ -411,14 +438,15 @@
                                                   <td style="width:8%;">{{de.product}}</td>
                                                   <td style="width:50%;">{{de.investInfo}}</td>
                                                   <td style="width:8%;">{{de.local_m}}</td>
-                                                  <td style="width:8%;">{{de.total_price}}</td>
-                                                  <td style="width:8%;">{{de.inv_allup}}</td>
-                                                  <td style="width:8%;">{{de.refund}}</td>
+                                                  <td style="width:6%;">{{de.total_price}}</td>
+                                                  <td style="width:6%;">{{de.inv_allup}}</td>
+                                                  <td style="width:6%;">{{de.cxBonus}}</td>
+                                                  <td style="width:6%;">{{de.refund}}</td>
                                               </tr>
                                           </tbody>
                                           <tbody *ngIf="Nodata3">
                                               <tr>
-                                                  <td colspan="3">{{data3}}</td>
+                                                  <td colspan="8">{{data3}}</td>
                                               </tr>
                                           </tbody>
                                       </table>
@@ -428,7 +456,7 @@
                       </tbody>
                       <tbody *ngIf="Nodata">
                           <tr>
-                              <td colspan="13">{{data}}</td>
+                              <td colspan="14">{{data}}</td>
                           </tr>
                       </tbody>
                       
@@ -516,6 +544,20 @@
                                 <td>{{total.resultMap.FGS.totalInvestment}}</td>
                             </tr>
                             <tr *ngIf="total" class="smallfontbody">
+                                <td>加奖额</td>
+                                <td>{{total.resultMap.HAD.bonus}}</td>
+                                <td>{{total.resultMap.HHAD.bonus}}</td>
+                                <td>{{total.resultMap.HAFU.bonus}}</td>
+                                <td>{{total.resultMap.CRS.bonus}}</td>
+                                <td>{{total.resultMap.TTG.bonus}}</td>
+                                <td>{{total.resultMap.FHAD.bonus}}</td>
+                                <td>{{total.resultMap.AHC.bonus}}</td>
+                                <td>{{total.resultMap.FAHC.bonus}}</td>
+                                <td>{{total.resultMap.HL.bonus}}</td>
+                                <td>{{total.resultMap.FHL.bonus}}</td>
+                                <td>{{total.resultMap.FGS.bonus}}</td>
+                            </tr>
+                            <tr *ngIf="total" class="smallfontbody">
                                 <td>返奖金额</td>
                                 <td>{{total.resultMap.HAD.totalPrice}}</td>
                                 <td>{{total.resultMap.HHAD.totalPrice}}</td>
@@ -592,6 +634,16 @@
                               <td>{{totaldian.resultMap.SHL.totalInvestment}}</td>
                               <td>{{totaldian.resultMap.MNL.totalInvestment}}</td>
                               <td>{{totaldian.resultMap.HS.totalInvestment}}</td>
+                          </tr>
+                          <tr *ngIf="totaldian" class="smallfontbody">
+                              <td>加奖额</td>
+                              <td>{{totaldian.resultMap.FBL.bonus}}</td>
+                              <td>{{totaldian.resultMap.SHDC.bonus}}</td>
+                              <td>{{totaldian.resultMap.HL.bonus}}</td>
+                              <td>{{totaldian.resultMap.HDC.bonus}}</td>
+                              <td>{{totaldian.resultMap.SHL.bonus}}</td>
+                              <td>{{totaldian.resultMap.MNL.bonus}}</td>
+                              <td>{{totaldian.resultMap.HS.bonus}}</td>
                           </tr>
                           <tr *ngIf="totaldian" class="smallfontbody">
                               <td>返奖金额</td>
@@ -674,17 +726,19 @@
                       <thead>
                           <tr class="thtible">
                               <th style="width:20%;">人民币RMB</th>
-                              <th style="width:20%;">投注额</th>
-                              <th style="width:20%;">返奖金额</th>
-                              <th style="width:20%;">返奖率</th>
-                              <th style="width:20%;">盈利</th>
+                              <th style="width:16%;">投注额</th>
+                              <th style="width:16%;">加奖额</th>
+                              <th style="width:16%;">返奖金额</th>
+                              <th style="width:16%;">返奖率</th>
+                              <th style="width:16%;">盈利</th>
                           </tr>
                           <tr class="firstr odds" *ngIf="allupdata">
                               <th style="width:20%;">合计</th>
-                              <th style="width:20%;">{{allupdata.totalInvestment}}</th>
-                              <th style="width:20%;">{{allupdata.totalPrice}}</th>
-                              <th style="width:20%;">{{allupdata.payoutRate}}%</th>
-                              <th style="width:20%;">{{allupdata.payout}}</th>
+                              <th style="width:16%;">{{allupdata.totalInvestment}}</th>
+                              <th style="width:16%;">{{allupdata.bonus}}</th>
+                              <th style="width:16%;">{{allupdata.totalPrice}}</th>
+                              <th style="width:16%;">{{allupdata.payoutRate}}%</th>
+                              <th style="width:16%;">{{allupdata.payout}}</th>
                           </tr>
                       </thead>
                   </table>
@@ -693,216 +747,240 @@
                           <tr class="tablelv" *ngIf="allHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">HAD</td>
-                              <td style="width:20%;">{{allHAD.totalInvestment}}</td>
-                              <td style="width:20%;">{{allHAD.totalPrice}}</td>
-                              <td style="width:20%;">{{allHAD.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allHAD.payout}}</td> 
+                              <td style="width:16%;">{{allHAD.totalInvestment}}</td>
+                              <th style="width:16%;">{{allHAD.bonus}}</th>
+                              <td style="width:16%;">{{allHAD.totalPrice}}</td>
+                              <td style="width:16%;">{{allHAD.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allHAD.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupHHAD">
                           <tr class="tablelv" *ngIf="allHHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">HHAD</td>
-                              <td style="width:20%;">{{allHHAD.totalInvestment}}</td>
-                              <td style="width:20%;">{{allHHAD.totalPrice}}</td>
-                              <td style="width:20%;">{{allHHAD.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allHHAD.payout}}</td> 
+                              <td style="width:16%;">{{allHHAD.totalInvestment}}</td>
+                              <th style="width:16%;">{{allHHAD.bonus}}</th>
+                              <td style="width:16%;">{{allHHAD.totalPrice}}</td>
+                              <td style="width:16%;">{{allHHAD.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allHHAD.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupHHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupHAFU">
                           <tr class="tablelv" *ngIf="allHAFU">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">HAFU</td>
-                              <td style="width:20%;">{{allHAFU.totalInvestment}}</td>
-                              <td style="width:20%;">{{allHAFU.totalPrice}}</td>
-                              <td style="width:20%;">{{allHAFU.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allHAFU.payout}}</td> 
+                              <td style="width:16%;">{{allHAFU.totalInvestment}}</td>
+                              <th style="width:16%;">{{allHAFU.bonus}}</th>
+                              <td style="width:16%;">{{allHAFU.totalPrice}}</td>
+                              <td style="width:16%;">{{allHAFU.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allHAFU.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupHAFU">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupTTG">
                           <tr class="tablelv" *ngIf="allTTG">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">TTG</td>
-                              <td style="width:20%;">{{allTTG.totalInvestment}}</td>
-                              <td style="width:20%;">{{allTTG.totalPrice}}</td>
-                              <td style="width:20%;">{{allTTG.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allTTG.payout}}</td> 
+                              <td style="width:16%;">{{allTTG.totalInvestment}}</td>
+                              <th style="width:16%;">{{allTTG.bonus}}</th>
+                              <td style="width:16%;">{{allTTG.totalPrice}}</td>
+                              <td style="width:16%;">{{allTTG.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allTTG.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupTTG">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupCRS">
                           <tr class="tablelv" *ngIf="allCRS">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">CRS</td>
-                              <td style="width:20%;">{{allCRS.totalInvestment}}</td>
-                              <td style="width:20%;">{{allCRS.totalPrice}}</td>
-                              <td style="width:20%;">{{allCRS.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allCRS.payout}}</td> 
+                              <td style="width:16%;">{{allCRS.totalInvestment}}</td>
+                              <th style="width:16%;">{{allCRS.bonus}}</th>
+                              <td style="width:16%;">{{allCRS.totalPrice}}</td>
+                              <td style="width:16%;">{{allCRS.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allCRS.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupCRS">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupFHAD">
                           <tr class="tablelv" *ngIf="allFHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">FHAD</td>
-                              <td style="width:20%;">{{allFHAD.totalInvestment}}</td>
-                              <td style="width:20%;">{{allFHAD.totalPrice}}</td>
-                              <td style="width:20%;">{{allFHAD.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allFHAD.payout}}</td> 
+                              <td style="width:16%;">{{allFHAD.totalInvestment}}</td>
+                              <th style="width:16%;">{{allFHAD.bonus}}</th>
+                              <td style="width:16%;">{{allFHAD.totalPrice}}</td>
+                              <td style="width:16%;">{{allFHAD.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allFHAD.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupFHAD">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupAHC">
                           <tr class="tablelv" *ngIf="allAHC">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">AHC</td>
-                              <td style="width:20%;">{{allAHC.totalInvestment}}</td>
-                              <td style="width:20%;">{{allAHC.totalPrice}}</td>
-                              <td style="width:20%;">{{allAHC.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allAHC.payout}}</td> 
+                              <td style="width:16%;">{{allAHC.totalInvestment}}</td>
+                              <th style="width:16%;">{{allAHC.bonus}}</th>
+                              <td style="width:16%;">{{allAHC.totalPrice}}</td>
+                              <td style="width:16%;">{{allAHC.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allAHC.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupAHC">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupFAHC">
                           <tr class="tablelv" *ngIf="allFAHC">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">FAHC</td>
-                              <td style="width:20%;">{{allFAHC.totalInvestment}}</td>
-                              <td style="width:20%;">{{allFAHC.totalPrice}}</td>
-                              <td style="width:20%;">{{allFAHC.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allFAHC.payout}}</td> 
+                              <td style="width:16%;">{{allFAHC.totalInvestment}}</td>
+                              <th style="width:16%;">{{allFAHC.bonus}}</th>
+                              <td style="width:16%;">{{allFAHC.totalPrice}}</td>
+                              <td style="width:16%;">{{allFAHC.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allFAHC.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupFAHC">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupHL">
                           <tr class="tablelv" *ngIf="allHL">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">HL</td>
-                              <td style="width:20%;">{{allHL.totalInvestment}}</td>
-                              <td style="width:20%;">{{allHL.totalPrice}}</td>
-                              <td style="width:20%;">{{allHL.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allHL.payout}}</td> 
+                              <td style="width:16%;">{{allHL.totalInvestment}}</td>
+                              <th style="width:16%;">{{allHL.bonus}}</th>
+                              <td style="width:16%;">{{allHL.totalPrice}}</td>
+                              <td style="width:16%;">{{allHL.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allHL.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupHL">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupFHL">
                           <tr class="tablelv" *ngIf="allFHL">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">FHL</td>
-                              <td style="width:20%;">{{allFHL.totalInvestment}}</td>
-                              <td style="width:20%;">{{allFHL.totalPrice}}</td>
-                              <td style="width:20%;">{{allFHL.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allFHL.payout}}</td> 
+                              <td style="width:16%;">{{allFHL.totalInvestment}}</td>
+                              <th style="width:16%;">{{allFHL.bonus}}</th>
+                              <td style="width:16%;">{{allFHL.totalPrice}}</td>
+                              <td style="width:16%;">{{allFHL.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allFHL.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupFHL">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupFGS">
                           <tr class="tablelv" *ngIf="allFGS">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">FGS</td>
-                              <td style="width:20%;">{{allFGS.totalInvestment}}</td>
-                              <td style="width:20%;">{{allFGS.totalPrice}}</td>
-                              <td style="width:20%;">{{allFGS.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allFGS.payout}}</td> 
+                              <td style="width:16%;">{{allFGS.totalInvestment}}</td>
+                              <th style="width:16%;">{{allFGS.bonus}}</th>
+                              <td style="width:16%;">{{allFGS.totalPrice}}</td>
+                              <td style="width:16%;">{{allFGS.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allFGS.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupFGS">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody id="lists" *ngIf="allupFCA">
                           <tr class="tablelv" *ngIf="allFCA">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">FCA</td>
-                              <td style="width:20%;">{{allFCA.totalInvestment}}</td>
-                              <td style="width:20%;">{{allFCA.totalPrice}}</td>
-                              <td style="width:20%;">{{allFCA.payoutRate}}%</td> 
-                              <td style="width:20%;">{{allFCA.payout}}</td> 
+                              <td style="width:16%;">{{allFCA.totalInvestment}}</td>
+                              <th style="width:16%;">{{allFCA.bonus}}</th>
+                              <td style="width:16%;">{{allFCA.totalPrice}}</td>
+                              <td style="width:16%;">{{allFCA.payoutRate}}%</td> 
+                              <td style="width:16%;">{{allFCA.payout}}</td> 
                           </tr>
                           <tr *ngFor="let b of allupFCA">
                               <td style="visibility:hidden;">0</td>
                               <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                              <td style="width:20%;">{{b.totalInvestment}}</td>
-                              <td style="width:20%;">{{b.totalPrice}}</td>
-                              <td style="width:20%;">{{b.payoutRate}}%</td> 
-                              <td style="width:20%;">{{b.payout}}</td> 
+                              <td style="width:16%;">{{b.totalInvestment}}</td>
+                              <th style="width:16%;">{{b.bonus}}</th>
+                              <td style="width:16%;">{{b.totalPrice}}</td>
+                              <td style="width:16%;">{{b.payoutRate}}%</td> 
+                              <td style="width:16%;">{{b.payout}}</td> 
                           </tr>
                       </tbody>
                       <tbody *ngIf="Nodata">
@@ -919,17 +997,19 @@
                   <thead>
                       <tr class="thtible">
                           <th style="width:20%;">人民币RMB</th>
-                          <th style="width:20%;">投注额</th>
-                          <th style="width:20%;">返奖金额</th>
-                          <th style="width:20%;">返奖率</th>
-                          <th style="width:20%;">盈利</th>
+                          <th style="width:16%;">投注额</th>
+                          <th style="width:16%;">加奖额</th>
+                          <th style="width:16%;">返奖金额</th>
+                          <th style="width:16%;">返奖率</th>
+                          <th style="width:16%;">盈利</th>
                       </tr>
                       <tr class="firstr odds" *ngIf="allupdiandata">
                           <th style="width:20%;">合计</th>
-                          <th style="width:20%;">{{allupdiandata.totalInvestment}}</th>
-                          <th style="width:20%;">{{allupdiandata.totalPrice}}</th>
-                          <th style="width:20%;">{{allupdiandata.payoutRate}}%</th>
-                          <th style="width:20%;">{{allupdiandata.payout}}</th>
+                          <th style="width:16%;">{{allupdiandata.totalInvestment}}</th>
+                          <th style="width:16%;">{{allupdiandata.bonus}}</th>
+                          <th style="width:16%;">{{allupdiandata.totalPrice}}</th>
+                          <th style="width:16%;">{{allupdiandata.payoutRate}}%</th>
+                          <th style="width:16%;">{{allupdiandata.payout}}</th>
                       </tr>
                   </thead>
               </table>
@@ -938,144 +1018,160 @@
                       <tr class="tablelv" *ngIf="allFBL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">FBL</td>
-                          <td style="width:20%;">{{allFBL.totalInvestment}}</td>
-                          <td style="width:20%;">{{allFBL.totalPrice}}</td>
-                          <td style="width:20%;">{{allFBL.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allFBL.payout}}</td> 
+                          <td style="width:16%;">{{allFBL.totalInvestment}}</td>
+                          <td style="width:16%;">{{allFBL.bonus}}</td>
+                          <td style="width:16%;">{{allFBL.totalPrice}}</td>
+                          <td style="width:16%;">{{allFBL.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allFBL.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupFBL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupSHDC">
                       <tr class="tablelv" *ngIf="allSHDC">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">SHDC</td>
-                          <td style="width:20%;">{{allSHDC.totalInvestment}}</td>
-                          <td style="width:20%;">{{allSHDC.totalPrice}}</td>
-                          <td style="width:20%;">{{allSHDC.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allSHDC.payout}}</td> 
+                          <td style="width:16%;">{{allSHDC.totalInvestment}}</td>
+                          <td style="width:16%;">{{allSHDC.bonus}}</td>
+                          <td style="width:16%;">{{allSHDC.totalPrice}}</td>
+                          <td style="width:16%;">{{allSHDC.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allSHDC.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupSHDC">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupdianHL">
                       <tr class="tablelv" *ngIf="alldianHL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">HL</td>
-                          <td style="width:20%;">{{alldianHL.totalInvestment}}</td>
-                          <td style="width:20%;">{{alldianHL.totalPrice}}</td>
-                          <td style="width:20%;">{{alldianHL.payoutRate}}%</td> 
-                          <td style="width:20%;">{{alldianHL.payout}}</td> 
+                          <td style="width:16%;">{{alldianHL.totalInvestment}}</td>
+                          <td style="width:16%;">{{alldianHL.bonus}}</td>
+                          <td style="width:16%;">{{alldianHL.totalPrice}}</td>
+                          <td style="width:16%;">{{alldianHL.payoutRate}}%</td> 
+                          <td style="width:16%;">{{alldianHL.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupdianHL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupHDC">
                       <tr class="tablelv" *ngIf="allHDC">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">HDC</td>
-                          <td style="width:20%;">{{allHDC.totalInvestment}}</td>
-                          <td style="width:20%;">{{allHDC.totalPrice}}</td>
-                          <td style="width:20%;">{{allHDC.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allHDC.payout}}</td> 
+                          <td style="width:16%;">{{allHDC.totalInvestment}}</td>
+                          <td style="width:16%;">{{allHDC.bonus}}</td>
+                          <td style="width:16%;">{{allHDC.totalPrice}}</td>
+                          <td style="width:16%;">{{allHDC.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allHDC.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupHDC">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupSHL">
                       <tr class="tablelv" *ngIf="allSHL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">SHL</td>
-                          <td style="width:20%;">{{allSHL.totalInvestment}}</td>
-                          <td style="width:20%;">{{allSHL.totalPrice}}</td>
-                          <td style="width:20%;">{{allSHL.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allSHL.payout}}</td> 
+                          <td style="width:16%;">{{allSHL.totalInvestment}}</td>
+                          <td style="width:16%;">{{allSHL.bonus}}</td>
+                          <td style="width:16%;">{{allSHL.totalPrice}}</td>
+                          <td style="width:16%;">{{allSHL.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allSHL.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupSHL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupMNL">
                       <tr class="tablelv" *ngIf="allMNL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">MNL</td>
-                          <td style="width:20%;">{{allMNL.totalInvestment}}</td>
-                          <td style="width:20%;">{{allMNL.totalPrice}}</td>
-                          <td style="width:20%;">{{allMNL.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allMNL.payout}}</td> 
+                          <td style="width:16%;">{{allMNL.totalInvestment}}</td>
+                          <td style="width:16%;">{{allMNL.bonus}}</td>
+                          <td style="width:16%;">{{allMNL.totalPrice}}</td>
+                          <td style="width:16%;">{{allMNL.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allMNL.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupMNL">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupHS">
                       <tr class="tablelv" *ngIf="allHS">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">HS</td>
-                          <td style="width:20%;">{{allHS.totalInvestment}}</td>
-                          <td style="width:20%;">{{allHS.totalPrice}}</td>
-                          <td style="width:20%;">{{allHS.payoutRate}}%</td> 
-                          <td style="width:20%;">{{allHS.payout}}</td> 
+                          <td style="width:16%;">{{allHS.totalInvestment}}</td>
+                          <td style="width:16%;">{{allHS.bonus}}</td>
+                          <td style="width:16%;">{{allHS.totalPrice}}</td>
+                          <td style="width:16%;">{{allHS.payoutRate}}%</td> 
+                          <td style="width:16%;">{{allHS.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupHS">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody id="lists" *ngIf="allupdianFCA">
                       <tr class="tablelv" *ngIf="alldianFCA">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">FCA</td>
-                          <td style="width:20%;">{{alldianFCA.totalInvestment}}</td>
-                          <td style="width:20%;">{{alldianFCA.totalPrice}}</td>
-                          <td style="width:20%;">{{alldianFCA.payoutRate}}%</td> 
-                          <td style="width:20%;">{{alldianFCA.payout}}</td> 
+                          <td style="width:16%;">{{alldianFCA.totalInvestment}}</td>
+                          <td style="width:16%;">{{alldianFCA.bonus}}</td>
+                          <td style="width:16%;">{{alldianFCA.totalPrice}}</td>
+                          <td style="width:16%;">{{alldianFCA.payoutRate}}%</td> 
+                          <td style="width:16%;">{{alldianFCA.payout}}</td> 
                       </tr>
                       <tr *ngFor="let b of allupdianFCA">
                           <td style="visibility:hidden;">0</td>
                           <td style="width:20%;">{{b.local_m}}关    Level {{b.local_m}}</td>
-                          <td style="width:20%;">{{b.totalInvestment}}</td>
-                          <td style="width:20%;">{{b.totalPrice}}</td>
-                          <td style="width:20%;">{{b.payoutRate}}%</td> 
-                          <td style="width:20%;">{{b.payout}}</td> 
+                          <td style="width:16%;">{{b.totalInvestment}}</td>
+                          <td style="width:16%;">{{b.bonus}}</td>
+                          <td style="width:16%;">{{b.totalPrice}}</td>
+                          <td style="width:16%;">{{b.payoutRate}}%</td> 
+                          <td style="width:16%;">{{b.payout}}</td> 
                       </tr>
                   </tbody>
                   <tbody *ngIf="Nodata">
@@ -1123,21 +1219,24 @@
                               <thead>
                                   <tr class="thtible">
                                       <td></td> 
-                                      <td colspan="3">合计</td>
-                                      <td colspan="3">过关固定奖ALLUP</td>
-                                      <td colspan="5">单场固定奖FSGL</td>
+                                      <td colspan="4">合计</td>
+                                      <td colspan="4">过关固定奖ALLUP</td>
+                                      <td colspan="4">单场固定奖FSGL</td>
                                   </tr>
                               </thead>
                               <thead>
                                   <tr class="firstr odds">
                                       <th>玩法</th>
                                       <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>合计加奖</th> 
                                       <th>中奖金额 Payout 人民币 RMB</th>
                                       <th>盈利率 Payout Ratio %</th>
                                       <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>串关加奖</th> 
                                       <th>中奖金额 Payout 人民币 RMB</th>
                                       <th>盈利率 Payout Ratio %</th>
                                       <th>投注额 Investment 人民币 RMB</th> 
+                                      <th>单关加奖</th> 
                                       <th>中奖金额 Payout 人民币 RMB</th>
                                       <th>盈利率 Payout Ratio %</th>
                                   </tr>
@@ -1146,31 +1245,37 @@
                                   <tr *ngFor="let dn of breakpro">
                                       <td class="product" >{{dn.product}}</td>
                                       <td class="gree">{{dn.totalInvestment}}￥</td>
+                                      <td class="gree">{{dn.bonusInvest}}￥</td>
                                       <td class="gree">{{dn.totalPrice}}￥</td>
                                       <td class="gree">{{dn.payoutRate}}%</td>
                                       <td class="red">{{dn.totalInvestmentAllup}}￥</td>
+                                      <td class="red">{{dn.bonusInvestAllup}}￥</td>
                                       <td class="red">{{dn.totalPriceAllup}}￥</td>
                                       <td class="red">{{dn.payoutRateAllup}}%</td>
                                       <td class="blue">{{dn.totalInvestmentFsgl}}￥</td>
+                                      <td class="blue">{{dn.bonusInvestFsgl}}￥</td>
                                       <td class="blue">{{dn.totalPriceFsgl}}￥</td>
                                       <td class="blue">{{dn.payoutRateFsgl}}%</td>
                                   </tr>
                                   <tr *ngIf="totalpro">
                                       <td>合计Total</td>
                                       <td>{{totalpro.totalInvestment}}￥</td>
+                                      <td>{{totalpro.bonusInvest}}￥</td>
                                       <td>{{totalpro.totalPrice}}￥</td>
                                       <td>{{totalpro.payoutRate}}%</td>
                                       <td>{{totalpro.totalInvestmentAllup}}￥</td>
+                                      <td>{{totalpro.bonusInvestAllup}}￥</td>
                                       <td>{{totalpro.totalPriceAllup}}￥</td>
                                       <td>{{totalpro.payoutRateAllup}}%</td>
                                       <td>{{totalpro.totalInvestmentFsgl}}￥</td>
+                                      <td>{{totalpro.bonusInvestFsgl}}￥</td>
                                       <td>{{totalpro.totalPriceFsgl}}￥</td>
                                       <td>{{totalpro.payoutRateFsgl}}%</td>
                                   </tr>
                               </tbody>
                           <tbody *ngIf="Nodata">
                               <tr>
-                                  <td colspan="18">{{data}}</td>
+                                  <td colspan="13">{{data}}</td>
                               </tr>
                           </tbody>
                       </table>
@@ -3329,7 +3434,14 @@
               </div>
           </div>
           <!-- <div class="main" *ngSwitchCase="21">
-                <div echarts [options]="chartOption" class="demo-chart"></div>
+                <div id="wrapper">
+                    <div id="progressbar">
+                        <div id="fill"></div>
+                    </div>
+                </div>
+                <div>盈利率
+                    <input type="range" name="points" min="1" max="10" />
+                </div>
           </div> -->
 
       
