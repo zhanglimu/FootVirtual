@@ -523,22 +523,6 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-
-//进度条
-// var progressbar={
-//   init:function(){
-//       var fill=document.getElementById('fill');
-//       var counting=0;
-//   //通过间隔定时器实现百分比文字效果,通过计算CSS动画持续时间进行间隔设置
-//       var timer=setInterval(function(e){
-//           counting++;
-//           fill.innerHTML=counting+'%';
-//           if(counting===85000000) clearInterval(timer);
-//       },1200);
-//   }
-// };
-// progressbar.init();
-
     this.lo = "2";//彩种值
     //summary开始
     this.lot = "2";//彩种值
@@ -3291,6 +3275,41 @@ EVENTrecycle(agentId){
       window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=3');
     } 
 }
+//进度条
+// barCha(reslt) {
+//   this.loading = true;
+//       this.QUERY.bar().subscribe(data => {
+//         if (data!=null) {
+//           this.loading = false;
+//           this.Nodata = false;
+//           this.emonthTotal = data.monthTotal;
+//           var obj=Object.keys(data).length-1;
+//         }else{
+//           this.loading = false;
+//           this.Nodata = true;
+//           this.data = "暂无新数据";
+//         }
+//       },error=>{
+//         this.loading = false;
+//         this.Nodata = true;
+//         this.data = "数据异常请联系开发人员";
+//       });
+//   }
 
+formatSubtitle (percent: number) : any {
+  this.QUERY.bar().subscribe(data => {
+    console.log(data,"44")
+    if(percent >= 85000000){
+      console.log("4555")
+      return "Congratulations!"
+    }else if(percent >= 42500000){
+      return "Half"
+    }else if(percent > 0){
+      return "Just began"
+    }else {
+      return "Not started"
+    }
+  })
+}
 
 }

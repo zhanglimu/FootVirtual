@@ -43,7 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
-              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li> -->
+              <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li>
           </ul>
       </div>
 </header>
@@ -3433,16 +3433,23 @@
                   </table>
               </div>
           </div>
-          <!-- <div class="main" *ngSwitchCase="21">
-                <div id="wrapper">
-                    <div id="progressbar">
-                        <div id="fill"></div>
-                    </div>
-                </div>
+          <div class="main" *ngSwitchCase="21">
+                <circle-progress
+                    [percent]="65"
+                    [radius]="100"
+                    [outerStrokeWidth]="16"
+                    [innerStrokeWidth]="8"
+                    [outerStrokeColor]="'#78C000'"
+                    [innerStrokeColor]="'#C7E596'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                >
+              <!-- {{ formatSubtitle(25) }} -->
+            </circle-progress>
                 <div>盈利率
                     <input type="range" name="points" min="1" max="10" />
                 </div>
-          </div> -->
+          </div>
 
       
         </div>
