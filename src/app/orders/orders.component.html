@@ -3434,18 +3434,29 @@
               </div>
           </div>
           <div class="main" *ngSwitchCase="21">
-                <circle-progress
-                    [percent]="65"
-                    [radius]="100"
-                    [outerStrokeWidth]="16"
-                    [innerStrokeWidth]="8"
-                    [outerStrokeColor]="'#78C000'"
-                    [innerStrokeColor]="'#C7E596'"
-                    [animation]="true"
-                    [animationDuration]="300"
-                >
-              <!-- {{ formatSubtitle(25) }} -->
-            </circle-progress>
+                <div>
+                    <p class="invest">
+                        <span>当前交易额:</span>
+                        <b class="hong">{{jindu}}</b>
+                    </p>
+                    <p class="invest">
+                        <circle-progress
+                                [percent]="baifen"
+                                [radius]="100"
+                                [outerStrokeWidth]="16"
+                                [innerStrokeWidth]="8"
+                                [outerStrokeColor]="'#2979ff'"
+                                [innerStrokeColor]="'#bddcee'"
+                                [animation]="true"
+                                [animationDuration]="300"
+                        >
+                        </circle-progress>
+                    </p>
+                    <p class="invest">
+                        <span>助力交易额:</span>
+                        <b>85000000</b>
+                    </p>
+                </div>
                 <div>盈利率
                     <input type="range" name="points" min="1" max="10" />
                 </div>

@@ -334,11 +334,17 @@ export class OrdersComponent implements OnInit {
     EbreakdownName:string;
     EagentName:string;
     //进度条
-    // pg:any;
+    jindu:string;
+    baifen:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
-      
+      //进度条
+      this.QUERY.bar().subscribe(data => {
+        this.jindu =data.invest;
+        var num=((Number(data.invest)/85000000)*100).toFixed(2)
+        this.baifen=num;
+      })
       // 折叠导航
       $(document).ready(function(){
         $(".one_bar").click(function(){
@@ -3276,40 +3282,19 @@ EVENTrecycle(agentId){
     } 
 }
 //进度条
-// barCha(reslt) {
-//   this.loading = true;
-//       this.QUERY.bar().subscribe(data => {
-//         if (data!=null) {
-//           this.loading = false;
-//           this.Nodata = false;
-//           this.emonthTotal = data.monthTotal;
-//           var obj=Object.keys(data).length-1;
-//         }else{
-//           this.loading = false;
-//           this.Nodata = true;
-//           this.data = "暂无新数据";
-//         }
-//       },error=>{
-//         this.loading = false;
-//         this.Nodata = true;
-//         this.data = "数据异常请联系开发人员";
-//       });
-//   }
-
-formatSubtitle (percent: number) : any {
-  this.QUERY.bar().subscribe(data => {
-    console.log(data,"44")
-    if(percent >= 85000000){
-      console.log("4555")
-      return "Congratulations!"
-    }else if(percent >= 42500000){
-      return "Half"
-    }else if(percent > 0){
-      return "Just began"
-    }else {
-      return "Not started"
-    }
-  })
-}
+// formatSubtitle (percent: number) : any {
+  
+//     console.log(data,"44")
+//     if(percent >= 85000000){
+//       console.log("4555")
+//       return "Congratulations!"
+//     }else if(percent >= 42500000){
+//       return "Half"
+//     }else if(percent > 0){
+//       return "Just began"
+//     }else {
+//       return "Not started"
+//     }
+// }
 
 }
