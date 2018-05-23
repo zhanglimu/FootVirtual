@@ -336,6 +336,7 @@ export class OrdersComponent implements OnInit {
     //进度条
     jindu:string;
     baifen:string;
+    payoutrate:string;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
@@ -344,6 +345,7 @@ export class OrdersComponent implements OnInit {
         this.jindu =data.invest;
         var num=((Number(data.invest)/85000000)*100).toFixed(2)
         this.baifen=num;
+        this.payoutrate =data.payoutrate;
       })
       // 折叠导航
       $(document).ready(function(){
@@ -3282,19 +3284,5 @@ EVENTrecycle(agentId){
     } 
 }
 //进度条
-// formatSubtitle (percent: number) : any {
-  
-//     console.log(data,"44")
-//     if(percent >= 85000000){
-//       console.log("4555")
-//       return "Congratulations!"
-//     }else if(percent >= 42500000){
-//       return "Half"
-//     }else if(percent > 0){
-//       return "Just began"
-//     }else {
-//       return "Not started"
-//     }
-// }
 
 }

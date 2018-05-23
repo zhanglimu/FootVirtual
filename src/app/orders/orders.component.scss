@@ -253,9 +253,36 @@ label{display: inline-block;margin: 10px 0;width: 96%;}
   }
 
 //进度条
+.inv{
+    background:#FFF8DC;
+    text-align: center;
+}
+.inv p:first-of-type{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    background: #ff9900;
+    padding: 20px;
+}
 .invest{
     display: inline-block;
     vertical-align: middle;
 }
 .invest span{font-size: 26px;font-weight: bold;}
 .hong{color: #2979ff}
+.pay{
+    background: #e7fce6;
+    text-align: center;
+}
+.pay p:first-of-type{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    background: #b7d382;
+    padding: 20px;
+}
+.yingli{
+    font-size: 26px;
+    color: #fe3c3c;
+}
+
