@@ -43,7 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
-              <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li>
+              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li> -->
           </ul>
       </div>
 </header>
@@ -3441,7 +3441,7 @@
                         <b class="hong">{{jindu}}</b>
                     </p>
                     <p class="invest">
-                        <circle-progress
+                        <!-- <circle-progress
                                 [percent]="baifen"
                                 [radius]="100"
                                 [outerStrokeWidth]="16"
@@ -3451,7 +3451,8 @@
                                 [animation]="true"
                                 [animationDuration]="300"
                         >
-                        </circle-progress>
+                        </circle-progress> -->
+                        <el-progress type="circle" width="150" [percentage]="baifen"></el-progress>
                     </p>
                     <p class="invest">
                         <span>助力交易额</span><br>
@@ -3460,16 +3461,21 @@
                 </div>
                 <div class="pay">
                     <p>**盈利率   payoutrate</p>
-                    <div id="slider-range"><span class="yingli">{{payoutrate}}</span></div>
+                    <!-- <p style="width:50%;"><el-slider [model]="50"></el-slider></p> -->
+                    <div style="padding:46px 0;">
+                        <b>
+                            <span class="yingli">{{payoutrate}}%</span>
+                            <span style="border:3px solid red;position:relative;top:16px;"></span>
+                        </b>
+                        <span style="font-size: 26px;">7.5%</span>
+                        <b>
+                            <span *ngIf="hide" style="visibility:hidden;" class="yingli">{{payoutrate}}%</span>
+                        </b>
+                    </div>
                 </div>
           </div>
 
       
         </div>
-        <!-- <div class="font4">
-          <p>1.每次更新版本首次启动需等待10分钟点击报表(系统后台正在缓存，目前只有summary有缓存，其他页面敬请期待) </p>
-          <p>2.渠道管理页面显示 查询时间区间为 所选时间的00:00:00 至24:00:00 </p>
-          <p>3.用户管理页面显示 查询时间区间为 此时时间小于当日14:00:00 查询 系统默认查询前一日14:00:00至当天23:59:59; 此时时间大于当日14:00:00 查询 系统默认查询当日14:00:00至当天23:59:59</p>
-          <p>4.其他报表页面显示 查询时间区间是所选择时间的14:00:00至第二天的14:00:00</p>
-        </div> -->
+        
       

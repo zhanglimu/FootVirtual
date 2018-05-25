@@ -346,6 +346,11 @@ export class OrdersComponent implements OnInit {
         var num=((Number(data.invest)/85000000)*100).toFixed(2)
         this.baifen=num;
         this.payoutrate =data.payoutrate;
+        if(data.payoutrate<=7.5){
+          
+        }else{
+          
+        }
       })
       // 折叠导航
       $(document).ready(function(){

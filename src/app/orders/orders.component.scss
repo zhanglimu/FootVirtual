@@ -267,6 +267,7 @@ label{display: inline-block;margin: 10px 0;width: 96%;}
 .invest{
     display: inline-block;
     vertical-align: middle;
+    padding: 20px;
 }
 .invest span{font-size: 26px;font-weight: bold;}
 .hong{color: #2979ff}
@@ -285,4 +286,9 @@ label{display: inline-block;margin: 10px 0;width: 96%;}
     font-size: 26px;
     color: #fe3c3c;
 }
-
+.pay b{
+    display: inline-block;
+    width:25%;
+    border-bottom: 4px solid #ccc;
+    margin: 10px 0;
+}

@@ -15,6 +15,8 @@ import { LoginComponent }  from './login/login.component';
 import { LoginService} from './service/login.service';
 import { LoginoutService} from './service/loginout.service';
 
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+
 //路由配置方法
 export const ROUTES : Routes =[
   {path: '', pathMatch:'full', redirectTo:'login'}, //默认访问页面
@@ -56,7 +58,8 @@ export const ROUTES : Routes =[
   providers: [
     InterfaceService,
     LoginService,
-    LoginoutService
+    LoginoutService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
  
