@@ -83,6 +83,7 @@ export class OrdersComponent implements OnInit {
     //single开始
     total: string[];   //订单变量
     totaldian:string[];
+    totalshijian:string[];
     lottery_ty:any;
     lotte:string;
     singleName:string;
@@ -149,6 +150,7 @@ export class OrdersComponent implements OnInit {
     data3:string;
     zuqiu:boolean;
     dianjing:boolean;
+    shijian:boolean;
     allupzuqiu:boolean;
     allupdianjing:boolean;
     caizhong:boolean;
@@ -337,19 +339,23 @@ export class OrdersComponent implements OnInit {
     jindu:string;
     baifen:string;
     payoutrate:string;
+    showscale:boolean;
+    hidescale:boolean;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
       //进度条
+      this.showscale=false;
+      this.hidescale=false;
       this.QUERY.bar().subscribe(data => {
         this.jindu =data.invest;
         var num=((Number(data.invest)/85000000)*100).toFixed(2)
         this.baifen=num;
         this.payoutrate =data.payoutrate;
         if(data.payoutrate<=7.5){
-          
+          this.showscale=true;
         }else{
-          
+          this.hidescale=true;
         }
       })
       // 折叠导航
@@ -592,6 +598,7 @@ export class OrdersComponent implements OnInit {
     this.breakName = "breakdown";
     this.zuqiu =false;
     this.dianjing =false;
+    this.shijian =false;
     this.allupzuqiu =false;
     this.allupdianjing =false;
     // this.caizhong=false;
@@ -1072,12 +1079,19 @@ compare(property){
             this.Nodata = false;
             this.total = data.total;
             this.totaldian = data.total;
+            this.totalshijian = data.total;
             if (this.lottery_ty==2) {
               this.dianjing =true;
               this.zuqiu =false;
-            }else{
+              this.shijian =false;
+            }if (this.lottery_ty==1){
               this.zuqiu =true;
               this.dianjing =false;
+              this.shijian =false;
+            }else{
+              this.shijian =true;
+              this.dianjing =false;
+              this.zuqiu =false;
             }
           }else{
             this.loading = false;
@@ -3288,6 +3302,5 @@ EVENTrecycle(agentId){
       window.open(AppConfig.baseUrl +'/account/channelStatistics/detailExcel?year='+year+'&month='+month+'&day='+day+'&agentId='+agentId+'&lottery_type=3');
     } 
 }
-//进度条
 
 }

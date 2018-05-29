@@ -43,7 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
-              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li> -->
+              <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li>
           </ul>
       </div>
 </header>
@@ -66,6 +66,7 @@
                           <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
                               <option value="1">足球</option>
                               <option value="2">电竞</option>
+                              <option value="4">事件型</option>
                           </select>
                         </p>
                     </form> 
@@ -232,6 +233,7 @@
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
                                   <option value="1">足球</option>
                                   <option value="2">电竞</option>
+                                  <option value="4">事件型</option>
                               </select>
                             </p>
                       </form>
@@ -344,6 +346,7 @@
                                   <select id="lottery_type" name="lottery_type" [(ngModel)]="lott">
                                       <option value="1">足球</option>
                                       <option value="2">电竞</option>
+                                      <option value="4">事件型</option>
                                   </select>
                               </p>
                                   <button class="selss" type="submit">查询</button>
@@ -495,6 +498,7 @@
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="lotte">
                                   <option value="1">足球</option>
                                   <option value="2">电竞</option>
+                                  <option value="4">事件型</option>
                               </select>
                           </p>
                       </form>
@@ -686,6 +690,43 @@
                               <td>{{totaldian.resultMap.HS.payoutRate}}%</td>
                           </tr>
                       </tbody>
+                      <tbody *ngIf="shijian">
+                        <tr class="firstr odds">
+                          <td>合计</td>
+                          <td>FNL</td>
+                          <td>CHP</td>
+                      </tr>  
+                        <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>投注额</td>
+                            <td>{{totalshijian.resultMap.FNL.totalInvestment}}</td>
+                            <td>{{totalshijian.resultMap.CHP.totalInvestment}}</td>
+                        </tr>
+                        <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>加奖额</td>
+                            <td>{{totalshijian.resultMap.FNL.bonus}}</td>
+                            <td>{{totalshijian.resultMap.CHP.bonus}}</td>
+                        </tr>
+                        <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>返奖金额</td>
+                            <td>{{totalshijian.resultMap.FNL.totalPrice}}</td>
+                            <td>{{totalshijian.resultMap.CHP.totalPrice}}</td>
+                        </tr> 
+                        <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>中奖投注额</td>
+                            <td>{{totalshijian.resultMap.FNL.winprice}}</td>
+                            <td>{{totalshijian.resultMap.CHP.winprice}}</td>
+                        </tr>
+                            <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>平均中奖固定金额</td>
+                            <td>{{totalshijian.resultMap.FNL.average}}</td>
+                            <td>{{totalshijian.resultMap.CHP.average}}</td>
+                        </tr>
+                            <tr *ngIf="totalshijian" class="smallfontbody">
+                            <td>盈利率%</td>
+                            <td>{{totalshijian.resultMap.FNL.payoutRate}}%</td>
+                            <td>{{totalshijian.resultMap.CHP.payoutRate}}%</td>
+                        </tr>
+                    </tbody>
                   </table>
               </div>
           </div>
@@ -1201,6 +1242,7 @@
                                   <select id="lottery_type" name="lottery_type" [(ngModel)]="loery">
                                       <option value="1">足球</option>
                                       <option value="2">电竞</option>
+                                      <option value="4">事件型</option>
                                   </select>
                               </p>
                           </form>
@@ -3463,14 +3505,19 @@
                     <p>**盈利率   payoutrate</p>
                     <!-- <p style="width:50%;"><el-slider [model]="50"></el-slider></p> -->
                     <div style="padding:46px 0;">
-                        <b>
-                            <span class="yingli">{{payoutrate}}%</span>
-                            <span style="border:3px solid red;position:relative;top:16px;"></span>
-                        </b>
+                        <div class="dd">
+                            <b *ngIf="showscale">
+                                <span class="yingli">{{payoutrate}}%</span>
+                                <span style="border:3px solid red;position:relative;top:16px;"></span>
+                            </b>
+                        </div>
                         <span style="font-size: 26px;">7.5%</span>
-                        <b>
-                            <span *ngIf="hide" style="visibility:hidden;" class="yingli">{{payoutrate}}%</span>
-                        </b>
+                        <div class="dd">
+                            <b *ngIf="hidescale">
+                                <span class="yingli">{{payoutrate}}%</span>
+                                <span style="border:3px solid blue;position:relative;top:16px;"></span>
+                            </b>
+                        </div>
                     </div>
                 </div>
           </div>
