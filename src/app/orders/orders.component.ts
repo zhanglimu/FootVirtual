@@ -138,6 +138,13 @@ export class OrdersComponent implements OnInit {
     lottery_typ:any;
     lotter:string;
     allupName:string;
+     //break
+     breakpro:string[];
+     totalpro:string[];
+     breakweeking:any;
+     lottery_type:any;
+     loery:string;
+     breakName:string;
 
     time0:string;
     Nodata:boolean; //是否显示提示信息
@@ -172,7 +179,7 @@ export class OrdersComponent implements OnInit {
       this.timekai=s1;
       this.timejie =end;
       //默认显示虚拟订单数据
-      this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",1)
+      this.all(this.timekai,this.timejie,"",this.pageNum,this.pageSize,"","","","",2)
     }
 /**
    * 切换选项卡
@@ -245,6 +252,9 @@ export class OrdersComponent implements OnInit {
     this.allHS=[];
     this.allupdianFCA=[];
     this.alldianFCA=[];
+    //break
+    this.breakpro=[];
+    this.totalpro=[];
   }
   //退出登录
   Signout(){
@@ -273,6 +283,7 @@ export class OrdersComponent implements OnInit {
     checkDate.setDate(1);
     week=Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
     this.weeking =week;
+    this.breakweeking =week;
     //初始默认时间
     var timeing =  new Date();
     var year = timeing.getFullYear();
@@ -296,9 +307,11 @@ export class OrdersComponent implements OnInit {
     //order结束
     this.lotte = "2";//彩种值
     this.lotter = "2";//彩种值
+    this.loery = "2"
     this.agentName = "agent";
     this.singleName = "single";
     this.allupName = "allup";
+    this.breakName = "breakdown";
     this.zuqiu =false;
     this.dianjing =false;
     this.allupzuqiu =false;
@@ -1037,5 +1050,121 @@ compare(property){
         window.open(AppConfig.baseUrl +'/account/bookieAllup/dailyAllupExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_typ);
       } 
   }
+  breakCha(reslt) {
+    this.loading = true;
+    var	year = "";
+    var	month = "";
+    var	day = "";
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
+    var time:any = $("#d12").val();
+    if(time =="" || time ==null){
+        this.message.error("请先选择日期");
+    }else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+        }else{
+          year=sort;
+        }
+        this.QUERY.bookieBreakdown(year,month,day,this.lottery_type).subscribe(data => {
+          if (data!=null) {
+            this.loading = false;
+            this.Nodata = false;
+            this.breakpro = data.prolist;
+            this.totalpro = data.proTotal;
+          }else{
+            this.loading = false;
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.loading = false;
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });
+        
+      } 
+  }
+  breakretry() {
+    var	year = "";
+		var	month = "";
+    var	day = "";
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
+    var time:any = $("#d12").val();
+		if(time =="" || time ==null){
+      this.message.error("请先选择要重算的日期");
+		}else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+          this.message.error("请先精确到日");
+          return false;
+        }else{
+          year=sort;
+          this.message.error("请先精确到日");
+          return false;
+        }
+        this.QUERY.Breakretry(year,month,day,this.lottery_type,this.breakName).subscribe(data => {
+          if (data.ResultCode=1) {
+            this.Nodata = false;
+          }else{
+            this.Nodata = true;
+            this.data = "暂无新数据";
+          }
+        },error=>{
+          this.Nodata = true;
+          this.data = "数据异常请联系开发人员";
+        });      
+    } 
+  }
+  breakexport() {
+    var	year = "";
+    var	month = "";
+    var	day = "";
+    if(this.people==0){
+      this.lottery_type = "2";
+    }else{
+      this.lottery_type = $("#lottery_type").val();
+    }
+    var time:any = $("#d12").val();
+    if(time =="" || time ==null){
+        this.message.error("请先选择要导出的日期");
+    }else{
+        var sort = time.split("-");
+        if(sort.length ==3){
+          year=sort[0];
+          month=sort[1];
+          day=sort[2];
+        }else if(sort.length ==2){
+          year=sort[0];
+          month=sort[1];
+        }else{
+          year=sort;
+        }
+        window.open(AppConfig.baseUrl +'/account/bookieBreakdown/breakdownExcel?year='+year+'&month='+month+'&day='+day+'&lottery_type='+this.lottery_type);
+      } 
+  }
+
+
+
+
 
 }

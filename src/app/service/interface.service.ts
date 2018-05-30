@@ -62,5 +62,13 @@ export class InterfaceService{
         return this.http.get(AppConfig.baseUrl+'/account/recountData?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_typ+'&reportsName='+allupName)
         .map(res=>res.json());
     }
-
+    //虚拟break接口
+    bookieBreakdown(year,month,day,lottery_type){
+        return this.http.get(AppConfig.baseUrl+'/account/bookieBreakdown/queryAll?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_type)
+        .map(res=>res.json());
+    }
+    Breakretry(year,month,day,lottery_type,breakName){
+        return this.http.get(AppConfig.baseUrl+'/account/recountData?year='+year+'&month='+month+'&day='+day+'&lottery_type='+lottery_type+'&reportsName='+breakName)
+        .map(res=>res.json());
+    }
 }   
