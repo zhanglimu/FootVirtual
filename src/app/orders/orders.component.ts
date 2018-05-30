@@ -49,6 +49,7 @@ export class OrdersComponent implements OnInit {
     agentdatas:LiveOrdermanage;
     agentName:string;
     lottery_:any;
+    vixiang:string[];
 
     //order开始
     resut: any[];   //返回所有渠道信息变量
@@ -848,6 +849,15 @@ compare(property){
           this.data = "数据异常请联系开发人员";
         });
       } 
+  }
+  vishowdiv(index) {
+    this.vixiang=this.agentdatas[index];
+      document.getElementById("bg").style.display = "block";
+      document.getElementById("show").style.display = "block";
+  }
+  vihidediv() {
+    document.getElementById("bg").style.display = 'none';
+    document.getElementById("show").style.display = 'none';
   }
   agentretry() {
     var year = "";
@@ -2411,8 +2421,8 @@ channelCha(reslt) {
           this.loading = false;
           this.Nodata = false;
           this.channeltotal = data.total;
-          this.channelshuju = data.agentInfoModels;
-          for(var i=0; i<data.agentInfoModels.length; i++){
+          this.channelshuju = data.agentInfoModels.sort(this.compare('agentSell'));
+          for(var i=0; i<data.agentInfoModels.sort(this.compare('agentSell')).length; i++){
             if(this.channelshuju[i].recyclePrice =="0"){
               this.channelshuju[i].recyclePriceName ="-";
             }else{

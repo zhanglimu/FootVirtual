@@ -282,8 +282,20 @@
                           </tr>
                       </thead>
                       <tbody id="lists" *ngIf="agentdatas">
-                          <tr *ngFor="let b of agentdatas">
-                              <td>{{b.agentName}}</td>
+                          <tr *ngFor="let b of agentdatas let i=index">
+                            <td id="btn" (click)="vishowdiv(i)">{{b.agentName}}</td>
+                                <div id="bg"></div>
+                                <div id="show">
+                                    <input id="btnclose" value="Close" (click)="vihidediv()" type="button">
+                                    <div *ngIf="vixiang">
+                                        <label class="youqi">渠道名称：<input value="{{vixiang.agentName}}" readonly></label><br>
+                                        <label class="youqi">渠道编码：<input value="{{vixiang.agentCode}}" readonly></label><br>
+                                        <label class="youqi">渠道编号：<input value="{{vixiang.agentId}}" readonly></label><br>
+                                        <label class="youqi">渠道url：<input value="{{vixiang.url}}" readonly></label><br>
+                                        <label class="youqi">渠道密码：<input value="{{vixiang.password}}" readonly></label><br>	
+                                    </div>
+                                </div>
+
                               <td>{{b.agentCode}}</td>
                               <td>{{b.agentRate}}</td> 
                               <td>{{b.agentBonusRate}}</td>
@@ -3508,14 +3520,14 @@
                         <div class="dd">
                             <b *ngIf="showscale">
                                 <span class="yingli">{{payoutrate}}%</span>
-                                <span style="border:3px solid red;position:relative;top:16px;"></span>
+                                <span style="border:3px solid red;"></span>
                             </b>
                         </div>
                         <span style="font-size: 26px;">7.5%</span>
                         <div class="dd">
                             <b *ngIf="hidescale">
                                 <span class="yingli">{{payoutrate}}%</span>
-                                <span style="border:3px solid blue;position:relative;top:16px;"></span>
+                                <span style="border:3px solid blue;"></span>
                             </b>
                         </div>
                     </div>
