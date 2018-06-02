@@ -43,7 +43,7 @@
                         <li class="segment-button" [class.selected]="switchIndex === '20'" (click)="switch('20')">渠道统计报表</li>
                       </ul>
                 </li>
-              <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li>
+              <!-- <li class="segment-button" [class.selected]="switchIndex === '21'" (click)="switch('21')"><span class="one_bar">世界杯进度</span></li> -->
           </ul>
       </div>
 </header>
@@ -66,7 +66,6 @@
                           <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
                               <option value="1">足球</option>
                               <option value="2">电竞</option>
-                              <option value="4">事件型</option>
                           </select>
                         </p>
                     </form> 
@@ -233,7 +232,6 @@
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="lot">
                                   <option value="1">足球</option>
                                   <option value="2">电竞</option>
-                                  <option value="4">事件型</option>
                               </select>
                             </p>
                       </form>
@@ -282,20 +280,8 @@
                           </tr>
                       </thead>
                       <tbody id="lists" *ngIf="agentdatas">
-                          <tr *ngFor="let b of agentdatas let i=index">
-                            <td id="btn" (click)="vishowdiv(i)">{{b.agentName}}</td>
-                                <div id="bg"></div>
-                                <div id="show">
-                                    <input id="btnclose" value="Close" (click)="vihidediv()" type="button">
-                                    <div *ngIf="vixiang">
-                                        <label class="youqi">渠道名称：<input value="{{vixiang.agentName}}" readonly></label><br>
-                                        <label class="youqi">渠道编码：<input value="{{vixiang.agentCode}}" readonly></label><br>
-                                        <label class="youqi">渠道编号：<input value="{{vixiang.agentId}}" readonly></label><br>
-                                        <label class="youqi">渠道url：<input value="{{vixiang.url}}" readonly></label><br>
-                                        <label class="youqi">渠道密码：<input value="{{vixiang.password}}" readonly></label><br>	
-                                    </div>
-                                </div>
-
+                          <tr *ngFor="let b of agentdatas">
+                              <td>{{b.agentName}}</td>
                               <td>{{b.agentCode}}</td>
                               <td>{{b.agentRate}}</td> 
                               <td>{{b.agentBonusRate}}</td>
@@ -358,7 +344,6 @@
                                   <select id="lottery_type" name="lottery_type" [(ngModel)]="lott">
                                       <option value="1">足球</option>
                                       <option value="2">电竞</option>
-                                      <option value="4">事件型</option>
                                   </select>
                               </p>
                                   <button class="selss" type="submit">查询</button>
@@ -510,7 +495,6 @@
                               <select id="lottery_type" name="lottery_type" [(ngModel)]="lotte">
                                   <option value="1">足球</option>
                                   <option value="2">电竞</option>
-                                  <option value="4">事件型</option>
                               </select>
                           </p>
                       </form>
@@ -702,43 +686,6 @@
                               <td>{{totaldian.resultMap.HS.payoutRate}}%</td>
                           </tr>
                       </tbody>
-                      <tbody *ngIf="shijian">
-                        <tr class="firstr odds">
-                          <td>合计</td>
-                          <td>FNL</td>
-                          <td>CHP</td>
-                      </tr>  
-                        <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>投注额</td>
-                            <td>{{totalshijian.resultMap.FNL.totalInvestment}}</td>
-                            <td>{{totalshijian.resultMap.CHP.totalInvestment}}</td>
-                        </tr>
-                        <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>加奖额</td>
-                            <td>{{totalshijian.resultMap.FNL.bonus}}</td>
-                            <td>{{totalshijian.resultMap.CHP.bonus}}</td>
-                        </tr>
-                        <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>返奖金额</td>
-                            <td>{{totalshijian.resultMap.FNL.totalPrice}}</td>
-                            <td>{{totalshijian.resultMap.CHP.totalPrice}}</td>
-                        </tr> 
-                        <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>中奖投注额</td>
-                            <td>{{totalshijian.resultMap.FNL.winprice}}</td>
-                            <td>{{totalshijian.resultMap.CHP.winprice}}</td>
-                        </tr>
-                            <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>平均中奖固定金额</td>
-                            <td>{{totalshijian.resultMap.FNL.average}}</td>
-                            <td>{{totalshijian.resultMap.CHP.average}}</td>
-                        </tr>
-                            <tr *ngIf="totalshijian" class="smallfontbody">
-                            <td>盈利率%</td>
-                            <td>{{totalshijian.resultMap.FNL.payoutRate}}%</td>
-                            <td>{{totalshijian.resultMap.CHP.payoutRate}}%</td>
-                        </tr>
-                    </tbody>
                   </table>
               </div>
           </div>
@@ -1254,7 +1201,6 @@
                                   <select id="lottery_type" name="lottery_type" [(ngModel)]="loery">
                                       <option value="1">足球</option>
                                       <option value="2">电竞</option>
-                                      <option value="4">事件型</option>
                                   </select>
                               </p>
                           </form>
@@ -3487,54 +3433,14 @@
                   </table>
               </div>
           </div>
-          <div class="main" *ngSwitchCase="21">
-                <div class="inv"> 
-                    <p>**交易额   inveat</p>
-                    <p class="invest">
-                        <span>当前交易额</span><br>
-                        <b class="hong">{{jindu}}</b>
-                    </p>
-                    <p class="invest">
-                        <!-- <circle-progress
-                                [percent]="baifen"
-                                [radius]="100"
-                                [outerStrokeWidth]="16"
-                                [innerStrokeWidth]="8"
-                                [outerStrokeColor]="'#2979ff'"
-                                [innerStrokeColor]="'#bddcee'"
-                                [animation]="true"
-                                [animationDuration]="300"
-                        >
-                        </circle-progress> -->
-                        <el-progress type="circle" width="150" [percentage]="baifen"></el-progress>
-                    </p>
-                    <p class="invest">
-                        <span>助力交易额</span><br>
-                        <b>85000000</b>
-                    </p>
-                </div>
-                <div class="pay">
-                    <p>**盈利率   payoutrate</p>
-                    <!-- <p style="width:50%;"><el-slider [model]="50"></el-slider></p> -->
-                    <div style="padding:46px 0;">
-                        <div class="dd">
-                            <b *ngIf="showscale">
-                                <span class="yingli">{{payoutrate}}%</span>
-                                <span style="border:3px solid red;"></span>
-                            </b>
-                        </div>
-                        <span style="font-size: 26px;">7.5%</span>
-                        <div class="dd">
-                            <b *ngIf="hidescale">
-                                <span class="yingli">{{payoutrate}}%</span>
-                                <span style="border:3px solid blue;"></span>
-                            </b>
-                        </div>
-                    </div>
-                </div>
-          </div>
+          
 
       
         </div>
-        
+        <!-- <div class="font4">
+          <p>1.每次更新版本首次启动需等待10分钟点击报表(系统后台正在缓存，目前只有summary有缓存，其他页面敬请期待) </p>
+          <p>2.渠道管理页面显示 查询时间区间为 所选时间的00:00:00 至24:00:00 </p>
+          <p>3.用户管理页面显示 查询时间区间为 此时时间小于当日14:00:00 查询 系统默认查询前一日14:00:00至当天23:59:59; 此时时间大于当日14:00:00 查询 系统默认查询当日14:00:00至当天23:59:59</p>
+          <p>4.其他报表页面显示 查询时间区间是所选择时间的14:00:00至第二天的14:00:00</p>
+        </div> -->
       
