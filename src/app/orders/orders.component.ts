@@ -342,23 +342,26 @@ export class OrdersComponent implements OnInit {
     payoutrate:string;
     showscale:boolean;
     hidescale:boolean;
+    private interval;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
       //进度条
       this.showscale=false;
       this.hidescale=false;
-      this.QUERY.bar().subscribe(data => {
-        this.jindu =data.invest;
-        var num=((Number(data.invest)/85000000)*100).toFixed(2)
-        this.baifen=num;
-        this.payoutrate =data.payoutrate;
-        if(data.payoutrate<=7.5){
-          this.showscale=true;
-        }else{
-          this.hidescale=true;
-        }
-      })
+      this.interval = setInterval(() => {
+        this.QUERY.bar().subscribe(data => {
+          this.jindu =data.invest;
+          var num=((Number(data.invest)/85000000)*100).toFixed(2)
+          this.baifen=num;
+          this.payoutrate =data.payoutrate;
+          if(data.payoutrate<=7.5){
+            this.showscale=true;
+          }else{
+            this.hidescale=true;
+          }
+        })
+      }, 30000);
       // 折叠导航
       $(document).ready(function(){
         $(".one_bar").click(function(){
@@ -532,6 +535,9 @@ export class OrdersComponent implements OnInit {
     //eventchannel
     this.eventchanneltotal=[];
     this.eventchannelshuju=null;
+    //进度条
+    this.jindu=null;
+    this.payoutrate=null;
   }
   //退出登录
   Signout(){
