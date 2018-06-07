@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ElModule } from 'element-angular';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { OrdersComponent } from './orders/orders.component';
 import { InterfaceService} from './service/interface.service';
@@ -41,14 +40,7 @@ export const ROUTES : Routes =[
       secondaryColour: '#ffffff', 
       tertiaryColour: '#ffffff'
   }),
-  NgCircleProgressModule.forRoot({
-    radius: 100,
-    outerStrokeWidth: 16,
-    innerStrokeWidth: 8,
-    outerStrokeColor: "#78C000",
-    innerStrokeColor: "#C7E596",
-    animationDuration: 300
-})
+  
   ],
   declarations: [
     AppComponent, 

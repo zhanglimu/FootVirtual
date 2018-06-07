@@ -167,8 +167,9 @@ td.blue{background: #F2F2F2;}
 	border:8px solid #E8E9F7;
 	background-color:white;
 	z-index:1002;
-	// overflow:auto;
 }
+#yushow{
+	overflow-y:auto;}
 .fontse{
     background: #666;
     color: #fff;
@@ -253,9 +254,53 @@ label{display: inline-block;margin: 10px 0;width: 96%;}
   }
 
 //进度条
+.inv{
+    background:#FFF8DC;
+    text-align: center;
+}
+.inv p:first-of-type{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    background: #ff9900;
+    padding: 20px;
+}
 .invest{
     display: inline-block;
     vertical-align: middle;
+    padding: 20px;
 }
 .invest span{font-size: 26px;font-weight: bold;}
 .hong{color: #2979ff}
+.pay{
+    background: #e7fce6;
+    text-align: center;
+}
+.pay p:first-of-type{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    background: #b7d382;
+    padding: 20px;
+}
+.yingli{
+    font-size: 26px;
+    color: #fe3c3c;
+}
+.dd{
+    display: inline-block;
+    width:30%;
+    border-bottom: 4px solid #ccc;
+    margin: 10px 0;
+}
+.dd b{
+    margin: 0 30px;
+    display: table-cell;
+}
+
+.dd i{
+    height: 6px;
+    display: inline-block;
+    position: relative;
+    top: 6px;
+}

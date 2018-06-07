@@ -227,9 +227,4 @@ export class InterfaceService{
         .map(res=>res.json());
     }
 
-    bar(){
-        console.log(AppConfig.baseUrl+'/account/getGrashByTime')
-        return this.http.get(AppConfig.baseUrl+'/account/getGrashByTime')
-        .map(res=>res.json());
-    }
 }   

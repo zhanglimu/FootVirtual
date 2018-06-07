@@ -336,32 +336,9 @@ export class OrdersComponent implements OnInit {
     EmonthSummaryName:string;
     EbreakdownName:string;
     EagentName:string;
-    //进度条
-    jindu:string;
-    baifen:string;
-    payoutrate:string;
-    showscale:boolean;
-    hidescale:boolean;
-    private interval;
     constructor(private router:Router,private QUERY: InterfaceService,private message: ElMessageService,private Loginout:LoginoutService) { 
       // this.username = localStorage.getItem("username");
       // this.loginNum = localStorage.getItem("loginCount")
-      //进度条
-      this.showscale=false;
-      this.hidescale=false;
-      this.interval = setInterval(() => {
-        this.QUERY.bar().subscribe(data => {
-          this.jindu =data.invest;
-          var num=((Number(data.invest)/85000000)*100).toFixed(2)
-          this.baifen=num;
-          this.payoutrate =data.payoutrate;
-          if(data.payoutrate<=7.5){
-            this.showscale=true;
-          }else{
-            this.hidescale=true;
-          }
-        })
-      }, 30000);
       // 折叠导航
       $(document).ready(function(){
         $(".one_bar").click(function(){
@@ -425,6 +402,7 @@ export class OrdersComponent implements OnInit {
     //single
     this.total = null;
     this.totaldian = null;
+    this.totalshijian = null;
     //allup
     this.allupdata = [];
     this.allupHAD = [];
@@ -535,9 +513,6 @@ export class OrdersComponent implements OnInit {
     //eventchannel
     this.eventchanneltotal=[];
     this.eventchannelshuju=null;
-    //进度条
-    this.jindu=null;
-    this.payoutrate=null;
   }
   //退出登录
   Signout(){
@@ -721,6 +696,7 @@ export class OrdersComponent implements OnInit {
     return Math.ceil((d + ((d2.getDay() + 1) - 1)) / 7); 
   }
   summaryretry() {
+    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -750,12 +726,15 @@ export class OrdersComponent implements OnInit {
         }
         this.QUERY.Summaryretry(year,month,day,this.lottery,this.summaryName).subscribe(data => {
           if (data.ResultCode=1) {
+            this.loading = false;
             this.Nodata = false;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });      
@@ -866,6 +845,7 @@ compare(property){
     document.getElementById("show").style.display = 'none';
   }
   agentretry() {
+    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -895,12 +875,15 @@ compare(property){
         }
         this.QUERY.Agentretry(year,month,day,this.lottery_,this.agentName).subscribe(data => {
           if (data.ResultCode=1) {
+            this.loading = false;
             this.Nodata = false;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });      
@@ -1093,18 +1076,20 @@ compare(property){
           if (data!=null) {
             this.loading = false;
             this.Nodata = false;
-            this.total = data.total;
-            this.totaldian = data.total;
-            this.totalshijian = data.total;
             if (this.lottery_ty==2) {
+            this.totaldian = data.total;
               this.dianjing =true;
               this.zuqiu =false;
               this.shijian =false;
-            }if (this.lottery_ty==1){
+            }
+            if (this.lottery_ty==1){
+            this.total = data.total;
               this.zuqiu =true;
               this.dianjing =false;
               this.shijian =false;
-            }else{
+            }
+            if (this.lottery_ty==4){
+            this.totalshijian = data.total;
               this.shijian =true;
               this.dianjing =false;
               this.zuqiu =false;
@@ -1122,6 +1107,7 @@ compare(property){
       } 
   }
   singleretry() {
+    this.loading = true;
     var year = "";
     var month = "";
     var day = "";
@@ -1151,12 +1137,15 @@ compare(property){
         }
         this.QUERY.Singleretry(year,month,day,this.lottery_ty,this.singleName).subscribe(data => {
           if (data.ResultCode=1) {
+            this.loading = false;
             this.Nodata = false;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });      
@@ -1328,6 +1317,7 @@ compare(property){
   }
 
   allupretry() {
+    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -1357,12 +1347,15 @@ compare(property){
         }
         this.QUERY.Allupretry(year,month,day,this.lottery_typ,this.allupName).subscribe(data => {
           if (data.ResultCode=1) {
+            this.loading = false;
             this.Nodata = false;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });      
@@ -1441,6 +1434,7 @@ compare(property){
       } 
   }
   breakretry() {
+    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -1470,12 +1464,15 @@ compare(property){
         }
         this.QUERY.Breakretry(year,month,day,this.lottery_type,this.breakName).subscribe(data => {
           if (data.ResultCode=1) {
+            this.loading = false;
             this.Nodata = false;
           }else{
+            this.loading = false;
             this.Nodata = true;
             this.data = "暂无新数据";
           }
         },error=>{
+          this.loading = false;
           this.Nodata = true;
           this.data = "数据异常请联系开发人员";
         });      
@@ -1602,6 +1599,7 @@ cashallupCha(reslt) {
     } 
 }
 cashallupretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -1627,12 +1625,15 @@ cashallupretry() {
       }
       this.QUERY.cashallupretry(year,month,day,this.cashzhonglei,this.cashallupName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -1708,6 +1709,7 @@ cashsingleCha(reslt) {
     } 
 }
 cashsingleretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -1733,12 +1735,15 @@ cashsingleretry() {
       }
       this.QUERY.cashsingleretry(year,month,day,this.cashzhongle,this.cashsingleName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -1815,6 +1820,7 @@ cashsummaryCha(reslt) {
     document.getElementById("month").innerText = month;
 }
 cashsummaryretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -1844,12 +1850,15 @@ cashsummaryretry() {
       }
       this.QUERY.cashsummaryretry(year,month,day,this.cashzhongl,this.cashsummaryName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -1948,12 +1957,15 @@ cashmonthsummaryretry() {
       }
       this.QUERY.cashmonthsummaryretry(year,month,day,this.cashmonthSummaryName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });   
@@ -2059,6 +2071,7 @@ cashbreakCha(reslt) {
     } 
 }
 cashbreakretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2084,12 +2097,15 @@ cashbreakretry() {
       }
       this.QUERY.cashbreakretry(year,month,day,this.cashzhong,this.cashbreakdownName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -2485,6 +2501,7 @@ yuhidediv() {
   document.getElementById("yushow").style.display = 'none';
 }
 channelretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2509,12 +2526,15 @@ channelretry() {
       }
       this.QUERY.channelretry(year,month,day,this.cashagentName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -2626,6 +2646,7 @@ eventsingleCha(reslt) {
     } 
 }
 eventsingleretry(){
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2650,12 +2671,15 @@ eventsingleretry(){
       }
       this.QUERY.Esingleretry(year,month,day,this.EsingleName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -2730,6 +2754,7 @@ eventsummaryCha(reslt) {
     document.getElementById("month").innerText = month;
 }
 eventsummaryretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2754,12 +2779,15 @@ eventsummaryretry() {
       }
       this.QUERY.Esummaryretry(year,month,day,this.EsummaryName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -2826,6 +2854,7 @@ eventbreakCha(reslt) {
     } 
 }
 eventbreakretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2850,12 +2879,15 @@ eventbreakretry() {
       }
       this.QUERY.Ebreakretry(year,month,day,this.EbreakdownName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
@@ -3124,12 +3156,15 @@ eventmonthsummaryretry() {
       }
       this.QUERY.Emonthsummaryretry(year,month,day,this.EmonthSummaryName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });   
@@ -3239,6 +3274,7 @@ evhidediv() {
   document.getElementById("evshow").style.display = 'none';
 }
 eventchannelretry() {
+  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -3263,12 +3299,15 @@ eventchannelretry() {
       }
       this.QUERY.Eagentretry(year,month,day,this.EagentName).subscribe(data => {
         if (data.ResultCode=1) {
+          this.loading = false;
           this.Nodata = false;
         }else{
+          this.loading = false;
           this.Nodata = true;
           this.data = "暂无新数据";
         }
       },error=>{
+        this.loading = false;
         this.Nodata = true;
         this.data = "数据异常请联系开发人员";
       });      
