@@ -704,38 +704,45 @@
                       <tbody *ngIf="shijian">
                         <tr class="firstr odds">
                           <td>合计</td>
-                          <td>FNL</td>
-                          <td>CHP</td>
+                          <td>OOW</td>
+                          <td>OAW</td>
+                          <td>OSE</td>
                       </tr>  
                         <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>投注额</td>
-                            <td>{{totalshijian.resultMap.FNL.totalInvestment}}</td>
-                            <td>{{totalshijian.resultMap.CHP.totalInvestment}}</td>
+                            <td>{{totalshijian.resultMap.OOW.totalInvestment}}</td>
+                            <td>{{totalshijian.resultMap.OAW.totalInvestment}}</td>
+                            <td>{{totalshijian.resultMap.OSE.totalInvestment}}</td>
                         </tr>
                         <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>加奖额</td>
-                            <td>{{totalshijian.resultMap.FNL.bonus}}</td>
-                            <td>{{totalshijian.resultMap.CHP.bonus}}</td>
+                            <td>{{totalshijian.resultMap.OOW.bonus}}</td>
+                            <td>{{totalshijian.resultMap.OAW.bonus}}</td>
+                            <td>{{totalshijian.resultMap.OSE.bonus}}</td>
                         </tr>
                         <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>返奖金额</td>
-                            <td>{{totalshijian.resultMap.FNL.totalPrice}}</td>
-                            <td>{{totalshijian.resultMap.CHP.totalPrice}}</td>
+                            <td>{{totalshijian.resultMap.OOW.totalPrice}}</td>
+                            <td>{{totalshijian.resultMap.OAW.totalPrice}}</td>
+                            <td>{{totalshijian.resultMap.OSE.totalPrice}}</td>
                         </tr> 
                         <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>中奖投注额</td>
-                            <td>{{totalshijian.resultMap.FNL.winprice}}</td>
-                            <td>{{totalshijian.resultMap.CHP.winprice}}</td>
+                            <td>{{totalshijian.resultMap.OOW.winprice}}</td>
+                            <td>{{totalshijian.resultMap.OAW.winprice}}</td>
+                            <td>{{totalshijian.resultMap.OSE.winprice}}</td>
                         </tr>
                             <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>平均中奖固定金额</td>
-                            <td>{{totalshijian.resultMap.FNL.average}}</td>
-                            <td>{{totalshijian.resultMap.CHP.average}}</td>
+                            <td>{{totalshijian.resultMap.OOW.average}}</td>
+                            <td>{{totalshijian.resultMap.OAW.average}}</td>
+                            <td>{{totalshijian.resultMap.OSE.average}}</td>
                         </tr>
                             <tr *ngIf="totalshijian" class="smallfontbody">
                             <td>盈利率%</td>
-                            <td>{{totalshijian.resultMap.FNL.payoutRate}}%</td>
-                            <td>{{totalshijian.resultMap.CHP.payoutRate}}%</td>
+                            <td>{{totalshijian.resultMap.OOW.payoutRate}}%</td>
+                            <td>{{totalshijian.resultMap.OAW.payoutRate}}%</td>
+                            <td>{{totalshijian.resultMap.OSE.payoutRate}}%</td>
                         </tr>
                     </tbody>
                   </table>

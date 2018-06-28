@@ -845,7 +845,6 @@ compare(property){
     document.getElementById("show").style.display = 'none';
   }
   agentretry() {
-    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -860,6 +859,7 @@ compare(property){
         }else{
         var sort = time.split("-");
         if(sort.length ==3){
+          this.loading = true;
           year=sort[0];
           month=sort[1];
           day=sort[2];
@@ -1107,7 +1107,6 @@ compare(property){
       } 
   }
   singleretry() {
-    this.loading = true;
     var year = "";
     var month = "";
     var day = "";
@@ -1122,6 +1121,7 @@ compare(property){
         }else{
         var sort = time.split("-");
         if(sort.length ==3){
+          this.loading = true;
           year=sort[0];
           month=sort[1];
           day=sort[2];
@@ -1317,7 +1317,6 @@ compare(property){
   }
 
   allupretry() {
-    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -1332,6 +1331,7 @@ compare(property){
         }else{
         var sort = time.split("-");
         if(sort.length ==3){
+          this.loading = true;
           year=sort[0];
           month=sort[1];
           day=sort[2];
@@ -1434,7 +1434,6 @@ compare(property){
       } 
   }
   breakretry() {
-    this.loading = true;
     var year = "";
         var month = "";
     var day = "";
@@ -1449,6 +1448,7 @@ compare(property){
         }else{
         var sort = time.split("-");
         if(sort.length ==3){
+          this.loading = true;
           year=sort[0];
           month=sort[1];
           day=sort[2];
@@ -1599,7 +1599,6 @@ cashallupCha(reslt) {
     } 
 }
 cashallupretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -1610,6 +1609,7 @@ cashallupretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -1709,7 +1709,6 @@ cashsingleCha(reslt) {
     } 
 }
 cashsingleretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -1720,6 +1719,7 @@ cashsingleretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -2071,7 +2071,6 @@ cashbreakCha(reslt) {
     } 
 }
 cashbreakretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2082,6 +2081,7 @@ cashbreakretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -2501,7 +2501,6 @@ yuhidediv() {
   document.getElementById("yushow").style.display = 'none';
 }
 channelretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2511,6 +2510,7 @@ channelretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -2646,7 +2646,6 @@ eventsingleCha(reslt) {
     } 
 }
 eventsingleretry(){
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2656,6 +2655,7 @@ eventsingleretry(){
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -2854,7 +2854,6 @@ eventbreakCha(reslt) {
     } 
 }
 eventbreakretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -2864,6 +2863,7 @@ eventbreakretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
@@ -3274,7 +3274,6 @@ evhidediv() {
   document.getElementById("evshow").style.display = 'none';
 }
 eventchannelretry() {
-  this.loading = true;
   var year = "";
   var month = "";
   var day = "";
@@ -3284,6 +3283,7 @@ eventchannelretry() {
       }else{
       var sort = time.split("-");
       if(sort.length ==3){
+        this.loading = true;
         year=sort[0];
         month=sort[1];
         day=sort[2];
